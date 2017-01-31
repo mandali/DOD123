@@ -14,7 +14,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/dod_db" />
 		<property name="username" value="root" />
-		<property name="password" value="mysql" />
+		<property name="password" value="root" />
 	</bean>
 
 	<bean id="sessionFactory"
@@ -23,16 +23,16 @@
 		<property name="annotatedClasses">
 			<list>
 				<value> com.omni.dod.model.ConsumerRegistration</value>
-				<value>	com.omni.dod.model.RegisterWithOtp</value>
+				<value>	com.omni.dod.model.RegisterWithOtp</value>				
 				<value>	com.omni.dod.model.UserProfile</value>
-				<value>	com.omni.dod.model.Promotions</value>
+				<value>	com.omni.dod.model.MerchantProfile</value>
+				<value>	com.omni.dod.model.Promotions</value>				
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
 			</props>
 		</property>
 	</bean>

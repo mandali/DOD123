@@ -9,21 +9,23 @@ import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.omni.dod.dao.DODDao;
+import com.omni.dod.dao.RegistrationDao;
 import com.omni.dod.model.ConsumerRegistration;
+import com.omni.dod.model.MerchantProfile;
 import com.omni.dod.model.Promotions;
 import com.omni.dod.model.RegisterWithOtp;
 import com.omni.dod.model.UserProfile;
 
 @Repository
-public class DODDaoImpl implements DODDao {
+public class RegistrationDaoImpl implements RegistrationDao {
 	@Autowired
 	SessionFactory sessionFactory;
 	
 	public ConsumerRegistration save(ConsumerRegistration consumerRegistration) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Integer id = (Integer) session.save(consumerRegistration);
-		ConsumerRegistration reg = (ConsumerRegistration) session.get(ConsumerRegistration.class, id);		return reg;
+		ConsumerRegistration reg = (ConsumerRegistration) session.get(ConsumerRegistration.class, id);		
+		return reg;
 	}
 
 	public List<ConsumerRegistration> getConsumers() {
@@ -32,7 +34,7 @@ public class DODDaoImpl implements DODDao {
 		return list;
 	}
 
-	public RegisterWithOtp savewithotp(RegisterWithOtp registerWithOtp) {		
+	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp) {		
 		Session session = this.sessionFactory.getCurrentSession();
 		Integer id = (Integer) session.save(registerWithOtp);
 		RegisterWithOtp reg=(RegisterWithOtp) session.get(RegisterWithOtp.class, id);
@@ -54,6 +56,14 @@ public class DODDaoImpl implements DODDao {
 		return list;
 	}
 
+		public MerchantProfile registermerchant(MerchantProfile merchantProfile) {
+			
+			Session session = this.sessionFactory.getCurrentSession();
+			Integer id = (Integer) session.save(merchantProfile);
+			MerchantProfile resp=(MerchantProfile) session.get(MerchantProfile.class, id);		
+			return resp;			
+	
+		}		
 		
 	
 }

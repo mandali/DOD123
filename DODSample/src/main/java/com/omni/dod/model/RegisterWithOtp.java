@@ -15,12 +15,12 @@ import javax.persistence.Version;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "OTP_TABLE")
+@Table(name = "otp_table")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class RegisterWithOtp {
 	
 	@Id
-	@Column(name = "id")
+	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	/*@Column(name="USER_TYPE")

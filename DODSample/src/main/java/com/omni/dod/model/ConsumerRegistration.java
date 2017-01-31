@@ -1,6 +1,6 @@
 package com.omni.dod.model;
 
-import java.sql.Date;
+import java.util.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,97 +16,7 @@ import org.springframework.validation.annotation.Validated;
 @Entity
 @Table(name = "user_table")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class ConsumerRegistration {
-	/*
-	 * @Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String firstName;
-	private String lastName;
-	private String username;
-	private double otp;
-
-	*//**
-	 * @return the id
-	 *//*
-	public Integer getId() {
-		return id;
-	}
-
-	*//**
-	 * @param id
-	 *            the id to set
-	 *//*
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	*//**
-	 * @return the firstName
-	 *//*
-	public String getFirstName() {
-		return firstName;
-	}
-
-	*//**
-	 * @param firstName
-	 *            the firstName to set
-	 *//*
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	*//**
-	 * @return the lastName
-	 *//*
-	public String getLastName() {
-		return lastName;
-	}
-
-	*//**
-	 * @param lastName
-	 *            the lastName to set
-	 *//*
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	*//**
-	 * @return the username
-	 *//*
-	public String getUsername() {
-		return username;
-	}
-
-	*//**
-	 * @param username
-	 *            the username to set
-	 *//*
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public double getOtp() {
-		return otp;
-	}
-
-	public void setOtp(double otp) {
-		this.otp = otp;
-	}
-
-	
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 
-	@Override
-	public String toString() {
-		return "ConsumerRegistration [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
-				+ username + "]";
-	}*/	
-	//below are the fields i need to insert into table name : user_table
-	
+public class ConsumerRegistration {	
 	@Id
 	@Column(name = "USER_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,9 +31,7 @@ public class ConsumerRegistration {
 	@Column(name = "PASSWORD")
 	private String password;
 	@Column(name = "DATE")
-	private Date createddate;
-	
-	
+	private Date createddate;	
 	
 	public Date getCreateddate() {
 		return createddate;
@@ -161,8 +69,6 @@ public class ConsumerRegistration {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	
+	}	
 	
 }
