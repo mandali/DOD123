@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.omni.dod.dao.RegistrationDao;
-import com.omni.dod.model.ConsumerRegistration;
+import com.omni.dod.model.ConsumerProfile;
 import com.omni.dod.model.MerchantProfile;
 import com.omni.dod.model.Promotions;
 import com.omni.dod.model.RegisterWithOtp;
@@ -22,19 +22,7 @@ import com.omni.dod.service.RegistrationService;
 public class RegistrationServiceImpl implements RegistrationService {
 	
 	@Autowired
-	RegistrationDao registrationDao;
-	
-	public ConsumerRegistration save(ConsumerRegistration consumerRegistration) {
-		ConsumerRegistration cons=	registrationDao.save(consumerRegistration);				
-		return cons;
-	}	
-	public List<ConsumerRegistration> getConsumers() {
-		
-		return registrationDao.getConsumers();
-	}	
-	
-	
-	
+	RegistrationDao registrationDao;	
 
 	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp) {
 		
@@ -60,6 +48,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 	public List<Promotions> getPromotions(Date currentdate) {				
 		return registrationDao.getPromotions(currentdate);
+		
+	}
+	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
+		
+		Date date=new Date();
+		consumerProfile.setCreateddate(date);
+		ConsumerProfile resp=registrationDao.registerconsumer(consumerProfile);
+		return resp;	
 		
 	}
 	

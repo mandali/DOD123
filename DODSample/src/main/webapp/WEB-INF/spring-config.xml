@@ -22,7 +22,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value> com.omni.dod.model.ConsumerRegistration</value>
+				<value> com.omni.dod.model.ConsumerProfile</value>
 				<value>	com.omni.dod.model.RegisterWithOtp</value>				
 				<value>	com.omni.dod.model.UserProfile</value>
 				<value>	com.omni.dod.model.MerchantProfile</value>

@@ -10,47 +10,36 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.validation.annotation.Validated;
 
 @Entity
-@Table(name = "user_table")
+@Table(name = "consumer_profile")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class ConsumerRegistration {	
+public class ConsumerProfile {
+	
 	@Id
-	@Column(name = "USER_ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer user_id;
-	
-	@Column(name = "USER_TYPE")
-	private String user_type;
-	@Column(name = "EMAIL_ID")
+	private Integer id;		
+	@Column(name = "emailid")
 	private String email_id;
-	@Column(name = "PHONE_NO")
-	private String phone_no;
-	@Column(name = "PASSWORD")
+	@Column(name = "phone_no")
+	private String phone_no;	
+	@Column(name = "city")
+	private String city;
+	@Column(name = "age")
+	private String age;
+	@Column(name = "password")
 	private String password;
-	@Column(name = "DATE")
-	private Date createddate;	
+	@Column(name = "confirmpassword")
+	private String confirmpassword;	
+	@Column(name = "createddate")
+	private Date createddate;
 	
-	public Date getCreateddate() {
-		return createddate;
+	public Integer getId() {
+		return id;
 	}
-	public void setCreateddate(Date createddate) {
-		this.createddate = createddate;
-	}
-	
-	public Integer getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
-	}
-	public String getUser_type() {
-		return user_type;
-	}
-	public void setUser_type(String user_type) {
-		this.user_type = user_type;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getEmail_id() {
 		return email_id;
@@ -64,11 +53,38 @@ public class ConsumerRegistration {
 	public void setPhone_no(String phone_no) {
 		this.phone_no = phone_no;
 	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getAge() {
+		return age;
+	}
+	public void setAge(String age) {
+		this.age = age;
+	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}	
+	}
+	public String getConfirmpassword() {
+		return confirmpassword;
+	}
+	public void setConfirmpassword(String confirmpassword) {
+		this.confirmpassword = confirmpassword;
+	}
+	public Date getCreateddate() {
+		return createddate;
+	}
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
+		
+	
+	
 	
 }

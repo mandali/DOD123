@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.omni.dod.dao.RegistrationDao;
-import com.omni.dod.model.ConsumerRegistration;
+import com.omni.dod.model.ConsumerProfile;
 import com.omni.dod.model.MerchantProfile;
 import com.omni.dod.model.Promotions;
 import com.omni.dod.model.RegisterWithOtp;
@@ -20,19 +20,6 @@ import com.omni.dod.model.UserProfile;
 public class RegistrationDaoImpl implements RegistrationDao {
 	@Autowired
 	SessionFactory sessionFactory;
-	
-	public ConsumerRegistration save(ConsumerRegistration consumerRegistration) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Integer id = (Integer) session.save(consumerRegistration);
-		ConsumerRegistration reg = (ConsumerRegistration) session.get(ConsumerRegistration.class, id);		
-		return reg;
-	}
-
-	public List<ConsumerRegistration> getConsumers() {
-		Session session = this.sessionFactory.getCurrentSession();
-		List<ConsumerRegistration> list = session.createQuery("from ConsumerRegistration").list();
-		return list;
-	}
 
 	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp) {		
 		Session session = this.sessionFactory.getCurrentSession();
@@ -63,6 +50,13 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			MerchantProfile resp=(MerchantProfile) session.get(MerchantProfile.class, id);		
 			return resp;			
 	
+		}
+
+		public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
+			Session session = this.sessionFactory.getCurrentSession();
+			Integer id = (Integer) session.save(consumerProfile);
+			ConsumerProfile resp=(ConsumerProfile) session.get(ConsumerProfile.class, id);		
+			return resp;
 		}		
 		
 	

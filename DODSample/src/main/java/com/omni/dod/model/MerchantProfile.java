@@ -49,7 +49,16 @@ public class MerchantProfile {
 	@Column(name="description")
 	String description;
 	@Column(name="tags")
-	String tags;
+	String tags;	
+	@Column(name="nickname")
+	String nickname;	
+	@Column(name="password")
+	String password;	
+	@Column(name="confirmpassword")
+	String confirmpassword;
+	
+	@Column(name = "created_date")
+	private Date createddate;
 	public String getPassword() {
 		return password;
 	}
@@ -62,22 +71,7 @@ public class MerchantProfile {
 	public void setConfirmpassword(String confirmpassword) {
 		this.confirmpassword = confirmpassword;
 	}
-	@Column(name="nickname")
-	String nickname;
-	
-	@Column(name="password")
-	String password;
-	
-	@Column(name="confirmpassword")
-	String confirmpassword;
-	
-	
-	
-	
-	
-	@Column(name = "created_date")
-	private Date createddate;
-	
+		
 	
 	public Integer getId() {
 		return id;

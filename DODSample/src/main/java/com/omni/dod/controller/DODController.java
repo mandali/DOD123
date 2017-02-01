@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.omni.dod.bean.DataResult;
 import com.omni.dod.bean.OtpBean;
-import com.omni.dod.model.ConsumerRegistration;
+import com.omni.dod.model.ConsumerProfile;
 import com.omni.dod.model.MerchantProfile;
 import com.omni.dod.model.Promotions;
 import com.omni.dod.model.RegisterWithOtp;
@@ -71,6 +71,17 @@ public class DODController {
 		System.out.println(model);
 		return new ResponseEntity(model, HttpStatus.OK);
 	}	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/consumerRegistration", method = RequestMethod.POST)
+	public ResponseEntity Registerconsumer(@RequestBody ConsumerProfile consumerProfile) {		
+		System.out.println(consumerProfile);
+		ConsumerProfile model = registrationService.registerconsumer(consumerProfile);	
+		//DataResult result=new DataResult(true, "Success", HttpStatus.OK.value());
+		System.out.println(model);
+		return new ResponseEntity(model, HttpStatus.OK);
+	}
+	
 
 	@RequestMapping(value = "/promotions", method = RequestMethod.GET)
 	public ResponseEntity getPromotions() {
