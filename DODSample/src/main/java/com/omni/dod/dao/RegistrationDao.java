@@ -11,15 +11,13 @@ import com.omni.dod.model.UserProfile;
 
 public interface RegistrationDao {
 	
-	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp); //ConsumerRegistration
+	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp); 
 	
 	public UserProfile registeruser(UserProfile userProfile);
 	
 	public MerchantProfile registermerchant(MerchantProfile merchantProfile);
 	
-	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile);
-	
-	
+	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile);	
 	
 	public List<Promotions> getPromotions(Date currentdate);
 	

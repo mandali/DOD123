@@ -21,25 +21,10 @@ import com.omni.dod.model.UserProfile;
 import com.omni.dod.service.RegistrationService;
 
 @RestController
-public class DODController {	
+public class DODController {
+	
 	@Autowired
 	RegistrationService registrationService;	
-	
-	/*
-	@RequestMapping(value = "/reg/consumer", method = RequestMethod.POST)
-	public ResponseEntity saveConsumer(@RequestBody ConsumerRegistration consumerRegistration) {		
-		System.out.println(consumerRegistration);
-		ConsumerRegistration model = registrationService.save(consumerRegistration);
-		DataResult<ConsumerRegistration> result=new DataResult(true, "Success", HttpStatus.OK.value(), model);
-		return new ResponseEntity(result, HttpStatus.OK);
-	}*/
-	
-	/*@RequestMapping(value = "/consumers", method = RequestMethod.GET)
-	public ResponseEntity getConsumers() {
-		List<ConsumerRegistration> consumerRegistrations = registrationService.getConsumers();;
-		DataResult result=new DataResult(true, "Success", HttpStatus.OK.value(), consumerRegistrations);
-		return new ResponseEntity(result, HttpStatus.OK);
-	}*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -80,8 +65,7 @@ public class DODController {
 		//DataResult result=new DataResult(true, "Success", HttpStatus.OK.value());
 		System.out.println(model);
 		return new ResponseEntity(model, HttpStatus.OK);
-	}
-	
+	}	
 
 	@RequestMapping(value = "/promotions", method = RequestMethod.GET)
 	public ResponseEntity getPromotions() {

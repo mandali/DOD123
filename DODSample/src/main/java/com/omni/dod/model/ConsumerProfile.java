@@ -20,7 +20,7 @@ public class ConsumerProfile {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;		
-	@Column(name = "emailid")
+	@Column(name = "email_id")
 	private String email_id;
 	@Column(name = "phone_no")
 	private String phone_no;	
@@ -82,9 +82,5 @@ public class ConsumerProfile {
 	}
 	public void setCreateddate(Date createddate) {
 		this.createddate = createddate;
-	}
-		
-	
-	
-	
+	}	
 }

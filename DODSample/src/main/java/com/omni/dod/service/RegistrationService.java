@@ -13,8 +13,7 @@ public interface RegistrationService {
 		
 	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp);
 	
-	public UserProfile registeruser(UserProfile userProfile);
-	
+	public UserProfile registeruser(UserProfile userProfile);	
 	
 	public MerchantProfile registermerchant(MerchantProfile merchantProfile);
 	

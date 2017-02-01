@@ -37,8 +37,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 
 		public List<Promotions> getPromotions(Date currentdate) {		
 		Session session = this.sessionFactory.getCurrentSession();		
-		List<Promotions> list = session.createQuery("from Promotions p where :currentDate between p.startdate and p.enddate")
-				.setParameter("currentDate", currentdate).list();
+		List<Promotions> list = session.createQuery("from Promotions p where :currentDate between p.startdate and p.enddate").setParameter("currentDate", currentdate).list();
 		System.out.println(list.size());
 		return list;
 	}
