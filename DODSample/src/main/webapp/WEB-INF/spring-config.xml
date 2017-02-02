@@ -26,7 +26,9 @@
 				<value>	com.omni.dod.model.UserProfile</value>
 				<value>	com.omni.dod.model.MerchantProfile</value>
 				<value>	com.omni.dod.model.Promotions</value>	
-				<value> com.omni.dod.model.ConsumerProfile</value>			
+				<value> com.omni.dod.model.ConsumerProfile</value> 
+				<value> com.omni.dod.model.ConsumerLogin</value>
+				<value> com.omni.dod.model.MerchantLogin</value>			
 			</list>
 		</property>
 		<property name="hibernateProperties">
