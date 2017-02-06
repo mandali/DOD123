@@ -23,8 +23,8 @@ public class LoginDaoImpl implements LoginDao {
 		
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from ConsumerProfile where phone_no=:username and password=:password");
-		query.setParameter("username",userLogin.getUsername());
-		query.setParameter("password", userLogin.getPassword());		
+		query.setParameter("username",userLogin.getUsername().trim());
+		query.setParameter("password", userLogin.getPassword().trim());		
 		ConsumerProfile login=(ConsumerProfile)query.uniqueResult();		
 		 return login;					
 	}
@@ -32,8 +32,8 @@ public class LoginDaoImpl implements LoginDao {
 	public MerchantProfile autheticateLogin(MerchantLogin merchantLogin) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where mobile_number=:username and password=:password");
-		query.setParameter("username", merchantLogin.getUsername());
-		query.setParameter("password", merchantLogin.getPassword());
+		query.setParameter("username", merchantLogin.getUsername().trim());
+		query.setParameter("password", merchantLogin.getPassword().trim());
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();
 		return resp;
 	}

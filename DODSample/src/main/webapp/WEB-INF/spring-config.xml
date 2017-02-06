@@ -16,7 +16,6 @@
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
-
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -25,16 +24,18 @@
 				<value>	com.omni.dod.model.RegisterWithOtp</value>				
 				<value>	com.omni.dod.model.UserProfile</value>
 				<value>	com.omni.dod.model.MerchantProfile</value>
-				<value>	com.omni.dod.model.Promotions</value>	
+				<value>	com.omni.dod.model.Promotion</value>
+				<value>	com.omni.dod.model.CategorySelection</value>
 				<value> com.omni.dod.model.ConsumerProfile</value> 
 				<value> com.omni.dod.model.ConsumerLogin</value>
-				<value> com.omni.dod.model.MerchantLogin</value>			
+				<value> com.omni.dod.model.MerchantLogin</value>	
+				<value> com.omni.dod.model.Category</value>			
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">true</prop>									
 			</props>
 		</property>
 	</bean>

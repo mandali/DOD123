@@ -21,7 +21,6 @@ public class DataResult<T> {
 		this.statusCode = statusCode;
 		this.entities = entities;
 	}
-
 	public DataResult(boolean successful, String message, int statusCode, T entity) {
 		this.successful = successful;
 		this.message = message;

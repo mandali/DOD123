@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.omni.dod.dao.RegistrationDao;
+import com.omni.dod.model.Category;
+import com.omni.dod.model.CategorySelection;
 import com.omni.dod.model.ConsumerProfile;
 import com.omni.dod.model.MerchantProfile;
-import com.omni.dod.model.Promotions;
+import com.omni.dod.model.Promotion;
 import com.omni.dod.model.RegisterWithOtp;
 import com.omni.dod.model.UserProfile;
 import com.omni.dod.service.RegistrationService;
@@ -46,7 +48,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		MerchantProfile resp=registrationDao.registermerchant(merchantProfile);
 		return resp;
 	}
-	public List<Promotions> getPromotions(Date currentdate) {				
+	public List<Promotion> getPromotions(Date currentdate) {				
 		return registrationDao.getPromotions(currentdate);
 		
 	}
@@ -57,6 +59,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 		ConsumerProfile resp=registrationDao.registerconsumer(consumerProfile);
 		return resp;	
 		
+	}
+	public List<Promotion> getCategoryPromotions(Date currentdate, CategorySelection categorySelection) {
+		
+		return registrationDao.getCategoryPromotions(currentdate, categorySelection);
 	}
 	
 

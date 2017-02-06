@@ -59,7 +59,7 @@ public class RegisterWithOtp {
 	public void setOtpno(String otpno) {
 		this.otpno = otpno;
 	}	
-	@Column(name="CRETATE_DATE")
+	@Column(name="CRETATED_DATE")
 	private Date createdate;
 
 	public Date getCreatedate() {
