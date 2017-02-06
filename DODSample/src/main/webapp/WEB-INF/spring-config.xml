@@ -14,11 +14,15 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/dod_db" />
 		<property name="username" value="root" />
-		<property name="password" value="mysql" />
+		<property name="password" value="glog" />
 	</bean>
-
+<bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate" >
+        <property name="dataSource" ref="dataSource" />
+        <property name="locations" value="classpath:db/migrations" />
+        <!-- <property name="validateOnMigrate" value="false"/> -->
+    </bean> 
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" depends-on="flyway">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
