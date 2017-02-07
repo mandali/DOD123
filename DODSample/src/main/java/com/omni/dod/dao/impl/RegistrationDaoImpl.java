@@ -52,9 +52,9 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		}
 
 		public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = this.sessionFactory.getCurrentSession();			
 			Integer id = (Integer) session.save(consumerProfile);
-			ConsumerProfile resp=(ConsumerProfile) session.get(ConsumerProfile.class, id);		
+			ConsumerProfile resp=(ConsumerProfile) session.get(ConsumerProfile.class, id);				
 			return resp;
 		}
 

@@ -1,17 +1,18 @@
 package com.omni.dod.model;
 
+import java.sql.Blob;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+
 
 @Entity
 @Table(name = "promotions")
@@ -38,7 +39,8 @@ public class Promotion {
 		this.category_name = category_name;
 	}
 	@Column(name = "product_image")
-	private String product_image;	
+	private String product_image;
+	
 	@Column(name = "original_price")
 	private String originalPrice;
 	@Column(name = "DISCOUNT")
@@ -71,12 +73,13 @@ public class Promotion {
 	public void setId(Integer id) {
 		this.id = id;
 	}	
-	/*public Category getCategory() {
-		return category;
+	
+	public String getProduct_image() {
+		return product_image;
 	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}*/
+	public void setProduct_image(String product_image) {
+		this.product_image = product_image;
+	}
 	public String getProduct_id() {
 		return product_id;
 	}
@@ -89,15 +92,11 @@ public class Promotion {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getProduct_image() {
-		return product_image;
-	}
-	public void setProduct_image(String product_image) {
-		this.product_image = product_image;
-	}
+	
 	public String getDiscount() {
 		return discount;
 	}
+	
 	public void setDiscount(String discount) {
 		this.discount = discount;
 	}

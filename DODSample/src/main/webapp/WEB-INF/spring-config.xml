@@ -14,7 +14,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/dod_db" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="mysql" />
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -26,7 +26,8 @@
 				<value>	com.omni.dod.model.MerchantProfile</value>
 				<value>	com.omni.dod.model.Promotion</value>
 				<value>	com.omni.dod.model.CategorySelection</value>
-				<value> com.omni.dod.model.ConsumerProfile</value> 
+				<value> com.omni.dod.model.ConsumerProfile</value>
+				<value> com.omni.dod.model.ConsumerMobileAndEmailValidate</value>  
 				<value> com.omni.dod.model.ConsumerLogin</value>
 				<value> com.omni.dod.model.MerchantLogin</value>	
 				<value> com.omni.dod.model.Category</value>			
