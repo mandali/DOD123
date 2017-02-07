@@ -38,10 +38,10 @@ public class TestDODService {
 	public void testsave(){
 		ConsumerRegistration consumerRegistration=new ConsumerRegistration();
 		consumerRegistration.setEmail_id("s.binkam@omniwyse.com");
-		consumerRegistration.setCreateddate(Calendar.getInstance().getTime());
+		consumerRegistration.setPhone_no("9876543210");
 		Mockito.when(dodDao.save(consumerRegistration)).thenReturn(createConsumerRegistration(consumerRegistration));
 		ConsumerRegistration cr=dodService.save(consumerRegistration);
-		Assert.assertEquals( Calendar.getInstance().getTime(), cr.getCreateddate());
+		Assert.assertEquals( consumerRegistration.getPhone_no(), cr.getPhone_no());
 		Assert.assertEquals("s.binkam@omniwyse.com", cr.getEmail_id());
 
 	}
@@ -49,7 +49,7 @@ public class TestDODService {
 	public ConsumerRegistration createConsumerRegistration(ConsumerRegistration consumerRegistration){
 		ConsumerRegistration cr=new ConsumerRegistration();
 		cr.setEmail_id(consumerRegistration.getEmail_id());
-		cr.setCreateddate(consumerRegistration.getCreateddate());
+		cr.setPhone_no(consumerRegistration.getPhone_no());
 		return cr;
 	}
 	
