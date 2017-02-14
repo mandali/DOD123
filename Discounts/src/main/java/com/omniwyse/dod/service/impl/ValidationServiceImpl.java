@@ -1,14 +1,14 @@
-package com.omni.dod.service.impl;
+package com.omniwyse.dod.service.impl;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.omni.dod.dao.RegisterationValidateDao;
-import com.omni.dod.model.OTPValidation;
-import com.omni.dod.model.RegisterWithOtp;
-import com.omni.dod.service.ValidationService;
+import com.omniwyse.dod.dao.RegisterationValidateDao;
+import com.omniwyse.dod.model.OTPValidation;
+import com.omniwyse.dod.model.RegisterWithOtp;
+import com.omniwyse.dod.service.ValidationService;
 
 @Service
 @Transactional

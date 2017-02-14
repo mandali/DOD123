@@ -1,4 +1,4 @@
-package com.omni.dod.config;
+package com.omniwyse.dod.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

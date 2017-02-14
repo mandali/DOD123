@@ -1,4 +1,4 @@
-package com.omni.dod.model;
+package com.omniwyse.dod.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

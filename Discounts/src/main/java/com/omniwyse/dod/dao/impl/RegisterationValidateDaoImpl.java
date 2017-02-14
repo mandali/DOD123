@@ -1,4 +1,4 @@
-package com.omni.dod.dao.impl;
+package com.omniwyse.dod.dao.impl;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -6,11 +6,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.omni.dod.dao.RegisterationValidateDao;
-import com.omni.dod.model.ConsumerProfile;
-import com.omni.dod.model.MerchantProfile;
-import com.omni.dod.model.OTPValidation;
-import com.omni.dod.model.RegisterWithOtp;
+import com.omniwyse.dod.dao.RegisterationValidateDao;
+import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.OTPValidation;
+import com.omniwyse.dod.model.RegisterWithOtp;
 
 @Repository
 public class RegisterationValidateDaoImpl implements RegisterationValidateDao {

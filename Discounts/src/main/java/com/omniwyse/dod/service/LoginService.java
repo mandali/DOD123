@@ -1,17 +1,18 @@
-package com.omni.dod.service;
+package com.omniwyse.dod.service;
 
-import com.omni.dod.model.ConsumerProfile;
-import com.omni.dod.model.MerchantLogin;
-import com.omni.dod.model.MerchantLoginwithEmail;
-import com.omni.dod.model.MerchantLoginwithMobile;
-import com.omni.dod.model.MerchantProfile;
-import com.omni.dod.model.ConsumerLogin;
-import com.omni.dod.model.ConsumerLoginwithEmail;
-import com.omni.dod.model.ConsumerLoginwithMobile;
+import com.omniwyse.dod.model.ConsumerLogin;
+import com.omniwyse.dod.model.ConsumerLoginwithEmail;
+import com.omniwyse.dod.model.ConsumerLoginwithMobile;
+import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.MerchantLogin;
+import com.omniwyse.dod.model.MerchantLoginwithEmail;
+import com.omniwyse.dod.model.MerchantLoginwithMobile;
+import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.RegisterWithOtp;
 
 public interface LoginService {
 	
-	public ConsumerProfile ConsumerLogin(ConsumerLogin userLogin); 
+	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin); 
 	
 	public MerchantProfile MerchatLogin(MerchantLogin merchantLogin);
 

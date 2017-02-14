@@ -1,4 +1,4 @@
-package com.omni.dod.model;
+package com.omniwyse.dod.model;
 
 public class ConsumerLogin {
 	
@@ -11,8 +11,4 @@ public class ConsumerLogin {
 	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
 	}
-	
-	
-
-
 }

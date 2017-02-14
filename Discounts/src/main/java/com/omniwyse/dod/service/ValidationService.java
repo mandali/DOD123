@@ -1,7 +1,7 @@
-package com.omni.dod.service;
+package com.omniwyse.dod.service;
 
-import com.omni.dod.model.OTPValidation;
-import com.omni.dod.model.RegisterWithOtp;
+import com.omniwyse.dod.model.OTPValidation;
+import com.omniwyse.dod.model.RegisterWithOtp;
 
 public interface ValidationService {
 	

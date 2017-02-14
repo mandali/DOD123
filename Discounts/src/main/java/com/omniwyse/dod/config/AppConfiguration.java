@@ -1,4 +1,4 @@
-package com.omni.dod.config;
+package com.omniwyse.dod.config;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.omni.dod.*")
+@ComponentScan(basePackages = "com.omniwyse.dod.*")
 @ImportResource({
 	  "/WEB-INF/spring-config.xml"
 	})

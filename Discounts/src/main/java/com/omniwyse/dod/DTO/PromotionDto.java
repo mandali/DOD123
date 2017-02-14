@@ -1,4 +1,4 @@
-package com.omni.dod.DTO;
+package com.omniwyse.dod.DTO;
 
 import java.io.Serializable;
 import java.util.Date;

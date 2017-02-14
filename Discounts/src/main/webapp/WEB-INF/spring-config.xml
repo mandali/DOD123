@@ -25,21 +25,22 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>				
-				<value>	com.omni.dod.model.RegisterWithOtp</value>	
-				<value>	com.omni.dod.model.OTPValidation</value>			
-				<value>	com.omni.dod.model.UserProfile</value>
-				<value>	com.omni.dod.model.MerchantProfile</value>
-				<value>	com.omni.dod.model.Promotion</value>
-				<value>	com.omni.dod.model.CategorySelection</value>
-				<value> com.omni.dod.model.ConsumerProfile</value>
-				<value> com.omni.dod.model.ConsumerLogin</value>
-				<value> com.omni.dod.model.ConsumerMobileAndEmailValidate</value>  
-				<value> com.omni.dod.model.ConsumerLoginwithEmail</value>
-				<value> com.omni.dod.model.ConsumerLoginwithMobile</value>
-				<value> com.omni.dod.model.MerchantLogin</value>
-				<value> com.omni.dod.model.MerchantLoginwithEmail</value>
-				<value> com.omni.dod.model.MerchantLoginwithMobile</value>	
-				<value> com.omni.dod.model.Category</value>			
+				<value>	com.omniwyse.dod.model.RegisterWithOtp</value>	
+				<value>	com.omniwyse.dod.model.OTPValidation</value>			
+				<value>	com.omniwyse.dod.model.UserProfile</value>
+				<value>	com.omniwyse.dod.model.MerchantProfile</value>
+				<value>	com.omniwyse.dod.model.Promotion</value>
+				<value>	com.omniwyse.dod.model.IdBasePromotion</value>
+				<value>	com.omniwyse.dod.model.CategorySelection</value>
+				<value> com.omniwyse.dod.model.ConsumerProfile</value>
+				<value> com.omniwyse.dod.model.ConsumerLogin</value>
+				<value> com.omniwyse.dod.model.ConsumerMobileAndEmailValidate</value>  
+				<value> com.omniwyse.dod.model.ConsumerLoginwithEmail</value>
+				<value> com.omniwyse.dod.model.ConsumerLoginwithMobile</value>
+				<value> com.omniwyse.dod.model.MerchantLogin</value>
+				<value> com.omniwyse.dod.model.MerchantLoginwithEmail</value>
+				<value> com.omniwyse.dod.model.MerchantLoginwithMobile</value>	
+				<value> com.omniwyse.dod.model.Category</value>			
 			</list>
 		</property>
 		<property name="hibernateProperties">

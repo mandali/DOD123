@@ -1,4 +1,4 @@
-package com.omni.dod.AppConstants;
+package com.omniwyse.dod.AppConstants;
 
 public class AppConstants {
 	

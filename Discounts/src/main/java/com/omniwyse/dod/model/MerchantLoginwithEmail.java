@@ -1,4 +1,4 @@
-package com.omni.dod.model;
+package com.omniwyse.dod.model;
 
 public class MerchantLoginwithEmail {
 	

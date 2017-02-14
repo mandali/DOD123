@@ -1,4 +1,4 @@
-package com.omni.dod.bean;
+package com.omniwyse.dod.bean;
 
 public class OtpBean {
 	private String otpType;

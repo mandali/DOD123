@@ -1,4 +1,4 @@
-package com.omni.dod.service.impl;
+package com.omniwyse.dod.service.impl;
 
 
 import java.util.Date;
@@ -10,15 +10,15 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.omni.dod.dao.RegistrationDao;
-import com.omni.dod.model.Category;
-import com.omni.dod.model.CategorySelection;
-import com.omni.dod.model.ConsumerProfile;
-import com.omni.dod.model.MerchantProfile;
-import com.omni.dod.model.Promotion;
-import com.omni.dod.model.RegisterWithOtp;
-import com.omni.dod.model.UserProfile;
-import com.omni.dod.service.RegistrationService;
+import com.omniwyse.dod.dao.RegistrationDao;
+import com.omniwyse.dod.model.Category;
+import com.omniwyse.dod.model.CategorySelection;
+import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.Promotion;
+import com.omniwyse.dod.model.RegisterWithOtp;
+import com.omniwyse.dod.model.UserProfile;
+import com.omniwyse.dod.service.RegistrationService;
 
 @Service
 @Transactional
@@ -52,26 +52,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 		consumerProfile.setCreateddate(date);
 		ConsumerProfile resp=registrationDao.registerconsumer(consumerProfile);
 		return resp;		
-	}
-	public List<Promotion> getPromotions(Date currentdate) {			
-		
-		return registrationDao.getPromotions(currentdate);
-	}
-	
-	public List<Promotion> getCategoryPromotions(Date currentdate, CategorySelection categorySelection) {		
-		return registrationDao.getCategoryPromotions(currentdate, categorySelection);
-	}
-	public Promotion CreatePromotions(Promotion promotion) {
-		Date date=new Date();
-		promotion.setCreateddate(date);
-		promotion.setStartdate(date);
-		promotion.setEnddate(date);
-		return registrationDao.CreatePromotions(promotion);
-	}
-	
-
-	
-
-	
+	}	
 
 }

@@ -1,9 +1,9 @@
-package com.omni.dod.dao;
+package com.omniwyse.dod.dao;
 
-import com.omni.dod.model.ConsumerProfile;
-import com.omni.dod.model.MerchantProfile;
-import com.omni.dod.model.OTPValidation;
-import com.omni.dod.model.RegisterWithOtp;
+import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.OTPValidation;
+import com.omniwyse.dod.model.RegisterWithOtp;
 
 public interface RegisterationValidateDao {
 	

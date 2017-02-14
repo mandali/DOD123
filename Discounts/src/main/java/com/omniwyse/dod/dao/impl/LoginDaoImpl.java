@@ -1,4 +1,4 @@
-package com.omni.dod.dao.impl;
+package com.omniwyse.dod.dao.impl;
 
 
 
@@ -9,15 +9,16 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.omni.dod.dao.LoginDao;
-import com.omni.dod.model.ConsumerProfile;
-import com.omni.dod.model.MerchantLogin;
-import com.omni.dod.model.MerchantLoginwithEmail;
-import com.omni.dod.model.MerchantLoginwithMobile;
-import com.omni.dod.model.MerchantProfile;
-import com.omni.dod.model.ConsumerLogin;
-import com.omni.dod.model.ConsumerLoginwithEmail;
-import com.omni.dod.model.ConsumerLoginwithMobile;
+import com.omniwyse.dod.dao.LoginDao;
+import com.omniwyse.dod.model.ConsumerLogin;
+import com.omniwyse.dod.model.ConsumerLoginwithEmail;
+import com.omniwyse.dod.model.ConsumerLoginwithMobile;
+import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.MerchantLogin;
+import com.omniwyse.dod.model.MerchantLoginwithEmail;
+import com.omniwyse.dod.model.MerchantLoginwithMobile;
+import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.RegisterWithOtp;
 @Repository
 public class LoginDaoImpl implements LoginDao {
 
@@ -56,11 +57,11 @@ public class LoginDaoImpl implements LoginDao {
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;		
 	}
-	public ConsumerProfile ConsumerLogin(ConsumerLogin userLogin) {
+	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query=(Query) session.createQuery("from ConsumerProfile where phone_no=:mobile");
+		Query query=(Query) session.createQuery("from RegisterWithOtp where user_id=:mobile");
 		query.setParameter("mobile",userLogin.getMobileno());			
-		ConsumerProfile login=(ConsumerProfile)query.uniqueResult();		
+		RegisterWithOtp login=(RegisterWithOtp)query.uniqueResult();		
 		 return login;
 	}
 	public MerchantProfile MerchantLogin(MerchantLogin merchantLogin) {

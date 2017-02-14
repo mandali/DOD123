@@ -1,4 +1,4 @@
-package com.omni.dod.test;
+package com.omniwyse.dod.test;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -11,11 +11,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.omni.dod.dao.RegistrationDao;
-import com.omni.dod.model.ConsumerProfile;
-import com.omni.dod.model.RegisterWithOtp;
-import com.omni.dod.service.RegistrationService;
-import com.omni.dod.service.impl.RegistrationServiceImpl;
+import com.omniwyse.dod.dao.RegistrationDao;
+import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.RegisterWithOtp;
+import com.omniwyse.dod.service.RegistrationService;
+import com.omniwyse.dod.service.impl.RegistrationServiceImpl;
 
 public class TestDODService {
 

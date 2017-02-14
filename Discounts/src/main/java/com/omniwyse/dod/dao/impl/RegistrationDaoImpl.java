@@ -1,4 +1,4 @@
-package com.omni.dod.dao.impl;
+package com.omniwyse.dod.dao.impl;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -10,14 +10,14 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.omni.dod.dao.RegistrationDao;
-import com.omni.dod.model.Category;
-import com.omni.dod.model.CategorySelection;
-import com.omni.dod.model.ConsumerProfile;
-import com.omni.dod.model.MerchantProfile;
-import com.omni.dod.model.Promotion;
-import com.omni.dod.model.RegisterWithOtp;
-import com.omni.dod.model.UserProfile;
+import com.omniwyse.dod.dao.RegistrationDao;
+import com.omniwyse.dod.model.Category;
+import com.omniwyse.dod.model.CategorySelection;
+import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.Promotion;
+import com.omniwyse.dod.model.RegisterWithOtp;
+import com.omniwyse.dod.model.UserProfile;
 
 @Repository
 public class RegistrationDaoImpl implements RegistrationDao {
@@ -36,13 +36,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			UserProfile resp=(UserProfile) session.get(UserProfile.class, id);		
 			return resp;
 		}
-			@SuppressWarnings("unchecked")
-			public List<Promotion> getPromotions(Date currentdate) {		
-			Session session = this.sessionFactory.getCurrentSession();		
-			List<Promotion> list = session.createQuery(" from Promotion p where :currentDate between p.startdate and p.enddate")
-					.setParameter("currentDate", currentdate).list();			
-			return list;
-		}
+		
 		public MerchantProfile registermerchant(MerchantProfile merchantProfile) {			
 			Session session = this.sessionFactory.getCurrentSession();
 			Integer id = (Integer) session.save(merchantProfile);
@@ -55,18 +49,5 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			ConsumerProfile resp=(ConsumerProfile) session.get(ConsumerProfile.class, id);				
 			return resp;
 		}
-		@SuppressWarnings("unchecked")
-		public List<Promotion> getCategoryPromotions(Date currentdate, CategorySelection categorySelection) { 
-			Session session = this.sessionFactory.getCurrentSession();	
-			List<Promotion> list = session.createQuery(" from Promotion p where :currentDate between p.startdate and p.enddate and p.category_name =:name")
-					.setParameter("name", categorySelection.getCategoryname().trim())
-					.setParameter("currentDate", currentdate).list();			
-			return list;
-		}
-		public Promotion CreatePromotions(Promotion promotion) {
-			Session session = this.sessionFactory.getCurrentSession();
-			Integer id = (Integer) session.save(promotion);
-			Promotion resp=(Promotion) session.get(Promotion.class, id);			
-			return resp;
-		}
+		
 }
