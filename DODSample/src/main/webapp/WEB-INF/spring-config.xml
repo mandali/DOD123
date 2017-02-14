@@ -16,6 +16,11 @@
 		<property name="username" value="root" />
 		<property name="password" value="mysql"/>
 	</bean>
+	<bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate" >
+        <property name="dataSource" ref="dataSource" />
+        <property name="locations" value="classpath:db/migrations" />
+        <!-- <property name="validateOnMigrate" value="false"/> -->
+    </bean> 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
