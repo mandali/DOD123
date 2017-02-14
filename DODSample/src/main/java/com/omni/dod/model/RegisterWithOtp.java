@@ -22,17 +22,15 @@ public class RegisterWithOtp {
 	@Id
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	/*@Column(name="USER_TYPE")
-	private String user_type;*/
+	private Integer id;	
 	@Column(name="USER_ID")
 	private String user_id;
 	@Column(name="OTP_NO")
-	private String otpno;
-	@Version
-	
+	private String otpno;		
 	@Column(name="EXP_DATE")
 	private Date expdate;
+	@Column(name="CRETATED_DATE")
+	private Date createdate;
 	
 	public Date getExpdate() {
 		return expdate;
@@ -45,8 +43,7 @@ public class RegisterWithOtp {
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	
+	}	
 	public String getUser_id() {
 		return user_id;
 	}
@@ -58,10 +55,7 @@ public class RegisterWithOtp {
 	}
 	public void setOtpno(String otpno) {
 		this.otpno = otpno;
-	}	
-	@Column(name="CRETATED_DATE")
-	private Date createdate;
-
+	}
 	public Date getCreatedate() {
 		return createdate;
 	}

@@ -2,6 +2,7 @@ package com.omni.dod.bean;
 
 public class OtpBean {
 	private String otpType;
+	
 	private Integer otp;
 
 	public OtpBean() {

@@ -1,14 +1,14 @@
 package com.omni.dod.bean;
 
 public class DataResult<T> {
-	public boolean successful = false;
+	public boolean success = false;
 	public String message = "";
 	public int statusCode = 400;
 	/*public T entity;
 	public List<T> entities;*/
 
-	public DataResult(boolean successful, String message, int statusCode) {
-		this.successful = successful;
+	public DataResult(boolean success, String message, int statusCode) {
+		this.success = success;
 		this.message = message;
 		this.statusCode = statusCode;
 	}

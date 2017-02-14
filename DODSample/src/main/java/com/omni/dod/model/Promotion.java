@@ -1,6 +1,5 @@
 package com.omni.dod.model;
 
-import java.sql.Blob;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,21 +25,11 @@ public class Promotion {
 	@Column(name = "P_ID")	
 	private String product_id;
 	@Column(name = "PRMS_DESC")
-	private String description;
-	
+	private String description;	
 	@Column(name = "category_name")
 	private String category_name;
-	
-	
-	public String getCategory_name() {
-		return category_name;
-	}
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
-	}
 	@Column(name = "product_image")
-	private String product_image;
-	
+	private String product_image;	
 	@Column(name = "original_price")
 	private String originalPrice;
 	@Column(name = "DISCOUNT")
@@ -53,6 +42,14 @@ public class Promotion {
 	private Date enddate;	
 	@Column(name = "location")
 	private String location;
+	
+	public String getCategory_name() {
+		return category_name;
+	}
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+	
 	
 	public String getLocation() {
 		return location;

@@ -1,6 +1,6 @@
 package com.omni.dod.model;
 
-public class MerchantLogin {
+public class ConsumerLogin {
 	
 	private String mobileno;
 
@@ -13,5 +13,6 @@ public class MerchantLogin {
 	}
 	
 	
+
 
 }

@@ -25,5 +25,7 @@ public interface RegistrationService {
 	
 	public List<Promotion> getCategoryPromotions(Date currentdate ,CategorySelection categorySelection);
 	
+	public Promotion CreatePromotions(Promotion promotion);
+	
 	
 }

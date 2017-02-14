@@ -18,10 +18,8 @@ public class Category {
 	@Column(name = "PRMS_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 	@Column(name = "NAME")
-    private String name;
-	
+    private String name;	
    public Long getId() {
 		return id;
 	}

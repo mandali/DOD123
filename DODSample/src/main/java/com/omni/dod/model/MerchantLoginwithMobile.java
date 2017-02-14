@@ -1,9 +1,9 @@
 package com.omni.dod.model;
 
-public class ConsumerMobileAndEmailValidate {
+public class MerchantLoginwithMobile {
 	
 	private String mobileno;
-	private String emailid;
+	private String password;
 	
 	public String getMobileno() {
 		return mobileno;
@@ -11,12 +11,13 @@ public class ConsumerMobileAndEmailValidate {
 	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
 	}
-	public String getEmailid() {
-		return emailid;
+	public String getPassword() {
+		return password;
 	}
-	public void setEmailid(String emailid) {
-		this.emailid = emailid;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+	
 	
 
 }

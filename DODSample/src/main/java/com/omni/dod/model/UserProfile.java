@@ -14,8 +14,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @Entity
 @Table(name = "USER_PROFILE")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class UserProfile {
-	
+public class UserProfile {	
 	@Id
 	@Column(name = "USER_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -122,8 +121,4 @@ public class UserProfile {
 	public void setCreteddate(Date creteddate) {
 		this.creteddate = creteddate;
 	}
-	
-	
-	
-
 }
