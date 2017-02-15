@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import com.omniwyse.dod.bean.DataResult;
 import com.omniwyse.dod.bean.OtpBean;
@@ -52,7 +53,7 @@ public class DODController {
 	public ResponseEntity SavewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
 		RegisterWithOtp data=ConsumerRegisterValidate.getmobileno(registerWithOtp);
 		if (data==null) {			
-			Integer otp=1234;			
+			Integer otp=1234;				
 			OtpBean otpBean=new OtpBean("OTP For Registration !!", otp);
 			RegisterWithOtp model = registrationService.Register(registerWithOtp);			
 			return new ResponseEntity(otpBean, HttpStatus.OK);
@@ -191,8 +192,8 @@ public class DODController {
 		Date date=new Date();
 		List<Promotion> promotions = promotionService.getPromotions(date);
 		if (!promotions.isEmpty()) {
-			
-			return new ResponseEntity(promotions, HttpStatus.OK);			
+			DataResult result=new DataResult<Promotion>(true, " available Promotions are ,", HttpStatus.OK.value(), promotions);
+			return new ResponseEntity(result, HttpStatus.OK);			
 		}else
 		{
 			DataResult result=new DataResult(false, "Sorry , No Promotions are available right now ", HttpStatus.BAD_REQUEST.value());
