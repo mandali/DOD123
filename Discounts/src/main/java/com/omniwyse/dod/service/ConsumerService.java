@@ -16,6 +16,5 @@ public interface ConsumerService {
 	
 	public ConsumerProfile consumerautheticatewithemail(ConsumerLoginwithEmail userLogin); 
 	
-	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin);		
-
+	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin);
 }

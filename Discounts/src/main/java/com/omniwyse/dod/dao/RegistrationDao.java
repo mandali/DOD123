@@ -9,9 +9,7 @@ public interface RegistrationDao {
 	
 	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp); 
 	
-	public UserProfile registeruser(UserProfile userProfile);
-	
-	//public MerchantProfile registermerchant(MerchantProfile merchantProfile);
+	public UserProfile registeruser(UserProfile userProfile);	
 	
 	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile);	
 	
