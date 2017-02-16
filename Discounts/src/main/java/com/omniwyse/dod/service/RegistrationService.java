@@ -17,7 +17,7 @@ public interface RegistrationService {
 	
 	public UserProfile registeruser(UserProfile userProfile);	
 	
-	public MerchantProfile registermerchant(MerchantProfile merchantProfile);
+	//public MerchantProfile registermerchant(MerchantProfile merchantProfile);
 	
 	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile); 
 	
