@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.RegistrationDao;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
@@ -25,7 +26,8 @@ import com.omniwyse.dod.service.RegistrationService;
 public class RegistrationServiceImpl implements RegistrationService {
 	
 	@Autowired
-	RegistrationDao registrationDao;	
+	RegistrationDao registrationDao;
+	
 
 	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp) {		
 		Date date=new Date();		
@@ -41,12 +43,12 @@ public class RegistrationServiceImpl implements RegistrationService {
 		UserProfile resp=registrationDao.registeruser(userProfile);		
 		return resp;
 	}	
-	public MerchantProfile registermerchant(MerchantProfile merchantProfile) {
+	/*public MerchantProfile registermerchant(MerchantProfile merchantProfile) {
 		Date date=new Date();
 		merchantProfile.setCreateddate(date);
 		MerchantProfile resp=registrationDao.registermerchant(merchantProfile);
 		return resp;
-	}
+	}*/
 	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {		
 		Date date=new Date();
 		consumerProfile.setCreateddate(date);

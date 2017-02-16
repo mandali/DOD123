@@ -10,17 +10,12 @@ import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.RegisterWithOtp;
 
-public interface LoginDao {
+public interface ConsumerDao {
 	
 	public ConsumerProfile consumerautheticatewithemail(ConsumerLoginwithEmail userLogin); 
 	
 	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin);	
 	
-	public MerchantProfile merchantautheticateWithEmail(MerchantLoginwithEmail merchantLoginwithEmail); 
+	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin);	
 	
-	public MerchantProfile merchantautheticateWithMobile(MerchantLoginwithMobile merchantLoginwithMobile);
-	
-	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin);
-	
-	public MerchantProfile MerchantLogin(MerchantLogin merchantLogin);
 }

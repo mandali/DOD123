@@ -1,21 +1,13 @@
 package com.omniwyse.dod.dao.impl;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.omniwyse.dod.dao.RegistrationDao;
-import com.omniwyse.dod.model.Category;
-import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.ConsumerProfile;
 import com.omniwyse.dod.model.MerchantProfile;
-import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.RegisterWithOtp;
 import com.omniwyse.dod.model.UserProfile;
 
@@ -37,12 +29,12 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			return resp;
 		}
 		
-		public MerchantProfile registermerchant(MerchantProfile merchantProfile) {			
+		/*public MerchantProfile registermerchant(MerchantProfile merchantProfile) {			
 			Session session = this.sessionFactory.getCurrentSession();
 			Integer id = (Integer) session.save(merchantProfile);
 			MerchantProfile resp=(MerchantProfile) session.get(MerchantProfile.class, id);		
 			return resp;	
-		}
+		}*/
 		public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
 			Session session = this.sessionFactory.getCurrentSession();			
 			Integer id = (Integer) session.save(consumerProfile);
