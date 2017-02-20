@@ -1,8 +1,11 @@
 package com.omniwyse.dod.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,23 +15,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.omniwyse.dod.AppConstants.AppConstants;
+import com.omniwyse.dod.DTO.CitiesVO;
+import com.omniwyse.dod.DTO.CountryVO;
+import com.omniwyse.dod.DTO.LocationsVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
 import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.bean.DataResult;
 import com.omniwyse.dod.bean.DataResultEntity;
 import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.bean.OtpBean;
+import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
 import com.omniwyse.dod.model.CategorySelection;
+import com.omniwyse.dod.model.Cities;
 import com.omniwyse.dod.model.ConsumerIdBaseProfile;
 import com.omniwyse.dod.model.ConsumerLogin;
 import com.omniwyse.dod.model.ConsumerLoginwithEmail;
 import com.omniwyse.dod.model.ConsumerLoginwithMobile;
 import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.Country;
 import com.omniwyse.dod.model.GetMerchantById;
 import com.omniwyse.dod.model.GetMerchatProfile;
 import com.omniwyse.dod.model.IdBasePromotion;
+import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
@@ -38,6 +49,7 @@ import com.omniwyse.dod.model.OTPValidation;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.RegisterWithOtp;
 import com.omniwyse.dod.service.ConsumerService;
+import com.omniwyse.dod.service.LocationService;
 import com.omniwyse.dod.service.MerchantService;
 import com.omniwyse.dod.service.PromotionService;
 import com.omniwyse.dod.service.RegistrationService;
@@ -60,6 +72,12 @@ public class DODController {
 	MerchantService MerchantService;
 	@Autowired
 	MerchantDao MerchantDao;
+	@Autowired
+	LocationService locationService;
+	
+	
+	
+	//private static final Logger logger = Logger.getLogger(AppConfiguration.class);
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -412,5 +430,145 @@ public class DODController {
 	}
 	
 	/*===========================================================================================================*/	
+	
+	
+	/*===========================================================================================================*/	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_COUNTRIES, method = RequestMethod.GET)
+	public ResponseEntity fetchCountriesList(){
+		final String METHOD_NAME="fetchCountriesList";
+		List<Country> countries=locationService.fetchCountriesList();
+		DataResultlist<CountryVO> result;
+		DataResult resultError;
+		ResponseEntity responseEntity = null;
+		List<CountryVO> countryVOs=new ArrayList<CountryVO>();
+		CountryVO countryVO;
+		try{
+			
+		if (!countries.isEmpty()) {
+			
+			for(Country country:countries){
+				countryVO=new CountryVO();
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTimeInMillis(country.getCreated().getTime() );
+				Date date = calendar.getTime();
+				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+				String formattedDate = DATE_FORMAT.format(date);
+				countryVO.setCountryId(country.getId().toString());
+				countryVO.setCountryName(country.getName());
+				countryVO.setCreatedDate(formattedDate);
+				countryVOs.add(countryVO);
+			}
+			result=new DataResultlist<CountryVO>(true, AppConstants.LIST_COUNTRIES_SUCCESS_MSG, HttpStatus.OK.value(), countryVOs);
+			responseEntity= new ResponseEntity(result, HttpStatus.OK);			
+		}else
+		{
+			resultError=new DataResult(false, AppConstants.LIST_COUNTRIES_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
+			responseEntity= new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+		}
+		
+		}
+		catch(Exception exception){
+			//logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+		
+	}
+	/*===========================================================================================================*/	
+	
+	/*===========================================================================================================*/	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_CITIES, method = RequestMethod.GET)
+	public ResponseEntity fetchCitiesList(){
+		final String METHOD_NAME="fetchCitiesList";
+		List<Cities> cities=locationService.fetchCitiesList();
+		DataResultlist<CitiesVO> result;
+		DataResult resultError;
+		ResponseEntity responseEntity = null;
+		List<CitiesVO> citiesVOs=new ArrayList<CitiesVO>();
+		CitiesVO citiesVO;
+		try {
+		if (!cities.isEmpty()) {
+			
+			for(Cities citiesLocal:cities){
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTimeInMillis( citiesLocal.getCreated().getTime() );
+				Date date = calendar.getTime();
+				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+		        String formattedDate = DATE_FORMAT.format(date);
+				citiesVO=new CitiesVO();
+				citiesVO.setCityId(citiesLocal.getCityId().toString());
+				citiesVO.setCityName(citiesLocal.getCityName());
+				citiesVO.setCountryId(citiesLocal.getCountryId().getId().toString());
+				citiesVO.setCreatedDate(formattedDate);
+				citiesVOs.add(citiesVO);
+				
+			}
+			result=new DataResultlist<CitiesVO>(true, AppConstants.LIST_CITIES_SUCCESS_MSG, HttpStatus.OK.value(), citiesVOs);
+			responseEntity=new ResponseEntity(result, HttpStatus.OK);			
+		}else
+		{
+			resultError=new DataResult(false, AppConstants.LIST_CITIES_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
+			responseEntity= new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+		}
+		}
+		catch(Exception exception){
+			//logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+		
+	}
+	/*===========================================================================================================*/	
+	
+	
+	/*===========================================================================================================*/	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_LOCATIONS, method = RequestMethod.GET)
+	public ResponseEntity fetchLocationsList(){
+		final String METHOD_NAME="fetchLocationsList";
+		List<Location> locations=locationService.fetchLocationsList();
+		DataResultlist<LocationsVO> result = null;
+		DataResult resultError;
+		ResponseEntity responseEntity = null;
+		List<LocationsVO> locationsVOs=new ArrayList<LocationsVO>();
+		LocationsVO locationsVO;
+		
+		try {
+		if (!locations.isEmpty()) {
+			
+			for(Location location:locations){
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTimeInMillis( location.getCreated().getTime() );
+				Date date = calendar.getTime();
+				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+		        String formattedDate = DATE_FORMAT.format(date);
+				locationsVO=new LocationsVO();
+				locationsVO.setCityId(location.getCitiesId().getCityId().toString());
+				locationsVO.setCountryId(location.getCountryId().getId().toString());
+				locationsVO.setCreatedDate(formattedDate);
+				locationsVO.setLattitude(location.getLocationLatitude());
+				locationsVO.setLongitude(location.getLocationLongitude());
+				locationsVO.setLocationId(location.getLocationId().toString());
+				locationsVO.setLocationName(location.getLocationName());
+				locationsVOs.add(locationsVO);
+				
+			}
+			
+			 result=new DataResultlist<LocationsVO>(true, AppConstants.LIST_LOCATIONS_SUCCESS_MSG, HttpStatus.OK.value(), locationsVOs);
+			 responseEntity=new ResponseEntity(result, HttpStatus.OK);			
+		}else
+		{
+			resultError=new DataResult(false, AppConstants.LIST_LOCATIONS_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
+			responseEntity=new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+			
+		}	 
+		}
+		catch(Exception exception){
+			//logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+	}
+	/*===========================================================================================================*/
+	
 	
 }
