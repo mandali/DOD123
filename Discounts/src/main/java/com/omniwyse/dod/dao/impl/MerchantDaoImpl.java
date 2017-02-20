@@ -1,17 +1,24 @@
 package com.omniwyse.dod.dao.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.model.GetMerchantById;
+import com.omniwyse.dod.model.GetMerchatProfile;
 import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.MerchantPromotions;
+import com.omniwyse.dod.model.Promotion;
 
 @Repository
 public class MerchantDaoImpl implements MerchantDao{
@@ -32,6 +39,15 @@ public class MerchantDaoImpl implements MerchantDao{
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
 	}
+	
+	public MerchantProfile getMerchantbyID(Integer getMerchantById) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query=(Query) session.createQuery("from MerchantProfile where  id=:id")
+				.setParameter("id",getMerchantById );	
+		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
+		return resp;
+	}
+	
 	public MerchantProfile GetMerchant(MerchantLogin MerchantLogin) {
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where mobilenumber=:mobile").setParameter("mobile", MerchantLogin.getMobileno());
@@ -62,6 +78,33 @@ public class MerchantDaoImpl implements MerchantDao{
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
 	}
+	public MerchantProfile MerchantProfile(GetMerchatProfile getMerchatProfile) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query=(Query) session.createQuery("from MerchantProfile where  mobilenumber=:mobileno");
+		query.setParameter("mobileno", getMerchatProfile.getMobileno());		
+		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
+		return resp;
+	}
+	public List<MerchantProfile> AllMerchants() {
+		Session session = this.sessionFactory.openSession();			
+		List<MerchantProfile> list = session.createQuery(" from MerchantProfile").list();					
+		return list;
+	}
+	public List<MerchantProfile> MerchantPromotions(MerchantPromotions MerchantPromotions, Date date) {
+		
+		Session session = this.sessionFactory.openSession();
+		@SuppressWarnings("unchecked")
+		List<MerchantProfile> list = session.createQuery(" from MerchantProfile where id=:id")
+		.setParameter("id",MerchantPromotions.getId()).list();			
+		return list;
+	}
+	public MerchantProfile getMerchantID(PromotionDto PromotionDto) {
+		Session session = this.sessionFactory.openSession();	
+		Query query=(Query) session.createQuery("from MerchantProfile where  id=:ID");
+		query.setParameter("ID", PromotionDto.getMerchatId());
+		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
+		return resp;
+	}	
 	}
 
 

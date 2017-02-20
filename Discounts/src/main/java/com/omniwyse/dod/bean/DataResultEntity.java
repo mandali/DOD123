@@ -4,12 +4,12 @@ public class DataResultEntity<T> {
 	public boolean success = false;
 	public String message = "";
 	public int statusCode = 400;
-	public T Details;
+	public T data;
 	
-	public DataResultEntity(boolean successful, String message, int statusCode, T Details) {
+	public DataResultEntity(boolean successful, String message, int statusCode, T data) {
 		this.success = successful;
 		this.message = message;
 		this.statusCode = statusCode;
-		this.Details = Details;
+		this.data = data;
 	}
 }

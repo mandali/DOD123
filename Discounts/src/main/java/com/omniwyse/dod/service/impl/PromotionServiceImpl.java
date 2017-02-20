@@ -8,9 +8,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omniwyse.dod.DTO.PromotionDto;
+import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
+import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.service.PromotionService;
 
@@ -20,6 +23,11 @@ public class PromotionServiceImpl implements PromotionService{
 	
 	@Autowired
 	PromotionsDao promotionsDao;
+	
+	@Autowired
+	MerchantDao merchantDao;
+	
+	
 
 	public List<Promotion> getPromotions(Date currentdate) {
 		
@@ -31,9 +39,29 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotionsDao.getCategoryPromotions(currentdate, categorySelection);
 	}
 
-	public Promotion CreatePromotions(Promotion promotion) {
-		
-		return promotionsDao.CreatePromotions(promotion) ;
+	public Promotion CreatePromotions(Promotion promotion) {		
+				
+		return promotionsDao.CreatePromotions(promotion);
+	}
+	
+	public Promotion CreatePromotions(PromotionDto promotionDto) {		
+		Date date=new Date();
+		Promotion promotion=new Promotion();
+		MerchantProfile merchantProfile=merchantDao.getMerchantbyID(promotionDto.getMerchatId());
+		//promotion.setMerchantProfile(merchantProfile);		
+		promotion.setCategory_name(promotionDto.getCategory_name());
+		promotion.setOriginalPrice(promotionDto.getOriginalPrice());
+		promotion.setDiscount(promotionDto.getDiscount());
+		promotion.setStartdate(date);
+		promotion.setEnddate(date);
+		promotion.setDescription(promotionDto.getDescription());
+		promotion.setProduct_image(promotionDto.getProduct_image());
+		promotion.setLocation(promotionDto.getLocation());		
+		promotion.setCreateddate(date);
+		promotion.setProduct_id(promotionDto.getProduct_id());
+		promotion.setMerchatid(promotionDto.getMerchatId());
+		promotionsDao.CreatePromotions(promotion);	
+		return promotion;
 	}
 
 	public Promotion IdBasePromotions(IdBasePromotion idBasePromotion) {

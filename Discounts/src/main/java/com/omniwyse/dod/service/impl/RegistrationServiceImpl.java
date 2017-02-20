@@ -43,17 +43,5 @@ public class RegistrationServiceImpl implements RegistrationService {
 		UserProfile resp=registrationDao.registeruser(userProfile);		
 		return resp;
 	}	
-	/*public MerchantProfile registermerchant(MerchantProfile merchantProfile) {
-		Date date=new Date();
-		merchantProfile.setCreateddate(date);
-		MerchantProfile resp=registrationDao.registermerchant(merchantProfile);
-		return resp;
-	}*/
-	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {		
-		Date date=new Date();
-		consumerProfile.setCreateddate(date);
-		ConsumerProfile resp=registrationDao.registerconsumer(consumerProfile);
-		return resp;		
-	}	
-
+	
 }

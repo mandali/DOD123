@@ -6,13 +6,13 @@ public class DataResultlist<T> {
 	public boolean success = false;
 	public String message = "";
 	public int statusCode = 400;	
-	public List<T> Details;
+	public List<T> data;
 	
-	public DataResultlist(boolean successful, String message, int statusCode, List<T> Details) {
+	public DataResultlist(boolean successful, String message, int statusCode, List<T> data) {
 		this.success = successful;
 		this.message = message;
 		this.statusCode = statusCode;
-		this.Details = Details;
+		this.data = data;
 	}
 	
 }

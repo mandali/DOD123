@@ -1,5 +1,6 @@
 package com.omniwyse.dod.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.omniwyse.dod.DTO.MercnantDTO;
+import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.bean.DataResult;
 import com.omniwyse.dod.bean.DataResultEntity;
 import com.omniwyse.dod.bean.DataResultlist;
@@ -18,16 +21,19 @@ import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
 import com.omniwyse.dod.model.CategorySelection;
+import com.omniwyse.dod.model.ConsumerIdBaseProfile;
 import com.omniwyse.dod.model.ConsumerLogin;
 import com.omniwyse.dod.model.ConsumerLoginwithEmail;
 import com.omniwyse.dod.model.ConsumerLoginwithMobile;
 import com.omniwyse.dod.model.ConsumerProfile;
 import com.omniwyse.dod.model.GetMerchantById;
+import com.omniwyse.dod.model.GetMerchatProfile;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.OTPValidation;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.RegisterWithOtp;
@@ -43,7 +49,7 @@ public class DODController {
 	@Autowired
 	RegistrationService registrationService;
 	@Autowired
-	ConsumerService loginService;
+	ConsumerService consumerService;
 	@Autowired
 	RegisterationValidateDao ConsumerRegisterValidate;	
 	@Autowired
@@ -92,7 +98,7 @@ public class DODController {
 	public ResponseEntity Registerconsumer(@RequestBody ConsumerProfile consumerProfile) {		
 		ConsumerProfile data=ConsumerRegisterValidate.getmobilenoandemail(consumerProfile);			
 		if (data == null) {
-			ConsumerProfile model = registrationService.registerconsumer(consumerProfile);
+			ConsumerProfile model = consumerService.registerconsumer(consumerProfile);
 			DataResult result=new DataResult(true, " Consumer Registration successfully ...", HttpStatus.OK.value());
 			return new ResponseEntity(result, HttpStatus.OK);			
 		} else {
@@ -101,10 +107,11 @@ public class DODController {
 		}	
 	}
 	/*======================================================================================================*/	
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumerlogin", method = RequestMethod.POST)
 	public ResponseEntity checkMobile(@RequestBody ConsumerLogin userLogin) {
-		RegisterWithOtp	 resp=loginService.ConsumerLogin(userLogin);
+		RegisterWithOtp	 resp=consumerService.ConsumerLogin(userLogin);
 		if (resp!=null) {
 			DataResult result=new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 			return new ResponseEntity(result, HttpStatus.OK); 			
@@ -114,11 +121,27 @@ public class DODController {
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
 		}		
 	}	
+	
+	/*======================================================================================================*/	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/consumerProfile", method = RequestMethod.POST)
+	public ResponseEntity consumerProfile(@RequestBody ConsumerIdBaseProfile consumerIdBaseProfile) {
+		ConsumerProfile	 resp=consumerService.ConsumerProfile(consumerIdBaseProfile);
+		if (resp!=null) {
+			DataResultEntity<ConsumerProfile> data=new DataResultEntity<ConsumerProfile>(true, "Consumer Details is , ", HttpStatus.OK.value(), resp);
+			return new ResponseEntity(data, HttpStatus.OK); 			
+		}
+		else {
+			DataResult result=new DataResult(false, " Sorry , No data available on selected mobile no ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+		}		
+	}
+	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumeremaillogin", method = RequestMethod.POST)
 	public ResponseEntity checkUsernameAndPassword(@RequestBody ConsumerLoginwithEmail userLogin) {
-		ConsumerProfile resp=loginService.consumerautheticatewithemail(userLogin);			
+		ConsumerProfile resp=consumerService.consumerautheticatewithemail(userLogin);			
 		if (resp!=null){
 			DataResult result=new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 			return new ResponseEntity(result, HttpStatus.OK);
@@ -131,7 +154,7 @@ public class DODController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumermobilelogin", method = RequestMethod.POST)
 	public ResponseEntity checkUsernameAndPassword(@RequestBody ConsumerLoginwithMobile userLogin) {
-		ConsumerProfile resp=loginService.consumerautheticatewithMobile(userLogin);	
+		ConsumerProfile resp=consumerService.consumerautheticatewithMobile(userLogin);	
 		if (resp!=null)  {
 			DataResult result=new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 			return new ResponseEntity(result, HttpStatus.OK);
@@ -157,6 +180,61 @@ public class DODController {
 	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/merchantProfile", method = RequestMethod.POST)
+	public ResponseEntity MerchatProfile(@RequestBody GetMerchatProfile GetMerchatProfile) {		
+		MerchantProfile data=MerchantService.MerchatProfile(GetMerchatProfile);		
+		if (data != null) {			
+			MerchantProfile model = MerchantService.MerchatProfile(GetMerchatProfile);
+			DataResultEntity<MerchantProfile> dataResult=new DataResultEntity<MerchantProfile>(true, "Success , Merchant Details found ", HttpStatus.OK.value(),model);
+			return new ResponseEntity(dataResult,HttpStatus.OK);			
+		}else {
+			DataResult result=new DataResult(false, " Sorry , no details found on selected mobile no ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+		}	
+	}
+	
+	/*======================================================================================================*/	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/merchantlist", method = RequestMethod.GET)
+	public ResponseEntity AllMerchants() {		
+		List<MerchantProfile> data=MerchantService.AllMerchants();
+		List<MercnantDTO> response=new ArrayList<MercnantDTO>();
+		MercnantDTO mercnantDTO;
+		if (data != null) {
+			for (MerchantProfile response1:data) {
+				mercnantDTO=new MercnantDTO();
+				mercnantDTO.setId(response1.getId().toString());
+				mercnantDTO.setFirstname(response1.getFirstname());
+				mercnantDTO.setLastname(response1.getLastname());
+				mercnantDTO.setEmailid(response1.getEmailid());
+				mercnantDTO.setMobilenumber(response1.getMobilenumber());
+				mercnantDTO.setBusinessname(response1.getBusinessname());
+				mercnantDTO.setBusinessoffaddr(response1.getBusinessoffaddr());
+				mercnantDTO.setLandlineno(response1.getLandlineno());
+				mercnantDTO.setCity(response1.getCity());
+				mercnantDTO.setState(response1.getState());				
+				mercnantDTO.setStreet(response1.getStreet());
+				mercnantDTO.setCountry(response1.getCountry());
+				mercnantDTO.setTown(response1.getTown());				
+				mercnantDTO.setZipcode(response1.getDescription());
+				mercnantDTO.setTags(response1.getTags());
+				mercnantDTO.setDescription(response1.getDescription());				
+				mercnantDTO.setNickname(response1.getNickname());			
+				mercnantDTO.setCreateddate(response1.getCreateddate());
+				response.add(mercnantDTO);
+			}
+			DataResultlist<MercnantDTO> resp=new DataResultlist<MercnantDTO>(true, " all merchants details is ", HttpStatus.OK.value(), response);		
+			return new ResponseEntity(resp,HttpStatus.OK);			
+		}else {
+			DataResult result=new DataResult(false, " Sorry , no details found on selected mobile no ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+		}	
+	}
+	
+	
+	/*======================================================================================================*/	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/getmerchatbyMobile", method = RequestMethod.POST)
 	public ResponseEntity getMerchatById(@RequestBody GetMerchantById getMerchantById) {		
 		MerchantProfile data=MerchantService.GetmerchantMobile(getMerchantById);			
@@ -170,14 +248,73 @@ public class DODController {
 		}	
 	}
 	
+/*======================================================================================================*/	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/promotion/merchantid", method = RequestMethod.POST)
+	public ResponseEntity MerchantPromotions(@RequestBody MerchantPromotions MerchantPromotions) {
+		Date date=new Date();
+		List<MerchantProfile> data=MerchantService.MerchatPromotion(MerchantPromotions, date);	
+		List<PromotionDto> promotionDtos=new ArrayList<PromotionDto>();
+		PromotionDto promotionDto;
+		if (!data.isEmpty()) {
+			for (MerchantProfile response:data) {
+				promotionDto=new PromotionDto();
+				promotionDto.setId(response.getId());
+				for(Promotion promotion:response.getPromotions()){
+					promotionDto.setProduct_id(promotion.getProduct_id());
+					promotionDto.setCategory_name(promotion.getCategory_name());
+					promotionDto.setProduct_image(promotion.getProduct_image());
+					promotionDto.setOriginalPrice(promotion.getOriginalPrice());
+					promotionDto.setDiscount(promotion.getDiscount());
+					promotionDto.setStartdate(promotion.getStartdate());
+					promotionDto.setEnddate(promotion.getEnddate());
+					promotionDto.setLocation(promotion.getLocation());
+					promotionDto.setMerchatId(promotion.getMerchatid());
+				}
+				promotionDto.setDescription(response.getDescription());
+				promotionDto.setCreateddate(response.getCreateddate());
+				promotionDtos.add(promotionDto);		
+				
+			}
+			DataResultlist<PromotionDto> resp=new DataResultlist<PromotionDto>(true, " Promotions are ", HttpStatus.OK.value(), promotionDtos);			
+			return new ResponseEntity(resp,HttpStatus.OK);			
+		}else {
+			DataResult result=new DataResult(false, "Sorry , No Promotion found on selected Merchantid ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+		}	
+	}
+	
 	/*======================================================================================================*/		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantlogin", method = RequestMethod.POST)
 	public ResponseEntity checkMerchatUsernameAndPassword(@RequestBody MerchantLogin merchantLogin) {
 		MerchantProfile resp=MerchantService.MerchatLogin(merchantLogin);
 		if (resp!=null) {
-			MerchantProfile MerchantProfile=MerchantDao.GetMerchant(merchantLogin);
-			DataResultEntity<MerchantProfile> result=new DataResultEntity<MerchantProfile>(true, " Login successfully ... ", HttpStatus.OK.value(),MerchantProfile);
+			
+			MerchantProfile merchantProfile=MerchantDao.GetMerchant(merchantLogin);	
+			
+			MercnantDTO merchnantDTO=new MercnantDTO();
+			
+			merchnantDTO.setId(merchantProfile.getId().toString());
+			merchnantDTO.setFirstname(merchantProfile.getFirstname());
+			merchnantDTO.setLastname(merchantProfile.getLastname());
+			merchnantDTO.setEmailid(merchantProfile.getEmailid());
+			merchnantDTO.setMobilenumber(merchantProfile.getMobilenumber());
+			merchnantDTO.setBusinessname(merchantProfile.getBusinessname());
+			merchnantDTO.setBusinessoffaddr(merchantProfile.getBusinessoffaddr());
+			merchnantDTO.setLandlineno(merchantProfile.getLandlineno());
+			merchnantDTO.setCity(merchantProfile.getCity());
+			merchnantDTO.setState(merchantProfile.getState());
+			merchnantDTO.setStreet(merchantProfile.getStreet());
+			merchnantDTO.setCountry(merchantProfile.getCountry());
+			merchnantDTO.setTown(merchantProfile.getTown());
+			merchnantDTO.setDescription(merchantProfile.getDescription());
+			merchnantDTO.setTags(merchantProfile.getTags());
+			merchnantDTO.setZipcode(merchantProfile.getZipcode());
+			merchnantDTO.setNickname(merchantProfile.getNickname());
+			merchnantDTO.setCreateddate(merchantProfile.getCreateddate());			
+			DataResultEntity<MercnantDTO> result=new DataResultEntity<MercnantDTO>(true, " Login successfully ... ", HttpStatus.OK.value(),merchnantDTO);
 			return new ResponseEntity(result, HttpStatus.OK);
 		}
 		else {
@@ -211,13 +348,14 @@ public class DODController {
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);			
 		}		
 	}	
-	/*======================================================================================================*/	
+	/*======================================================================================================*/
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/promotions", method = RequestMethod.GET)
-	public ResponseEntity getPromotions() {
+	public ResponseEntity getPromotions() {		
 		Date date=new Date();
 		List<Promotion> promotions = promotionService.getPromotions(date);		
-		if (!promotions.isEmpty()) {
+		if (!promotions.isEmpty()) {			
 			DataResultlist<Promotion> result=new DataResultlist<Promotion>(true, " available Promotions are ,", HttpStatus.OK.value(), promotions);
 			return new ResponseEntity(result, HttpStatus.OK);			
 		}else
@@ -229,17 +367,20 @@ public class DODController {
 	/*======================================================================================================*/
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/createpromotions", method = RequestMethod.POST)
-	public ResponseEntity CreatePromotions(@RequestBody Promotion promotion) {		
-		Promotion promotions = promotionService.CreatePromotions(promotion);
-		if (promotions!=null) {
+	public ResponseEntity CreatePromotions(@RequestBody PromotionDto promotionDto) {		
+		
+		MerchantProfile merchantProfile=MerchantDao.getMerchantID(promotionDto);		
+		if (merchantProfile!=null) {
+			Promotion promotions = promotionService.CreatePromotions(promotionDto);	
 		DataResult result=new DataResult(true, " Promotion Posted successfully ... ", HttpStatus.OK.value());
 		return new ResponseEntity(result, HttpStatus.OK);			
 		}else
 		{
-			DataResult result=new DataResult(false, "Sorry , Please enter Valid data !! ", HttpStatus.BAD_REQUEST.value());
+			DataResult result=new DataResult(false, "Sorry , Please enter Valid Merchant Id  !! ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
 		}	 
-	}	
+	}
+	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/categorypromotions", method = RequestMethod.POST)

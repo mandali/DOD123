@@ -1,7 +1,8 @@
 
 create table dod_db.promotions
 (
- PRMS_ID INT(11), 
+ PRMS_ID INT(11),
+ Merchant_ID varchar(255),
  P_ID varchar(255),
  PRMS_DESC varchar(255) ,
  product_image varchar(255),
@@ -24,9 +25,10 @@ PASSWORD varchar(255),
 CRETATED_DATE DATE
 );
 
-create table dod_db.marchant_table
+create table dod_db.merchant_profile
 (
- ID INT(11),			
+ ID INT(11),
+ logo varchar(255),
  first_name varchar(255),
 last_name varchar(255),
 email_id varchar(255),

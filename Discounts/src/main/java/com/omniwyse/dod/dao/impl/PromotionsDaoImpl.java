@@ -23,12 +23,12 @@ public class PromotionsDaoImpl implements PromotionsDao{
 
 	@SuppressWarnings("unchecked")
 	public List<Promotion> getPromotions(Date currentdate) {
-		Session session = this.sessionFactory.getCurrentSession();		
+		Session session = this.sessionFactory.openSession();			
 		List<Promotion> list = session.createQuery(" from Promotion p where :currentDate between p.startdate and p.enddate")
-				.setParameter("currentDate", currentdate).list();			
-		return list;
+				.setParameter("currentDate", currentdate).list();	
+		return list;	
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public List<Promotion> getCategoryPromotions(Date currentdate, CategorySelection categorySelection) {
 		Session session = this.sessionFactory.getCurrentSession();	

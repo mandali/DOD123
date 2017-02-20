@@ -12,15 +12,23 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.omniwyse.dod.dao.RegistrationDao;
+import com.omniwyse.dod.dao.impl.ConsumerDaoImpl;
 import com.omniwyse.dod.model.ConsumerProfile;
 import com.omniwyse.dod.model.RegisterWithOtp;
 import com.omniwyse.dod.service.RegistrationService;
+import com.omniwyse.dod.service.impl.ConsumerServiceImpl;
 import com.omniwyse.dod.service.impl.RegistrationServiceImpl;
 
 public class TestDODService {
 
 	@InjectMocks
-	private RegistrationServiceImpl registrationService;
+	private ConsumerServiceImpl consumerServiceImpl;
+	
+	@Mock
+	private ConsumerDaoImpl consumerDaoImpl;
+	
+	@InjectMocks
+	private RegistrationServiceImpl RegistrationServiceImpl;
 	
 	@Mock
 	private RegistrationDao registrationDao;
@@ -36,8 +44,8 @@ public class TestDODService {
 		ConsumerProfile consumerRegistration=new ConsumerProfile();
 		consumerRegistration.setEmail_id("s.binkam@omniwyse.com");
 		consumerRegistration.setPhone_no("9876543210");
-		Mockito.when(registrationDao.registerconsumer(consumerRegistration)).thenReturn(createConsumerProfile(consumerRegistration));
-		ConsumerProfile cr=registrationService.registerconsumer(consumerRegistration);
+		Mockito.when(consumerDaoImpl.registerconsumer(consumerRegistration)).thenReturn(createConsumerProfile(consumerRegistration));
+		ConsumerProfile cr=consumerServiceImpl.registerconsumer(consumerRegistration);
 		Assert.assertEquals( consumerRegistration.getPhone_no(), cr.getPhone_no());
 		Assert.assertEquals("s.binkam@omniwyse.com", cr.getEmail_id());
 
@@ -59,7 +67,7 @@ public class TestDODService {
 		regOTP.setCreatedate(date);
 		regOTP.setOtpno("1234");
 		Mockito.when(registrationDao.Register(regOTP)).thenReturn(regOTP);
-		RegisterWithOtp registerWithOtp=registrationService.Register(regOTP);
+		RegisterWithOtp registerWithOtp=RegistrationServiceImpl.Register(regOTP);
 		Assert.assertEquals("1234", registerWithOtp.getOtpno());
 		Assert.assertEquals("9491779827", registerWithOtp.getUser_id());
 	}

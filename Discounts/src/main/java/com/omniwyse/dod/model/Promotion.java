@@ -1,31 +1,42 @@
 package com.omniwyse.dod.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.testng.junit.IJUnitTestRunner;
 
 
 
 @Entity
 @Table(name = "promotions")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Promotion {
+public class Promotion implements Serializable{	
 	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "PRMS_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;			
-	@Column(name = "P_ID")	
+	@Column(name = "P_ID")
 	private String product_id;
 	@Column(name = "PRMS_DESC")
 	private String description;	
+	@Column(name = "Merchant_ID")
+	private Integer merchatid;	
 	@Column(name = "category_name")
 	private String category_name;
 	@Column(name = "product_image")
@@ -42,14 +53,20 @@ public class Promotion {
 	private Date enddate;	
 	@Column(name = "location")
 	private String location;
+
 	
+	public Integer getMerchatid() {
+		return merchatid;
+	}
+	public void setMerchatid(Integer merchatid) {
+		this.merchatid = merchatid;
+	}
 	public String getCategory_name() {
 		return category_name;
 	}
 	public void setCategory_name(String category_name) {
 		this.category_name = category_name;
-	}
-	
+	}	
 	
 	public String getLocation() {
 		return location;
@@ -114,6 +131,9 @@ public class Promotion {
 	}
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
+	}	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}	
 
 }

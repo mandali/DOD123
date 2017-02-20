@@ -3,21 +3,17 @@ package com.omniwyse.dod.dao.impl;
 
 
 import org.hibernate.Query;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.omniwyse.dod.dao.ConsumerDao;
+import com.omniwyse.dod.model.ConsumerIdBaseProfile;
 import com.omniwyse.dod.model.ConsumerLogin;
 import com.omniwyse.dod.model.ConsumerLoginwithEmail;
 import com.omniwyse.dod.model.ConsumerLoginwithMobile;
 import com.omniwyse.dod.model.ConsumerProfile;
-import com.omniwyse.dod.model.MerchantLogin;
-import com.omniwyse.dod.model.MerchantLoginwithEmail;
-import com.omniwyse.dod.model.MerchantLoginwithMobile;
-import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.RegisterWithOtp;
 @Repository
 public class ConsumerDaoImpl implements ConsumerDao {
@@ -47,6 +43,19 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		query.setParameter("mobile",userLogin.getMobileno());			
 		RegisterWithOtp login=(RegisterWithOtp)query.uniqueResult();		
 		 return login;
+	}
+	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
+		Session session = this.sessionFactory.getCurrentSession();			
+		Integer id = (Integer) session.save(consumerProfile);
+		ConsumerProfile resp=(ConsumerProfile) session.get(ConsumerProfile.class, id);				
+		return resp;
+	}
+	public ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile ConsumerIdBaseProfile) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query=(Query) session.createQuery("from ConsumerProfile where phone_no=:mobileno");
+		query.setParameter("mobileno", ConsumerIdBaseProfile.getMobileno().trim());		
+		ConsumerProfile resp=(ConsumerProfile) query.uniqueResult();		
+		return resp;
 	}
 	
 }

@@ -27,19 +27,5 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			Integer id = (Integer) session.save(userProfile);
 			UserProfile resp=(UserProfile) session.get(UserProfile.class, id);		
 			return resp;
-		}
-		
-		/*public MerchantProfile registermerchant(MerchantProfile merchantProfile) {			
-			Session session = this.sessionFactory.getCurrentSession();
-			Integer id = (Integer) session.save(merchantProfile);
-			MerchantProfile resp=(MerchantProfile) session.get(MerchantProfile.class, id);		
-			return resp;	
-		}*/
-		public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
-			Session session = this.sessionFactory.getCurrentSession();			
-			Integer id = (Integer) session.save(consumerProfile);
-			ConsumerProfile resp=(ConsumerProfile) session.get(ConsumerProfile.class, id);				
-			return resp;
-		}
-		
+		}		
 }
