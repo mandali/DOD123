@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,17 +74,18 @@ public class DODController {
 	@Autowired
 	MerchantDao MerchantDao;
 	@Autowired
-	LocationService locationService;
+	LocationService locationService;	
 	
 	
-	
-	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
-	
+	private static final Logger logger = Logger.getLogger(AppConfiguration.class);	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity SavewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
+		final String METHOD_NAME="SavewithOTP";
+		ResponseEntity responseEntity = null;
 		RegisterWithOtp data=ConsumerRegisterValidate.getmobileno(registerWithOtp);
+		try {		
 		if (data==null) {			
 			Integer otp=1234;				
 			OtpBean otpBean=new OtpBean("OTP For Registration !!", otp);
@@ -93,14 +95,21 @@ public class DODController {
 		else{
 			DataResult dataResult=new DataResult(false, " Sorry , Mobile no is alredy exist ... ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(dataResult, HttpStatus.BAD_REQUEST);
-			}	
+			}
+		 }catch(Exception exception){
+			 logger.error("Exception in "+METHOD_NAME+""+exception.getMessage()); 		
+		}
+		return responseEntity;		
 	}	
 	/*======================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/OTPvalidate", method = RequestMethod.POST)
 	public ResponseEntity getOTP(@RequestBody OTPValidation oTPValidation) {
+		final String METHOD_NAME="getOTP";
+		ResponseEntity responseEntity = null;
 		RegisterWithOtp data=validationService.Getotp(oTPValidation);
+		try{
 		if (data!=null) {		
 			DataResult result=new DataResult(true, " OTP Validation successfully ... ", HttpStatus.OK.value());	
 			return new ResponseEntity(result , HttpStatus.OK);			
@@ -108,13 +117,21 @@ public class DODController {
 		else{
 			DataResult result=new DataResult(false, "Sorry , Wrong OTP No / Mobile no . ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-			}	
+			}
+		}catch(Exception exception)
+		{
+			 logger.error("Exception in "+METHOD_NAME+""+exception.getMessage()); 	
+		}
+		return responseEntity;
 	}	
 	/*======================================================================================================*/			
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumerRegistration", method = RequestMethod.POST)
-	public ResponseEntity Registerconsumer(@RequestBody ConsumerProfile consumerProfile) {		
-		ConsumerProfile data=ConsumerRegisterValidate.getmobilenoandemail(consumerProfile);			
+	public ResponseEntity Registerconsumer(@RequestBody ConsumerProfile consumerProfile) {
+		final String METHOD_NAME="Registerconsumer";
+		ResponseEntity responseEntity = null;
+		ConsumerProfile data=ConsumerRegisterValidate.getmobilenoandemail(consumerProfile);	
+		try{
 		if (data == null) {
 			ConsumerProfile model = consumerService.registerconsumer(consumerProfile);
 			DataResult result=new DataResult(true, " Consumer Registration successfully ...", HttpStatus.OK.value());
@@ -122,14 +139,22 @@ public class DODController {
 		} else {
 			DataResult result=new DataResult(false, " Sorry , Mobile no and Mail address is alredy exist !!", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);	
-		}	
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage()); 
+		}
+		return responseEntity;
 	}
+	
 	/*======================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumerlogin", method = RequestMethod.POST)
 	public ResponseEntity checkMobile(@RequestBody ConsumerLogin userLogin) {
+		final String METHOD_NAME="checkMobile";
+		ResponseEntity responseEntity = null;
 		RegisterWithOtp	 resp=consumerService.ConsumerLogin(userLogin);
+		try{
 		if (resp!=null) {
 			DataResult result=new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 			return new ResponseEntity(result, HttpStatus.OK); 			
@@ -137,14 +162,22 @@ public class DODController {
 		else {
 			DataResult result=new DataResult(false, " Sorry , Wrong Credentials ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}		
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}	
 	
-	/*======================================================================================================*/	
+	/*======================================================================================================*/
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumerProfile", method = RequestMethod.POST)
 	public ResponseEntity consumerProfile(@RequestBody ConsumerIdBaseProfile consumerIdBaseProfile) {
+		final String METHOD_NAME="consumerProfile";
+		ResponseEntity responseEntity = null;
 		ConsumerProfile	 resp=consumerService.ConsumerProfile(consumerIdBaseProfile);
+		try{
 		if (resp!=null) {
 			DataResultEntity<ConsumerProfile> data=new DataResultEntity<ConsumerProfile>(true, "Consumer Details is , ", HttpStatus.OK.value(), resp);
 			return new ResponseEntity(data, HttpStatus.OK); 			
@@ -152,40 +185,63 @@ public class DODController {
 		else {
 			DataResult result=new DataResult(false, " Sorry , No data available on selected mobile no ... ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}		
+		}
+		}catch(Exception exception)
+		{
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage()); 
+		}
+		return responseEntity;
+		
 	}
 	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumeremaillogin", method = RequestMethod.POST)
-	public ResponseEntity checkUsernameAndPassword(@RequestBody ConsumerLoginwithEmail userLogin) {
-		ConsumerProfile resp=consumerService.consumerautheticatewithemail(userLogin);			
+	public ResponseEntity checkEmailAndPassword(@RequestBody ConsumerLoginwithEmail userLogin) {
+		final String METHOD_NAME="checkEmailAndPassword";
+		ResponseEntity responseEntity = null;
+		ConsumerProfile resp=consumerService.consumerautheticatewithemail(userLogin);	
+		try{
 		if (resp!=null){
 			DataResult result=new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 			return new ResponseEntity(result, HttpStatus.OK);
 		}else{
 			DataResult result=new DataResult(false, " Sorry , Wrong Credentials ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);			
-		}		
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumermobilelogin", method = RequestMethod.POST)
-	public ResponseEntity checkUsernameAndPassword(@RequestBody ConsumerLoginwithMobile userLogin) {
+	public ResponseEntity checkMobilenoAndPassword(@RequestBody ConsumerLoginwithMobile userLogin) {
+		final String METHOD_NAME="checkMobilenoAndPassword";
+		ResponseEntity responseEntity = null;
 		ConsumerProfile resp=consumerService.consumerautheticatewithMobile(userLogin);	
+		try{
 		if (resp!=null)  {
 			DataResult result=new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 			return new ResponseEntity(result, HttpStatus.OK);
 		}else{
 			DataResult result=new DataResult(false, " Sorry , Wrong Credentials ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);			
-		}		
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantRegistration", method = RequestMethod.POST)
-	public ResponseEntity Registermerchant(@RequestBody MerchantProfile merchantProfile) {		
-		MerchantProfile data=ConsumerRegisterValidate.getmobilenoandemail(merchantProfile);			
+	public ResponseEntity registerMerchant(@RequestBody MerchantProfile merchantProfile) {
+		final String METHOD_NAME="registerMerchant";
+		ResponseEntity responseEntity = null;
+		MerchantProfile data=ConsumerRegisterValidate.getmobilenoandemail(merchantProfile);	
+		try{
 		if (data == null) {			
 			MerchantProfile model = MerchantService.registermerchant(merchantProfile);
 			DataResultEntity<MerchantProfile> dataResult=new DataResultEntity<MerchantProfile>(true, "Registration successfully", HttpStatus.OK.value(),model);
@@ -193,14 +249,21 @@ public class DODController {
 		}else {
 			DataResult result=new DataResult(false, "Sorry , Mobile no and Mail address is alredy exist !!", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}	
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}	
 	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantProfile", method = RequestMethod.POST)
-	public ResponseEntity MerchatProfile(@RequestBody GetMerchatProfile GetMerchatProfile) {		
+	public ResponseEntity merchatProfile(@RequestBody GetMerchatProfile GetMerchatProfile) {
+		final String METHOD_NAME="merchatProfile";
+		ResponseEntity responseEntity = null;
 		MerchantProfile data=MerchantService.MerchatProfile(GetMerchatProfile);		
+		try{
 		if (data != null) {			
 			MerchantProfile model = MerchantService.MerchatProfile(GetMerchatProfile);
 			DataResultEntity<MerchantProfile> dataResult=new DataResultEntity<MerchantProfile>(true, "Success , Merchant Details found ", HttpStatus.OK.value(),model);
@@ -208,18 +271,24 @@ public class DODController {
 		}else {
 			DataResult result=new DataResult(false, " Sorry , no details found on selected mobile no ... ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}	
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}return responseEntity;
 	}
 	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantlist", method = RequestMethod.GET)
-	public ResponseEntity AllMerchants() {		
+	public ResponseEntity allMerchants() {
+		final String METHOD_NAME="allMerchants";
+		ResponseEntity responseEntity = null;
 		List<MerchantProfile> data=MerchantService.AllMerchants();
 		List<MercnantDTO> response=new ArrayList<MercnantDTO>();
 		MercnantDTO mercnantDTO;
+		try{
 		if (!data.isEmpty()) {
-			for (MerchantProfile response1:data) {
+			for(MerchantProfile response1:data) {
 				mercnantDTO=new MercnantDTO();
 				mercnantDTO.setId(response1.getId().toString());
 				mercnantDTO.setFirstname(response1.getFirstname());
@@ -246,16 +315,22 @@ public class DODController {
 		}else {
 			DataResult result=new DataResult(false, " Sorry , merchants are not found right now  ... ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}	
-	}
-	
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+	}	
 	
 	/*======================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/getmerchatbyMobile", method = RequestMethod.POST)
-	public ResponseEntity getMerchatById(@RequestBody GetMerchantById getMerchantById) {		
-		MerchantProfile data=MerchantService.GetmerchantMobile(getMerchantById);			
+	public ResponseEntity getMerchatById(@RequestBody GetMerchantById getMerchantById) {
+		final String METHOD_NAME="getMerchatById";
+		ResponseEntity responseEntity = null;
+		MerchantProfile data=MerchantService.GetmerchantMobile(getMerchantById);
+		try{
 		if (data != null) {	
 			DataResultEntity<MerchantProfile> merchantProfile=new DataResultEntity<MerchantProfile>(true, " Succes ,  Merchant Details is  ", HttpStatus.OK.value(), data);
 			
@@ -263,18 +338,25 @@ public class DODController {
 		}else {
 			DataResult result=new DataResult(false, "Sorry , No details found on selected id ... ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}	
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}
 	
 /*======================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/promotion/merchantid", method = RequestMethod.POST)
-	public ResponseEntity MerchantPromotions(@RequestBody MerchantPromotions MerchantPromotions) {
+	public ResponseEntity merchantPromotions(@RequestBody MerchantPromotions MerchantPromotions) {
+		final String METHOD_NAME="merchantPromotions";
+		ResponseEntity responseEntity = null;
 		Date date=new Date();
 		List<MerchantProfile> data=MerchantService.MerchatPromotion(MerchantPromotions, date);	
 		List<PromotionDto> promotionDtos=new ArrayList<PromotionDto>();
 		PromotionDto promotionDto;
+		try{
 		if (!data.isEmpty()) {
 			for (MerchantProfile response:data) {
 				promotionDto=new PromotionDto();
@@ -292,28 +374,30 @@ public class DODController {
 				}
 				promotionDto.setDescription(response.getDescription());
 				promotionDto.setCreateddate(response.getCreateddate());
-				promotionDtos.add(promotionDto);		
-				
+				promotionDtos.add(promotionDto);				
 			}
 			DataResultlist<PromotionDto> resp=new DataResultlist<PromotionDto>(true, " Promotions are ", HttpStatus.OK.value(), promotionDtos);			
 			return new ResponseEntity(resp,HttpStatus.OK);			
 		}else {
 			DataResult result=new DataResult(false, "Sorry , No Promotion found on selected Merchantid ... ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}	
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}return responseEntity;
 	}
 	
 	/*======================================================================================================*/		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantlogin", method = RequestMethod.POST)
 	public ResponseEntity checkMerchatUsernameAndPassword(@RequestBody MerchantLogin merchantLogin) {
+		final String METHOD_NAME="checkMerchatUsernameAndPassword";
+		ResponseEntity responseEntity = null;
 		MerchantProfile resp=MerchantService.MerchatLogin(merchantLogin);
-		if (resp!=null) {
-			
-			MerchantProfile merchantProfile=MerchantDao.GetMerchant(merchantLogin);	
-			
-			MercnantDTO merchnantDTO=new MercnantDTO();
-			
+		try{
+		if (resp!=null) {			
+			MerchantProfile merchantProfile=MerchantDao.GetMerchant(merchantLogin);			
+			MercnantDTO merchnantDTO=new MercnantDTO();			
 			merchnantDTO.setId(merchantProfile.getId().toString());
 			merchnantDTO.setFirstname(merchantProfile.getFirstname());
 			merchnantDTO.setLastname(merchantProfile.getLastname());
@@ -338,41 +422,64 @@ public class DODController {
 		else {
 			DataResult result=new DataResult(false, " Sorry , Wrong Credentials ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}		
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantemaillogin", method = RequestMethod.POST)
-	public ResponseEntity checkUsernameAndPassword(@RequestBody MerchantLoginwithEmail merchantLoginwithEmail) {
-		MerchantProfile resp=MerchantService.merchatAutheticateWithEmail(merchantLoginwithEmail);	
+	public ResponseEntity checkEmailAndPassword(@RequestBody MerchantLoginwithEmail merchantLoginwithEmail) {
+		final String METHOD_NAME="checkEmailAndPassword";
+		ResponseEntity responseEntity = null;
+		MerchantProfile resp=MerchantService.merchatAutheticateWithEmail(merchantLoginwithEmail);
+		try{
 		if (resp!=null)  {
 			DataResult result=new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 			return new ResponseEntity(result, HttpStatus.OK);
 		}else{
 			DataResult result=new DataResult(false, " Sorry , Wrong Credentials ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);	
-		}		
+		}
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantmobilelogin", method = RequestMethod.POST)
-	public ResponseEntity checkUsernameAndPassword(@RequestBody MerchantLoginwithMobile merchantLoginwithMobile) {
+	public ResponseEntity checkMobileAndPassword(@RequestBody MerchantLoginwithMobile merchantLoginwithMobile) {
+		final String METHOD_NAME="checkMobileAndPassword";
+		ResponseEntity responseEntity = null;
 		MerchantProfile resp=MerchantService.merchatAutheticateWithMobile(merchantLoginwithMobile);
+		try{
 		if (resp!=null)  {
 			DataResult result=new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 			return new ResponseEntity(result, HttpStatus.OK);
 		}else{
 			DataResult result=new DataResult(false, " Sorry , Wrong Credentials ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);			
-		}		
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+		
 	}	
 	/*======================================================================================================*/
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/promotions", method = RequestMethod.GET)
-	public ResponseEntity getPromotions() {		
+	public ResponseEntity getPromotions() {	
+		final String METHOD_NAME="getPromotions";
+		ResponseEntity responseEntity = null;
 		Date date=new Date();
-		List<Promotion> promotions = promotionService.getPromotions(date);		
+		List<Promotion> promotions = promotionService.getPromotions(date);	
+		try{
 		if (!promotions.isEmpty()) {			
 			DataResultlist<Promotion> result=new DataResultlist<Promotion>(true, " available Promotions are ,", HttpStatus.OK.value(), promotions);
 			return new ResponseEntity(result, HttpStatus.OK);			
@@ -380,14 +487,20 @@ public class DODController {
 		{
 			DataResult result=new DataResult(false, "Sorry , No Promotions are available right now ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}	 
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}	
 	/*======================================================================================================*/
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/createpromotions", method = RequestMethod.POST)
-	public ResponseEntity CreatePromotions(@RequestBody PromotionDto promotionDto) {		
-		
-		MerchantProfile merchantProfile=MerchantDao.getMerchantID(promotionDto);		
+	public ResponseEntity createPromotions(@RequestBody PromotionDto promotionDto) {		
+		final String METHOD_NAME="createPromotions";
+		ResponseEntity responseEntity = null;		
+		MerchantProfile merchantProfile=MerchantDao.getMerchantID(promotionDto);
+		try{
 		if (merchantProfile!=null) {
 			Promotion promotions = promotionService.CreatePromotions(promotionDto);	
 		DataResult result=new DataResult(true, " Promotion Posted successfully ... ", HttpStatus.OK.value());
@@ -396,43 +509,58 @@ public class DODController {
 		{
 			DataResult result=new DataResult(false, "Sorry , Please enter Valid Merchant Id  !! ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}	 
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}return responseEntity;
 	}
 	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/categorypromotions", method = RequestMethod.POST)
 	public ResponseEntity getCategoryPromotion(@RequestBody CategorySelection categorySelection) {
+		final String METHOD_NAME="getCategoryPromotion";
+		ResponseEntity responseEntity = null;
 		Date date=new Date();
 		List<Promotion> promotions = promotionService.getCategoryPromotions(date, categorySelection);
+		try{
 		if (!promotions.isEmpty()) {
 			DataResultlist<Promotion> data=new DataResultlist<Promotion>(true, " Promotions are ,",HttpStatus.OK.value() , promotions);
 			return new ResponseEntity(data, HttpStatus.OK);			
 		}else{			
 			DataResult result=new DataResult(false, " Sorry , No Promotions are available on selected category right now ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}	
+		}		
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}
 	
 	/*===========================================================================================================*/
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/IdBasePromotions", method = RequestMethod.POST)
-	public ResponseEntity getIdbasePromotions(@RequestBody IdBasePromotion idBasePromotion) {		
+	public ResponseEntity getIdbasePromotions(@RequestBody IdBasePromotion idBasePromotion) {	
+		final String METHOD_NAME="getIdbasePromotions";
+		ResponseEntity responseEntity = null;
 		Promotion promotions = promotionService.IdBasePromotions(idBasePromotion);
+		try{
 		if (promotions!=null) {			
 			return new ResponseEntity(promotions, HttpStatus.OK);			
 		}else
 		{
 			DataResult result=new DataResult(false, "Sorry , No Promotions are available on selected id ... ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}	 
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
 	}
 	
-	/*===========================================================================================================*/	
-	
-	
-	/*===========================================================================================================*/	
+	/*===========================================================================================================*/		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_COUNTRIES, method = RequestMethod.GET)
 	public ResponseEntity fetchCountriesList(){
@@ -474,9 +602,9 @@ public class DODController {
 		return responseEntity;
 		
 	}
-	/*===========================================================================================================*/	
 	
 	/*===========================================================================================================*/	
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_CITIES, method = RequestMethod.GET)
 	public ResponseEntity fetchCitiesList(){
@@ -488,8 +616,7 @@ public class DODController {
 		List<CitiesVO> citiesVOs=new ArrayList<CitiesVO>();
 		CitiesVO citiesVO;
 		try {
-		if (!cities.isEmpty()) {
-			
+		if (!cities.isEmpty()) {			
 			for(Cities citiesLocal:cities){
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTimeInMillis( citiesLocal.getCreated().getTime() );
@@ -501,8 +628,7 @@ public class DODController {
 				citiesVO.setCityName(citiesLocal.getCityName());
 				citiesVO.setCountryId(citiesLocal.getCountryId().getId().toString());
 				citiesVO.setCreatedDate(formattedDate);
-				citiesVOs.add(citiesVO);
-				
+				citiesVOs.add(citiesVO);				
 			}
 			result=new DataResultlist<CitiesVO>(true, AppConstants.LIST_CITIES_SUCCESS_MSG, HttpStatus.OK.value(), citiesVOs);
 			responseEntity=new ResponseEntity(result, HttpStatus.OK);			
@@ -518,8 +644,6 @@ public class DODController {
 		return responseEntity;
 		
 	}
-	/*===========================================================================================================*/	
-	
 	
 	/*===========================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -531,11 +655,9 @@ public class DODController {
 		DataResult resultError;
 		ResponseEntity responseEntity = null;
 		List<LocationsVO> locationsVOs=new ArrayList<LocationsVO>();
-		LocationsVO locationsVO;
-		
+		LocationsVO locationsVO;		
 		try {
-		if (!locations.isEmpty()) {
-			
+		if (!locations.isEmpty()) {			
 			for(Location location:locations){
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTimeInMillis( location.getCreated().getTime() );
@@ -550,10 +672,8 @@ public class DODController {
 				locationsVO.setLongitude(location.getLocationLongitude());
 				locationsVO.setLocationId(location.getLocationId().toString());
 				locationsVO.setLocationName(location.getLocationName());
-				locationsVOs.add(locationsVO);
-				
-			}
-			
+				locationsVOs.add(locationsVO);				
+			}			
 			 result=new DataResultlist<LocationsVO>(true, AppConstants.LIST_LOCATIONS_SUCCESS_MSG, HttpStatus.OK.value(), locationsVOs);
 			 responseEntity=new ResponseEntity(result, HttpStatus.OK);			
 		}else

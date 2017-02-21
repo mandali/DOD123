@@ -12,6 +12,5 @@ public class AppConstants {
 	public static final String LIST_CITIES_ERROR_MSG="Sorry , No Cities are available right now ";
 	public static final String LIST_LOCATIONS_SUCCESS_MSG=" available locations are ,";
 	public static final String LIST_LOCATIONS_ERROR_MSG="Sorry , No Locations are available right now ";
-	
 
 }
