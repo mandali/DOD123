@@ -597,7 +597,7 @@ public class DODController {
 		
 		}
 		catch(Exception exception){
-			//logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return responseEntity;
 		
