@@ -218,7 +218,7 @@ public class DODController {
 		List<MerchantProfile> data=MerchantService.AllMerchants();
 		List<MercnantDTO> response=new ArrayList<MercnantDTO>();
 		MercnantDTO mercnantDTO;
-		if (data != null) {
+		if (!data.isEmpty()) {
 			for (MerchantProfile response1:data) {
 				mercnantDTO=new MercnantDTO();
 				mercnantDTO.setId(response1.getId().toString());
@@ -244,7 +244,7 @@ public class DODController {
 			DataResultlist<MercnantDTO> resp=new DataResultlist<MercnantDTO>(true, " all merchants details is ", HttpStatus.OK.value(), response);		
 			return new ResponseEntity(resp,HttpStatus.OK);			
 		}else {
-			DataResult result=new DataResult(false, " Sorry , no details found on selected mobile no ... ", HttpStatus.BAD_REQUEST.value());
+			DataResult result=new DataResult(false, " Sorry , merchants are not found right now  ... ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
 		}	
 	}
