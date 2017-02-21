@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,7 +77,7 @@ public class DODController {
 	
 	
 	
-	//private static final Logger logger = Logger.getLogger(AppConfiguration.class);
+	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -513,7 +513,7 @@ public class DODController {
 		}
 		}
 		catch(Exception exception){
-			//logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return responseEntity;
 		
@@ -564,7 +564,7 @@ public class DODController {
 		}	 
 		}
 		catch(Exception exception){
-			//logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return responseEntity;
 	}
