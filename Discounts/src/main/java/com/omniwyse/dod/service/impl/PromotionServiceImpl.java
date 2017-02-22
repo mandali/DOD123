@@ -47,9 +47,7 @@ public class PromotionServiceImpl implements PromotionService{
 	public Promotion CreatePromotions(PromotionDto promotionDto) {		
 		Date date=new Date();
 		Promotion promotion=new Promotion();
-		MerchantProfile merchantProfile=merchantDao.getMerchantbyID(promotionDto.getMerchatId());
-		//promotion.setMerchantProfile(merchantProfile);		
-		promotion.setCategory_name(promotionDto.getCategory_name());
+		MerchantProfile merchantProfile=merchantDao.getMerchantbyID(promotionDto.getMerchatId());			
 		promotion.setOriginalPrice(promotionDto.getOriginalPrice());
 		promotion.setDiscount(promotionDto.getDiscount());
 		promotion.setStartdate(date);

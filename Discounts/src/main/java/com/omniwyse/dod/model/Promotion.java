@@ -2,29 +2,24 @@ package com.omniwyse.dod.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.testng.junit.IJUnitTestRunner;
 
 
 
 @Entity
 @Table(name = "promotions")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Promotion implements Serializable{	
+public class Promotion implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -37,8 +32,6 @@ public class Promotion implements Serializable{
 	private String description;	
 	@Column(name = "Merchant_ID")
 	private Integer merchatid;	
-	@Column(name = "category_name")
-	private String category_name;
 	@Column(name = "product_image")
 	private String product_image;	
 	@Column(name = "original_price")
@@ -53,20 +46,33 @@ public class Promotion implements Serializable{
 	private Date enddate;	
 	@Column(name = "location")
 	private String location;
-
+	@OneToOne
+	@JoinColumn(name = "CAT_ID")
+	private Category catid;
+	@OneToOne
+	@JoinColumn(name = "BRD_ID")
+	private Brand brandId;
 	
+	
+	
+	public Category getCatid() {
+		return catid;
+	}
+	public void setCatid(Category catid) {
+		this.catid = catid;
+	}
+	public Brand getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(Brand brandId) {
+		this.brandId = brandId;
+	}
 	public Integer getMerchatid() {
 		return merchatid;
 	}
 	public void setMerchatid(Integer merchatid) {
 		this.merchatid = merchatid;
-	}
-	public String getCategory_name() {
-		return category_name;
-	}
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
-	}	
+	}		
 	
 	public String getLocation() {
 		return location;
@@ -132,8 +138,6 @@ public class Promotion implements Serializable{
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
 	}	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}	
+	
 
 }

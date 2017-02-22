@@ -99,6 +99,8 @@ public class DODController {
 			 logger.error("Exception in "+METHOD_NAME+""+exception.getMessage()); 		
 		}
 		return responseEntity;		
+	}
+	
 	}	
 	/*======================================================================================================*/	
 	
@@ -361,6 +363,7 @@ public class DODController {
 				promotionDto=new PromotionDto();
 				promotionDto.setId(response.getId());
 				for(Promotion promotion:response.getPromotions()){
+					promotionDto.setProduct_id(promotion.getProduct_id());					
 					promotionDto.setProduct_id(promotion.getProduct_id());
 					promotionDto.setCategory_name(promotion.getCategory_name());
 					promotionDto.setProduct_image(promotion.getProduct_image());
