@@ -16,8 +16,46 @@ public class PromotionDto implements Serializable{
 	private Date startdate;	
 	private Date enddate;
 	private String location;
-	private Integer merchatId;	
+	private Integer merchatId;
+	private String brandName;
+	private String brandRating;
+	private String brandImage;
+	private String brandDescription;
+	private String categoryName;
 	
+	
+	
+	
+	public String getBrandName() {
+		return brandName;
+	}
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+	public String getBrandRating() {
+		return brandRating;
+	}
+	public void setBrandRating(String brandRating) {
+		this.brandRating = brandRating;
+	}
+	public String getBrandImage() {
+		return brandImage;
+	}
+	public void setBrandImage(String brandImage) {
+		this.brandImage = brandImage;
+	}
+	public String getBrandDescription() {
+		return brandDescription;
+	}
+	public void setBrandDescription(String brandDescription) {
+		this.brandDescription = brandDescription;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public Integer getMerchatId() {
 		return merchatId;
 	}

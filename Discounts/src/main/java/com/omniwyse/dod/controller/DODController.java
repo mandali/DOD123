@@ -27,6 +27,7 @@ import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
+import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.Cities;
 import com.omniwyse.dod.model.ConsumerIdBaseProfile;
@@ -476,10 +477,33 @@ public class DODController {
 		final String METHOD_NAME="getPromotions";
 		ResponseEntity responseEntity = null;
 		Date date=new Date();
-		List<Promotion> promotions = promotionService.getPromotions(date);	
+		List<Promotion> promotions = promotionService.getPromotions(date);
+		List<PromotionDto> promotionDtos=new ArrayList<PromotionDto>();
+		PromotionDto promotionDto;
 		try{
-		if (!promotions.isEmpty()) {			
-			DataResultlist<Promotion> result=new DataResultlist<Promotion>(true, " available Promotions are ,", HttpStatus.OK.value(), promotions);
+		if (!promotions.isEmpty()) {
+			for (Promotion resp:promotions) {
+				promotionDto=new PromotionDto();
+				promotionDto.setId(resp.getId());
+				promotionDto.setProduct_id(resp.getProduct_id());
+				promotionDto.setDescription(resp.getDescription());
+				promotionDto.setMerchatId(resp.getMerchatid());
+				promotionDto.setProduct_image(resp.getProduct_image());
+				promotionDto.setOriginalPrice(resp.getOriginalPrice());
+				promotionDto.setDiscount(resp.getDiscount());
+				promotionDto.setLocation(resp.getLocation());
+				promotionDto.setCreateddate(resp.getCreateddate());
+				promotionDto.setStartdate(resp.getStartdate());
+				promotionDto.setEnddate(resp.getEnddate());
+				promotionDto.setCategoryName(resp.getCatid().getCategoryName());
+				promotionDto.setBrandName(resp.getBrandId().getBrandName());
+				promotionDto.setBrandRating(resp.getBrandId().getBrandRating());
+				promotionDto.setBrandImage(resp.getBrandId().getBrandImage());
+				promotionDto.setBrandDescription(resp.getBrandId().getBrandDescription());
+				promotionDtos.add(promotionDto);
+				
+			}
+			DataResultlist<PromotionDto> result=new DataResultlist<PromotionDto>(true, " available Promotions are ,", HttpStatus.OK.value(), promotionDtos);
 			return new ResponseEntity(result, HttpStatus.OK);			
 		}else
 		{
