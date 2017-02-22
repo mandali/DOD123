@@ -204,4 +204,20 @@ create table dod_db.promotions
  FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
  FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID));
 
-
+create table dod_db.promotions
+(
+ PRMS_ID INT(11),
+ Merchant_ID varchar(255),
+ P_ID varchar(255),
+ PRMS_DESC varchar(255) ,
+ product_image varchar(255),
+ original_price varchar(255) ,
+ location varchar(255),
+ DISCOUNT varchar(255) ,
+ CRETATED_DATE DATE ,
+ START_DATE DATE  ,
+ END_DATE DATE   ,
+ CAT_ID int(11),
+ BRD_ID int(11),
+ FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
+ FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID));
