@@ -10,10 +10,12 @@ create table dod_db.promotions
  location varchar(255),
  DISCOUNT varchar(255) ,
  CRETATED_DATE DATE ,
-  START_DATE DATE  ,
-  END_DATE DATE   ,
-  category_name varchar(255)
-);
+ START_DATE DATE  ,
+ END_DATE DATE   ,
+ CAT_ID int(11),
+ BRD_ID int(11),
+ FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
+ FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID));
 
 create table dod_db.user_table
 (
@@ -79,10 +81,12 @@ CRETATED_DATE DATE
  
  create table dod_db.category
 (
- PRMS_ID varchar(255),			
- NAME varchar(255),
-CRETATED_DATE DATE
+CAT_ID int(11),
+CAT_NAME  varchar(255) not null,
+CAT_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (CAT_ID)
 );
+
 
 create table dod_db.consumer_profile
 (
@@ -182,6 +186,23 @@ FOREIGN KEY (CT_ID) REFERENCES cities(CT_ID),
 LO_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+create table brand(
+BRD_ID int(11),
+BRD_NAME VARCHAR(255),
+BRD_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+BRD_RATING VARCHAR(255),
+BRD_IMAGE VARCHAR(255),
+BRD_DESC VARCHAR(255),
+PRIMARY KEY (BRD_ID)
+);
 
+create table category_brand
+(
+BRD_ID int(11),
+CAT_ID int(11),
+PRIMARY KEY (BRD_ID,CAT_ID),
+FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
+FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID)
+);
 
 
