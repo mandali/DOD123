@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -100,7 +98,8 @@ public class DODController {
 			 logger.error("Exception in "+METHOD_NAME+""+exception.getMessage()); 		
 		}
 		return responseEntity;		
-	}	
+	}
+	
 	/*======================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -362,8 +361,7 @@ public class DODController {
 				promotionDto=new PromotionDto();
 				promotionDto.setId(response.getId());
 				for(Promotion promotion:response.getPromotions()){
-					promotionDto.setProduct_id(promotion.getProduct_id());
-					promotionDto.setCategory_name(promotion.getCategory_name());
+					promotionDto.setProduct_id(promotion.getProduct_id());					
 					promotionDto.setProduct_image(promotion.getProduct_image());
 					promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 					promotionDto.setDiscount(promotion.getDiscount());
