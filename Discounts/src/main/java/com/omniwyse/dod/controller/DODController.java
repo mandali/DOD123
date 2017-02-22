@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -101,6 +102,7 @@ public class DODController {
 		return responseEntity;		
 	}
 	
+
 	/*======================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -363,6 +365,7 @@ public class DODController {
 				promotionDto.setId(response.getId());
 				for(Promotion promotion:response.getPromotions()){
 					promotionDto.setProduct_id(promotion.getProduct_id());					
+					promotionDto.setProduct_id(promotion.getProduct_id());
 					promotionDto.setProduct_image(promotion.getProduct_image());
 					promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 					promotionDto.setDiscount(promotion.getDiscount());
