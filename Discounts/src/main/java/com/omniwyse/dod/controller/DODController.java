@@ -101,7 +101,7 @@ public class DODController {
 		return responseEntity;		
 	}
 	
-	}	
+
 	/*======================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -365,7 +365,6 @@ public class DODController {
 				for(Promotion promotion:response.getPromotions()){
 					promotionDto.setProduct_id(promotion.getProduct_id());					
 					promotionDto.setProduct_id(promotion.getProduct_id());
-					promotionDto.setCategory_name(promotion.getCategory_name());
 					promotionDto.setProduct_image(promotion.getProduct_image());
 					promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 					promotionDto.setDiscount(promotion.getDiscount());
