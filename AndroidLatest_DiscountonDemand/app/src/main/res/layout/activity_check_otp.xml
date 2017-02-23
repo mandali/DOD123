@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/relative"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:background="@drawable/otp_screen_gradient">
+
+                <TextView
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:text="Please enter received 4 degit OTP number texted to 8341356926"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_launcher"/>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:paddingBottom="15dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_below="@+id/relative"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="36dp"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="1"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/background_dark"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:background="@drawable/verify_otp_edit_text_bg"
+                    android:id="@+id/otp_first_char" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:hint="2"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/background_dark"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:inputType="number"
+                    android:background="@drawable/verify_otp_edit_text_bg"
+                    android:id="@+id/otp_second_char" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:hint="3"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/background_dark"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:background="@drawable/verify_otp_edit_text_bg"
+                    android:id="@+id/otp_third_char" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:hint="4"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/background_dark"
+                    android:padding="5dp"
+                    android:inputType="number"
+                    android:background="@drawable/verify_otp_edit_text_bg"
+                    android:id="@+id/otp_fourth_char" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:layout_marginTop="@dimen/otp_screen_margin"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="CONFIRM"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:background="@drawable/otp_button_bg"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

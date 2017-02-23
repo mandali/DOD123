@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DiscountonDemand</string>
+    <string name="switch_text">I accept <font fgcolor="#555555">Terms &amp; Conditions</font></string>
+
+</resources>
