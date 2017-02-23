@@ -36,11 +36,14 @@ public class Brand implements Serializable{
 	@Column(name = "BRD_CREATED")
 	private Timestamp createdDate;
 	
+	
 	public Brand(){
 	}
 	
 	
 	
+	
+
 	
 	public Brand(Long brandId, String brandName, String brandRating, String brandImage, String brandDescription,
 			Timestamp createdDate) {

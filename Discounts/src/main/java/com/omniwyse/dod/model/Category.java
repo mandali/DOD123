@@ -2,12 +2,18 @@ package com.omniwyse.dod.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -15,7 +21,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @Entity
 @Table(name = "category")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Category implements Serializable{
+public class Category  implements Serializable{
 	
 	/**
 	 * 
@@ -29,6 +35,9 @@ public class Category implements Serializable{
     private String categoryName;	
 	@Column(name = "CAT_CREATED")
 	private Timestamp createddate;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "category_brand", joinColumns = { @JoinColumn(name = "CAT_ID") }, inverseJoinColumns = { @JoinColumn(name = "BRD_ID") })
+	private Set<Brand> brands=new HashSet<Brand>();
 	
 	public Category(){
 		
@@ -43,6 +52,17 @@ public class Category implements Serializable{
 	}
 	
 	
+	
+	
+
+
+
+	public Category(Long categoryId, String categoryName, Timestamp createddate, Set<Brand> brands) {
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.createddate = createddate;
+		this.brands = brands;
+	}
 
 
 
@@ -54,6 +74,14 @@ public class Category implements Serializable{
 
 	public Long getCategoryId() {
 		return categoryId;
+	}
+
+	public Set<Brand> getBrands() {
+		return brands;
+	}
+
+	public void setBrands(Set<Brand> brands) {
+		this.brands = brands;
 	}
 
 	public void setCategoryId(Long categoryId) {

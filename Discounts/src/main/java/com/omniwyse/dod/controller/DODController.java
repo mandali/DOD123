@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.omniwyse.dod.AppConstants.AppConstants;
+import com.omniwyse.dod.DTO.CategoryBrandVO;
+import com.omniwyse.dod.DTO.CategoryVO;
 import com.omniwyse.dod.DTO.CitiesVO;
 import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
@@ -29,6 +31,7 @@ import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
+import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.Cities;
 import com.omniwyse.dod.model.ConsumerIdBaseProfile;
@@ -52,6 +55,7 @@ import com.omniwyse.dod.model.RegisterWithOtp;
 import com.omniwyse.dod.service.ConsumerService;
 import com.omniwyse.dod.service.LocationService;
 import com.omniwyse.dod.service.MerchantService;
+import com.omniwyse.dod.service.MetaDataService;
 import com.omniwyse.dod.service.PromotionService;
 import com.omniwyse.dod.service.RegistrationService;
 import com.omniwyse.dod.service.ValidationService;
@@ -74,7 +78,9 @@ public class DODController {
 	@Autowired
 	MerchantDao MerchantDao;
 	@Autowired
-	LocationService locationService;	
+	LocationService locationService;
+	@Autowired
+	MetaDataService metaDataService;
 	
 	
 	private static final Logger logger = Logger.getLogger(AppConfiguration.class);	
@@ -723,5 +729,82 @@ public class DODController {
 	}
 	/*===========================================================================================================*/
 	
+	
+	/*===========================================================================================================*/
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_CATEGORIES, method = RequestMethod.GET)
+	public ResponseEntity fetchCategoriesList(){
+		final String METHOD_NAME="fetchCategoriesList";
+		List<Category> categories=metaDataService.fetchCategories();
+		List<CategoryVO> categoryVOs=new ArrayList<CategoryVO>();
+		ResponseEntity responseEntity = null;
+		DataResult resultError;
+		DataResultlist<CategoryVO> result;
+		CategoryVO categoryVO;
+		
+		
+		try{
+			if(!categories.isEmpty()){
+				
+				for(Category category:categories){
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTimeInMillis( category.getCreateddate().getTime() );
+					Date date = calendar.getTime();
+					SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+			        String formattedDate = DATE_FORMAT.format(date);
+					categoryVO=new CategoryVO();
+					categoryVO.setCategoryId(category.getCategoryId().toString());
+					categoryVO.setCategoryName(category.getCategoryName());
+					categoryVO.setCreatedDate(formattedDate);
+					categoryVOs.add(categoryVO);
+				}
+				result=new DataResultlist<CategoryVO>(true, AppConstants.LIST_CATEGORIES_SUCCESS_MSG, HttpStatus.OK.value(), categoryVOs);
+				responseEntity=new ResponseEntity(result, HttpStatus.OK);	
+			} else{
+				
+				resultError=new DataResult(false, AppConstants.LIST_CATEGORIES_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
+				responseEntity=new ResponseEntity(resultError,HttpStatus.BAD_REQUEST);
+			}
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+		
+	}
+	
+	/*===========================================================================================================*/
+	
+	/*===========================================================================================================*/
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_BRANDS, method = RequestMethod.GET)
+	public ResponseEntity fetchBrandsList() {
+		final String METHOD_NAME="fetchBrandsList";
+		List<CategoryBrandVO> categories= metaDataService.fetchBrands();
+		ResponseEntity<CategoryBrandVO>  responseEntity = null;
+		DataResultlist<CategoryBrandVO> result;
+		DataResult resultError;
+		try{
+			
+			if (!categories.isEmpty()) {		
+				result=new DataResultlist<CategoryBrandVO>(true, AppConstants.LIST_BRANDS_SUCCESS_MSG,HttpStatus.OK.value(), categories);	
+				return new ResponseEntity(result , HttpStatus.OK);			
+				}
+			else{
+				resultError=new DataResult(false, AppConstants.LIST_BRANDS_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
+				return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				}
+			
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+		
+	}
+	
+	
+	/*===========================================================================================================*/
 	
 }

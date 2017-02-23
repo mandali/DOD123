@@ -12,5 +12,11 @@ public class AppConstants {
 	public static final String LIST_CITIES_ERROR_MSG="Sorry , No Cities are available right now ";
 	public static final String LIST_LOCATIONS_SUCCESS_MSG=" available locations are ,";
 	public static final String LIST_LOCATIONS_ERROR_MSG="Sorry , No Locations are available right now ";
+	public static final String LIST_CATEGORIES="/categories";
+	public static final String LIST_CATEGORIES_SUCCESS_MSG=" available Categories are ,";
+	public static final String LIST_CATEGORIES_ERROR_MSG="Sorry , No Categories are available right now ";
+	public static final String LIST_BRANDS="/brands";
+	public static final String LIST_BRANDS_SUCCESS_MSG=" available Categories with Brands are ,";
+	public static final String LIST_BRANDS_ERROR_MSG="Sorry , No Categories are available right now ";
 
 }
