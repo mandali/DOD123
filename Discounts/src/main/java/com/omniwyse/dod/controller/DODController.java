@@ -51,6 +51,7 @@ import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.OTPValidation;
 import com.omniwyse.dod.model.Promotion;
+import com.omniwyse.dod.model.Promotionsummery;
 import com.omniwyse.dod.model.RegisterWithOtp;
 import com.omniwyse.dod.service.ConsumerService;
 import com.omniwyse.dod.service.LocationService;
@@ -97,7 +98,7 @@ public class DODController {
 			OtpBean otpBean=new OtpBean("OTP For Registration !!", otp);
 			RegisterWithOtp model = registrationService.Register(registerWithOtp);	
 			DataResult data1=new DataResult(true, "success", HttpStatus.OK.value());
-			return new ResponseEntity(data1, HttpStatus.OK);
+			return new ResponseEntity(otpBean, HttpStatus.OK);
 			}
 		else{
 			DataResult dataResult=new DataResult(false, " Sorry , Mobile no is alredy exist ... ", HttpStatus.BAD_REQUEST.value());
@@ -526,6 +527,36 @@ public class DODController {
 		return responseEntity;
 	}	
 	/*======================================================================================================*/
+	
+	
+/*======================================================================================================*/
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/promotions", method = RequestMethod.GET)
+	public ResponseEntity PromotionSummary() {	
+		final String METHOD_NAME="PromotionSummary";
+		ResponseEntity responseEntity = null;
+		Date date=new Date();
+		List<Promotionsummery> promotions = promotionService.promotionSummary(date);		
+		try{
+		if (!promotions.isEmpty()) {
+			
+			DataResultlist<Promotionsummery> result=new DataResultlist<Promotionsummery>(true, " available Promotions Summary are ,", HttpStatus.OK.value(), promotions);
+			return new ResponseEntity(result, HttpStatus.OK);			
+		}else
+		{
+			DataResult result=new DataResult(false, "Sorry , No Promotions Summary are available right now ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+	}
+	
+	
+	
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/createpromotions", method = RequestMethod.POST)
 	public ResponseEntity createPromotions(@RequestBody CreatePromotionVo CreatePromotionVo) {		
