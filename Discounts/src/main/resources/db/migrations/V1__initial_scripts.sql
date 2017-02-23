@@ -11,12 +11,12 @@ PRIMARY KEY (USER_ID)
 
 create table dod_db.merchant_profile
 (
- ID INT(11),
+ ID int NOT NULL AUTO_INCREMENT,
  logo varchar(255),
  first_name varchar(255),
 last_name varchar(255),
-email_id varchar(255),
-mobile_number varchar(255),
+email_id varchar(255) NOT NULL,
+mobile_number varchar(255) NOT NULL,
 business_name varchar(255),
 business_off_addr varchar(255),
 landline_no varchar(255),
@@ -29,8 +29,8 @@ zipcode varchar(255),
 description varchar(255),
 tags varchar(255),
 nickname varchar(255),
-password varchar(255),
-confirmpassword varchar(255),
+password varchar(255) NOT NULL,
+confirmpassword varchar(255) NOT NULL,
 created_date DATE,
 PRIMARY KEY (ID),
 UNIQUE (email_id),
@@ -69,7 +69,7 @@ primary key(BEACONS_ID)
  
  create table dod_db.category
 (
-CAT_ID int(11),
+CAT_ID int NOT NULL AUTO_INCREMENT,
 CAT_NAME  varchar(255) not null,
 CAT_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (CAT_ID)
@@ -78,7 +78,7 @@ PRIMARY KEY (CAT_ID)
 
 create table dod_db.consumer_profile
 (
- id INT(11),
+ id int NOT NULL AUTO_INCREMENT,
  email_id varchar(255),
 phone_no varchar(255),
 city varchar(255),
@@ -126,7 +126,7 @@ PRIMARY KEY (MAR_BECONS_ID)
 
 create table dod_db.otp_table
 (
- Id INT(11),			
+ Id int NOT NULL AUTO_INCREMENT,			
  USER_ID varchar(255),
 OTP_NO varchar(255),
 EXP_DATE DATE,
@@ -153,7 +153,7 @@ PRIMARY KEY (P_ID)
 
 create table dod_db.country
 (
-CO_ID int(11), 
+CO_ID int NOT NULL AUTO_INCREMENT, 
 CO_NAME varchar(255) not null,
 PRIMARY KEY (CO_ID),
 CO_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -161,9 +161,9 @@ CO_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 
 create table dod_db.cities
 (
-CT_ID int(11), 
+CT_ID int NOT NULL AUTO_INCREMENT, 
 CT_NAME varchar(255) not null,
-CO_ID int(11),
+CO_ID int,
 PRIMARY KEY (CT_ID),
 FOREIGN KEY (CO_ID) REFERENCES country(CO_ID),
 CT_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -172,12 +172,12 @@ CT_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 
 create table dod_db.location
 (
-LO_ID int(11), 
+LO_ID int NOT NULL AUTO_INCREMENT, 
 LO_NAME varchar(255) not null,
 LO_LAT varchar(255),
 LO_LONG varchar(255),
-CO_ID int(11),
-CT_ID int(11),
+CO_ID int,
+CT_ID int,
 PRIMARY KEY (LO_ID),
 FOREIGN KEY (CO_ID) REFERENCES country(CO_ID),
 FOREIGN KEY (CT_ID) REFERENCES cities(CT_ID),
@@ -185,7 +185,7 @@ LO_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 create table brand(
-BRD_ID int(11),
+BRD_ID int NOT NULL AUTO_INCREMENT,
 BRD_NAME VARCHAR(255),
 BRD_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 BRD_RATING VARCHAR(255),
@@ -196,8 +196,8 @@ PRIMARY KEY (BRD_ID)
 
 create table category_brand
 (
-BRD_ID int(11),
-CAT_ID int(11),
+BRD_ID int,
+CAT_ID int,
 PRIMARY KEY (BRD_ID,CAT_ID),
 FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
 FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID)
@@ -205,7 +205,7 @@ FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID)
 
 create table dod_db.promotions
 (
- PRMS_ID INT(11),
+ PRMS_ID int NOT NULL AUTO_INCREMENT,
  Merchant_ID varchar(255),
  P_ID varchar(255),
  PRMS_DESC varchar(255) ,
@@ -216,8 +216,8 @@ create table dod_db.promotions
  CRETATED_DATE DATE ,
  START_DATE DATE  ,
  END_DATE DATE   ,
- CAT_ID int(11),
- BRD_ID int(11),
+ CAT_ID int,
+ BRD_ID int,
  PRIMARY KEY (PRMS_ID),
  FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
  FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID));
