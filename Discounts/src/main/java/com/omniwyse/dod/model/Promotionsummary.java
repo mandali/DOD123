@@ -12,12 +12,16 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @Entity
-@Table(name = "promotionsummery")
+@Table(name = "promotionsummary")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Promotionsummery implements Serializable{
+public class Promotionsummary implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "SUMMERY_ID")
+	@Column(name = "SUMMARY_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long promotionSummeryId;	
 	@Column(name = "IMAGE")	
@@ -34,8 +38,9 @@ public class Promotionsummery implements Serializable{
 	private String maxDiscount;	
 	@Column(name = "BRAND_ID")	
 	private String brandId;	
-	@Column(name = "CREATED_CREATED")
+	@Column(name = "CREATED_DATE")
 	private Date createddate;
+	
 	public Long getPromotionSummeryId() {
 		return promotionSummeryId;
 	}

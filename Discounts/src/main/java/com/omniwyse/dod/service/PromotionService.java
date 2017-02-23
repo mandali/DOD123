@@ -8,7 +8,7 @@ import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Promotion;
-import com.omniwyse.dod.model.Promotionsummery;
+import com.omniwyse.dod.model.Promotionsummary;
 
 public interface PromotionService {
 	
@@ -22,6 +22,6 @@ public List<Promotion> getPromotions(Date currentdate);
 	
 	public Promotion IdBasePromotions(IdBasePromotion idBasePromotion);
 	
-	public List<Promotionsummery> promotionSummary( Date date );
+	public List<Promotionsummary> promotionSummary( String date );
 
 }

@@ -16,7 +16,7 @@ import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Promotion;
-import com.omniwyse.dod.model.Promotionsummery;
+import com.omniwyse.dod.model.Promotionsummary;
 import com.omniwyse.dod.service.PromotionService;
 
 @Service
@@ -72,9 +72,9 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotionsDao.getIdbasePromotion(idBasePromotion);
 	}
 
-	public List<Promotionsummery> promotionSummary(Date date) {
-		
-		return promotionsDao.PromotionSummary(date);
+	public List<Promotionsummary> promotionSummary(String date) {
+		Date date1=new Date();
+		return promotionsDao.PromotionSummary(date1);
 	}
 
 }

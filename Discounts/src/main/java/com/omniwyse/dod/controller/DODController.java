@@ -51,7 +51,7 @@ import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.OTPValidation;
 import com.omniwyse.dod.model.Promotion;
-import com.omniwyse.dod.model.Promotionsummery;
+import com.omniwyse.dod.model.Promotionsummary;
 import com.omniwyse.dod.model.RegisterWithOtp;
 import com.omniwyse.dod.service.ConsumerService;
 import com.omniwyse.dod.service.LocationService;
@@ -532,16 +532,20 @@ public class DODController {
 /*======================================================================================================*/
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/promotions", method = RequestMethod.GET)
+	@RequestMapping(value = "/promotionsummary", method = RequestMethod.GET)
 	public ResponseEntity PromotionSummary() {	
 		final String METHOD_NAME="PromotionSummary";
 		ResponseEntity responseEntity = null;
-		Date date=new Date();
-		List<Promotionsummery> promotions = promotionService.promotionSummary(date);		
+		Calendar calendar = Calendar.getInstance();
+		Date date = calendar.getTime();
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+		String formattedDate = DATE_FORMAT.format(date);
+		
+		List<Promotionsummary> promotions = promotionService.promotionSummary(formattedDate);		
 		try{
 		if (!promotions.isEmpty()) {
 			
-			DataResultlist<Promotionsummery> result=new DataResultlist<Promotionsummery>(true, " available Promotions Summary are ,", HttpStatus.OK.value(), promotions);
+			DataResultlist<Promotionsummary> result=new DataResultlist<Promotionsummary>(true, " available Promotions Summary are ,", HttpStatus.OK.value(), promotions);
 			return new ResponseEntity(result, HttpStatus.OK);			
 		}else
 		{

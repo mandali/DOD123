@@ -18,7 +18,7 @@ import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Promotion;
-import com.omniwyse.dod.model.Promotionsummery;
+import com.omniwyse.dod.model.Promotionsummary;
 
 @Repository
 public class PromotionsDaoImpl implements PromotionsDao{
@@ -74,10 +74,9 @@ public class PromotionsDaoImpl implements PromotionsDao{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Promotionsummery> PromotionSummary(Date date) {
+	public List<Promotionsummary> PromotionSummary(Date date) {
 		Session session = this.sessionFactory.openSession();			
-		List<Promotionsummery> list = session.createQuery(" from Promotionsummery p where :createddate between p.startdate and p.enddate")
-				.setParameter("createddate", date).list();	
+		List<Promotionsummary> list = session.createQuery(" from Promotionsummary ").list();	
 		return list;
 	}
 
