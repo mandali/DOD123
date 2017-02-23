@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.1_9b2a804f7befdaa59b25a3e44e7a93890e6c11d7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.1_dbe2a18b6263badf8c94e535df2ad97ef4f1fd53\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="39ae02ce40c3ac828abbf780ce0ff5d7a28b7d6a">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-23.0.1_892280d08d088c7c7930346a2a1aae67131a0c6d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\omniwyse\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.0.1_11f6e666e885513a6fcec85c6d4dda07769efffb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.0.1_9b0112263a6f97c81ac0cb496fbed14d20ae17b1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_399ae25d06b50bfae7800713af025d0ba8850393\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\omniwyse\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.0.2\f8d87f15b94b8d74e7ccf61d7eedb558811cdb30\converter-gson-2.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f8d87f15b94b8d74e7ccf61d7eedb558811cdb30">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.0.2_4cd3a70efef12fc0454f24f5631ddea937a2fa82\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e0c583edf2ec6dd7d7895f93feb007e6bb49d2ca">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_83e4f30ddea88101c8d623f4f96359d991aa1a96\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\omniwyse\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.8.0\5ea7af56cc7c567ed9856d99efb30740e9b17ff\okio-1.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.8.0_26fc3bfa4c242d5672e2f29a8a7ae29043fc0b58\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_13d5342a291dc3200546cd232d2800b354e1846f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_17b96e153dc1b02eac143d3684a6f31735cbe153\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7bad286c749292917801439e28ea03d5d46adea1">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_50119fff5911d694927af8fa3ed3cd6d9c470450\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.1_10cd9ef27c0fd68bf338488d9799acd380404970\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_3b9c9f6e372ec9c7553e512a4e6bc456352aad12\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.0.1_94e9c7aa9b6ca29ee09131eeba6828a80825c831\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.0.1_b5f52856e2bd8f9e863ef60814e3237a355833ff\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\design\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.0.1_9b3ebd8a146282ce2a8f91668653d1e33469411b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.0.1_bd3a76981ed43b168c8005242df95e9b443cf4ba\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f83b00041ecfba705603fec40363416c7de69719">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_e9f6dd5134a8ec6419269b02f5f2d7932e1de3e3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\omniwyse\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.6.2\f1bc476cc167b18e66c297df599b2377131a8947\gson-2.6.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.6.2_6602b745116d52659400fc8f1a442a2404c0f034\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.0.1_66f1beefb587d1dc10356ea2eaa36e40d4de126b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\omniwyse\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.0\2b802460eea20f8f2ad9c08c74e0f14718e88aa9\okhttp-3.3.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2b802460eea20f8f2ad9c08c74e0f14718e88aa9">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.3.0_eda8e6e5913fe2edf474164c65a9a8fe30144df9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\omniwyse\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-2.1.0_bd1e72b0c9efd2fed42fe50028fa30a3cdedae3c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.0.1_7fddd6999e3ca5153d6d0c6293a1442c04539b61\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.1_269833bbc1d386ee811e42bd0e061598de8a3263\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Omniwyse\DiscountonDemand\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.0.1_0eb162f44c40d1999804e2c29e576fe82fc4cb5c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\omniwyse\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="D:\Omniwyse\DiscountonDemand\app\build\intermediates\transforms\dex\debug\folders\1000\10\butterknife-7.0.1_e5f364bd64f57e8f9e94c02dd4cd20192d5f81fe\classes.dex" />
+    </item>
+
+</items>
