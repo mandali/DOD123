@@ -95,8 +95,9 @@ public class DODController {
 		if (data==null) {			
 			Integer otp=1234;				
 			OtpBean otpBean=new OtpBean("OTP For Registration !!", otp);
-			RegisterWithOtp model = registrationService.Register(registerWithOtp);			
-			return new ResponseEntity(otpBean, HttpStatus.OK);
+			RegisterWithOtp model = registrationService.Register(registerWithOtp);	
+			DataResult data1=new DataResult(true, "success", HttpStatus.OK.value());
+			return new ResponseEntity(data1, HttpStatus.OK);
 			}
 		else{
 			DataResult dataResult=new DataResult(false, " Sorry , Mobile no is alredy exist ... ", HttpStatus.BAD_REQUEST.value());

@@ -5,7 +5,8 @@ create table dod_db.user_table
 EMAIL_ID varchar(255),  	
 PHONE_NO varchar(255),
 PASSWORD varchar(255),
-CRETATED_DATE DATE
+CRETATED_DATE DATE,
+PRIMARY KEY (USER_ID)
 );
 
 create table dod_db.merchant_profile
@@ -16,7 +17,6 @@ create table dod_db.merchant_profile
 last_name varchar(255),
 email_id varchar(255),
 mobile_number varchar(255),
-
 business_name varchar(255),
 business_off_addr varchar(255),
 landline_no varchar(255),
@@ -31,7 +31,10 @@ tags varchar(255),
 nickname varchar(255),
 password varchar(255),
 confirmpassword varchar(255),
-created_date DATE
+created_date DATE,
+PRIMARY KEY (ID),
+UNIQUE (email_id),
+UNIQUE(mobile_number)
 );
 
 create table dod_db.user_profile_table
@@ -48,7 +51,10 @@ CITY varchar(255),
 DATE_BIRTH varchar(255),
 AGE varchar(255),
 ZIPCODE varchar(255),
-CRETATED_DATE DATE
+CRETATED_DATE DATE,
+primary key(USER_ID),
+UNIQUE (EMAIL_ID),
+UNIQUE(PHONE_NO)
 );
 
 create table dod_db.beacons_table
@@ -57,7 +63,8 @@ create table dod_db.beacons_table
  LOCATION varchar(255),
 LATTITUDE varchar(255),
 LONGITUDE varchar(255),
-CRETATED_DATE DATE
+CRETATED_DATE DATE,
+primary key(BEACONS_ID)
 ); 
  
  create table dod_db.category
@@ -78,14 +85,18 @@ city varchar(255),
 age varchar(255),
 password varchar(255),		
 confirmpassword varchar(255),
-createddate DATE
+createddate DATE,
+PRIMARY KEY (id),
+UNIQUE (email_id),
+UNIQUE(phone_no)
 );
 create table dod_db.mar_becons_proms_table
 (
  M_ID varchar(255),			
  PRMS_ID varchar(255),
 BECONS_ID varchar(255),
-CRETATED_DATE DATE
+CRETATED_DATE DATE,
+PRIMARY KEY (M_ID)
 );
 
 create table dod_db.mar_becons_table
@@ -95,7 +106,9 @@ create table dod_db.mar_becons_table
 BECONS_ID varchar(255),
 ISACTIVE TINYINT(4),
 LOCATION varchar(255),
-CRETATED_DATE DATE
+CRETATED_DATE DATE,
+PRIMARY KEY (MAR_BECONS_ID)
+
 );
 
 create table dod_db.mar_bus_table
@@ -107,7 +120,8 @@ LOCATION TINYINT(4),
 LATTITUDE varchar(255),
 LONGITUDE varchar(255),
 DESCRIPTION varchar(255),
-CRETATED_DATE DATE
+CRETATED_DATE DATE,
+PRIMARY KEY (MAR_BECONS_ID)
 );
 
 create table dod_db.otp_table
@@ -116,7 +130,9 @@ create table dod_db.otp_table
  USER_ID varchar(255),
 OTP_NO varchar(255),
 EXP_DATE DATE,
-CRETATED_DATE DATE
+CRETATED_DATE DATE,
+PRIMARY KEY (Id),
+UNIQUE(USER_ID)
 );
 
 create table dod_db.product_catagory_table
@@ -131,7 +147,8 @@ create table dod_db.product_table
  P_DESC varchar(255),
  P_IMAGE TINYBLOB,
 IMAGE_LOC varchar(255),
-CRETATED_DATE DATE
+CRETATED_DATE DATE,
+PRIMARY KEY (P_ID)
 );
 
 create table dod_db.country
@@ -201,6 +218,7 @@ create table dod_db.promotions
  END_DATE DATE   ,
  CAT_ID int(11),
  BRD_ID int(11),
+ PRIMARY KEY (PRMS_ID),
  FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
  FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID));
 
