@@ -35,6 +35,33 @@ public class Brand implements Serializable{
 	private String brandDescription;	
 	@Column(name = "BRD_CREATED")
 	private Timestamp createdDate;
+	
+	public Brand(){
+	}
+	
+	
+	
+	
+	public Brand(Long brandId, String brandName, String brandRating, String brandImage, String brandDescription,
+			Timestamp createdDate) {
+		this.brandId = brandId;
+		this.brandName = brandName;
+		this.brandRating = brandRating;
+		this.brandImage = brandImage;
+		this.brandDescription = brandDescription;
+		this.createdDate = createdDate;
+	}
+
+
+
+
+	public Brand(Long brandId) {
+		this.brandId = brandId;
+	}
+
+
+
+
 	public Long getBrandid() {
 		return brandId;
 	}

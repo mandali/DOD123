@@ -1,0 +1,7 @@
+package com.omniwyse.dod.DTO;
+
+import java.io.Serializable;
+
+public class CreatePromotionVo implements Serializable{
+
+}

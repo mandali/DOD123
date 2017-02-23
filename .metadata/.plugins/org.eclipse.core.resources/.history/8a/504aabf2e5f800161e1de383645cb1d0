@@ -1,0 +1,5 @@
+package com.omniwyse.dod.DTO;
+
+public class CreatePromotionVo {
+
+}

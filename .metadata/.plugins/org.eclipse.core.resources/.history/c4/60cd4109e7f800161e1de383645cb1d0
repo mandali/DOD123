@@ -1,0 +1,24 @@
+package com.omniwyse.dod.DTO;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class CreatePromotionVo implements Serializable{
+	
+	private Integer id;	
+	private String product_id;
+	private String description;
+	private Integer merchatId;
+	private String product_image;
+	private String originalPrice;
+	private String discount;
+	private String location;
+	private Date createddate;
+	private Date startdate;	
+	private Date enddate;
+	private Long catid;
+	private Long brandId;
+	
+	
+
+}

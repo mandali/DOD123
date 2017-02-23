@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.omniwyse.dod.AppConstants.AppConstants;
 import com.omniwyse.dod.DTO.CitiesVO;
 import com.omniwyse.dod.DTO.CountryVO;
+import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationsVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
 import com.omniwyse.dod.DTO.PromotionDto;
@@ -28,7 +29,6 @@ import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
-import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.Cities;
 import com.omniwyse.dod.model.ConsumerIdBaseProfile;
@@ -521,23 +521,32 @@ public class DODController {
 	/*======================================================================================================*/
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/createpromotions", method = RequestMethod.POST)
-	public ResponseEntity createPromotions(@RequestBody PromotionDto promotionDto) {		
+	public ResponseEntity createPromotions(@RequestBody CreatePromotionVo CreatePromotionVo) {		
 		final String METHOD_NAME="createPromotions";
 		ResponseEntity responseEntity = null;		
-		MerchantProfile merchantProfile=MerchantDao.getMerchantID(promotionDto);
+		MerchantProfile merchantProfile=MerchantDao.validatePromotion(CreatePromotionVo);		
 		try{
 		if (merchantProfile!=null) {
-			Promotion promotions = promotionService.CreatePromotions(promotionDto);	
-		DataResult result=new DataResult(true, " Promotion Posted successfully ... ", HttpStatus.OK.value());
-		return new ResponseEntity(result, HttpStatus.OK);			
-		}else
-		{
-			DataResult result=new DataResult(false, "Sorry , Please enter Valid Merchant Id  !! ", HttpStatus.BAD_REQUEST.value());
+			
+			Promotion resp = promotionService.CreatePromotions(CreatePromotionVo);			
+			if (resp!=null) {
+				DataResult result=new DataResult(true, " Promotion Posted successfully ... ", HttpStatus.OK.value());	
+				return new ResponseEntity(result, HttpStatus.OK);
+			}else
+			{
+			DataResult result=new DataResult(false, "Sorry , Please check categoryId/brandId/merchantId ...   ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-		}
+			}				
+		}else
+			{
+			DataResult result=new DataResult(false, "Sorry , Please check categoryId/brandId/merchantId ...   ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+			}
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
-		}return responseEntity;
+			logger.error(" Exception in "+METHOD_NAME+""+exception.getMessage());
+			
+		}		
+		return responseEntity;
 	}
 	
 	/*======================================================================================================*/	
@@ -561,8 +570,7 @@ public class DODController {
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return responseEntity;
-	}
-	
+	}	
 	/*===========================================================================================================*/
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })

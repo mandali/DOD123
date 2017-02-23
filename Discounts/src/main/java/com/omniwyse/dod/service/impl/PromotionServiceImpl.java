@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.PromotionsDao;
@@ -39,9 +40,12 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotionsDao.getCategoryPromotions(currentdate, categorySelection);
 	}
 
-	public Promotion CreatePromotions(Promotion promotion) {		
-				
-		return promotionsDao.CreatePromotions(promotion);
+	public Promotion CreatePromotions(CreatePromotionVo createPromotionVo) {
+		Date date=new Date();
+		createPromotionVo.setCreateddate(date);
+		createPromotionVo.setStartdate(date);
+		createPromotionVo.setEnddate(date);				
+		return promotionsDao.CreatePromotions(createPromotionVo);
 	}
 	
 	public Promotion CreatePromotions(PromotionDto promotionDto) {		
@@ -58,7 +62,7 @@ public class PromotionServiceImpl implements PromotionService{
 		promotion.setCreateddate(date);
 		promotion.setProduct_id(promotionDto.getProduct_id());
 		promotion.setMerchatid(promotionDto.getMerchatId());
-		promotionsDao.CreatePromotions(promotion);	
+		//promotionsDao.CreatePromotions(promotionDto);	
 		return promotion;
 	}
 

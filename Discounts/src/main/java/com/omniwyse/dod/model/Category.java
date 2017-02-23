@@ -30,6 +30,27 @@ public class Category implements Serializable{
 	@Column(name = "CAT_CREATED")
 	private Timestamp createddate;
 	
+	public Category(){
+		
+	}
+	
+	
+
+	public Category(Long categoryId, String categoryName, Timestamp createddate) {
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.createddate = createddate;
+	}
+	
+	
+
+
+
+	public Category(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+
 
 	public Long getCategoryId() {
 		return categoryId;

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/dod_db" />
+		<property name="username" value="root" />
+		<property name="password" value="mysqls"/>
+	</bean>
+	<bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate" >
+        <property name="dataSource" ref="dataSource" />
+        <property name="locations" value="classpath:db/migrations" />
+    </bean> 
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>				
+				<value>	com.omniwyse.dod.model.RegisterWithOtp</value>	
+				<value>	com.omniwyse.dod.model.OTPValidation</value>			
+				<value>	com.omniwyse.dod.model.UserProfile</value>
+				<value>	com.omniwyse.dod.model.MerchantProfile</value>
+				<value>	com.omniwyse.dod.model.Promotion</value>
+				<value>	com.omniwyse.dod.DTO.CreatePromotionVo</value>
+				<value>	com.omniwyse.dod.model.IdBasePromotion</value>
+				<value>	com.omniwyse.dod.model.CategorySelection</value>
+				<value> com.omniwyse.dod.model.ConsumerProfile</value>
+				<value> com.omniwyse.dod.model.ConsumerLogin</value>
+				<value> com.omniwyse.dod.model.ConsumerMobileAndEmailValidate</value>  
+				<value> com.omniwyse.dod.model.ConsumerLoginwithEmail</value>
+				<value> com.omniwyse.dod.model.ConsumerLoginwithMobile</value>
+				<value> com.omniwyse.dod.model.MerchantLogin</value>
+				<value> com.omniwyse.dod.model.MerchantLoginwithEmail</value>
+				<value> com.omniwyse.dod.model.MerchantLoginwithMobile</value>	
+				<value> com.omniwyse.dod.model.Category</value>		
+				<value> com.omniwyse.dod.model.Country</value>		
+				<value> com.omniwyse.dod.model.Cities</value>	
+				<value> com.omniwyse.dod.model.Location</value>	
+				<value> com.omniwyse.dod.model.Brand</value>	
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>									
+			</props>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+</beans>

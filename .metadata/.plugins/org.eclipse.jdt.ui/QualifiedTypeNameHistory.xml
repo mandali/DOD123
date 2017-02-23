@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.omniwyse.dod.model.MerchantProfile"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="com.omniwyse.dod.DTO.CreatePromotionVo"/>
+<fullyQualifiedTypeName name="com.omniwyse.dod.model.Promotion"/>
+<fullyQualifiedTypeName name="java.lang.Boolean"/>
+<fullyQualifiedTypeName name="org.mockito.exceptions.verification.NeverWantedButInvoked"/>
+<fullyQualifiedTypeName name="com.omniwyse.dod.model.Brand"/>
+<fullyQualifiedTypeName name="com.omniwyse.dod.model.Category"/>
+</qualifiedTypeNameHistroy>

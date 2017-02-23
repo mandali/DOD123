@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.omniwyse.dod.DTO.PromotionDto;
+import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.model.GetMerchantById;
 import com.omniwyse.dod.model.GetMerchatProfile;
@@ -18,7 +18,6 @@ import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotions;
-import com.omniwyse.dod.model.Promotion;
 
 @Repository
 public class MerchantDaoImpl implements MerchantDao{
@@ -98,11 +97,17 @@ public class MerchantDaoImpl implements MerchantDao{
 		.setParameter("id",MerchantPromotions.getId()).list();			
 		return list;
 	}
-	public MerchantProfile getMerchantID(PromotionDto PromotionDto) {
-		Session session = this.sessionFactory.openSession();	
-		Query query=(Query) session.createQuery("from MerchantProfile where  id=:ID");
-		query.setParameter("ID", PromotionDto.getMerchatId());
-		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
+	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo) {
+		MerchantProfile resp = null;
+		try{
+		Session session = this.sessionFactory.openSession();		
+		Query query=(Query) session.createQuery("from MerchantProfile where  id=:merchatid");
+		query.setParameter("merchatid", createPromotionVo.getMerchatid());		
+		 resp=(MerchantProfile) query.uniqueResult();
+		}
+		catch(Exception exception){
+			System.out.println("Exception in validate promotion method"+exception.getMessage());
+		}
 		return resp;
 	}	
 	}

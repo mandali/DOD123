@@ -7,8 +7,7 @@ public class PromotionDto implements Serializable{
 	
 	private Integer id;	
 	private String product_id;
-	private String description;
-	private String category_name;
+	private String description;	
 	private String product_image;
 	private String originalPrice;
 	private String discount;
@@ -22,10 +21,21 @@ public class PromotionDto implements Serializable{
 	private String brandImage;
 	private String brandDescription;
 	private String categoryName;
+	private Long catid;
+	private Long brandId;
 	
-	
-	
-	
+	public Long getCatid() {
+		return catid;
+	}
+	public void setCatid(Long catid) {
+		this.catid = catid;
+	}
+	public Long getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
 	public String getBrandName() {
 		return brandName;
 	}
@@ -79,13 +89,7 @@ public class PromotionDto implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getCategory_name() {
-		return category_name;
-	}
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
-	}
+	}	
 	public String getProduct_image() {
 		return product_image;
 	}

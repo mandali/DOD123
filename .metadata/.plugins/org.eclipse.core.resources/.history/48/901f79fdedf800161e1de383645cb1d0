@@ -1,0 +1,109 @@
+package com.omniwyse.dod.DTO;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class CreatePromotionVo implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id;	
+	private String product_id;
+	private String description;
+	private Integer merchatId;
+	private String product_image;
+	private String originalPrice;
+	private String discount;
+	private String location;
+	private Date createddate;
+	private Date startdate;	
+	private Date enddate;
+	private Long catid;
+	private Long brandId;
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getProduct_id() {
+		return product_id;
+	}
+	public void setProduct_id(String product_id) {
+		this.product_id = product_id;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Integer getMerchatId() {
+		return merchatId;
+	}
+	public void setMerchatId(Integer merchatId) {
+		this.merchatId = merchatId;
+	}
+	public String getProduct_image() {
+		return product_image;
+	}
+	public void setProduct_image(String product_image) {
+		this.product_image = product_image;
+	}
+	public String getOriginalPrice() {
+		return originalPrice;
+	}
+	public void setOriginalPrice(String originalPrice) {
+		this.originalPrice = originalPrice;
+	}
+	public String getDiscount() {
+		return discount;
+	}
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public Date getCreateddate() {
+		return createddate;
+	}
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
+	public Date getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(Date startdate) {
+		this.startdate = startdate;
+	}
+	public Date getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(Date enddate) {
+		this.enddate = enddate;
+	}
+	public Long getCatid() {
+		return catid;
+	}
+	public void setCatid(Long catid) {
+		this.catid = catid;
+	}
+	public Long getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+	
+	
+
+}

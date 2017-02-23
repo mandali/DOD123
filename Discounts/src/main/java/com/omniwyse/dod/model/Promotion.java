@@ -26,35 +26,51 @@ public class Promotion implements Serializable{
 	@Column(name = "PRMS_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;			
-	@Column(name = "P_ID")
-	private String product_id;
-	@Column(name = "PRMS_DESC")
+	@Column(name = "P_ID")	
+	private String product_id;	
+	@Column(name = "PRMS_DESC")	
 	private String description;	
-	@Column(name = "Merchant_ID")
+	@Column(name = "Merchant_ID")	
 	private Integer merchatid;	
-	@Column(name = "product_image")
+	@Column(name = "product_image")	
 	private String product_image;	
-	@Column(name = "original_price")
-	private String originalPrice;
-	@Column(name = "DISCOUNT")
-	private String discount;
+	@Column(name = "original_price")	
+	private String originalPrice;	
+	@Column(name = "DISCOUNT")	
+	private String discount;	
 	@Column(name = "CRETATED_DATE")
-	private Date createddate;
+	private Date createddate;	
 	@Column(name = "START_DATE")
 	private Date startdate;	
 	@Column(name = "END_DATE")
 	private Date enddate;	
 	@Column(name = "location")
-	private String location;
+	private String location;	
 	@OneToOne
 	@JoinColumn(name = "CAT_ID")
-	private Category catid;
+	private Category catid;	
 	@OneToOne
 	@JoinColumn(name = "BRD_ID")
 	private Brand brandId;
-	
-	
-	
+	public Promotion(){
+	}
+	public Promotion(Integer id, String product_id, String description, Integer merchatid, String product_image,
+			String originalPrice, String discount, Date createddate, Date startdate, Date enddate, String location,
+			Category catid, Brand brandId) {
+		this.id = id;
+		this.product_id = product_id;
+		this.description = description;
+		this.merchatid = merchatid;
+		this.product_image = product_image;
+		this.originalPrice = originalPrice;
+		this.discount = discount;
+		this.createddate = createddate;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.location = location;
+		this.catid = catid;
+		this.brandId = brandId;
+	}	
 	public Category getCatid() {
 		return catid;
 	}
