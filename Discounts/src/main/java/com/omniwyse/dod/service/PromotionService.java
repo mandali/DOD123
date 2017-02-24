@@ -12,7 +12,7 @@ import com.omniwyse.dod.model.Promotionsummary;
 
 public interface PromotionService {
 	
-public List<Promotion> getPromotions(Date currentdate);
+public List getPromotions(Date currentdate);
 	
 	public List<Promotion> getCategoryPromotions(Date currentdate ,CategorySelection categorySelection);
 	

@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.mockito.exceptions.verification.NeverWantedButInvoked;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +15,6 @@ import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
-import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.Promotionsummary;
 
@@ -28,9 +26,9 @@ public class PromotionsDaoImpl implements PromotionsDao{
 
 	@SuppressWarnings("unchecked")
 	public List<Promotion> getPromotions(Date currentdate) {
-		Session session = this.sessionFactory.openSession();			
-		List<Promotion> list = session.createQuery(" from Promotion p where :currentDate between p.startdate and p.enddate")
-				.setParameter("currentDate", currentdate).list();	
+		Session session = this.sessionFactory.openSession();
+		
+		List<Promotion> list = session.createQuery(" from Promotion where startdate = current_date() ").list();
 		return list;	
 	}
 	

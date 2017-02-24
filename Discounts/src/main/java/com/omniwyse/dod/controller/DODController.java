@@ -82,6 +82,7 @@ public class DODController {
 	LocationService locationService;
 	@Autowired
 	MetaDataService metaDataService;
+	//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
 	
 	private static final Logger logger = Logger.getLogger(AppConfiguration.class);	
@@ -487,8 +488,10 @@ public class DODController {
 	public ResponseEntity getPromotions() {	
 		final String METHOD_NAME="getPromotions";
 		ResponseEntity responseEntity = null;
-		Date date=new Date();
-		List<Promotion> promotions = promotionService.getPromotions(date);
+		Calendar calendar=Calendar.getInstance();
+		Date date =  calendar.getTime();
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		List<Promotion> promotions = promotionService.getPromotions(sqlDate);
 		List<PromotionDto> promotionDtos=new ArrayList<PromotionDto>();
 		PromotionDto promotionDto;
 		try{
@@ -511,6 +514,8 @@ public class DODController {
 				promotionDto.setBrandRating(resp.getBrandId().getBrandRating());
 				promotionDto.setBrandImage(resp.getBrandId().getBrandImage());
 				promotionDto.setBrandDescription(resp.getBrandId().getBrandDescription());
+				promotionDto.setCatid(resp.getCatid().getCategoryId());
+				promotionDto.setBrandId(resp.getBrandId().getBrandid());
 				promotionDtos.add(promotionDto);
 				
 			}

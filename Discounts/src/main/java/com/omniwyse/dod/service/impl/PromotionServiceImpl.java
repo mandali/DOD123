@@ -31,7 +31,7 @@ public class PromotionServiceImpl implements PromotionService{
 	
 	
 
-	public List<Promotion> getPromotions(Date currentdate) {
+	public List getPromotions(Date currentdate) {
 		
 		return promotionsDao.getPromotions(currentdate);
 	}
