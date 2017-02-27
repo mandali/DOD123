@@ -3,6 +3,7 @@ package com.omniwyse.dod.dao.impl;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,6 +17,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.omniwyse.dod.DTO.BrandComparator;
 import com.omniwyse.dod.DTO.BrandVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.config.AppConfiguration;
@@ -53,7 +55,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		try {
 
 			session = this.sessionFactory.openSession();
-			Query query = (Query) session.createQuery("from Category c join c.brands b");
+			Query query = (Query) session.createQuery("from Category c join c.brands b order by c.categoryId");
 			objects = query.list();
 			Iterator iterator = objects.iterator();
 			while (iterator.hasNext()) {
@@ -85,7 +87,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 						Date dateBrand = calendar.getTime();
 				        String formattedDateBrand = DATE_FORMAT.format(dateBrand);
 						brandVO.setBrandDescription(brand.getBrandDescription());
-						brandVO.setBrandId(brand.getBrandid().toString());
+						brandVO.setBrandId(brand.getBrandid().intValue());
 						brandVO.setBrandImage(brand.getBrandImage());
 						brandVO.setBrandName(brand.getBrandName());
 						brandVO.setBrandRating(brand.getBrandRating());
@@ -93,9 +95,14 @@ public class MetaDataDaoImpl implements MetaDataDao {
 						categoryVO.getBrands().add(brandVO);
 					}
 					categoryVOs.add(categoryVO);
+					
+					for(CategoryBrandVO categoryBrandVO:categoryVOs){
+						Collections.sort(categoryBrandVO.getBrands(),new BrandComparator());
+					}
 
 
 				}
+			
 			}
 
 		} catch (Exception exception) {

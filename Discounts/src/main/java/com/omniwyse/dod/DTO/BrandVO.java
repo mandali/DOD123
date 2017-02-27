@@ -7,7 +7,7 @@ public class BrandVO implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String brandId;
+	private Integer brandId;
 	private String brandName;
 	private String created;
 	private String brandRating;
@@ -18,13 +18,25 @@ public class BrandVO implements java.io.Serializable{
 	public BrandVO(){
 	}
 
-	public String getBrandId() {
+	
+	
+
+
+	public Integer getBrandId() {
 		return brandId;
 	}
 
-	public void setBrandId(String brandId) {
+
+
+
+
+	public void setBrandId(Integer brandId) {
 		this.brandId = brandId;
 	}
+
+
+
+
 
 	public String getBrandName() {
 		return brandName;
