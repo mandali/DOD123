@@ -34,6 +34,6 @@ public interface MerchantDao {
 	
 	public List<MerchantProfile> MerchantPromotions(MerchantPromotions MerchantPromotions , Date date); 
 	
-	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo);
 	
+	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo);
 }

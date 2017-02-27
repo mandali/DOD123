@@ -30,7 +30,9 @@ import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
+import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
+import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.Cities;
@@ -81,8 +83,10 @@ public class DODController {
 	@Autowired
 	LocationService locationService;
 	@Autowired
-	MetaDataService metaDataService;
-	//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	MetaDataService metaDataService;	
+	@Autowired
+	PromotionsDao promotionsDao;
+	
 	
 	
 	private static final Logger logger = Logger.getLogger(AppConfiguration.class);	
@@ -490,8 +494,8 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 		Calendar calendar=Calendar.getInstance();
 		Date date =  calendar.getTime();
-		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		List<Promotion> promotions = promotionService.getPromotions(sqlDate);
+		//java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		List<Promotion> promotions = promotionService.getPromotions();
 		List<PromotionDto> promotionDtos=new ArrayList<PromotionDto>();
 		PromotionDto promotionDto;
 		try{
@@ -568,14 +572,15 @@ public class DODController {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/createpromotions", method = RequestMethod.POST)
-	public ResponseEntity createPromotions(@RequestBody CreatePromotionVo CreatePromotionVo) {		
+	public ResponseEntity createPromotions(@RequestBody CreatePromotionVo createPromotionVo) {		
 		final String METHOD_NAME="createPromotions";
 		ResponseEntity responseEntity = null;		
-		MerchantProfile merchantProfile=MerchantDao.validatePromotion(CreatePromotionVo);		
+		MerchantProfile merchantId=MerchantDao.validatePromotion(createPromotionVo);	
+		Category categoryid=promotionsDao.getcategoryId(createPromotionVo);
+		Brand brandid=promotionsDao.getBrandId(createPromotionVo);
 		try{
-		if (merchantProfile!=null) {
-			
-			Promotion resp = promotionService.CreatePromotions(CreatePromotionVo);			
+		if (merchantId!=null && categoryid!=null && brandid!=null ) {			
+			Promotion resp = promotionService.CreatePromotions(createPromotionVo);			
 			if (resp!=null) {
 				DataResult result=new DataResult(true, " Promotion Posted successfully ... ", HttpStatus.OK.value());	
 				return new ResponseEntity(result, HttpStatus.OK);

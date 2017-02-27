@@ -25,10 +25,9 @@ public class PromotionsDaoImpl implements PromotionsDao{
 	SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
-	public List<Promotion> getPromotions(Date currentdate) {
-		Session session = this.sessionFactory.openSession();
-		
-		List<Promotion> list = session.createQuery(" from Promotion where startdate = current_date() ").list();
+	public List<Promotion> getPromotions() {
+		Session session = this.sessionFactory.openSession();		
+		List<Promotion> list = session.createQuery(" from Promotion where startdate = current_date()").list();
 		return list;	
 	}
 	
@@ -76,6 +75,23 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		Session session = this.sessionFactory.openSession();			
 		List<Promotionsummary> list = session.createQuery(" from Promotionsummary ").list();	
 		return list;
+	}
+
+	public Category getcategoryId(CreatePromotionVo createPromotionVo) {
+	
+		Session session = this.sessionFactory.openSession();
+		Query query=(Query)session.createQuery(" from Category where categoryId=:categoryId ")
+				.setParameter("categoryId",createPromotionVo.getCatid());
+		Category category =(Category)query.uniqueResult();	
+		return category;
+	}
+
+	public Brand getBrandId(CreatePromotionVo createPromotionVo) {
+		Session session = this.sessionFactory.openSession();
+		Query query=(Query)session.createQuery(" from Brand where brandId=:brandId ")
+				.setParameter("brandId",createPromotionVo.getBrandId());
+		Brand brand =(Brand)query.uniqueResult();	
+		return brand;
 	}
 
 
