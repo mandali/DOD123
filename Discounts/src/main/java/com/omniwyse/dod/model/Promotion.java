@@ -52,11 +52,18 @@ public class Promotion implements Serializable{
 	@OneToOne
 	@JoinColumn(name = "BRD_ID")
 	private Brand brandId;
+	@Column(name="PRMS_DISC_TXT")
+	private String discountText;
+	
 	public Promotion(){
 	}
+	
+	
+	
+	
 	public Promotion(Integer id, String product_id, String description, Integer merchatid, String product_image,
 			String originalPrice, String discount, Date createddate, Date startdate, Date enddate, String location,
-			Category catid, Brand brandId) {
+			Category catid, Brand brandId, String discountText) {
 		this.id = id;
 		this.product_id = product_id;
 		this.description = description;
@@ -70,7 +77,12 @@ public class Promotion implements Serializable{
 		this.location = location;
 		this.catid = catid;
 		this.brandId = brandId;
-	}	
+		this.discountText = discountText;
+	}
+
+
+
+
 	public Category getCatid() {
 		return catid;
 	}
@@ -153,6 +165,12 @@ public class Promotion implements Serializable{
 	}
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
+	}
+	public String getDiscountText() {
+		return discountText;
+	}
+	public void setDiscountText(String discountText) {
+		this.discountText = discountText;
 	}	
 	
 
