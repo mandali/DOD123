@@ -9,6 +9,8 @@ public class CategoryVO implements java.io.Serializable{
 	private String categoryId;
 	private String categoryName;
 	private String createdDate;
+	private String categoryImage;
+	private String categoryRank;
 	
 	
 
@@ -38,6 +40,22 @@ public class CategoryVO implements java.io.Serializable{
 
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public String getCategoryImage() {
+		return categoryImage;
+	}
+
+	public void setCategoryImage(String categoryImage) {
+		this.categoryImage = categoryImage;
+	}
+
+	public String getCategoryRank() {
+		return categoryRank;
+	}
+
+	public void setCategoryRank(String categoryRank) {
+		this.categoryRank = categoryRank;
 	}
 	
 	

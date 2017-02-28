@@ -802,6 +802,8 @@ public class DODController {
 					categoryVO.setCategoryId(category.getCategoryId().toString());
 					categoryVO.setCategoryName(category.getCategoryName());
 					categoryVO.setCreatedDate(formattedDate);
+					categoryVO.setCategoryRank(category.getCategoryRank());
+					categoryVO.setCategoryImage(category.getCategoryImage());
 					categoryVOs.add(categoryVO);
 				}
 				result=new DataResultlist<CategoryVO>(true, AppConstants.LIST_CATEGORIES_SUCCESS_MSG, HttpStatus.OK.value(), categoryVOs);

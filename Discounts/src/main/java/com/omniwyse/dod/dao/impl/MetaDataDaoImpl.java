@@ -35,7 +35,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 
 	public List<Category> fetchCategories() {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = (Query) session.createQuery("from Category");
+		Query query = (Query) session.createQuery("from Category c order by c.categoryRank desc");
 		List<Category> categories = (List<Category>) query.list();
 
 		return categories;
