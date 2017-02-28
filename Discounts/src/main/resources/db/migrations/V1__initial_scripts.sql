@@ -222,7 +222,8 @@ create table dod_db.promotions
  BRD_ID int,
  PRIMARY KEY (PRMS_ID),
  FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
- FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID));
+ FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID),
+ PRMS_DISC_TXT varchar(1000));
 
 
  create table promotionsummary
