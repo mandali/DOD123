@@ -42,7 +42,6 @@ create table dod_db.product
 (			
  P_ID int NOT NULL AUTO_INCREMENT,
  P_DESC varchar(255),
- P_IMAGE TINYBLOB,
  IMAGE_LOC varchar(255),
  CRETATED_DATE DATE,
  M_ID int,
