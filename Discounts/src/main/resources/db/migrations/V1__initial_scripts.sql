@@ -37,6 +37,21 @@ UNIQUE (email_id),
 UNIQUE(mobile_number)
 );
 
+
+create table dod_db.product
+(			
+ P_ID int NOT NULL AUTO_INCREMENT,
+ P_DESC varchar(255),
+ P_IMAGE TINYBLOB,
+ IMAGE_LOC varchar(255),
+ CRETATED_DATE DATE,
+ M_ID int,
+ PRIMARY KEY (P_ID),
+ FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID)
+);
+
+
+
 create table dod_db.user_profile_table
 (
  USER_ID varchar(255),
@@ -137,21 +152,6 @@ PRIMARY KEY (Id),
 UNIQUE(USER_ID)
 );
 
-create table dod_db.product_catagory_table
-(			
- P_ID varchar(255),
-CATAGORY_ID varchar(255),
-CRETATED_DATE DATE
-);
-create table dod_db.product_table
-(			
- P_ID varchar(255),
- P_DESC varchar(255),
- P_IMAGE TINYBLOB,
-IMAGE_LOC varchar(255),
-CRETATED_DATE DATE,
-PRIMARY KEY (P_ID)
-);
 
 create table dod_db.country
 (
