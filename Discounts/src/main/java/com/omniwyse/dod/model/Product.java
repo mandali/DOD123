@@ -1,6 +1,7 @@
 package com.omniwyse.dod.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +27,58 @@ public class Product  implements Serializable{
     private Long productId;
 	@Column(name = "P_DESC")
 	private String productDescription;
+	@Column(name = "IMAGE_LOC")
+	private String productImageLocation;
+	@Column(name = "CRETATED_DATE")
+	private Timestamp productCreatedDate;
+	
+	public Product(){
+	}
+	
+	
+
+	public Product(Long productId, String productDescription, String productImageLocation,
+			Timestamp productCreatedDate) {
+		this.productId = productId;
+		this.productDescription = productDescription;
+		this.productImageLocation = productImageLocation;
+		this.productCreatedDate = productCreatedDate;
+	}
+
+
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
+	}
+
+	public String getProductImageLocation() {
+		return productImageLocation;
+	}
+
+	public void setProductImageLocation(String productImageLocation) {
+		this.productImageLocation = productImageLocation;
+	}
+
+	public Timestamp getProductCreatedDate() {
+		return productCreatedDate;
+	}
+
+	public void setProductCreatedDate(Timestamp productCreatedDate) {
+		this.productCreatedDate = productCreatedDate;
+	}
+	
 	
 	
 
