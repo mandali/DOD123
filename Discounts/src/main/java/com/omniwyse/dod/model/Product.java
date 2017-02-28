@@ -31,6 +31,8 @@ public class Product  implements Serializable{
 	private String productImageLocation;
 	@Column(name = "CRETATED_DATE")
 	private Timestamp productCreatedDate;
+	@Column(name="M_ID")
+	private Integer merchantId;
 	
 	public Product(){
 	}
@@ -77,6 +79,18 @@ public class Product  implements Serializable{
 
 	public void setProductCreatedDate(Timestamp productCreatedDate) {
 		this.productCreatedDate = productCreatedDate;
+	}
+
+
+
+	public Integer getMerchantId() {
+		return merchantId;
+	}
+
+
+
+	public void setMerchantId(Integer merchantId) {
+		this.merchantId = merchantId;
 	}
 	
 	

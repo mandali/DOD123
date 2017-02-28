@@ -80,6 +80,10 @@ public class MerchantProfile implements Serializable{
 	@Column(name = "created_date")
 	private Date createddate;
 	
+	@OneToMany(targetEntity =Product.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="M_ID" ,referencedColumnName ="ID")
+	private Set<Product> products;	
+	
 	public String getLogo() {
 		return logo;
 	}

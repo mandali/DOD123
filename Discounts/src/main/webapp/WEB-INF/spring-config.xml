@@ -51,6 +51,7 @@
 				<value> com.omniwyse.dod.model.Location</value>	
 				<value> com.omniwyse.dod.model.Brand</value>	
 				<value> com.omniwyse.dod.model.Promotionsummary</value>
+				<value>com.omniwyse.dod.model.Product</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
