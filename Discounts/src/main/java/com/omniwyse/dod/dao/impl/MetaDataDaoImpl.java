@@ -20,10 +20,13 @@ import org.springframework.stereotype.Repository;
 import com.omniwyse.dod.DTO.BrandComparator;
 import com.omniwyse.dod.DTO.BrandVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
+import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MetaDataDao;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
+import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.Product;
 
 @Repository
 public class MetaDataDaoImpl implements MetaDataDao {
@@ -35,7 +38,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 
 	public List<Category> fetchCategories() {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = (Query) session.createQuery("from Category");
+		Query query = (Query) session.createQuery("from Category c order by c.categoryRank desc");
 		List<Category> categories = (List<Category>) query.list();
 
 		return categories;
@@ -106,6 +109,53 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			session.close();
 		}
 		return categoryVOs;
+	}
+
+	public List<ProductVO> fetchMerchantProducts(ProductVO productVO) {
+		Session session;
+		Query query;
+		List<MerchantProfile> merchantProfiles = null;
+		final String METHOD_NAME="fetchMerchantProducts";
+		List<Object> objects = null;
+		boolean duplicateFlag;
+		ProductVO productVOData;
+		List<ProductVO> productVOs=new ArrayList<ProductVO>();
+		ProductVO.MerchantProduct merchantProduct;
+		try
+		{
+		session = this.sessionFactory.getCurrentSession();
+		query =  (Query)session.createQuery(" from MerchantProfile m where m.id=:merchantId ");
+		query.setParameter("merchantId",Integer.valueOf(productVO.getMerchantId()));
+		objects = query.list();
+		Iterator iterator = objects.iterator();
+		while (iterator.hasNext()) {
+			duplicateFlag = false;
+			MerchantProfile merchantProfile = (MerchantProfile) iterator.next();
+			Set<Product> products = merchantProfile.getProducts();
+			productVOData=new ProductVO();
+			productVOData.setMerchantId(String.valueOf(merchantProfile.getId()));
+			
+			
+			for(Product product:products){
+		        merchantProduct=new ProductVO().new MerchantProduct();
+				merchantProduct.setProductId(String.valueOf(product.getProductId()));
+				merchantProduct.setProductDescription(product.getProductDescription());
+				merchantProduct.setProductImage(product.getProductImageLocation());
+				merchantProduct.setCreatedDate(product.getProductCreatedDate().toString());
+				productVOData.getMerchantProducts().add(merchantProduct);
+			
+			}
+			
+			productVOs.add(productVOData);
+			
+			
+		}
+		}
+		catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		
+		return productVOs;
 	}
 
 }

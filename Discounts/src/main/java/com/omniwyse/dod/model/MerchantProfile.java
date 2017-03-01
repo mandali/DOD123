@@ -24,6 +24,11 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class MerchantProfile implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -74,6 +79,10 @@ public class MerchantProfile implements Serializable{
 	
 	@Column(name = "created_date")
 	private Date createddate;
+	
+	@OneToMany(targetEntity =Product.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="M_ID" ,referencedColumnName ="ID")
+	private Set<Product> products;	
 	
 	public String getLogo() {
 		return logo;
@@ -248,6 +257,12 @@ public class MerchantProfile implements Serializable{
 	}
 	public void setPromotions(Set<Promotion> promotions) {
 		this.promotions = promotions;
+	}
+	public Set<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 	
 	

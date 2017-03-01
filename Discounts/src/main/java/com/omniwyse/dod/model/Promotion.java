@@ -2,18 +2,14 @@ package com.omniwyse.dod.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -55,13 +51,24 @@ public class Promotion implements Serializable{
 	@JoinColumn(name = "CAT_ID")
 	private Category catid;	
 	@ManyToOne
-	@JoinColumn(name = "BRD_ID")
-	private Brand brandId;		
+	@JoinColumn(name = "BRD_ID")	
+	private Brand brandId;
+	@Column(name="PRMS_DISC_TXT")
+	private String discountText;
 	public Promotion(){
+	}	
+
+
+	
+	public Category getCatid() {
+		return catid;
 	}
+
+
+
 	public Promotion(Integer id, String product_id, String description, Integer merchatid, String product_image,
 			String originalPrice, String discount, Date createddate, Date startdate, Date enddate, String location,
-			Category catid, Brand brandId) {
+			Category catid, Brand brandId, String discountText) {
 		this.id = id;
 		this.product_id = product_id;
 		this.description = description;
@@ -75,11 +82,15 @@ public class Promotion implements Serializable{
 		this.location = location;
 		this.catid = catid;
 		this.brandId = brandId;
-	}	
-	
-	public Category getCatid() {
-		return catid;
+		this.discountText = discountText;
 	}
+
+
+
+
+
+
+
 	public void setCatid(Category catid) {
 		this.catid = catid;
 	}
@@ -159,6 +170,12 @@ public class Promotion implements Serializable{
 	}
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
+	}
+	public String getDiscountText() {
+		return discountText;
+	}
+	public void setDiscountText(String discountText) {
+		this.discountText = discountText;
 	}	
 	
 

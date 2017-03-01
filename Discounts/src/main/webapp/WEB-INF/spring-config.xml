@@ -3,12 +3,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	
   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+  http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
+<task:annotation-driven/>
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -47,6 +51,7 @@
 				<value> com.omniwyse.dod.model.Location</value>	
 				<value> com.omniwyse.dod.model.Brand</value>	
 				<value> com.omniwyse.dod.model.Promotionsummary</value>
+				<value>com.omniwyse.dod.model.Product</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -63,5 +68,7 @@
 
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+		
+		<bean id="prommtionJob" class="com.omniwyse.dod.scheduler.PromotionScheduler" /> 
 
 </beans>

@@ -38,11 +38,40 @@ public class Category  implements Serializable{
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "category_brand", joinColumns = { @JoinColumn(name = "CAT_ID") }, inverseJoinColumns = { @JoinColumn(name = "BRD_ID") })
 	private Set<Brand> brands=new HashSet<Brand>();	
+	
+	@Column(name="CAT_IMAGE")
+	private String categoryImage;
+	@Column(name="CAT_RANK")
+	private String categoryRank;
 	public Category(){
 		
 	}
 	
 	
+
+	public String getCategoryImage() {
+		return categoryImage;
+	}
+
+
+
+	public void setCategoryImage(String categoryImage) {
+		this.categoryImage = categoryImage;
+	}
+
+
+
+	public String getCategoryRank() {
+		return categoryRank;
+	}
+
+
+
+	public void setCategoryRank(String categoryRank) {
+		this.categoryRank = categoryRank;
+	}
+
+
 
 	public Category(Long categoryId, String categoryName, Timestamp createddate) {
 		this.categoryId = categoryId;
@@ -61,6 +90,20 @@ public class Category  implements Serializable{
 		this.categoryName = categoryName;
 		this.createddate = createddate;
 		this.brands = brands;
+	}
+	
+	
+
+
+
+	public Category(Long categoryId, String categoryName, Timestamp createddate, Set<Brand> brands,
+			String categoryImage, String categoryRank) {
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.createddate = createddate;
+		this.brands = brands;
+		this.categoryImage = categoryImage;
+		this.categoryRank = categoryRank;
 	}
 
 

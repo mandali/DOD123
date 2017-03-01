@@ -18,5 +18,9 @@ public class AppConstants {
 	public static final String LIST_BRANDS="/brands";
 	public static final String LIST_BRANDS_SUCCESS_MSG=" available Categories with Brands are ,";
 	public static final String LIST_BRANDS_ERROR_MSG="Sorry , No Categories are available right now ";
+	public static final String LIST_MERCHANT_PRODUCTS_SUCCESS_MSG=" available Products are";
+	public static final String LIST_MERCHANT_PRODUCTS_ERROR_MSG="Sorry , No Products are available right now ";
+	public static final String LIST_MERCHANT_PRODUCTS="/merchantproducts";
+	
 
 }

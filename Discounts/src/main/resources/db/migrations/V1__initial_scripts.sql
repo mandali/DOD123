@@ -37,6 +37,20 @@ UNIQUE (email_id),
 UNIQUE(mobile_number)
 );
 
+
+create table dod_db.product
+(			
+ P_ID int NOT NULL AUTO_INCREMENT,
+ P_DESC varchar(255),
+ IMAGE_LOC varchar(255),
+ CRETATED_DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ M_ID int,
+ PRIMARY KEY (P_ID),
+ FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID)
+);
+
+
+
 create table dod_db.user_profile_table
 (
  USER_ID varchar(255),
@@ -72,6 +86,8 @@ primary key(BEACONS_ID)
 CAT_ID int NOT NULL AUTO_INCREMENT,
 CAT_NAME  varchar(255) not null,
 CAT_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CAT_RANK smallint,
+CAT_IMAGE varchar(255),
 PRIMARY KEY (CAT_ID)
 );
 
@@ -135,21 +151,6 @@ PRIMARY KEY (Id),
 UNIQUE(USER_ID)
 );
 
-create table dod_db.product_catagory_table
-(			
- P_ID varchar(255),
-CATAGORY_ID varchar(255),
-CRETATED_DATE DATE
-);
-create table dod_db.product_table
-(			
- P_ID varchar(255),
- P_DESC varchar(255),
- P_IMAGE TINYBLOB,
-IMAGE_LOC varchar(255),
-CRETATED_DATE DATE,
-PRIMARY KEY (P_ID)
-);
 
 create table dod_db.country
 (
@@ -220,7 +221,8 @@ create table dod_db.promotions
  BRD_ID int,
  PRIMARY KEY (PRMS_ID),
  FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
- FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID));
+ FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID),
+ PRMS_DISC_TXT varchar(1000));
 
 
  create table promotionsummary
