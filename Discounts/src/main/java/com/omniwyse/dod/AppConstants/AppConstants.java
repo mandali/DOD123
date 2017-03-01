@@ -21,6 +21,9 @@ public class AppConstants {
 	public static final String LIST_MERCHANT_PRODUCTS_SUCCESS_MSG=" available Products are";
 	public static final String LIST_MERCHANT_PRODUCTS_ERROR_MSG="Sorry , No Products are available right now ";
 	public static final String LIST_MERCHANT_PRODUCTS="/merchantproducts";
+	public static final String CREATE_PRODUCTS_SUCCESS_MSG="Product Created";
+	public static final String CREATE_PRODUCTS_ERROR_MSG="Product Cannot be Created ";
+	public static final String CREATE_PRODUCTS="/createproducts";
 	
 
 }

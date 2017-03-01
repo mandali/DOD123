@@ -23,6 +23,7 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationsVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
+import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.bean.DataResult;
@@ -865,6 +866,7 @@ public class DODController {
 		try{
 			
 			if (!productVOs.isEmpty()) {	
+				
 				result=new DataResultlist<ProductVO>(true, AppConstants.LIST_MERCHANT_PRODUCTS_SUCCESS_MSG,HttpStatus.OK.value(), productVOs);	
 				return new ResponseEntity(result , HttpStatus.OK);			
 			}
@@ -879,7 +881,21 @@ public class DODController {
 			return responseEntity;
 	  }
 		
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.CREATE_PRODUCTS, method = RequestMethod.POST)
+	public void createMerchatProducts(@RequestBody NewProductVO newProductVO) {
+		final String METHOD_NAME="createMerchatProducts";
+		try{
+			System.out.println("P Id"+newProductVO.getProductId());
+			System.out.println("P Image"+newProductVO.getProductImage());
+			System.out.println("P Description"+newProductVO.getProductDescription());
+			System.out.println("P Mearchat Id"+newProductVO.getMerchantId());
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
 		
+	}
 	
 	
 	
