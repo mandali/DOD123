@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.model.Brand;
@@ -94,5 +95,22 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		return brand;
 	}
 
+	public Promotion CategoryIdPromotion(CategoryPromotion categoryPromotion) {
+		Session session = this.sessionFactory.openSession();	
+		Query query=(Query)session.createQuery(" from Promotion p where p.catid.categoryId=:id").setParameter("id" , categoryPromotion.getCategoryId());
+		Promotion resp=(Promotion)((org.hibernate.Query) query).uniqueResult();
+		return resp;
+		
+	}
+
+	public List<Promotion> brandIdPromotion(CategoryPromotion categoryPromotion) {
+		
+		Session session = this.sessionFactory.openSession();	
+		/*Query query=(Query)session.createQuery(" from Promotion p where p.brandId.brandId=:id").setParameter("id" , categoryPromotion.getBrandId());
+		List<Promotion> resp=(Promotion)((org.hibernate.Query) query).list();*/		
+		List<Promotion> list = session.createQuery(" from Promotion p where p.brandId.brandId=:id").setParameter("id" , categoryPromotion.getBrandId()).list();
+		return list;
+	
+	}
 
 }

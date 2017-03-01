@@ -2,13 +2,17 @@ package com.omniwyse.dod.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -45,13 +49,39 @@ public class Promotion implements Serializable{
 	@Column(name = "END_DATE")
 	private Date enddate;	
 	@Column(name = "location")
-	private String location;	
+	private String location;
+	
+	
+	/*@OneToMany(targetEntity =Category.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="CAT_ID" ,referencedColumnName ="PRMS_ID")
+	private Set<Category> Category;	
+	
+	@OneToMany(targetEntity =Brand.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="BRD_ID" ,referencedColumnName ="PRMS_ID")
+	private Set<Brand> Brand;*/
+	
+	
+	
+	
 	@OneToOne
 	@JoinColumn(name = "CAT_ID")
 	private Category catid;	
 	@OneToOne
 	@JoinColumn(name = "BRD_ID")
-	private Brand brandId;
+	private Brand brandId;	
+	
+	/*public Set<Category> getCategory() {
+		return Category;
+	}
+	public void setCategory(Set<Category> category) {
+		Category = category;
+	}
+	public Set<Brand> getBrand() {
+		return Brand;
+	}
+	public void setBrand(Set<Brand> brand) {
+		Brand = brand;
+	}*/
 	public Promotion(){
 	}
 	public Promotion(Integer id, String product_id, String description, Integer merchatid, String product_image,
@@ -71,6 +101,7 @@ public class Promotion implements Serializable{
 		this.catid = catid;
 		this.brandId = brandId;
 	}	
+	
 	public Category getCatid() {
 		return catid;
 	}

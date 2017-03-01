@@ -3,6 +3,7 @@ package com.omniwyse.dod.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
@@ -23,10 +24,13 @@ public List<Promotion> getPromotions();
 
 	public List<Promotionsummary> PromotionSummary(Date date);
 	
-	public Category getcategoryId(CreatePromotionVo createPromotionVo);
+	public Category getcategoryId(CreatePromotionVo createPromotionVo); 
 	
-	public Brand getBrandId(CreatePromotionVo createPromotionVo);
+	public Brand getBrandId(CreatePromotionVo createPromotionVo);	
 	
+	public Promotion CategoryIdPromotion(CategoryPromotion categoryPromotion );
+	
+	public List<Promotion> brandIdPromotion(CategoryPromotion categoryPromotion );
 	
 	
 	

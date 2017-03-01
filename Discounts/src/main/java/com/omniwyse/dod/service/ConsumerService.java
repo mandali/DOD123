@@ -5,6 +5,7 @@ import com.omniwyse.dod.model.ConsumerLogin;
 import com.omniwyse.dod.model.ConsumerLoginwithEmail;
 import com.omniwyse.dod.model.ConsumerLoginwithMobile;
 import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.ConsumerPromotionData;
 import com.omniwyse.dod.model.RegisterWithOtp;
 
 public interface ConsumerService {
@@ -18,4 +19,6 @@ public interface ConsumerService {
 	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin); 
 	
 	public ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile);
+	
+	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData ConsumerPromotionData);
 }

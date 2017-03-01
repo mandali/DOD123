@@ -69,7 +69,6 @@ public class MetaDataDaoImpl implements MetaDataDao {
 							duplicateFlag = true;
 							break;
 						}
-
 					}
 				}
 				if (!duplicateFlag) {
@@ -99,12 +98,8 @@ public class MetaDataDaoImpl implements MetaDataDao {
 					for(CategoryBrandVO categoryBrandVO:categoryVOs){
 						Collections.sort(categoryBrandVO.getBrands(),new BrandComparator());
 					}
-
-
-				}
-			
+				}			
 			}
-
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		} finally {
