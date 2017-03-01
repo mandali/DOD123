@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.omniwyse.dod.DTO.CategoryBrandVO;
+import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.dao.MetaDataDao;
+import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.service.MetaDataService;
 
 @Service
@@ -20,6 +23,8 @@ public class MetaDataServiceImpl implements MetaDataService {
 
 	@Autowired
 	MetaDataDao metaDataDao;
+	@Autowired
+	ProductDao productDao;
 
 	public List<Category> fetchCategories() {
 		return metaDataDao.fetchCategories();
@@ -32,6 +37,11 @@ public class MetaDataServiceImpl implements MetaDataService {
 	public List<ProductVO> fetchMerchantProducts(ProductVO productVO) {
 		// TODO Auto-generated method stub
 		return metaDataDao.fetchMerchantProducts(productVO);
+	}
+
+	public Product createProduct(NewProductVO newProductVO) {
+		// TODO Auto-generated method stub
+		return productDao.createProduct(newProductVO);
 	}
 
 }

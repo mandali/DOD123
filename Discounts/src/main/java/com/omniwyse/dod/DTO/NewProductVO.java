@@ -6,7 +6,6 @@ public class NewProductVO implements java.io.Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String productId;
 	private String productDescription;
 	private String productImage;
 	private String merchantId;
@@ -15,12 +14,7 @@ public class NewProductVO implements java.io.Serializable{
 		
 	}
 	
-	public String getProductId() {
-		return productId;
-	}
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
+	
 	public String getProductDescription() {
 		return productDescription;
 	}
