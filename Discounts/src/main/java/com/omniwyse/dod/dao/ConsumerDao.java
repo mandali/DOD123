@@ -5,6 +5,7 @@ import com.omniwyse.dod.model.ConsumerLogin;
 import com.omniwyse.dod.model.ConsumerLoginwithEmail;
 import com.omniwyse.dod.model.ConsumerLoginwithMobile;
 import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.ConsumerPromotionData;
 import com.omniwyse.dod.model.RegisterWithOtp;
 
 public interface ConsumerDao {
@@ -17,6 +18,10 @@ public interface ConsumerDao {
 	
 	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin);	
 	
-	public ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile ConsumerIdBaseProfile);
+	public ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile ConsumerIdBaseProfile); 
+	
+	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData consumerPromotionData);
+	
+	
 	
 }

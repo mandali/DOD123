@@ -37,12 +37,12 @@ public class Category  implements Serializable{
 	private Timestamp createddate;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "category_brand", joinColumns = { @JoinColumn(name = "CAT_ID") }, inverseJoinColumns = { @JoinColumn(name = "BRD_ID") })
-	private Set<Brand> brands=new HashSet<Brand>();
+	private Set<Brand> brands=new HashSet<Brand>();	
+	
 	@Column(name="CAT_IMAGE")
 	private String categoryImage;
 	@Column(name="CAT_RANK")
 	private String categoryRank;
-	
 	public Category(){
 		
 	}

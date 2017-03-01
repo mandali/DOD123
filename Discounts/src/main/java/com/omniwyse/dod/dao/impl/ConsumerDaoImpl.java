@@ -14,6 +14,7 @@ import com.omniwyse.dod.model.ConsumerLogin;
 import com.omniwyse.dod.model.ConsumerLoginwithEmail;
 import com.omniwyse.dod.model.ConsumerLoginwithMobile;
 import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.ConsumerPromotionData;
 import com.omniwyse.dod.model.RegisterWithOtp;
 @Repository
 public class ConsumerDaoImpl implements ConsumerDao {
@@ -55,6 +56,12 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		Query query=(Query) session.createQuery("from ConsumerProfile where phone_no=:mobileno");
 		query.setParameter("mobileno", ConsumerIdBaseProfile.getMobileno().trim());		
 		ConsumerProfile resp=(ConsumerProfile) query.uniqueResult();		
+		return resp;
+	}
+	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData consumerPromotionData) {
+		Session session = this.sessionFactory.getCurrentSession();			
+		Integer id = (Integer) session.save(consumerPromotionData);
+		ConsumerPromotionData resp=(ConsumerPromotionData) session.get(ConsumerPromotionData.class, id);				
 		return resp;
 	}
 	

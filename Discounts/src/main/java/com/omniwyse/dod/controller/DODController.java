@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.omniwyse.dod.AppConstants.AppConstants;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
+import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CategoryVO;
 import com.omniwyse.dod.DTO.CitiesVO;
 import com.omniwyse.dod.DTO.CountryVO;
@@ -493,10 +494,7 @@ public class DODController {
 	@RequestMapping(value = "/promotions", method = RequestMethod.GET)
 	public ResponseEntity getPromotions() {	
 		final String METHOD_NAME="getPromotions";
-		ResponseEntity responseEntity = null;
-		Calendar calendar=Calendar.getInstance();
-		Date date =  calendar.getTime();
-		//java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		ResponseEntity responseEntity = null;				
 		List<Promotion> promotions = promotionService.getPromotions();
 		List<PromotionDto> promotionDtos=new ArrayList<PromotionDto>();
 		PromotionDto promotionDto;
@@ -540,6 +538,57 @@ public class DODController {
 	/*======================================================================================================*/
 	
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/promotion/categoryId", method = RequestMethod.POST)
+	public ResponseEntity CategoryIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {	
+		final String METHOD_NAME="CategoryIdPromotion";
+		ResponseEntity responseEntity = null;
+		PromotionDto promotionDto;
+		List<PromotionDto> promotions = promotionService.CategoryIdPromotions(categoryPromotion);		
+		try{
+		if (!promotions.isEmpty()) {
+			
+			DataResultlist<PromotionDto> dataResultlist=new DataResultlist<PromotionDto>(true, "available Promotions are ... ", HttpStatus.OK.value(), promotions);
+			return new ResponseEntity(dataResultlist, HttpStatus.OK);			
+					
+		}else
+		{
+			DataResult result=new DataResult(false, "Sorry , No Promotions are available on selected Id right now ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+	}
+	
+	
+/*======================================================================================================*/
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
+	@RequestMapping(value = "/promotion/brandId", method = RequestMethod.POST)
+	public ResponseEntity brandIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {	
+		final String METHOD_NAME="brandIdPromotion";
+		ResponseEntity responseEntity = null;		
+		List<PromotionDto> promotions = promotionService.brandIdPromotions(categoryPromotion);					
+		try{
+		if (!promotions.isEmpty()) {			
+			DataResultlist<PromotionDto> resp=new DataResultlist<PromotionDto>(true, " available promotions are ... ", HttpStatus.OK.value(), promotions);
+			return new ResponseEntity(resp, HttpStatus.OK);			
+		}else
+		{
+			DataResult result=new DataResult(false, "Sorry , No Promotions are available on selected Id right now ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+	}
+	
+	
+	
 /*======================================================================================================*/
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -569,7 +618,7 @@ public class DODController {
 		return responseEntity;
 	}
 	
-	
+	/*======================================================================================================*/
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -603,8 +652,9 @@ public class DODController {
 		return responseEntity;
 	}
 	
+	
 	/*======================================================================================================*/	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked" }) 
 	@RequestMapping(value = "/categorypromotions", method = RequestMethod.POST)
 	public ResponseEntity getCategoryPromotion(@RequestBody CategorySelection categorySelection) {
 		final String METHOD_NAME="getCategoryPromotion";

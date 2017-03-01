@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -49,18 +50,22 @@ public class Promotion implements Serializable{
 	@OneToOne
 	@JoinColumn(name = "CAT_ID")
 	private Category catid;	
-	@OneToOne
-	@JoinColumn(name = "BRD_ID")
+	@ManyToOne
+	@JoinColumn(name = "BRD_ID")	
 	private Brand brandId;
 	@Column(name="PRMS_DISC_TXT")
 	private String discountText;
-	
 	public Promotion(){
+	}	
+
+
+	
+	public Category getCatid() {
+		return catid;
 	}
-	
-	
-	
-	
+
+
+
 	public Promotion(Integer id, String product_id, String description, Integer merchatid, String product_image,
 			String originalPrice, String discount, Date createddate, Date startdate, Date enddate, String location,
 			Category catid, Brand brandId, String discountText) {
@@ -83,9 +88,9 @@ public class Promotion implements Serializable{
 
 
 
-	public Category getCatid() {
-		return catid;
-	}
+
+
+
 	public void setCatid(Category catid) {
 		this.catid = catid;
 	}

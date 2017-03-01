@@ -13,6 +13,7 @@ import com.omniwyse.dod.model.ConsumerLogin;
 import com.omniwyse.dod.model.ConsumerLoginwithEmail;
 import com.omniwyse.dod.model.ConsumerLoginwithMobile;
 import com.omniwyse.dod.model.ConsumerProfile;
+import com.omniwyse.dod.model.ConsumerPromotionData;
 import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
@@ -50,6 +51,10 @@ public class ConsumerServiceImpl implements ConsumerService{
 	public com.omniwyse.dod.model.ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile) {
 		
 		return consumerDao.ConsumerProfile(consumerIdBaseProfile);
+	}
+	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData consumerPromotionData) {
+		
+		return consumerDao.ConsumerPromotion(consumerPromotionData);
 	}	
 
 	}
