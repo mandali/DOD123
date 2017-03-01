@@ -5,10 +5,12 @@ import java.util.List;
 
 import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
+import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
+import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.Promotionsummary;
 
@@ -28,9 +30,9 @@ public List<Promotion> getPromotions();
 	
 	public Brand getBrandId(CreatePromotionVo createPromotionVo);	
 	
-	public Promotion CategoryIdPromotion(CategoryPromotion categoryPromotion );
+	public List<PromotionDto> CategoryIdPromotion(CategoryPromotion categoryPromotion );
 	
-	public List<Promotion> brandIdPromotion(CategoryPromotion categoryPromotion );
+	public List<PromotionDto> brandIdPromotion(CategoryPromotion categoryPromotion );
 	
 	
 	

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -49,39 +50,13 @@ public class Promotion implements Serializable{
 	@Column(name = "END_DATE")
 	private Date enddate;	
 	@Column(name = "location")
-	private String location;
-	
-	
-	/*@OneToMany(targetEntity =Category.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="CAT_ID" ,referencedColumnName ="PRMS_ID")
-	private Set<Category> Category;	
-	
-	@OneToMany(targetEntity =Brand.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="BRD_ID" ,referencedColumnName ="PRMS_ID")
-	private Set<Brand> Brand;*/
-	
-	
-	
-	
+	private String location;	
 	@OneToOne
 	@JoinColumn(name = "CAT_ID")
 	private Category catid;	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "BRD_ID")
-	private Brand brandId;	
-	
-	/*public Set<Category> getCategory() {
-		return Category;
-	}
-	public void setCategory(Set<Category> category) {
-		Category = category;
-	}
-	public Set<Brand> getBrand() {
-		return Brand;
-	}
-	public void setBrand(Set<Brand> brand) {
-		Brand = brand;
-	}*/
+	private Brand brandId;		
 	public Promotion(){
 	}
 	public Promotion(Integer id, String product_id, String description, Integer merchatid, String product_image,

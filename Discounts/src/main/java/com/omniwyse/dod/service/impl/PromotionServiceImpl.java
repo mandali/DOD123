@@ -77,13 +77,13 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotionsDao.PromotionSummary(date1);
 	}
 
-	public Promotion CategoryIdPromotions(CategoryPromotion categoryPromotion) {
+	public List<PromotionDto> CategoryIdPromotions(CategoryPromotion categoryPromotion) {
 		
 		return promotionsDao.CategoryIdPromotion(categoryPromotion);
 		
 	}
 
-	public List<Promotion> brandIdPromotions(CategoryPromotion categoryPromotion) {
+	public List<PromotionDto> brandIdPromotions(CategoryPromotion categoryPromotion) {
 		
 		return promotionsDao.brandIdPromotion(categoryPromotion);
 	}

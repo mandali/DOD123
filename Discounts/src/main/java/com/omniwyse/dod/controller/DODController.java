@@ -542,31 +542,13 @@ public class DODController {
 		final String METHOD_NAME="CategoryIdPromotion";
 		ResponseEntity responseEntity = null;
 		PromotionDto promotionDto;
-		Promotion promotions = promotionService.CategoryIdPromotions(categoryPromotion);		
+		List<PromotionDto> promotions = promotionService.CategoryIdPromotions(categoryPromotion);		
 		try{
-		if (promotions!=null) {
-			promotionDto=new PromotionDto();
-			promotionDto.setId(promotions.getId());
-			promotionDto.setCatid(promotions.getCatid().getCategoryId());
-			promotionDto.setProduct_id(promotions.getProduct_id());
-			promotionDto.setDescription(promotions.getDescription());
-			promotionDto.setProduct_image(promotions.getProduct_image());
-			promotionDto.setOriginalPrice(promotions.getOriginalPrice());
-			promotionDto.setDiscount(promotions.getDiscount());
-			promotionDto.setStartdate(promotions.getStartdate());
-			promotionDto.setCreateddate(promotions.getCreateddate());
-			promotionDto.setEnddate(promotions.getEnddate());
-			promotionDto.setLocation(promotions.getLocation());
-			promotionDto.setMerchatId(promotions.getMerchatid());
-			promotionDto.setBrandName(promotions.getBrandId().getBrandName());
-			promotionDto.setBrandRating(promotions.getBrandId().getBrandRating());
-			promotionDto.setBrandImage(promotions.getBrandId().getBrandImage());
-			promotionDto.setBrandDescription(promotions.getBrandId().getBrandDescription());
-			promotionDto.setCategoryName(promotions.getCatid().getCategoryName());
-			promotionDto.setBrandId(promotions.getBrandId().getBrandid());
+		if (!promotions.isEmpty()) {
 			
-			DataResultEntity<PromotionDto> result = new DataResultEntity<PromotionDto>(true, " available Promotions are ... ", HttpStatus.OK.value(), promotionDto);
-			return new ResponseEntity(result, HttpStatus.OK);			
+			DataResultlist<PromotionDto> dataResultlist=new DataResultlist<PromotionDto>(true, "available Promotions are ... ", HttpStatus.OK.value(), promotions);
+			return new ResponseEntity(dataResultlist, HttpStatus.OK);			
+					
 		}else
 		{
 			DataResult result=new DataResult(false, "Sorry , No Promotions are available on selected Id right now ", HttpStatus.BAD_REQUEST.value());
@@ -582,42 +564,16 @@ public class DODController {
 /*======================================================================================================*/
 	
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = "/promotion/brandId", method = RequestMethod.POST)
 	public ResponseEntity brandIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {	
 		final String METHOD_NAME="brandIdPromotion";
-		ResponseEntity responseEntity = null;
-		List<PromotionDto> promotionDtos=new ArrayList<PromotionDto>();
-		List<Promotion> promotions = promotionService.brandIdPromotions(categoryPromotion);
-		PromotionDto promotionDto;
+		ResponseEntity responseEntity = null;		
+		List<PromotionDto> promotions = promotionService.brandIdPromotions(categoryPromotion);					
 		try{
-		if (!promotions.isEmpty()) {
-			for (Promotion resp:promotions) {
-				promotionDto=new PromotionDto();
-			
-			promotionDto.setId(resp.getId());
-			promotionDto.setCatid(resp.getCatid().getCategoryId());
-			promotionDto.setProduct_id(resp.getProduct_id());
-			promotionDto.setDescription(resp.getDescription());
-			promotionDto.setProduct_image(resp.getProduct_image());
-			promotionDto.setOriginalPrice(resp.getOriginalPrice());
-			promotionDto.setDiscount(resp.getDiscount());
-			promotionDto.setStartdate(resp.getStartdate());
-			promotionDto.setCreateddate(resp.getCreateddate());
-			promotionDto.setEnddate(resp.getEnddate());
-			promotionDto.setLocation(resp.getLocation());
-			promotionDto.setMerchatId(resp.getMerchatid());
-			promotionDto.setBrandName(resp.getBrandId().getBrandName());
-			promotionDto.setBrandRating(resp.getBrandId().getBrandRating());
-			promotionDto.setBrandImage(resp.getBrandId().getBrandImage());
-			promotionDto.setBrandDescription(resp.getBrandId().getBrandDescription());
-			promotionDto.setCategoryName(resp.getCatid().getCategoryName());
-			promotionDto.setBrandId(resp.getBrandId().getBrandid());
-			promotionDtos.add(promotionDto);
-			
-			DataResultlist<PromotionDto> result = new DataResultlist<PromotionDto>(true, " available Promotions are ... ", HttpStatus.OK.value(), promotionDtos);
-			return new ResponseEntity(result, HttpStatus.OK);
-			}
+		if (!promotions.isEmpty()) {			
+			DataResultlist<PromotionDto> resp=new DataResultlist<PromotionDto>(true, " available promotions are ... ", HttpStatus.OK.value(), promotions);
+			return new ResponseEntity(resp, HttpStatus.OK);			
 		}else
 		{
 			DataResult result=new DataResult(false, "Sorry , No Promotions are available on selected Id right now ", HttpStatus.BAD_REQUEST.value());
