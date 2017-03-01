@@ -23,6 +23,7 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationsVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
+import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.bean.DataResult;
 import com.omniwyse.dod.bean.DataResultEntity;
@@ -851,6 +852,36 @@ public class DODController {
 		return responseEntity;
 		
 	}
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_MERCHANT_PRODUCTS, method = RequestMethod.POST)
+	public ResponseEntity fetchMerchatProducts(@RequestBody ProductVO productVO) {
+		final String METHOD_NAME="fetchMerchatProducts";
+		List<ProductVO> productVOs = metaDataService.fetchMerchantProducts(productVO);
+		ResponseEntity<ProductVO> responseEntity=null;
+		DataResultlist<ProductVO> result;
+		DataResult resultError;
+		try{
+			
+			if (!productVOs.isEmpty()) {	
+				result=new DataResultlist<ProductVO>(true, AppConstants.LIST_MERCHANT_PRODUCTS_SUCCESS_MSG,HttpStatus.OK.value(), productVOs);	
+				return new ResponseEntity(result , HttpStatus.OK);			
+			}
+			else {
+				resultError=new DataResult(false, AppConstants.LIST_MERCHANT_PRODUCTS_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
+				return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+			}
+	   }
+			catch(Exception exception){
+				logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			}
+			return responseEntity;
+	  }
+		
+		
+	
+	
 	
 	
 	/*===========================================================================================================*/

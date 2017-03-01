@@ -258,6 +258,12 @@ public class MerchantProfile implements Serializable{
 	public void setPromotions(Set<Promotion> promotions) {
 		this.promotions = promotions;
 	}
+	public Set<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 	
 	
 	
