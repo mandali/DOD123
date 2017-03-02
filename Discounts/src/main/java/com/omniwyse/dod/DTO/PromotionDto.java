@@ -23,10 +23,7 @@ public class PromotionDto implements Serializable{
 	private String categoryName;
 	private Long catid;
 	private Long brandId;
-	private String discountText;
-	
-	
-	
+	private String discountText;	
 	public String getDiscountText() {
 		return discountText;
 	}

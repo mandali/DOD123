@@ -22,6 +22,7 @@ import com.omniwyse.dod.DTO.CategoryVO;
 import com.omniwyse.dod.DTO.CitiesVO;
 import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
+import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.LocationsVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
 import com.omniwyse.dod.DTO.NewProductVO;
@@ -902,7 +903,6 @@ public class DODController {
 		
 	}
 	
-	/*===========================================================================================================*/
 	
 	/*===========================================================================================================*/
 	
@@ -933,6 +933,7 @@ public class DODController {
 		
 	}
 	
+	/*===========================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_MERCHANT_PRODUCTS, method = RequestMethod.POST)
@@ -959,6 +960,8 @@ public class DODController {
 			}
 			return responseEntity;
 	  }
+	
+	/*===========================================================================================================*/
 		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.CREATE_PRODUCTS, method = RequestMethod.POST)
@@ -967,26 +970,23 @@ public class DODController {
 		ResponseEntity responseEntity = null;		
 		MerchantProfile merchantId=productDao.validateProduct(newProductVO);		
 		List<Product> products= productDao.validateProductname(newProductVO);		
-		try{	
-					
+		try{					
 			if (merchantId!=null && products.isEmpty()){				
 				Product resp = metaDataService.createProduct(newProductVO);	
 				if (resp!=null) {
-					DataResult result=new DataResult(true, "Product Created successfully ... ", HttpStatus.OK.value());	
+					DataResult result=new DataResult(true, " Product Created successfully ... ", HttpStatus.OK.value());	
 					return new ResponseEntity(result, HttpStatus.OK);
 				}else
 				{
 				DataResult result=new DataResult(false, "Sorry , Please check merchantId/productId   ", HttpStatus.BAD_REQUEST.value());
 				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
 				}				
-				
 			}			
 			else
 			{
 			DataResult result=new DataResult(false, "Sorry , Please check merchantId/productId    ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-			}
-			
+			}			
 		}
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
@@ -995,9 +995,31 @@ public class DODController {
 		
 	}
 	
+	/*===========================================================================================================*/	
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.CREATE_LOCATION, method = RequestMethod.POST)
+	public ResponseEntity createLocation(@RequestBody LocationVO locationVO) {
+		final String METHOD_NAME="createLocation";
+		ResponseEntity responseEntity = null;
+		Location location=metaDataService.createLocation(locationVO);
+		try{					
+			if (location!=null){
+				DataResult result=new DataResult(true, " Location Created successfully ... ", HttpStatus.OK.value());	
+				return new ResponseEntity(result, HttpStatus.OK);							
+			}			
+			else
+			{
+			DataResult result=new DataResult(false, "Sorry , Please enter valied details ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+			}			
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}		
+		return responseEntity;
+		
+	}
 	
-	
-	/*===========================================================================================================*/
 	
 }
