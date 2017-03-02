@@ -965,11 +965,11 @@ public class DODController {
 	public ResponseEntity createMerchatProducts(@RequestBody NewProductVO newProductVO) {
 		final String METHOD_NAME="createMerchatProducts";
 		ResponseEntity responseEntity = null;		
-		MerchantProfile merchantId=productDao.validateProduct(newProductVO);	
-		
-		try{
-			
-			if (merchantId!=null) {	
+		MerchantProfile merchantId=productDao.validateProduct(newProductVO);		
+		List<Product> products= productDao.validateProductname(newProductVO);		
+		try{	
+					
+			if (merchantId!=null && products.isEmpty()){				
 				Product resp = metaDataService.createProduct(newProductVO);	
 				if (resp!=null) {
 					DataResult result=new DataResult(true, "Product Created successfully ... ", HttpStatus.OK.value());	
@@ -980,8 +980,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
 				}				
 				
-			}
-			
+			}			
 			else
 			{
 			DataResult result=new DataResult(false, "Sorry , Please check merchantId/productId    ", HttpStatus.BAD_REQUEST.value());

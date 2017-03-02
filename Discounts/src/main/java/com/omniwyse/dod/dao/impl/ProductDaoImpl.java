@@ -1,5 +1,7 @@
 package com.omniwyse.dod.dao.impl;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -54,5 +56,18 @@ public class ProductDaoImpl implements ProductDao{
 		return resp;
 	}
 
-	
+	@SuppressWarnings("unchecked")
+	public List<Product> validateProductname(NewProductVO productVO) {
+		List<Product> resp=null;
+			Session session = this.sessionFactory.openSession();		
+			 resp= session.createQuery("from Product where productDescription=:productDescription")
+					.setParameter("productDescription", productVO.getProductDescription()).list();	
+			if(!resp.isEmpty()){
+				if(resp.contains(productVO.getProductDescription())){
+					return resp;
+				}
+			}
+			return resp;
+				
+	}	
 }
