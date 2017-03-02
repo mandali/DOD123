@@ -254,9 +254,10 @@ create table merchant_beacon
 BC_ID int NOT NULL AUTO_INCREMENT,
 B_ID int,
 M_ID int,
-PRIMARY KEY (BC_ID,B_ID,M_ID),
+PRIMARY KEY (BC_ID),
 FOREIGN KEY (B_ID) REFERENCES beacon(B_ID),
-FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID));
+FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID),
+UNIQUE (B_ID,M_ID));
 
 create table merchant_pm_bc(
 MPB_ID int NOT NULL AUTO_INCREMENT,
@@ -266,5 +267,7 @@ BC_ID int,
 FOREIGN KEY (BC_ID) REFERENCES beacon(B_ID),
 FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID),
 FOREIGN KEY (P_ID)  REFERENCES promotions(PRMS_ID),
-PRIMARY KEY (MPB_ID,BC_ID,P_ID,M_ID)
+PRIMARY KEY (MPB_ID),
+UNIQUE (M_ID,P_ID)
 );
+
