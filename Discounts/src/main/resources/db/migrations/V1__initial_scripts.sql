@@ -238,3 +238,33 @@ MAX_DISCOUNT varchar(255),
 BRAND_ID int,
 primary key(SUMMARY_ID)
 );
+
+
+create table beacon
+(
+B_ID int NOT NULL AUTO_INCREMENT,
+B_NAME varchar(255),
+B_STATUS varchar(255),
+BRD_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+primary key(B_ID)
+);
+
+create table merchant_beacon
+(
+BC_ID int NOT NULL AUTO_INCREMENT,
+B_ID int,
+M_ID int,
+PRIMARY KEY (BC_ID,B_ID,M_ID),
+FOREIGN KEY (B_ID) REFERENCES beacon(B_ID),
+FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID));
+
+create table merchant_pm_bc(
+MPB_ID int NOT NULL AUTO_INCREMENT,
+M_ID int,
+P_ID int,
+BC_ID int,
+FOREIGN KEY (BC_ID) REFERENCES beacon(B_ID),
+FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID),
+FOREIGN KEY (P_ID)  REFERENCES promotions(PRMS_ID),
+PRIMARY KEY (MPB_ID,BC_ID,P_ID,M_ID)
+);

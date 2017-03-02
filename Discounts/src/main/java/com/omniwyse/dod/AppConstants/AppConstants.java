@@ -28,5 +28,10 @@ public class AppConstants {
 	public static final String BRANDID_PROMOTIONS="/promotion/brandId"; 
 	public static final String AVAILABE_PROMOTIONS_SUCCESS_MSG=" available promotions are ... ";
 	public static final String AVAILABE_PROMOTIONS_ERROR_MSG="Sorry , No Promotions are available right now ";
+	public static final String CREATE_PRODUCTS_SUCCESS_MSG="Product Created";
+	public static final String CREATE_PRODUCTS_ERROR_MSG="Product Cannot be Created ";
+	public static final String CREATE_PRODUCTS="/createproduct";
+	
+
 
 }

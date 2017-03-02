@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import com.omniwyse.dod.DTO.BrandComparator;
 import com.omniwyse.dod.DTO.BrandVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
+import com.omniwyse.dod.DTO.MerchantProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MetaDataDao;
@@ -120,7 +121,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		boolean duplicateFlag;
 		ProductVO productVOData;
 		List<ProductVO> productVOs=new ArrayList<ProductVO>();
-		ProductVO.MerchantProduct merchantProduct;
+		MerchantProductVO merchantProduct;
 		try
 		{
 		session = this.sessionFactory.getCurrentSession();
@@ -137,7 +138,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			
 			
 			for(Product product:products){
-		        merchantProduct=new ProductVO().new MerchantProduct();
+		        merchantProduct=new MerchantProductVO();
 				merchantProduct.setProductId(String.valueOf(product.getProductId()));
 				merchantProduct.setProductDescription(product.getProductDescription());
 				merchantProduct.setProductImage(product.getProductImageLocation());

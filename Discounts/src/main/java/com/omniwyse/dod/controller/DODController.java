@@ -24,6 +24,7 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationsVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
+import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.bean.DataResult;
@@ -32,6 +33,7 @@ import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
+import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
 import com.omniwyse.dod.model.Brand;
@@ -54,6 +56,7 @@ import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.OTPValidation;
+import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.Promotionsummary;
 import com.omniwyse.dod.model.RegisterWithOtp;
@@ -88,6 +91,8 @@ public class DODController {
 	MetaDataService metaDataService;	
 	@Autowired
 	PromotionsDao promotionsDao;
+	@Autowired
+	ProductDao productDao;
 	
 	
 	
@@ -940,6 +945,7 @@ public class DODController {
 		try{
 			
 			if (!productVOs.isEmpty()) {	
+				
 				result=new DataResultlist<ProductVO>(true, AppConstants.LIST_MERCHANT_PRODUCTS_SUCCESS_MSG,HttpStatus.OK.value(), productVOs);	
 				return new ResponseEntity(result , HttpStatus.OK);			
 			}
@@ -954,7 +960,41 @@ public class DODController {
 			return responseEntity;
 	  }
 		
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.CREATE_PRODUCTS, method = RequestMethod.POST)
+	public ResponseEntity createMerchatProducts(@RequestBody NewProductVO newProductVO) {
+		final String METHOD_NAME="createMerchatProducts";
+		ResponseEntity responseEntity = null;		
+		MerchantProfile merchantId=productDao.validateProduct(newProductVO);	
 		
+		try{
+			
+			if (merchantId!=null) {	
+				Product resp = metaDataService.createProduct(newProductVO);	
+				if (resp!=null) {
+					DataResult result=new DataResult(true, "Product Created successfully ... ", HttpStatus.OK.value());	
+					return new ResponseEntity(result, HttpStatus.OK);
+				}else
+				{
+				DataResult result=new DataResult(false, "Sorry , Please check merchantId/productId   ", HttpStatus.BAD_REQUEST.value());
+				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				}				
+				
+			}
+			
+			else
+			{
+			DataResult result=new DataResult(false, "Sorry , Please check merchantId/productId    ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+			}
+			
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+		
+	}
 	
 	
 	
