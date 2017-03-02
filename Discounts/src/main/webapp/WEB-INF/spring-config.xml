@@ -52,6 +52,8 @@
 				<value> com.omniwyse.dod.model.Brand</value>	
 				<value> com.omniwyse.dod.model.Promotionsummary</value>
 				<value>com.omniwyse.dod.model.Product</value>
+				<value>com.omniwyse.dod.model.Beacon</value>
+				<value>com.omniwyse.dod.model.MerchantBeacon</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
