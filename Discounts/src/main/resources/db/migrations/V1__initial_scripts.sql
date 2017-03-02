@@ -1,7 +1,7 @@
 create table dod_db.user_table
 (
- USER_ID varchar(255),
- USER_TYPE varchar(255),
+USER_ID varchar(255),
+USER_TYPE varchar(255),
 EMAIL_ID varchar(255),  	
 PHONE_NO varchar(255),
 PASSWORD varchar(255),
@@ -11,9 +11,9 @@ PRIMARY KEY (USER_ID)
 
 create table dod_db.merchant_profile
 (
- ID int NOT NULL AUTO_INCREMENT,
- logo varchar(255),
- first_name varchar(255),
+ID int NOT NULL AUTO_INCREMENT,
+logo varchar(255),
+first_name varchar(255),
 last_name varchar(255),
 email_id varchar(255) NOT NULL,
 mobile_number varchar(255) NOT NULL,
@@ -259,15 +259,32 @@ FOREIGN KEY (B_ID) REFERENCES beacon(B_ID),
 FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID),
 UNIQUE (B_ID,M_ID));
 
+create table merchant_ailes
+(
+A_ID int NOT NULL AUTO_INCREMENT,
+M_ID int,
+A_NAME varchar(255),
+A_X int,
+A_Y int,
+A_FLOOR int,
+LO_ID int,
+PRIMARY KEY (A_ID),
+FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID),
+FOREIGN KEY(LO_ID) REFERENCES location(LO_ID),
+UNIQUE (A_ID,M_ID,LO_ID));
+
+
 create table merchant_pm_bc(
 MPB_ID int NOT NULL AUTO_INCREMENT,
 M_ID int,
 P_ID int,
 BC_ID int,
+A_ID  int,
 FOREIGN KEY (BC_ID) REFERENCES beacon(B_ID),
 FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID),
 FOREIGN KEY (P_ID)  REFERENCES promotions(PRMS_ID),
+FOREIGN KEY (A_ID)  REFERENCES merchant_ailes(A_ID),
 PRIMARY KEY (MPB_ID),
-UNIQUE (M_ID,P_ID)
+UNIQUE (M_ID, P_ID, BC_ID)
 );
 
