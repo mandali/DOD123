@@ -2,6 +2,7 @@ package com.omniwyse.dod.DTO;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class CategoryPromotion implements Serializable {
 
 	private Long categoryId;

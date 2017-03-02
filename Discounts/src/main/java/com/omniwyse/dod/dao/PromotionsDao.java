@@ -34,6 +34,8 @@ public List<Promotion> getPromotions();
 	
 	public List<PromotionDto> brandIdPromotion(CategoryPromotion categoryPromotion );
 	
+	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion );
+	
 	
 	
 }

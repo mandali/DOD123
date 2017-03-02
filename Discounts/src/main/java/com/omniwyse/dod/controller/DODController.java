@@ -565,12 +565,37 @@ public class DODController {
 /*======================================================================================================*/
 	
 	
-	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
-	@RequestMapping(value = "/promotion/brandId", method = RequestMethod.POST)
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.BRANDID_PROMOTIONS, method = RequestMethod.POST)
 	public ResponseEntity brandIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {	
 		final String METHOD_NAME="brandIdPromotion";
 		ResponseEntity responseEntity = null;		
 		List<PromotionDto> promotions = promotionService.brandIdPromotions(categoryPromotion);					
+		try{
+		if (!promotions.isEmpty()) {			
+			DataResultlist<PromotionDto> resp=new DataResultlist<PromotionDto>(true, AppConstants.AVAILABE_PROMOTIONS_SUCCESS_MSG, HttpStatus.OK.value(), promotions);
+			return new ResponseEntity(resp, HttpStatus.OK);			
+		}else
+		{
+			DataResult result=new DataResult(false, AppConstants.AVAILABE_PROMOTIONS_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		return responseEntity;
+	}
+	
+	
+/*======================================================================================================*/
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_BRANDID_CATEGORYID , method = RequestMethod.POST)
+	public ResponseEntity brandCatIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {	
+		final String METHOD_NAME="brandCatIdPromotion";
+		ResponseEntity responseEntity = null;		
+		List<PromotionDto> promotions = promotionService.brandCatIdPromotion(categoryPromotion);				
 		try{
 		if (!promotions.isEmpty()) {			
 			DataResultlist<PromotionDto> resp=new DataResultlist<PromotionDto>(true, " available promotions are ... ", HttpStatus.OK.value(), promotions);
@@ -621,7 +646,7 @@ public class DODController {
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/createpromotions", method = RequestMethod.POST)
+	@RequestMapping(value = AppConstants.CREATE_PROMOTIONS, method = RequestMethod.POST)
 	public ResponseEntity createPromotions(@RequestBody CreatePromotionVo createPromotionVo) {		
 		final String METHOD_NAME="createPromotions";
 		ResponseEntity responseEntity = null;		
@@ -632,16 +657,16 @@ public class DODController {
 		if (merchantId!=null && categoryid!=null && brandid!=null ) {			
 			Promotion resp = promotionService.CreatePromotions(createPromotionVo);			
 			if (resp!=null) {
-				DataResult result=new DataResult(true, " Promotion Posted successfully ... ", HttpStatus.OK.value());	
+				DataResult result=new DataResult(true, AppConstants.PROMOTIONS_SUCCESS_MSG, HttpStatus.OK.value());	
 				return new ResponseEntity(result, HttpStatus.OK);
 			}else
 			{
-			DataResult result=new DataResult(false, "Sorry , Please check categoryId/brandId/merchantId ...   ", HttpStatus.BAD_REQUEST.value());
+			DataResult result=new DataResult(false, AppConstants.PROMOTIONS_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
 			}				
 		}else
 			{
-			DataResult result=new DataResult(false, "Sorry , Please check categoryId/brandId/merchantId ...   ", HttpStatus.BAD_REQUEST.value());
+			DataResult result=new DataResult(false, AppConstants.PROMOTIONS_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
 			}
 		}catch(Exception exception){
@@ -662,7 +687,7 @@ public class DODController {
 		List<Promotion> promotions = promotionService.getCategoryPromotions(date, categorySelection);
 		try{
 		if (!promotions.isEmpty()) {
-			DataResultlist<Promotion> data=new DataResultlist<Promotion>(true, " Promotions are ,",HttpStatus.OK.value() , promotions);
+			DataResultlist<Promotion> data=new DataResultlist<Promotion>(true, " available Promotions are ,",HttpStatus.OK.value() , promotions);
 			return new ResponseEntity(data, HttpStatus.OK);			
 		}else{			
 			DataResult result=new DataResult(false, " Sorry , No Promotions are available on selected category right now ", HttpStatus.BAD_REQUEST.value());

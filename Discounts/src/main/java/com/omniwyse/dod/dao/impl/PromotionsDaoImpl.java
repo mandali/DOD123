@@ -69,6 +69,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		promotion.setCreateddate(createPromotionVo.getCreateddate());
 		promotion.setStartdate(createPromotionVo.getStartdate());
 		promotion.setEnddate(createPromotionVo.getEnddate());
+		promotion.setDiscountText(createPromotionVo.getDiscountText());
 		Integer id = (Integer) session.save(promotion);
 		Promotion resp=(Promotion) session.get(Promotion.class, id);		
 		return resp;
@@ -145,8 +146,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 	public List<PromotionDto> brandIdPromotion(CategoryPromotion categoryPromotion) {	
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
 		Session session = this.sessionFactory.openSession();			
-		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:id").setParameter("id" , categoryPromotion.getBrandId()).list();
-		
+		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:id").setParameter("id" , categoryPromotion.getBrandId()).list();		
 		for(Promotion promotion:promotions){
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());
@@ -169,6 +169,38 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDtos.add(promotionDto);	
 		}		
 		return promotionDtos;	
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion) {
+		
+		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
+		Session session = this.sessionFactory.openSession();			
+		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:id and p.catid.categoryId=:id")
+				.setParameter("id" , categoryPromotion.getBrandId()).setParameter("id",categoryPromotion.getCategoryId()).list();		
+		for(Promotion promotion:promotions){
+			PromotionDto promotionDto=new PromotionDto();
+			promotionDto.setId(promotion.getId());
+			promotionDto.setProduct_id(promotion.getProduct_id());
+			promotionDto.setDescription(promotion.getDescription());
+			promotionDto.setProduct_image(promotion.getProduct_image());
+			promotionDto.setOriginalPrice(promotion.getOriginalPrice());
+			promotionDto.setDiscount(promotion.getDiscount());
+			promotionDto.setStartdate(promotion.getStartdate());
+			promotionDto.setCreateddate(promotion.getCreateddate());
+			promotionDto.setEnddate(promotion.getEnddate());
+			promotionDto.setLocation(promotion.getLocation());
+			promotionDto.setMerchatId(promotion.getMerchatid());
+			promotionDto.setBrandName(promotion.getBrandId().getBrandName());
+			promotionDto.setBrandImage(promotion.getBrandId().getBrandImage());
+			promotionDto.setBrandRating(promotion.getBrandId().getBrandRating());
+			promotionDto.setBrandDescription(promotion.getBrandId().getBrandDescription());
+			promotionDto.setCategoryName(promotion.getCatid().getCategoryName());
+			promotionDto.setCatid(promotion.getCatid().getCategoryId());
+			promotionDto.setBrandId(promotion.getBrandId().getBrandid());
+			promotionDtos.add(promotionDto);	
+		}		
+		return promotionDtos;
 	}
 
 }

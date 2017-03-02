@@ -23,8 +23,18 @@ public class CreatePromotionVo implements Serializable{
 	private Date enddate;
 	private Long catid;
 	private Long brandId;
+	private String discountText;
 	
 	
+	
+	
+	
+	public String getDiscountText() {
+		return discountText;
+	}
+	public void setDiscountText(String discountText) {
+		this.discountText = discountText;
+	}
 	public Integer getId() {
 		return id;
 	}

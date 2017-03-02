@@ -26,9 +26,11 @@ public interface PromotionService {
 	
 	public List<Promotionsummary> promotionSummary( String date ); 
 	
-	public List<PromotionDto> CategoryIdPromotions(CategoryPromotion categoryPromotion);
+	public List<PromotionDto> CategoryIdPromotions(CategoryPromotion categoryPromotion); 
 	
 	public List<PromotionDto> brandIdPromotions(CategoryPromotion categoryPromotion);
+	
+	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion);
 	
 	
 

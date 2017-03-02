@@ -21,6 +21,12 @@ public class AppConstants {
 	public static final String LIST_MERCHANT_PRODUCTS_SUCCESS_MSG=" available Products are";
 	public static final String LIST_MERCHANT_PRODUCTS_ERROR_MSG="Sorry , No Products are available right now ";
 	public static final String LIST_MERCHANT_PRODUCTS="/merchantproducts";
-	
+	public static final String LIST_BRANDID_CATEGORYID="/brandcatidpromotion"; 
+	public static final String CREATE_PROMOTIONS="/createpromotions";
+	public static final String PROMOTIONS_SUCCESS_MSG=" Promotion Posted successfully ... ";
+	public static final String PROMOTIONS_ERROR_MSG="Sorry , Please check categoryId/brandId/merchantId ...  "; 
+	public static final String BRANDID_PROMOTIONS="/promotion/brandId"; 
+	public static final String AVAILABE_PROMOTIONS_SUCCESS_MSG=" available promotions are ... ";
+	public static final String AVAILABE_PROMOTIONS_ERROR_MSG="Sorry , No Promotions are available right now ";
 
 }

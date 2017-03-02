@@ -88,4 +88,9 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotionsDao.brandIdPromotion(categoryPromotion);
 	}
 
+	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion) {
+		
+		return promotionsDao.brandCatIdPromotion(categoryPromotion);
+	}
+
 }
