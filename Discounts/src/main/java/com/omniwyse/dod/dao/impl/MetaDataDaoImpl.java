@@ -193,8 +193,8 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		try{
 		merchantProfileId=(MerchantProfile) session.get(MerchantProfile.class, Integer.valueOf(merchantPromotionBeaconVO.getMerchantId()));
 		promotionId=(Promotion)session.get(Promotion.class,Integer.valueOf(merchantPromotionBeaconVO.getPromotionId()));
-		beaconId=(Beacon)session.get(Beacon.class, Integer.valueOf(merchantPromotionBeaconVO.getBeaconId()));
-		merchantAisle=(MerchantAisle)session.get(MerchantAisle.class,Integer.valueOf(merchantPromotionBeaconVO.getAisleId()));
+		beaconId=(Beacon)session.get(Beacon.class, Long.valueOf(merchantPromotionBeaconVO.getBeaconId()));
+		merchantAisle=(MerchantAisle)session.get(MerchantAisle.class,Long.valueOf(merchantPromotionBeaconVO.getAisleId()));
 		if(merchantProfileId==null || promotionId==null || beaconId==null || merchantAisle==null){
 			flag=true;
 		}
