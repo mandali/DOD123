@@ -24,6 +24,7 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.LocationsVO;
+import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
 import com.omniwyse.dod.DTO.MercnantDTO;
 import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
@@ -34,6 +35,7 @@ import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
+import com.omniwyse.dod.dao.MerchantPromotionBeaconDao;
 import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
@@ -63,6 +65,7 @@ import com.omniwyse.dod.model.Promotionsummary;
 import com.omniwyse.dod.model.RegisterWithOtp;
 import com.omniwyse.dod.service.ConsumerService;
 import com.omniwyse.dod.service.LocationService;
+import com.omniwyse.dod.service.MerchantPromotionBeaconService;
 import com.omniwyse.dod.service.MerchantService;
 import com.omniwyse.dod.service.MetaDataService;
 import com.omniwyse.dod.service.PromotionService;
@@ -94,6 +97,9 @@ public class DODController {
 	PromotionsDao promotionsDao;
 	@Autowired
 	ProductDao productDao;
+	
+	@Autowired
+	MerchantPromotionBeaconService merchantPromotionBeaconService;
 	
 	
 	
@@ -1017,9 +1023,60 @@ public class DODController {
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}		
-		return responseEntity;
+		return responseEntity; 
 		
 	}
+	
+	
+	
+/*===========================================================================================================*/	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked", "null" })
+	@RequestMapping(value = AppConstants.LIST_BEACONS , method = RequestMethod.GET)
+	public ResponseEntity getbeacons() {
+		final String METHOD_NAME="createLocation";
+		ResponseEntity responseEntity = null;
+		
+		List<Object[]> resp=merchantPromotionBeaconService.getbeacons();
+		MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo = null;		
+		
+		try{			
+			
+			
+			if (!resp.isEmpty()){				
+				for(Object[] response:resp){
+					System.out.println(""+response[0]);
+					System.out.println(""+response[1]);
+					System.out.println(""+response[2]);
+					System.out.println(""+response[3]);
+					merchantPromotionBeaconSearchVo=new MerchantPromotionBeaconSearchVo();
+					merchantPromotionBeaconSearchVo.setMerchantId((Integer)response[0]);
+					merchantPromotionBeaconSearchVo.setAisleId((Long)response[1]);
+					merchantPromotionBeaconSearchVo.setBeaconId((Long)response[2]);
+					merchantPromotionBeaconSearchVo.setPromotionId((Long)response[3]);
+					
+					
+				}				
+				return new ResponseEntity(null, HttpStatus.OK);	
+				
+			}		
+			/*else
+			{
+			DataResult result=new DataResult(false, "Sorry , sorry No data found ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+			}	*/	
+			
+			return new ResponseEntity(null, HttpStatus.OK);
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}		
+		return responseEntity; 
+		
+	}
+	
+	
+	
 	
 	
 }

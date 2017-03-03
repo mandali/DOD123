@@ -31,7 +31,8 @@ public class AppConstants {
 	public static final String CREATE_PRODUCTS_SUCCESS_MSG="Product Created";
 	public static final String CREATE_PRODUCTS_ERROR_MSG="Product Cannot be Created ";
 	public static final String CREATE_PRODUCTS="/createproduct";
-	public static final String CREATE_LOCATION="/createlocation";
+	public static final String CREATE_LOCATION="/createlocation";	
+	public static final String LIST_BEACONS="/listbeacons";
 	
 
 
