@@ -49,6 +49,9 @@ public interface APIInterface {
     @POST("OTPvalidate")
     Call<OTPResponse> OTPValidate(@Body Otpbodyrequest body);
 
+    @GET("brands")
+    Call<GetBrandsresponse> getBrands();
+
 
 
 }
