@@ -176,8 +176,8 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
 		Session session = this.sessionFactory.openSession();			
-		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:id and p.catid.categoryId=:id")
-				.setParameter("id" , categoryPromotion.getBrandId()).setParameter("id",categoryPromotion.getCategoryId()).list();		
+		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:brandId and p.catid.categoryId=:categoryId")
+				.setParameter("brandId" , categoryPromotion.getBrandId()).setParameter("categoryId",categoryPromotion.getCategoryId()).list();		
 		for(Promotion promotion:promotions){
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());

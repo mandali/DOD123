@@ -267,9 +267,11 @@ A_NAME varchar(255),
 A_X int,
 A_Y int,
 A_FLOOR int,
+LO_ID int,
 PRIMARY KEY (A_ID),
 FOREIGN KEY (M_ID) REFERENCES merchant_profile(ID),
-UNIQUE (A_ID,M_ID));
+FOREIGN KEY(LO_ID) REFERENCES location(LO_ID),
+UNIQUE (A_ID,M_ID,LO_ID));
 
 
 create table merchant_pm_bc(

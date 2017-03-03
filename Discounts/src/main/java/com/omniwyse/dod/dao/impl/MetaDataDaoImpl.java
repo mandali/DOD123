@@ -20,12 +20,16 @@ import org.springframework.stereotype.Repository;
 import com.omniwyse.dod.DTO.BrandComparator;
 import com.omniwyse.dod.DTO.BrandVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
+import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.MerchantProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MetaDataDao;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
+import com.omniwyse.dod.model.Cities;
+import com.omniwyse.dod.model.Country;
+import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Product;
 
@@ -59,7 +63,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		try {
 
 			session = this.sessionFactory.openSession();
-			Query query = (Query) session.createQuery("from Category c join c.brands b order by c.categoryId");
+			Query query = (Query) session.createQuery(" from Category c join c.brands b order by c.categoryId");
 			objects = query.list();
 			Iterator iterator = objects.iterator();
 			while (iterator.hasNext()) {
@@ -134,29 +138,41 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			MerchantProfile merchantProfile = (MerchantProfile) iterator.next();
 			Set<Product> products = merchantProfile.getProducts();
 			productVOData=new ProductVO();
-			productVOData.setMerchantId(String.valueOf(merchantProfile.getId()));
-			
-			
+			productVOData.setMerchantId(String.valueOf(merchantProfile.getId()));			
 			for(Product product:products){
 		        merchantProduct=new MerchantProductVO();
 				merchantProduct.setProductId(String.valueOf(product.getProductId()));
 				merchantProduct.setProductDescription(product.getProductDescription());
 				merchantProduct.setProductImage(product.getProductImageLocation());
 				merchantProduct.setCreatedDate(product.getProductCreatedDate().toString());
-				productVOData.getMerchantProducts().add(merchantProduct);
-			
+				productVOData.getMerchantProducts().add(merchantProduct);			
 			}
 			
-			productVOs.add(productVOData);
-			
+			productVOs.add(productVOData);		
 			
 		}
-		}
+	}
 		catch(Exception exception){
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		
 		return productVOs;
+	}
+
+	public Location createLocation(LocationVO locationVo) {
+		Session session = this.sessionFactory.openSession();
+		Location location=new Location();
+		location.setLocationName(locationVo.getLocationName());
+		location.setLocationLatitude(locationVo.getLocationLatitude());
+		location.setLocationLongitude(locationVo.getLocationLongitude());
+		location.setCreated(locationVo.getCreated());
+		Country country=(Country) session.get(Country.class, locationVo.getCountryId());
+		location.setCountryId(country);
+		Cities cities=(Cities)session.get(Cities.class, locationVo.getCityId());
+		location.setCitiesId(cities);
+		Long id = (Long) session.save(location);
+		Location resp=(Location) session.get(Location.class, id);		
+		return resp;		
 	}
 
 }

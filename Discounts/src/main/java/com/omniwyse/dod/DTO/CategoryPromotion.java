@@ -7,6 +7,7 @@ public class CategoryPromotion implements Serializable {
 
 	private Long categoryId;
 	private Long brandId;
+	
 	public Long getCategoryId() {
 		return categoryId;
 	}
@@ -19,11 +20,5 @@ public class CategoryPromotion implements Serializable {
 	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
-	
-	
-	
-	
-	
-	
 	
 }

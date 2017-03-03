@@ -55,7 +55,6 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return resp;
 	}
-
 	@SuppressWarnings("unchecked")
 	public List<Product> validateProductname(NewProductVO productVO) {
 		List<Product> resp=null;
