@@ -7,8 +7,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -36,6 +38,7 @@ import com.omniwyse.dod.model.Country;
 import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantAisle;
 import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 
@@ -183,28 +186,31 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		return resp;		
 	}
 
-	public boolean validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
+	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
 		MerchantProfile merchantProfileId;
 		Promotion promotionId;
 		Beacon beaconId;
 		MerchantAisle merchantAisle;
-		boolean flag=false;
+		List<Object> mpbObjects=new LinkedList();
 		final String METHOD_NAME="validateMPBCreation";
 		try{
 		merchantProfileId=(MerchantProfile) session.get(MerchantProfile.class, Integer.valueOf(merchantPromotionBeaconVO.getMerchantId()));
 		promotionId=(Promotion)session.get(Promotion.class,Integer.valueOf(merchantPromotionBeaconVO.getPromotionId()));
 		beaconId=(Beacon)session.get(Beacon.class, Long.valueOf(merchantPromotionBeaconVO.getBeaconId()));
 		merchantAisle=(MerchantAisle)session.get(MerchantAisle.class,Long.valueOf(merchantPromotionBeaconVO.getAisleId()));
-		if(merchantProfileId==null || promotionId==null || beaconId==null || merchantAisle==null){
-			flag=true;
+		if(merchantProfileId!=null && promotionId!=null && beaconId!=null && merchantAisle!=null){
+			mpbObjects.add(merchantProfileId);
+			mpbObjects.add(promotionId);
+			mpbObjects.add(beaconId);
+			mpbObjects.add(merchantAisle);
 		}
 		}
 		catch(Exception exception){
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
-		return flag;
+		return mpbObjects;
 	}
 
 	public List<Object> fetchMPBObjects(MerchantPromotionBeaconSearchVo merchantPromotionBeaconVO) {
@@ -244,6 +250,35 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return mpbObjects;
+	}
+
+	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO) {
+		// TODO Auto-generated method stub
+		MerchantPromotionBeacon beacon;
+		MerchantProfile merchantProfile;
+		Promotion promotionId;
+		Beacon beaconId;
+		MerchantAisle merchantAisle;
+		MerchantPromotionBeacon resp = null;
+		final String METHOD_NAME="createMerchantPromotionBeacon";
+		try{
+		Session session = this.sessionFactory.openSession();
+		beacon=new MerchantPromotionBeacon();
+		merchantProfile=(com.omniwyse.dod.model.MerchantProfile) merchantPromotionBeaconVO.get(0);
+		promotionId=(Promotion) merchantPromotionBeaconVO.get(1);
+		beaconId=(Beacon) merchantPromotionBeaconVO.get(2);
+		merchantAisle=(MerchantAisle) merchantPromotionBeaconVO.get(3);
+		beacon.setBeacon(beaconId);
+		beacon.setMerchantAisle(merchantAisle);
+		beacon.setMerchantProfile(merchantProfile);
+		beacon.setPromotion(promotionId);
+		Long id = (Long) session.save(beacon);
+		resp=(MerchantPromotionBeacon) session.get(MerchantPromotionBeacon.class, id);	
+		}
+		catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		return resp;
 	}
 
 }

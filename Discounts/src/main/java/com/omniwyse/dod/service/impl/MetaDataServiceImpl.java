@@ -16,6 +16,7 @@ import com.omniwyse.dod.dao.MetaDataDao;
 import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.service.MetaDataService;
 
@@ -50,9 +51,14 @@ public class MetaDataServiceImpl implements MetaDataService {
 		return metaDataDao.createLocation(locationVO);
 	}
 
-	public boolean validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
+	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
 		return metaDataDao.validateMPBCreation(merchantPromotionBeaconVO);
+	}
+
+	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO) {
+		// TODO Auto-generated method stub
+		return metaDataDao.createMerchantPromotionBeacon(merchantPromotionBeaconVO);
 	}
 
 }

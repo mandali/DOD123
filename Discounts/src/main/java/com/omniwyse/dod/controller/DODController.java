@@ -60,6 +60,7 @@ import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.OTPValidation;
 import com.omniwyse.dod.model.Product;
@@ -1037,19 +1038,32 @@ public class DODController {
 	@RequestMapping(value = AppConstants.CREATE_MERCHANT_PROMOTION_BEACON, method = RequestMethod.POST)
 	public ResponseEntity createMerchantPromotionBeacon(@RequestBody MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
 	final String METHOD_NAME="createMerchantPromotionBeacon";
-	ResponseEntity responseEntity = null;
+	ResponseEntity responseEntity=null;
+	DataResult resultError;
 	
 	try{
 		
-		System.out.println("getAisleId: "+merchantPromotionBeaconVO.getAisleId());
-		System.out.println("getBeaconId: "+merchantPromotionBeaconVO.getBeaconId());
-		System.out.println("getMerchantId: "+merchantPromotionBeaconVO.getMerchantId());
-		System.out.println("getPromotionId: "+merchantPromotionBeaconVO.getPromotionId());
-		boolean flag=metaDataService.validateMPBCreation(merchantPromotionBeaconVO);
-		System.out.println("flag::::::::::::::"+flag);
+		List dependentObjects=metaDataService.validateMPBCreation(merchantPromotionBeaconVO);
+		if(!dependentObjects.isEmpty() && dependentObjects.size()==4){
+			MerchantPromotionBeacon  merchantPromotionBeacon=metaDataService.createMerchantPromotionBeacon(dependentObjects);
+			if (merchantPromotionBeacon!=null) {
+				DataResultEntity<MerchantPromotionBeacon> result=new DataResultEntity<MerchantPromotionBeacon>(true, " Merchant Promotion Beacon Created successfully ... ", HttpStatus.OK.value(),merchantPromotionBeacon);	
+				return new ResponseEntity(result, HttpStatus.OK);
+			}else
+			{
+			DataResult result=new DataResult(false, "Sorry , Please check merchantId/promotionId/beaconId/aisleId    ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+			}				
+		}			
+		else
+		{
+			resultError=new DataResult(false, "Sorry , Please check merchantId/promotionId/beaconId/aisleId    ", HttpStatus.BAD_REQUEST.value());
+		return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+		}			
+		
 	}
 	catch(Exception exception){
-		System.out.println("Exception: "+exception.getMessage());
+		logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 	}
 	
 	

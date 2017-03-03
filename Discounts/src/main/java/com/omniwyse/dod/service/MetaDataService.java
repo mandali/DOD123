@@ -9,6 +9,7 @@ import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
 
 public interface MetaDataService {
@@ -23,7 +24,9 @@ public interface MetaDataService {
 	
 	public Location createLocation(LocationVO locationVO);
 	
-	public boolean validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO);
+	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO);
+	
+	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO);
 	
 
 }

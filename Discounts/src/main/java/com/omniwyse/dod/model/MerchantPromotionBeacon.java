@@ -24,7 +24,7 @@ public class MerchantPromotionBeacon implements java.io.Serializable
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long mpbId;
 	@OneToOne
-	@JoinColumn(name="B_ID")
+	@JoinColumn(name="BC_ID",referencedColumnName="B_ID")
 	private Beacon beacon;
 	@OneToOne
 	@JoinColumn(name="M_ID", referencedColumnName="ID")
@@ -39,6 +39,16 @@ public class MerchantPromotionBeacon implements java.io.Serializable
 	
 	public MerchantPromotionBeacon(){
 		
+	}
+
+
+	public MerchantPromotionBeacon(Long mpbId, Beacon beacon, MerchantProfile merchantProfile, Promotion promotion,
+			MerchantAisle merchantAisle) {
+		this.mpbId = mpbId;
+		this.beacon = beacon;
+		this.merchantProfile = merchantProfile;
+		this.promotion = promotion;
+		this.merchantAisle = merchantAisle;
 	}
 
 
