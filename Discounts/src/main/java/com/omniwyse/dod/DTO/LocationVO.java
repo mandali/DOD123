@@ -8,23 +8,16 @@ public class LocationVO implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	
-	
+	private static final long serialVersionUID = 1L;	
 	private Long locationId;
 	private String locationName;
 	private String locationLongitude;
 	private String locationLatitude;
 	private Long countryId;
 	private Long cityId;
-	private Timestamp created;
-	
-	public LocationVO(){
-		
+	private Timestamp created;	
+	public LocationVO(){		
 	}	
-	
-	
 	public String getLocationName() {
 		return locationName;
 	}
