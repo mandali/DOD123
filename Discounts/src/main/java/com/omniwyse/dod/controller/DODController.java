@@ -1091,6 +1091,7 @@ public class DODController {
 					merchantPromotionBeaconSearchVo.setBeaconId(String.valueOf(response[2]));
 					merchantPromotionBeaconSearchVo.setPromotionId((Integer)response[3]);
 					List<Object> dependentObjects=metaDataDao.fetchMPBObjects(merchantPromotionBeaconSearchVo);
+					if(dependentObjects.size()>=0){
 					merchantProfileId=(MerchantProfile) dependentObjects.get(0);
 					merchantPromotionBeaconSearchVo.setMerchantemailid(merchantProfileId.getEmailid());
 					merchantPromotionBeaconSearchVo.setMerchantfirstname(merchantProfileId.getFirstname());
@@ -1109,6 +1110,8 @@ public class DODController {
 					merchantPromotionBeaconSearchVo.setBusinessoffaddr(merchantProfileId.getBusinessoffaddr());
 					merchantPromotionBeaconSearchVo.setDescription(merchantProfileId.getDescription());
 					merchantPromotionBeaconSearchVo.setCreated(merchantProfileId.getCreateddate());
+					}
+					if(dependentObjects.size()>=1){
 					promotionId=(Promotion) dependentObjects.get(1);
 					merchantPromotionBeaconSearchVo.setPromotionId(promotionId.getId());
 					merchantPromotionBeaconSearchVo.setStartdate(promotionId.getStartdate());
@@ -1129,21 +1132,30 @@ public class DODController {
 					merchantPromotionBeaconSearchVo.setBrandDescription(promotionId.getBrandId().getBrandDescription());
 					merchantPromotionBeaconSearchVo.setCatid(promotionId.getCatid().getCategoryId());
 					merchantPromotionBeaconSearchVo.setCategoryName(promotionId.getCatid().getCategoryName());
+					}
+					if(dependentObjects.size()>=5){
 					cities=(Cities) dependentObjects.get(5);
 					merchantPromotionBeaconSearchVo.setCity(cities.getCityName());
 					merchantPromotionBeaconSearchVo.setCityId(String.valueOf(cities.getCityId()));
+					}
+					if(dependentObjects.size()>=4){
 					country=(Country) dependentObjects.get(4);
 					merchantPromotionBeaconSearchVo.setCountry(country.getName());
 					merchantPromotionBeaconSearchVo.setCountryId(String.valueOf(country.getId()));
+					}
+					if(dependentObjects.size()>=2){
 					beaconId=(Beacon) dependentObjects.get(2);
 					merchantPromotionBeaconSearchVo.setBeaconName(String.valueOf(beaconId.getBeaconName()));
 					merchantPromotionBeaconSearchVo.setBeaconStatus(beaconId.getBeaconStatus());
+					}
+					if(dependentObjects.size()>=3){
 					merchantAisle=(MerchantAisle) dependentObjects.get(3);
 					merchantPromotionBeaconSearchVo.setAisleId(String.valueOf(merchantAisle.getAisleId()));
 					merchantPromotionBeaconSearchVo.setAisleName(merchantAisle.getAisleName());
 					merchantPromotionBeaconSearchVo.setxAxis(String.valueOf(merchantAisle.getxAxis()));
 					merchantPromotionBeaconSearchVo.setyAxis(String.valueOf(merchantAisle.getyAxis()));
 					merchantPromotionBeaconSearchVo.setFloor(String.valueOf(merchantAisle.getFloor()));
+					}
 					beaconSearchVos.add(merchantPromotionBeaconSearchVo);
 					
 				}
