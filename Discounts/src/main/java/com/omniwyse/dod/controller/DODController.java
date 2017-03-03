@@ -397,7 +397,7 @@ public class DODController {
 				promotionDto.setId(response.getId());
 				for(Promotion promotion:data){
 					promotionDto.setProduct_id(promotion.getProduct_id());					
-					promotionDto.setProduct_id(promotion.getProduct_id());
+					promotionDto.setId(response.getId());
 					promotionDto.setProduct_image(promotion.getProduct_image());
 					promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 					promotionDto.setDiscount(promotion.getDiscount());
@@ -405,6 +405,13 @@ public class DODController {
 					promotionDto.setEnddate(promotion.getEnddate());
 					promotionDto.setLocation(promotion.getLocation());
 					promotionDto.setMerchatId(promotion.getMerchatid());
+					promotionDto.setDiscountText(promotion.getDiscountText());
+					promotionDto.setCatid(promotion.getCatid().getCategoryId());
+					promotionDto.setCategoryName(response.getCatid().getCategoryName());
+					promotionDto.setBrandId(response.getBrandId().getBrandid());
+					promotionDto.setBrandName(response.getBrandId().getBrandName());
+					promotionDto.setBrandImage(response.getBrandId().getBrandImage());
+					promotionDto.setBrandRating(response.getBrandId().getBrandRating());
 				}
 				promotionDto.setDescription(response.getDescription());
 				promotionDto.setCreateddate(response.getCreateddate());
@@ -1076,12 +1083,11 @@ public class DODController {
 	
 /*===========================================================================================================*/	
 	
-	@SuppressWarnings({ "rawtypes", "unchecked", "null" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_MERCHANT_PROMOTION_BEACONS , method = RequestMethod.GET)
 	public ResponseEntity getbeacons() {
 		final String METHOD_NAME="createLocation";
-		ResponseEntity responseEntity = null;
-		
+		ResponseEntity responseEntity = null;		
 		List<Object[]> resp=merchantPromotionBeaconService.getbeacons();
 		MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo = null;		
 		MerchantProfile merchantProfileId;
@@ -1094,18 +1100,15 @@ public class DODController {
 		DataResultlist<MerchantPromotionBeaconSearchVo> result;
 		DataResult resultError;
 		try{			
-			
-			
 			if (!resp.isEmpty()){				
-				for(Object[] response:resp){
-					
+				for(Object[] response:resp){					
 					merchantPromotionBeaconSearchVo=new MerchantPromotionBeaconSearchVo();
 					merchantPromotionBeaconSearchVo.setMerchantId((Integer)response[0]);
 					merchantPromotionBeaconSearchVo.setAisleId(String.valueOf(response[1]));
 					merchantPromotionBeaconSearchVo.setBeaconId(String.valueOf(response[2]));
 					merchantPromotionBeaconSearchVo.setPromotionId((Integer)response[3]);
 					List<Object> dependentObjects=metaDataDao.fetchMPBObjects(merchantPromotionBeaconSearchVo);
-					if(dependentObjects.size()>=0){
+					if(dependentObjects.size()>0){
 					merchantProfileId=(MerchantProfile) dependentObjects.get(0);
 					merchantPromotionBeaconSearchVo.setMerchantemailid(merchantProfileId.getEmailid());
 					merchantPromotionBeaconSearchVo.setMerchantfirstname(merchantProfileId.getFirstname());
@@ -1178,7 +1181,7 @@ public class DODController {
 			}		
 			else
 			{
-			resultError=new DataResult(false, "Sorry , sorry No data found ... ", HttpStatus.BAD_REQUEST.value());
+			resultError=new DataResult(false, "Sorry , No data found ... ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
 			}
 			
