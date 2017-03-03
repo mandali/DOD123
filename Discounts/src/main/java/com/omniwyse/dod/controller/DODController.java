@@ -1063,7 +1063,7 @@ public class DODController {
 /*===========================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked", "null" })
-	@RequestMapping(value = AppConstants.LIST_BEACONS , method = RequestMethod.GET)
+	@RequestMapping(value = AppConstants.LIST_MERCHANT_PROMOTION_BEACONS , method = RequestMethod.GET)
 	public ResponseEntity getbeacons() {
 		final String METHOD_NAME="createLocation";
 		ResponseEntity responseEntity = null;

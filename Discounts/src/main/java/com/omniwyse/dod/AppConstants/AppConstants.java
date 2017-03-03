@@ -33,7 +33,7 @@ public class AppConstants {
 	public static final String CREATE_PRODUCTS="/createproduct";
 
 	public static final String CREATE_LOCATION="/createlocation";	
-	public static final String LIST_BEACONS="/listbeacons";
+	public static final String LIST_MERCHANT_PROMOTION_BEACONS="/listmerchantpromotionbeacons";
 
 	//public static final String CREATE_LOCATION="/createlocation";
 	public static final String CREATE_MERCHANT_PROMOTION_BEACON_SUCCESS_MSG="Merchant Promotion Beacon Created";
