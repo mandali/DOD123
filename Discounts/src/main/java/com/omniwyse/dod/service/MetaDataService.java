@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.DTO.LocationVO;
+import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.model.Category;
@@ -21,6 +22,8 @@ public interface MetaDataService {
 	public Product createProduct(NewProductVO newProductVO) ; 
 	
 	public Location createLocation(LocationVO locationVO);
+	
+	public boolean validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO);
 	
 
 }

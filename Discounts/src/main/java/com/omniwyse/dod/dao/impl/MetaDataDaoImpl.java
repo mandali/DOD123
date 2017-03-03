@@ -22,21 +22,27 @@ import com.omniwyse.dod.DTO.BrandVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.MerchantProductVO;
+import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MetaDataDao;
+import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Cities;
 import com.omniwyse.dod.model.Country;
 import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.MerchantAisle;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Product;
+import com.omniwyse.dod.model.Promotion;
 
 @Repository
 public class MetaDataDaoImpl implements MetaDataDao {
 
 	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
+
+	private static final String MerchantProfile = null;
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -173,6 +179,30 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		Long id = (Long) session.save(location);
 		Location resp=(Location) session.get(Location.class, id);		
 		return resp;		
+	}
+
+	public boolean validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.openSession();
+		MerchantProfile merchantProfileId;
+		Promotion promotionId;
+		Beacon beaconId;
+		MerchantAisle merchantAisle;
+		boolean flag=false;
+		final String METHOD_NAME="validateMPBCreation";
+		try{
+		merchantProfileId=(MerchantProfile) session.get(MerchantProfile.class, Integer.valueOf(merchantPromotionBeaconVO.getMerchantId()));
+		promotionId=(Promotion)session.get(Promotion.class,Integer.valueOf(merchantPromotionBeaconVO.getPromotionId()));
+		beaconId=(Beacon)session.get(Beacon.class, Integer.valueOf(merchantPromotionBeaconVO.getBeaconId()));
+		merchantAisle=(MerchantAisle)session.get(MerchantAisle.class,Integer.valueOf(merchantPromotionBeaconVO.getAisleId()));
+		if(merchantProfileId==null || promotionId==null || beaconId==null || merchantAisle==null){
+			flag=true;
+		}
+		}
+		catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		return flag;
 	}
 
 }
