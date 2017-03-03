@@ -87,11 +87,10 @@ public class MerchantDaoImpl implements MerchantDao{
 	}
 	public List<MerchantProfile> AllMerchants() {
 		Session session = this.sessionFactory.openSession();			
-		List<MerchantProfile> list = session.createQuery(" from MerchantProfile").list();					
+		List<MerchantProfile> list = session.createQuery(" from MerchantProfile ").list();					
 		return list;
 	}
-	public List<Promotion> MerchantPromotions(MerchantPromotions MerchantPromotions, Date date) {
-		
+	public List<Promotion> MerchantPromotions(MerchantPromotions MerchantPromotions, Date date) {		
 		Session session = this.sessionFactory.openSession();
 		@SuppressWarnings("unchecked")
 		List<Promotion> list = session.createQuery(" from Promotion where merchatid=:id")
