@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.DTO.LocationVO;
+import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.model.Category;
@@ -20,6 +21,8 @@ public interface MetaDataDao {
 	public Location createLocation(LocationVO locationVo) ;
 		
 	public boolean validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO);
+	
+	public List<Object> fetchMPBObjects(MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo);
 	
 	
 }

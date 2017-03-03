@@ -24,7 +24,6 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.LocationsVO;
-
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
@@ -37,9 +36,11 @@ import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
+import com.omniwyse.dod.dao.MetaDataDao;
 import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
+import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
@@ -54,6 +55,7 @@ import com.omniwyse.dod.model.GetMerchantById;
 import com.omniwyse.dod.model.GetMerchatProfile;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.MerchantAisle;
 import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
@@ -98,9 +100,10 @@ public class DODController {
 	PromotionsDao promotionsDao;
 	@Autowired
 	ProductDao productDao;
-	
 	@Autowired
 	MerchantPromotionBeaconService merchantPromotionBeaconService;
+	@Autowired
+	MetaDataDao metaDataDao;
 	
 	
 	
@@ -1067,34 +1070,92 @@ public class DODController {
 		
 		List<Object[]> resp=merchantPromotionBeaconService.getbeacons();
 		MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo = null;		
-		
+		MerchantProfile merchantProfileId;
+		Promotion promotionId;
+		Beacon beaconId;
+		MerchantAisle merchantAisle;
+		Cities cities;
+		Country country;
+		List<MerchantPromotionBeaconSearchVo> beaconSearchVos=new ArrayList<MerchantPromotionBeaconSearchVo>();
+		DataResultlist<MerchantPromotionBeaconSearchVo> result;
+		DataResult resultError;
 		try{			
 			
 			
 			if (!resp.isEmpty()){				
 				for(Object[] response:resp){
-					System.out.println(""+response[0]);
-					System.out.println(""+response[1]);
-					System.out.println(""+response[2]);
-					System.out.println(""+response[3]);
+					
 					merchantPromotionBeaconSearchVo=new MerchantPromotionBeaconSearchVo();
 					merchantPromotionBeaconSearchVo.setMerchantId((Integer)response[0]);
-					merchantPromotionBeaconSearchVo.setAisleId((Long)response[1]);
-					merchantPromotionBeaconSearchVo.setBeaconId((Long)response[2]);
-					merchantPromotionBeaconSearchVo.setPromotionId((Long)response[3]);
+					merchantPromotionBeaconSearchVo.setAisleId(String.valueOf(response[1]));
+					merchantPromotionBeaconSearchVo.setBeaconId(String.valueOf(response[2]));
+					merchantPromotionBeaconSearchVo.setPromotionId((Integer)response[3]);
+					List<Object> dependentObjects=metaDataDao.fetchMPBObjects(merchantPromotionBeaconSearchVo);
+					merchantProfileId=(MerchantProfile) dependentObjects.get(0);
+					merchantPromotionBeaconSearchVo.setMerchantemailid(merchantProfileId.getEmailid());
+					merchantPromotionBeaconSearchVo.setMerchantfirstname(merchantProfileId.getFirstname());
+					merchantPromotionBeaconSearchVo.setMerchantId(merchantProfileId.getId());
+					merchantPromotionBeaconSearchVo.setMerchantlastname(merchantProfileId.getLastname());
+					merchantPromotionBeaconSearchVo.setMobilenumber(merchantProfileId.getMobilenumber());
+					merchantPromotionBeaconSearchVo.setStreet(merchantProfileId.getStreet());
+					merchantPromotionBeaconSearchVo.setState(merchantProfileId.getState());
+					merchantPromotionBeaconSearchVo.setCountry(merchantProfileId.getCountry());
+					merchantPromotionBeaconSearchVo.setZipcode(merchantProfileId.getZipcode());
+					merchantPromotionBeaconSearchVo.setNickname(merchantProfileId.getNickname());
+					merchantPromotionBeaconSearchVo.setTown(merchantProfileId.getTown());
+					merchantPromotionBeaconSearchVo.setTags(merchantProfileId.getTags());
+					merchantPromotionBeaconSearchVo.setLandlineno(merchantProfileId.getLandlineno());
+					merchantPromotionBeaconSearchVo.setBusinessname(merchantProfileId.getBusinessname());
+					merchantPromotionBeaconSearchVo.setBusinessoffaddr(merchantProfileId.getBusinessoffaddr());
+					merchantPromotionBeaconSearchVo.setDescription(merchantProfileId.getDescription());
+					merchantPromotionBeaconSearchVo.setCreated(merchantProfileId.getCreateddate());
+					promotionId=(Promotion) dependentObjects.get(1);
+					merchantPromotionBeaconSearchVo.setPromotionId(promotionId.getId());
+					merchantPromotionBeaconSearchVo.setStartdate(promotionId.getStartdate());
+					merchantPromotionBeaconSearchVo.setEnddate(promotionId.getEnddate());
+					merchantPromotionBeaconSearchVo.setCreateddate(promotionId.getCreateddate());
+					merchantPromotionBeaconSearchVo.setOriginalPrice(promotionId.getOriginalPrice());
+					merchantPromotionBeaconSearchVo.setDiscount(promotionId.getDiscount());
+					merchantPromotionBeaconSearchVo.setDiscountText(promotionId.getDiscountText());
+					merchantPromotionBeaconSearchVo.setLocation(promotionId.getLocation());
+					merchantPromotionBeaconSearchVo.setMerchantId(promotionId.getMerchatid());
+					merchantPromotionBeaconSearchVo.setProduct_id(promotionId.getProduct_id());
+					merchantPromotionBeaconSearchVo.setProduct_image(promotionId.getProduct_image());
+					merchantPromotionBeaconSearchVo.setProductname(promotionId.getDescription());
+					merchantPromotionBeaconSearchVo.setBrandId(promotionId.getBrandId().getBrandid());
+					merchantPromotionBeaconSearchVo.setBrandName(promotionId.getBrandId().getBrandName());
+					merchantPromotionBeaconSearchVo.setBrandRating(promotionId.getBrandId().getBrandRating());
+					merchantPromotionBeaconSearchVo.setBrandImage(promotionId.getBrandId().getBrandImage());
+					merchantPromotionBeaconSearchVo.setBrandDescription(promotionId.getBrandId().getBrandDescription());
+					merchantPromotionBeaconSearchVo.setCatid(promotionId.getCatid().getCategoryId());
+					merchantPromotionBeaconSearchVo.setCategoryName(promotionId.getCatid().getCategoryName());
+					cities=(Cities) dependentObjects.get(5);
+					merchantPromotionBeaconSearchVo.setCity(cities.getCityName());
+					merchantPromotionBeaconSearchVo.setCityId(String.valueOf(cities.getCityId()));
+					country=(Country) dependentObjects.get(4);
+					merchantPromotionBeaconSearchVo.setCountry(country.getName());
+					merchantPromotionBeaconSearchVo.setCountryId(String.valueOf(country.getId()));
+					beaconId=(Beacon) dependentObjects.get(2);
+					merchantPromotionBeaconSearchVo.setBeaconName(String.valueOf(beaconId.getBeaconName()));
+					merchantPromotionBeaconSearchVo.setBeaconStatus(beaconId.getBeaconStatus());
+					merchantAisle=(MerchantAisle) dependentObjects.get(3);
+					merchantPromotionBeaconSearchVo.setAisleId(String.valueOf(merchantAisle.getAisleId()));
+					merchantPromotionBeaconSearchVo.setAisleName(merchantAisle.getAisleName());
+					merchantPromotionBeaconSearchVo.setxAxis(String.valueOf(merchantAisle.getxAxis()));
+					merchantPromotionBeaconSearchVo.setyAxis(String.valueOf(merchantAisle.getyAxis()));
+					merchantPromotionBeaconSearchVo.setFloor(String.valueOf(merchantAisle.getFloor()));
+					beaconSearchVos.add(merchantPromotionBeaconSearchVo);
 					
-					
-				}				
-				return new ResponseEntity(null, HttpStatus.OK);	
-				
+				}
+				result=new DataResultlist<MerchantPromotionBeaconSearchVo>(true, AppConstants.LIST_MERCHANT_PRODUCTS_SUCCESS_MSG,HttpStatus.OK.value(), beaconSearchVos);	
+				return new ResponseEntity(result, HttpStatus.OK);
 			}		
-			/*else
+			else
 			{
-			DataResult result=new DataResult(false, "Sorry , sorry No data found ... ", HttpStatus.BAD_REQUEST.value());
-			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-			}	*/	
+			resultError=new DataResult(false, "Sorry , sorry No data found ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+			}
 			
-			return new ResponseEntity(null, HttpStatus.OK);
 		}
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());

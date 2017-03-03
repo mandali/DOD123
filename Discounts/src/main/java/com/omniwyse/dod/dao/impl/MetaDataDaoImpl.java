@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ import com.omniwyse.dod.DTO.BrandVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.MerchantProductVO;
+import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.config.AppConfiguration;
@@ -203,6 +205,45 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return flag;
+	}
+
+	public List<Object> fetchMPBObjects(MerchantPromotionBeaconSearchVo merchantPromotionBeaconVO) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.openSession();
+		MerchantProfile merchantProfileId;
+		Promotion promotionId;
+		Beacon beaconId;
+		MerchantAisle merchantAisle;
+		Location location;
+		Country country = null;
+		Cities cities = null;
+		boolean flag=false;
+		final String METHOD_NAME="fetchMPBObjects";
+		List<Object> mpbObjects=new LinkedList();
+	
+		try{
+			merchantProfileId=(MerchantProfile) session.get(MerchantProfile.class, Integer.valueOf(merchantPromotionBeaconVO.getMerchantId()));
+			promotionId=(Promotion)session.get(Promotion.class,Integer.valueOf(merchantPromotionBeaconVO.getPromotionId()));
+			beaconId=(Beacon)session.get(Beacon.class, Long.valueOf(merchantPromotionBeaconVO.getBeaconId()));
+			merchantAisle=(MerchantAisle)session.get(MerchantAisle.class,Long.valueOf(merchantPromotionBeaconVO.getAisleId()));
+			if(promotionId!=null && promotionId.getLocation()!=null){
+				location=(Location) session.get(Location.class, Long.valueOf(promotionId.getLocation()));
+				if(location!=null && location.getCountryId().getId()!=null && location.getCitiesId().getCityId()!=null){
+					country=(Country) session.get(Country.class, Long.valueOf(location.getCountryId().getId()));
+					cities=(Cities) session.get(Cities.class, Long.valueOf(location.getCitiesId().getCityId()));
+				}
+			}
+			mpbObjects.add(merchantProfileId);
+			mpbObjects.add(promotionId);
+			mpbObjects.add(beaconId);
+			mpbObjects.add(merchantAisle);
+			mpbObjects.add(country);
+			mpbObjects.add(cities);
+		}
+		catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		return mpbObjects;
 	}
 
 }
