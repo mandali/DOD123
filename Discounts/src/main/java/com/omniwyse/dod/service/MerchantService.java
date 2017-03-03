@@ -28,6 +28,6 @@ public interface MerchantService {
 	
 	public List<MerchantProfile> AllMerchants();
 	
-	public List<MerchantProfile> MerchatPromotion(MerchantPromotions MerchantPromotions , Date date);
+	public List<Promotion> MerchatPromotion(MerchantPromotions MerchantPromotions , Date date);
 
 }

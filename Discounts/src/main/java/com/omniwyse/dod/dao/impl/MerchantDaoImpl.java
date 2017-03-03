@@ -18,6 +18,7 @@ import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotions;
+import com.omniwyse.dod.model.Promotion;
 
 @Repository
 public class MerchantDaoImpl implements MerchantDao{
@@ -89,11 +90,11 @@ public class MerchantDaoImpl implements MerchantDao{
 		List<MerchantProfile> list = session.createQuery(" from MerchantProfile").list();					
 		return list;
 	}
-	public List<MerchantProfile> MerchantPromotions(MerchantPromotions MerchantPromotions, Date date) {
+	public List<Promotion> MerchantPromotions(MerchantPromotions MerchantPromotions, Date date) {
 		
 		Session session = this.sessionFactory.openSession();
 		@SuppressWarnings("unchecked")
-		List<MerchantProfile> list = session.createQuery(" from MerchantProfile where id=:id")
+		List<Promotion> list = session.createQuery(" from Promotion where merchatid=:id")
 		.setParameter("id",MerchantPromotions.getId()).list();			
 		return list;
 	}

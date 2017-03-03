@@ -11,6 +11,7 @@ import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotions;
+import com.omniwyse.dod.model.Promotion;
 
 public interface MerchantDao {
 	
@@ -32,7 +33,7 @@ public interface MerchantDao {
 	
 	public MerchantProfile getMerchantbyID(Integer id);
 	
-	public List<MerchantProfile> MerchantPromotions(MerchantPromotions MerchantPromotions , Date date); 
+	public List<Promotion> MerchantPromotions(MerchantPromotions MerchantPromotions , Date date); 
 	
 	
 	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo);

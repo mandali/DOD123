@@ -61,7 +61,7 @@ public class MerchantServiceImpl implements MerchantService{
 		
 		return MerchantDao.getMerchantbyID(id);
 	}
-	public List<MerchantProfile> MerchatPromotion(MerchantPromotions MerchantPromotions, Date date) {
+	public List<Promotion> MerchatPromotion(MerchantPromotions MerchantPromotions, Date date) {
 		
 		 return MerchantDao.MerchantPromotions(MerchantPromotions, date);
 	}
