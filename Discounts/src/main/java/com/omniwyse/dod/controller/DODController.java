@@ -24,7 +24,9 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.LocationsVO;
+
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
+import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
 import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
@@ -35,7 +37,6 @@ import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
-import com.omniwyse.dod.dao.MerchantPromotionBeaconDao;
 import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
@@ -1026,6 +1027,33 @@ public class DODController {
 		return responseEntity; 
 		
 	}
+	
+	/*===========================================================================================================*/
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.CREATE_MERCHANT_PROMOTION_BEACON, method = RequestMethod.POST)
+	public ResponseEntity createMerchantPromotionBeacon(@RequestBody MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
+	final String METHOD_NAME="createMerchantPromotionBeacon";
+	ResponseEntity responseEntity = null;
+	
+	try{
+		
+		System.out.println("getAisleId: "+merchantPromotionBeaconVO.getAisleId());
+		System.out.println("getBeaconId: "+merchantPromotionBeaconVO.getBeaconId());
+		System.out.println("getMerchantId: "+merchantPromotionBeaconVO.getMerchantId());
+		System.out.println("getPromotionId: "+merchantPromotionBeaconVO.getPromotionId());
+		boolean flag=metaDataService.validateMPBCreation(merchantPromotionBeaconVO);
+		System.out.println("flag::::::::::::::"+flag);
+	}
+	catch(Exception exception){
+		System.out.println("Exception: "+exception.getMessage());
+	}
+	
+	
+	
+	return responseEntity;
+
+}
 	
 	
 	

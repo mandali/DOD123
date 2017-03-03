@@ -31,9 +31,14 @@ public class AppConstants {
 	public static final String CREATE_PRODUCTS_SUCCESS_MSG="Product Created";
 	public static final String CREATE_PRODUCTS_ERROR_MSG="Product Cannot be Created ";
 	public static final String CREATE_PRODUCTS="/createproduct";
+
 	public static final String CREATE_LOCATION="/createlocation";	
 	public static final String LIST_BEACONS="/listbeacons";
+
+	//public static final String CREATE_LOCATION="/createlocation";
+	public static final String CREATE_MERCHANT_PROMOTION_BEACON_SUCCESS_MSG="Merchant Promotion Beacon Created";
+	public static final String CREATE_MERCHANT_PROMOTION_BEACON_ERROR_MSG="Merchant Promotion Beacon Cannot be Created";
+	public static final String CREATE_MERCHANT_PROMOTION_BEACON="/createmerchantpromotionbeacon";
+
 	
-
-
 }
