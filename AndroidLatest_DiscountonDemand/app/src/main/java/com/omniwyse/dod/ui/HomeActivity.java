@@ -36,8 +36,8 @@ public class HomeActivity extends AppCompatActivity {
 
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
+//        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+//        setSupportActionBar(toolbar);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);

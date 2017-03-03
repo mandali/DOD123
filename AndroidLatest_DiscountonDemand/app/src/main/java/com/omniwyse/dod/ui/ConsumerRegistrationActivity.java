@@ -69,7 +69,7 @@ public class ConsumerRegistrationActivity extends AppCompatActivity {
 
                                                if (response.code() == 200) {//&& response.body().getstatusCode().trim().equals("200")) {
                                                    System.out.println("Mukesh" + "The Response is " + response.body().toString());
-                                                   startActivity(new Intent(ConsumerRegistrationActivity.this, OTPActivity.class));
+                                                   startActivity(new Intent(ConsumerRegistrationActivity.this, HomeActivity.class));
                                                } else {
                                                    Toast.makeText(ConsumerRegistrationActivity.this, "Sorry , Mobile no is alredy exist ...", Toast.LENGTH_SHORT).show();
 
