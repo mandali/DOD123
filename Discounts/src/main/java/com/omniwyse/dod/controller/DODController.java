@@ -407,13 +407,6 @@ public class DODController {
 				}
 				promotionDto.setDescription(response.getDescription());
 				promotionDto.setCreateddate(response.getCreateddate());
-				promotionDto.setDiscountText(response.getDiscountText());
-				promotionDto.setCatid(response.getCatid().getCategoryId());
-				promotionDto.setCategoryName(response.getCatid().getCategoryName());
-				promotionDto.setBrandId(response.getBrandId().getBrandid());
-				promotionDto.setBrandName(response.getBrandId().getBrandName());
-				promotionDto.setBrandRating(response.getBrandId().getBrandRating());
-				promotionDto.setBrandImage(response.getBrandId().getBrandImage());
 				promotionDtos.add(promotionDto);				
 			}
 			DataResultlist<PromotionDto> resp=new DataResultlist<PromotionDto>(true, " Promotions are ", HttpStatus.OK.value(), promotionDtos);			
@@ -1019,7 +1012,7 @@ public class DODController {
 	public ResponseEntity createLocation(@RequestBody LocationVO locationVO) {
 		final String METHOD_NAME="createLocation";
 		ResponseEntity responseEntity = null;
-		Location location=metaDataService.createLocation(locationVO);		
+		Location location=metaDataService.createLocation(locationVO);
 		try{					
 			if (location!=null){
 				DataResult result=new DataResult(true, " Location Created successfully ... ", HttpStatus.OK.value());	
@@ -1076,11 +1069,6 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 		
 		List<Object[]> resp=merchantPromotionBeaconService.getbeacons();
-<<<<<<< HEAD
-		MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo = null;	
-		List<MerchantPromotionBeaconSearchVo> beaconSearchVos=new ArrayList<MerchantPromotionBeaconSearchVo>();
-		
-=======
 		MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo = null;		
 		MerchantProfile merchantProfileId;
 		Promotion promotionId;
@@ -1091,7 +1079,6 @@ public class DODController {
 		List<MerchantPromotionBeaconSearchVo> beaconSearchVos=new ArrayList<MerchantPromotionBeaconSearchVo>();
 		DataResultlist<MerchantPromotionBeaconSearchVo> result;
 		DataResult resultError;
->>>>>>> d6b5318cff1dfcc0eebffdb18a460330d7c4a939
 		try{			
 			
 			
@@ -1100,15 +1087,6 @@ public class DODController {
 					
 					merchantPromotionBeaconSearchVo=new MerchantPromotionBeaconSearchVo();
 					merchantPromotionBeaconSearchVo.setMerchantId((Integer)response[0]);
-<<<<<<< HEAD
-					merchantPromotionBeaconSearchVo.setAisleId((Long)response[1]);
-					merchantPromotionBeaconSearchVo.setBeaconId((Long)response[2]);
-					merchantPromotionBeaconSearchVo.setPromotionId((Long)response[3]);
-									
-				}				
-				return new ResponseEntity(null, HttpStatus.OK);	
-				
-=======
 					merchantPromotionBeaconSearchVo.setAisleId(String.valueOf(response[1]));
 					merchantPromotionBeaconSearchVo.setBeaconId(String.valueOf(response[2]));
 					merchantPromotionBeaconSearchVo.setPromotionId((Integer)response[3]);
@@ -1171,7 +1149,6 @@ public class DODController {
 				}
 				result=new DataResultlist<MerchantPromotionBeaconSearchVo>(true, AppConstants.LIST_MERCHANT_PRODUCTS_SUCCESS_MSG,HttpStatus.OK.value(), beaconSearchVos);	
 				return new ResponseEntity(result, HttpStatus.OK);
->>>>>>> d6b5318cff1dfcc0eebffdb18a460330d7c4a939
 			}		
 			else
 			{
