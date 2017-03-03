@@ -20,7 +20,6 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	private Date startdate;	
 	private Date enddate;
 	private String location;
-	private Integer merchatId;
 	private String brandName;
 	private String brandRating;
 	private String brandImage;
@@ -29,9 +28,9 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	private Long catid;
 	private Long brandId;
 	private String discountText;
-	private String Merchantfirstname;
-	private String Merchantlastname;
-	private String Merchantemailid;
+	private String merchantfirstname;
+	private String merchantlastname;
+	private String merchantemailid;
 	private String mobilenumber;
 	private String businessname;
 	private String businessoffaddr;
@@ -44,17 +43,26 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	private String zipcode;
 	private String description;
 	private String tags;
-	private Long beaconId;
+	private String beaconId;
 	private String beaconName;
 	private String beaconStatus;
-	private Timestamp created;
-	private Long aisleId;
+	private Date created;
+	private String aisleId;
 	private String aisleName;
-	private Integer xAxis;
-	private Integer yAxis;
-	private Integer floor;	
+	private String xAxis;
+	private String yAxis;
+	private String floor;	
 	private String nickname;
-	private Long promotionId;
+	private Integer promotionId;
+	private String cityId;
+	private String countryId;
+	
+	
+	
+	public MerchantPromotionBeaconSearchVo(){
+	}
+	
+	
 	public Integer getId() {
 		return merchantId;
 	}
@@ -115,12 +123,7 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Integer getMerchatId() {
-		return merchatId;
-	}
-	public void setMerchatId(Integer merchatId) {
-		this.merchatId = merchatId;
-	}
+	
 	public String getBrandName() {
 		return brandName;
 	}
@@ -169,24 +172,7 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	public void setDiscountText(String discountText) {
 		this.discountText = discountText;
 	}
-	public String getMerchantfirstname() {
-		return Merchantfirstname;
-	}
-	public void setMerchantfirstname(String merchantfirstname) {
-		Merchantfirstname = merchantfirstname;
-	}
-	public String getMerchantlastname() {
-		return Merchantlastname;
-	}
-	public void setMerchantlastname(String merchantlastname) {
-		Merchantlastname = merchantlastname;
-	}
-	public String getMerchantemailid() {
-		return Merchantemailid;
-	}
-	public void setMerchantemailid(String merchantemailid) {
-		Merchantemailid = merchantemailid;
-	}
+	
 	public String getMobilenumber() {
 		return mobilenumber;
 	}
@@ -259,12 +245,7 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
-	public Long getBeaconId() {
-		return beaconId;
-	}
-	public void setBeaconId(Long beaconId) {
-		this.beaconId = beaconId;
-	}
+	
 	public String getBeaconName() {
 		return beaconName;
 	}
@@ -277,42 +258,14 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	public void setBeaconStatus(String beaconStatus) {
 		this.beaconStatus = beaconStatus;
 	}
-	public Timestamp getCreated() {
-		return created;
-	}
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-	public Long getAisleId() {
-		return aisleId;
-	}
-	public void setAisleId(Long aisleId) {
-		this.aisleId = aisleId;
-	}
+		
 	public String getAisleName() {
 		return aisleName;
 	}
 	public void setAisleName(String aisleName) {
 		this.aisleName = aisleName;
 	}
-	public Integer getxAxis() {
-		return xAxis;
-	}
-	public void setxAxis(Integer xAxis) {
-		this.xAxis = xAxis;
-	}
-	public Integer getyAxis() {
-		return yAxis;
-	}
-	public void setyAxis(Integer yAxis) {
-		this.yAxis = yAxis;
-	}
-	public Integer getFloor() {
-		return floor;
-	}
-	public void setFloor(Integer floor) {
-		this.floor = floor;
-	}
+	
 	public String getNickname() {
 		return nickname;
 	}
@@ -325,12 +278,115 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	public void setMerchantId(Integer merchantId) {
 		this.merchantId = merchantId;
 	}
-	public Long getPromotionId() {
+	
+	public String getMerchantfirstname() {
+		return merchantfirstname;
+	}
+	public void setMerchantfirstname(String merchantfirstname) {
+		this.merchantfirstname = merchantfirstname;
+	}
+	public String getMerchantlastname() {
+		return merchantlastname;
+	}
+	public void setMerchantlastname(String merchantlastname) {
+		this.merchantlastname = merchantlastname;
+	}
+	public String getMerchantemailid() {
+		return merchantemailid;
+	}
+	public void setMerchantemailid(String merchantemailid) {
+		this.merchantemailid = merchantemailid;
+	}
+
+	public Integer getPromotionId() {
 		return promotionId;
 	}
-	public void setPromotionId(Long promotionId) {
+
+
+	public void setPromotionId(Integer promotionId) {
 		this.promotionId = promotionId;
 	}
+
+
+	public String getCityId() {
+		return cityId;
+	}
+
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+
+	public String getCountryId() {
+		return countryId;
+	}
+
+
+	public void setCountryId(String countryId) {
+		this.countryId = countryId;
+	}
+
+
+	public String getBeaconId() {
+		return beaconId;
+	}
+
+
+	public void setBeaconId(String beaconId) {
+		this.beaconId = beaconId;
+	}
+
+
+	public String getAisleId() {
+		return aisleId;
+	}
+
+
+	public void setAisleId(String aisleId) {
+		this.aisleId = aisleId;
+	}
+
+
+	public String getxAxis() {
+		return xAxis;
+	}
+
+
+	public void setxAxis(String xAxis) {
+		this.xAxis = xAxis;
+	}
+
+
+	public String getyAxis() {
+		return yAxis;
+	}
+
+
+	public void setyAxis(String yAxis) {
+		this.yAxis = yAxis;
+	}
+
+
+	public String getFloor() {
+		return floor;
+	}
+
+
+	public void setFloor(String floor) {
+		this.floor = floor;
+	}
+
+
+	public Date getCreated() {
+		return created;
+	}
+
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	
 	
 	
 	
