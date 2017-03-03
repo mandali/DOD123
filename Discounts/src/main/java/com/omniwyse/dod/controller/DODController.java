@@ -1094,7 +1094,7 @@ public class DODController {
 					merchantPromotionBeaconSearchVo.setBeaconId(String.valueOf(response[2]));
 					merchantPromotionBeaconSearchVo.setPromotionId((Integer)response[3]);
 					List<Object> dependentObjects=metaDataDao.fetchMPBObjects(merchantPromotionBeaconSearchVo);
-					if(dependentObjects.size()>=0){
+					if(dependentObjects.size()>0){
 					merchantProfileId=(MerchantProfile) dependentObjects.get(0);
 					merchantPromotionBeaconSearchVo.setMerchantemailid(merchantProfileId.getEmailid());
 					merchantPromotionBeaconSearchVo.setMerchantfirstname(merchantProfileId.getFirstname());
