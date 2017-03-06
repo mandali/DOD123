@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -31,21 +33,29 @@ public class Product  implements Serializable{
 	private String productImageLocation;
 	@Column(name = "CRETATED_DATE")
 	private Timestamp productCreatedDate;
-	@Column(name="M_ID")
-	private Integer merchantId;
+	@OneToOne
+	@JoinColumn(name = "M_ID",referencedColumnName="ID")
+	private MerchantProfile merchantId;
 	
 	public Product(){
 	}
 	
 	
+	
 
-	public Product(Long productId, String productDescription, String productImageLocation,
-			Timestamp productCreatedDate) {
+
+
+	public Product(Long productId, String productDescription, String productImageLocation, Timestamp productCreatedDate,
+			MerchantProfile merchantId) {
 		this.productId = productId;
 		this.productDescription = productDescription;
 		this.productImageLocation = productImageLocation;
 		this.productCreatedDate = productCreatedDate;
+		this.merchantId = merchantId;
 	}
+
+
+
 
 
 
@@ -83,15 +93,22 @@ public class Product  implements Serializable{
 
 
 
-	public Integer getMerchantId() {
+
+
+	public MerchantProfile getMerchantId() {
 		return merchantId;
 	}
 
 
 
-	public void setMerchantId(Integer merchantId) {
+
+
+	public void setMerchantId(MerchantProfile merchantId) {
 		this.merchantId = merchantId;
 	}
+
+
+
 	
 	
 	

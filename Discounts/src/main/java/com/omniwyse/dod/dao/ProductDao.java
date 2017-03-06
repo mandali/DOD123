@@ -8,7 +8,7 @@ import com.omniwyse.dod.model.Product;
 
 public interface ProductDao {
 	
-	public Product createProduct(NewProductVO newProductVO);
+	public Product createProduct(NewProductVO newProductVO,MerchantProfile merchantProfile);
 	
 	public MerchantProfile validateProduct(NewProductVO newProductVO);
 	

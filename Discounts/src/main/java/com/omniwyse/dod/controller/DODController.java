@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.omniwyse.dod.AppConstants.AppConstants;
+import com.omniwyse.dod.DTO.BeaconInformationVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CategoryVO;
@@ -24,6 +25,8 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.LocationsVO;
+import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
+import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
 import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
@@ -34,9 +37,11 @@ import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.bean.OtpBean;
 import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantDao;
+import com.omniwyse.dod.dao.MetaDataDao;
 import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
+import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
@@ -51,10 +56,12 @@ import com.omniwyse.dod.model.GetMerchantById;
 import com.omniwyse.dod.model.GetMerchatProfile;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.MerchantAisle;
 import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.OTPValidation;
 import com.omniwyse.dod.model.Product;
@@ -63,6 +70,7 @@ import com.omniwyse.dod.model.Promotionsummary;
 import com.omniwyse.dod.model.RegisterWithOtp;
 import com.omniwyse.dod.service.ConsumerService;
 import com.omniwyse.dod.service.LocationService;
+import com.omniwyse.dod.service.MerchantPromotionBeaconService;
 import com.omniwyse.dod.service.MerchantService;
 import com.omniwyse.dod.service.MetaDataService;
 import com.omniwyse.dod.service.PromotionService;
@@ -94,12 +102,16 @@ public class DODController {
 	PromotionsDao promotionsDao;
 	@Autowired
 	ProductDao productDao;
+	@Autowired
+	MerchantPromotionBeaconService merchantPromotionBeaconService;
+	@Autowired
+	MetaDataDao metaDataDao;
 	
 	
 	
-	private static final Logger logger = Logger.getLogger(AppConfiguration.class);	
+	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity SavewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
 		final String METHOD_NAME="SavewithOTP";
@@ -122,10 +134,7 @@ public class DODController {
 		}
 		return responseEntity;		
 	}
-	
-
 	/*======================================================================================================*/	
-	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/OTPvalidate", method = RequestMethod.POST)
 	public ResponseEntity getOTP(@RequestBody OTPValidation oTPValidation) {
@@ -148,7 +157,7 @@ public class DODController {
 		return responseEntity;
 	}	
 	/*======================================================================================================*/			
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = "/consumerRegistration", method = RequestMethod.POST)
 	public ResponseEntity Registerconsumer(@RequestBody ConsumerProfile consumerProfile) {
 		final String METHOD_NAME="Registerconsumer";
@@ -167,10 +176,8 @@ public class DODController {
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage()); 
 		}
 		return responseEntity;
-	}
-	
+	}	
 	/*======================================================================================================*/	
-	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumerlogin", method = RequestMethod.POST)
 	public ResponseEntity checkMobile(@RequestBody ConsumerLogin userLogin) {
@@ -191,9 +198,7 @@ public class DODController {
 		}
 		return responseEntity;
 	}	
-	
-	/*======================================================================================================*/
-	
+	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumerProfile", method = RequestMethod.POST)
 	public ResponseEntity consumerProfile(@RequestBody ConsumerIdBaseProfile consumerIdBaseProfile) {
@@ -213,8 +218,7 @@ public class DODController {
 		{
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage()); 
 		}
-		return responseEntity;
-		
+		return responseEntity;	
 	}
 	
 	/*======================================================================================================*/	
@@ -278,7 +282,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}	
-	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantProfile", method = RequestMethod.POST)
@@ -298,8 +301,7 @@ public class DODController {
 		}catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}return responseEntity;
-	}
-	
+	}	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantlist", method = RequestMethod.GET)
@@ -344,9 +346,7 @@ public class DODController {
 		}
 		return responseEntity;
 	}	
-	
 	/*======================================================================================================*/	
-	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/getmerchatbyMobile", method = RequestMethod.POST)
 	public ResponseEntity getMerchatById(@RequestBody GetMerchantById getMerchantById) {
@@ -366,27 +366,25 @@ public class DODController {
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return responseEntity;
-	}
-	
-/*======================================================================================================*/	
-	
+	}	
+/*======================================================================================================*/		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/promotion/merchantid", method = RequestMethod.POST)
 	public ResponseEntity merchantPromotions(@RequestBody MerchantPromotions MerchantPromotions) {
 		final String METHOD_NAME="merchantPromotions";
 		ResponseEntity responseEntity = null;
 		Date date=new Date();
-		List<MerchantProfile> data=MerchantService.MerchatPromotion(MerchantPromotions, date);	
+		List<Promotion> data=MerchantService.MerchatPromotion(MerchantPromotions, date);	
 		List<PromotionDto> promotionDtos=new ArrayList<PromotionDto>();
 		PromotionDto promotionDto;
 		try{
 		if (!data.isEmpty()) {
-			for (MerchantProfile response:data) {
+			for (Promotion response:data) {
 				promotionDto=new PromotionDto();
 				promotionDto.setId(response.getId());
-				for(Promotion promotion:response.getPromotions()){
+				for(Promotion promotion:data){
 					promotionDto.setProduct_id(promotion.getProduct_id());					
-					promotionDto.setProduct_id(promotion.getProduct_id());
+					promotionDto.setId(response.getId());
 					promotionDto.setProduct_image(promotion.getProduct_image());
 					promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 					promotionDto.setDiscount(promotion.getDiscount());
@@ -394,9 +392,18 @@ public class DODController {
 					promotionDto.setEnddate(promotion.getEnddate());
 					promotionDto.setLocation(promotion.getLocation());
 					promotionDto.setMerchatId(promotion.getMerchatid());
+					promotionDto.setDiscountText(promotion.getDiscountText());
+					promotionDto.setCatid(promotion.getCatid().getCategoryId());
+					promotionDto.setCategoryName(response.getCatid().getCategoryName());
+					promotionDto.setBrandId(response.getBrandId().getBrandid());
+					promotionDto.setBrandName(response.getBrandId().getBrandName());
+					promotionDto.setBrandImage(response.getBrandId().getBrandImage());
+					promotionDto.setBrandRating(response.getBrandId().getBrandRating());
+					promotionDto.setBrandDescription(response.getBrandId().getBrandDescription());
 				}
 				promotionDto.setDescription(response.getDescription());
 				promotionDto.setCreateddate(response.getCreateddate());
+				promotionDto.setBrandDescription(response.getBrandId().getBrandDescription());
 				promotionDtos.add(promotionDto);				
 			}
 			DataResultlist<PromotionDto> resp=new DataResultlist<PromotionDto>(true, " Promotions are ", HttpStatus.OK.value(), promotionDtos);			
@@ -525,8 +532,7 @@ public class DODController {
 				promotionDto.setBrandDescription(resp.getBrandId().getBrandDescription());
 				promotionDto.setCatid(resp.getCatid().getCategoryId());
 				promotionDto.setBrandId(resp.getBrandId().getBrandid());
-				promotionDtos.add(promotionDto);
-				
+				promotionDtos.add(promotionDto);				
 			}
 			DataResultlist<PromotionDto> result=new DataResultlist<PromotionDto>(true, " available Promotions are ,", HttpStatus.OK.value(), promotionDtos);
 			return new ResponseEntity(result, HttpStatus.OK);			
@@ -540,15 +546,12 @@ public class DODController {
 		}
 		return responseEntity;
 	}	
-	/*======================================================================================================*/
-	
-	
+	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/promotion/categoryId", method = RequestMethod.POST)
 	public ResponseEntity CategoryIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {	
 		final String METHOD_NAME="CategoryIdPromotion";
-		ResponseEntity responseEntity = null;
-		PromotionDto promotionDto;
+		ResponseEntity responseEntity = null;		
 		List<PromotionDto> promotions = promotionService.CategoryIdPromotions(categoryPromotion);		
 		try{
 		if (!promotions.isEmpty()) {
@@ -565,12 +568,8 @@ public class DODController {
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return responseEntity;
-	}
-	
-	
-/*======================================================================================================*/
-	
-	
+	}	
+/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.BRANDID_PROMOTIONS, method = RequestMethod.POST)
 	public ResponseEntity brandIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {	
@@ -590,11 +589,9 @@ public class DODController {
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return responseEntity;
-	}
+	}	
 	
-	
-/*======================================================================================================*/
-	
+/*======================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_BRANDID_CATEGORYID , method = RequestMethod.POST)
@@ -615,10 +612,7 @@ public class DODController {
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return responseEntity;
-	}
-	
-	
-	
+	}	
 /*======================================================================================================*/
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -648,8 +642,7 @@ public class DODController {
 		return responseEntity;
 	}
 	
-	/*======================================================================================================*/
-	
+	/*======================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.CREATE_PROMOTIONS, method = RequestMethod.POST)
@@ -680,8 +673,8 @@ public class DODController {
 			
 		}		
 		return responseEntity;
-	}
-	
+		
+	}	
 	
 	/*======================================================================================================*/	
 	@SuppressWarnings({ "rawtypes", "unchecked" }) 
@@ -699,7 +692,7 @@ public class DODController {
 			DataResult result=new DataResult(false, " Sorry , No Promotions are available on selected category right now ", HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
 		}		
-		}
+	}
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
@@ -738,8 +731,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 		List<CountryVO> countryVOs=new ArrayList<CountryVO>();
 		CountryVO countryVO;
-		try{
-			
+		try{			
 		if (!countries.isEmpty()) {
 			
 			for(Country country:countries){
@@ -766,12 +758,9 @@ public class DODController {
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
-		return responseEntity;
-		
-	}
-	
-	/*===========================================================================================================*/	
-	
+		return responseEntity;		
+	}	
+	/*===========================================================================================================*/		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_CITIES, method = RequestMethod.GET)
 	public ResponseEntity fetchCitiesList(){
@@ -808,8 +797,7 @@ public class DODController {
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
-		return responseEntity;
-		
+		return responseEntity;		
 	}
 	
 	/*===========================================================================================================*/	
@@ -855,8 +843,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-	/*===========================================================================================================*/
-	
 	
 	/*===========================================================================================================*/
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -868,9 +854,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 		DataResult resultError;
 		DataResultlist<CategoryVO> result;
-		CategoryVO categoryVO;
-		
-		
+		CategoryVO categoryVO;		
 		try{
 			if(!categories.isEmpty()){
 				
@@ -899,10 +883,8 @@ public class DODController {
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
-		return responseEntity;
-		
-	}
-	
+		return responseEntity;		
+	}	
 	
 	/*===========================================================================================================*/
 	
@@ -929,10 +911,8 @@ public class DODController {
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
-		return responseEntity;
-		
-	}
-	
+		return responseEntity;		
+	}	
 	/*===========================================================================================================*/	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -945,8 +925,7 @@ public class DODController {
 		DataResult resultError;
 		try{
 			
-			if (!productVOs.isEmpty()) {	
-				
+			if (!productVOs.isEmpty()) {				
 				result=new DataResultlist<ProductVO>(true, AppConstants.LIST_MERCHANT_PRODUCTS_SUCCESS_MSG,HttpStatus.OK.value(), productVOs);	
 				return new ResponseEntity(result , HttpStatus.OK);			
 			}
@@ -972,7 +951,7 @@ public class DODController {
 		List<Product> products= productDao.validateProductname(newProductVO);		
 		try{					
 			if (merchantId!=null && products.isEmpty()){				
-				Product resp = metaDataService.createProduct(newProductVO);	
+				Product resp = metaDataService.createProduct(newProductVO,merchantId);	
 				if (resp!=null) {
 					DataResult result=new DataResult(true, " Product Created successfully ... ", HttpStatus.OK.value());	
 					return new ResponseEntity(result, HttpStatus.OK);
@@ -991,8 +970,7 @@ public class DODController {
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
-		return responseEntity;
-		
+		return responseEntity;	
 	}
 	
 	/*===========================================================================================================*/	
@@ -1017,9 +995,173 @@ public class DODController {
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}		
-		return responseEntity;
-		
+		return responseEntity;		
 	}
 	
+	/*===========================================================================================================*/
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.CREATE_MERCHANT_PROMOTION_BEACON, method = RequestMethod.POST)
+	public ResponseEntity createMerchantPromotionBeacon(@RequestBody MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
+	final String METHOD_NAME="createMerchantPromotionBeacon";
+	ResponseEntity responseEntity=null;
+	DataResult resultError;	
+	try{
+		
+		List dependentObjects=metaDataService.validateMPBCreation(merchantPromotionBeaconVO);
+		if(!dependentObjects.isEmpty() && dependentObjects.size()==4){
+			MerchantPromotionBeacon  merchantPromotionBeacon=metaDataService.createMerchantPromotionBeacon(dependentObjects);
+			if (merchantPromotionBeacon!=null) {
+				DataResultEntity<MerchantPromotionBeacon> result=new DataResultEntity<MerchantPromotionBeacon>(true, " Merchant Promotion Beacon Created successfully ... ", HttpStatus.OK.value(),merchantPromotionBeacon);	
+				return new ResponseEntity(result, HttpStatus.OK);
+			}else
+			{
+			DataResult result=new DataResult(false, "Sorry , Please check merchantId/promotionId/beaconId/aisleId    ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+			}				
+		}			
+		else
+		{
+			resultError=new DataResult(false, "Sorry , Please check merchantId/promotionId/beaconId/aisleId    ", HttpStatus.BAD_REQUEST.value());
+		return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+		}		
+	}
+	catch(Exception exception){
+		logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+	}	
+	return responseEntity;
+}
+	
+/*===========================================================================================================*/	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_MERCHANT_PROMOTION_BEACONS , method = RequestMethod.GET)
+	public ResponseEntity getbeacons() {
+		final String METHOD_NAME="getbeacons";
+		ResponseEntity responseEntity = null;		
+		List<Object[]> resp=merchantPromotionBeaconService.getbeacons();
+		MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo = null;		
+		MerchantProfile merchantProfileId;
+		Promotion promotionId;
+		Beacon beaconId;
+		MerchantAisle merchantAisle;
+		Cities cities;
+		Country country;
+		List<MerchantPromotionBeaconSearchVo> beaconSearchVos=new ArrayList<MerchantPromotionBeaconSearchVo>();
+		DataResultlist<MerchantPromotionBeaconSearchVo> result;
+		DataResult resultError;
+		try{			
+			if (!resp.isEmpty()){				
+				for(Object[] response:resp){					
+					merchantPromotionBeaconSearchVo=new MerchantPromotionBeaconSearchVo();
+					merchantPromotionBeaconSearchVo.setMerchantId((Integer)response[0]);
+					merchantPromotionBeaconSearchVo.setAisleId(String.valueOf(response[1]));
+					merchantPromotionBeaconSearchVo.setBeaconId(String.valueOf(response[2]));
+					merchantPromotionBeaconSearchVo.setPromotionId((Integer)response[3]);
+					List<Object> dependentObjects=metaDataDao.fetchMPBObjects(merchantPromotionBeaconSearchVo);
+					if(dependentObjects.size()>0){
+					merchantProfileId=(MerchantProfile) dependentObjects.get(0);
+					merchantPromotionBeaconSearchVo.setMerchantemailid(merchantProfileId.getEmailid());
+					merchantPromotionBeaconSearchVo.setMerchantfirstname(merchantProfileId.getFirstname());
+					merchantPromotionBeaconSearchVo.setMerchantId(merchantProfileId.getId());
+					merchantPromotionBeaconSearchVo.setMerchantlastname(merchantProfileId.getLastname());
+					merchantPromotionBeaconSearchVo.setMobilenumber(merchantProfileId.getMobilenumber());
+					merchantPromotionBeaconSearchVo.setStreet(merchantProfileId.getStreet());
+					merchantPromotionBeaconSearchVo.setState(merchantProfileId.getState());
+					merchantPromotionBeaconSearchVo.setCountry(merchantProfileId.getCountry());
+					merchantPromotionBeaconSearchVo.setZipcode(merchantProfileId.getZipcode());
+					merchantPromotionBeaconSearchVo.setNickname(merchantProfileId.getNickname());
+					merchantPromotionBeaconSearchVo.setTown(merchantProfileId.getTown());
+					merchantPromotionBeaconSearchVo.setTags(merchantProfileId.getTags());
+					merchantPromotionBeaconSearchVo.setLandlineno(merchantProfileId.getLandlineno());
+					merchantPromotionBeaconSearchVo.setBusinessname(merchantProfileId.getBusinessname());
+					merchantPromotionBeaconSearchVo.setBusinessoffaddr(merchantProfileId.getBusinessoffaddr());
+					merchantPromotionBeaconSearchVo.setDescription(merchantProfileId.getDescription());
+					merchantPromotionBeaconSearchVo.setCreated(merchantProfileId.getCreateddate());
+					}
+					if(dependentObjects.size()>=1){
+					promotionId=(Promotion) dependentObjects.get(1);
+					merchantPromotionBeaconSearchVo.setPromotionId(promotionId.getId());
+					merchantPromotionBeaconSearchVo.setStartdate(promotionId.getStartdate());
+					merchantPromotionBeaconSearchVo.setEnddate(promotionId.getEnddate());
+					merchantPromotionBeaconSearchVo.setCreateddate(promotionId.getCreateddate());
+					merchantPromotionBeaconSearchVo.setOriginalPrice(promotionId.getOriginalPrice());
+					merchantPromotionBeaconSearchVo.setDiscount(promotionId.getDiscount());
+					merchantPromotionBeaconSearchVo.setDiscountText(promotionId.getDiscountText());
+					merchantPromotionBeaconSearchVo.setLocation(promotionId.getLocation());
+					merchantPromotionBeaconSearchVo.setMerchantId(promotionId.getMerchatid());
+					merchantPromotionBeaconSearchVo.setProduct_id(promotionId.getProduct_id());
+					merchantPromotionBeaconSearchVo.setProduct_image(promotionId.getProduct_image());
+					merchantPromotionBeaconSearchVo.setProductname(promotionId.getDescription());
+					merchantPromotionBeaconSearchVo.setBrandId(promotionId.getBrandId().getBrandid());
+					merchantPromotionBeaconSearchVo.setBrandName(promotionId.getBrandId().getBrandName());
+					merchantPromotionBeaconSearchVo.setBrandRating(promotionId.getBrandId().getBrandRating());
+					merchantPromotionBeaconSearchVo.setBrandImage(promotionId.getBrandId().getBrandImage());
+					merchantPromotionBeaconSearchVo.setBrandDescription(promotionId.getBrandId().getBrandDescription());
+					merchantPromotionBeaconSearchVo.setCatid(promotionId.getCatid().getCategoryId());
+					merchantPromotionBeaconSearchVo.setCategoryName(promotionId.getCatid().getCategoryName());
+					}
+					if(dependentObjects.size()>=5){
+					cities=(Cities) dependentObjects.get(5);
+					merchantPromotionBeaconSearchVo.setCity(cities.getCityName());
+					merchantPromotionBeaconSearchVo.setCityId(String.valueOf(cities.getCityId()));
+					}
+					if(dependentObjects.size()>=4){
+					country=(Country) dependentObjects.get(4);
+					merchantPromotionBeaconSearchVo.setCountry(country.getName());
+					merchantPromotionBeaconSearchVo.setCountryId(String.valueOf(country.getId()));
+					}
+					if(dependentObjects.size()>=2){
+					beaconId=(Beacon) dependentObjects.get(2);
+					merchantPromotionBeaconSearchVo.setBeaconName(String.valueOf(beaconId.getBeaconName()));
+					merchantPromotionBeaconSearchVo.setBeaconStatus(beaconId.getBeaconStatus());
+					}
+					if(dependentObjects.size()>=3){
+					merchantAisle=(MerchantAisle) dependentObjects.get(3);
+					merchantPromotionBeaconSearchVo.setAisleId(String.valueOf(merchantAisle.getAisleId()));
+					merchantPromotionBeaconSearchVo.setAisleName(merchantAisle.getAisleName());
+					merchantPromotionBeaconSearchVo.setxAxis(String.valueOf(merchantAisle.getxAxis()));
+					merchantPromotionBeaconSearchVo.setyAxis(String.valueOf(merchantAisle.getyAxis()));
+					merchantPromotionBeaconSearchVo.setFloor(String.valueOf(merchantAisle.getFloor()));
+					}
+					beaconSearchVos.add(merchantPromotionBeaconSearchVo);					
+				}
+				result=new DataResultlist<MerchantPromotionBeaconSearchVo>(true, AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG,HttpStatus.OK.value(), beaconSearchVos);	
+				return new ResponseEntity(result, HttpStatus.OK);
+			}		
+			else
+			{
+			resultError=new DataResult(false, "Sorry , No data found ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+			}
+			
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}		
+		return responseEntity; 		
+	}	
+	/*===========================================================================================================*/	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_BEACONS_PROMOTIONS_INFO , method = RequestMethod.POST)
+	public ResponseEntity fetchBeaconsInformation(@RequestBody BeaconInformationVO beaconInformationVO) {
+	ResponseEntity responseEntity = null;		
+	final String METHOD_NAME="fetchBeaconsInformation";
+	try{		
+		List<MerchantPromotionBeacon> merchantPromotionBeacons=merchantPromotionBeaconService.fetchMerchantPromotionBeacons(beaconInformationVO);
+		DataResult resultError;
+		if (merchantPromotionBeacons!=null) {
+			DataResultlist<MerchantPromotionBeacon> result=new DataResultlist<MerchantPromotionBeacon>(true, AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(),merchantPromotionBeacons);
+			return new ResponseEntity(result, HttpStatus.OK); 			
+		}
+		else {
+			resultError=new DataResult(false, " Sorry , No data found ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+		}		
+	}
+	catch(Exception exception){
+		logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+	}
+	return responseEntity;	
+}	
 }

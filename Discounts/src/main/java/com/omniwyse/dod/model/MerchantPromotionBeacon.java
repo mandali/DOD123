@@ -1,12 +1,16 @@
 package com.omniwyse.dod.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="merchant_pm_bc")
 public class MerchantPromotionBeacon implements java.io.Serializable
 {
 
@@ -20,7 +24,7 @@ public class MerchantPromotionBeacon implements java.io.Serializable
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long mpbId;
 	@OneToOne
-	@JoinColumn(name="B_ID",referencedColumnName="BC_ID")
+	@JoinColumn(name="BC_ID",referencedColumnName="B_ID")
 	private Beacon beacon;
 	@OneToOne
 	@JoinColumn(name="M_ID", referencedColumnName="ID")
@@ -35,6 +39,16 @@ public class MerchantPromotionBeacon implements java.io.Serializable
 	
 	public MerchantPromotionBeacon(){
 		
+	}
+
+
+	public MerchantPromotionBeacon(Long mpbId, Beacon beacon, MerchantProfile merchantProfile, Promotion promotion,
+			MerchantAisle merchantAisle) {
+		this.mpbId = mpbId;
+		this.beacon = beacon;
+		this.merchantProfile = merchantProfile;
+		this.promotion = promotion;
+		this.merchantAisle = merchantAisle;
 	}
 
 

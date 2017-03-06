@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 
@@ -82,6 +83,7 @@ public class MerchantProfile implements Serializable{
 	
 	@OneToMany(targetEntity =Product.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="M_ID" ,referencedColumnName ="ID")
+	@JsonIgnore
 	private Set<Product> products;	
 	
 	public String getLogo() {

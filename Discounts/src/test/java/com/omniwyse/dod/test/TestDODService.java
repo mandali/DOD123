@@ -1,6 +1,5 @@
 package com.omniwyse.dod.test;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import org.mockito.InjectMocks;
@@ -15,7 +14,6 @@ import com.omniwyse.dod.dao.RegistrationDao;
 import com.omniwyse.dod.dao.impl.ConsumerDaoImpl;
 import com.omniwyse.dod.model.ConsumerProfile;
 import com.omniwyse.dod.model.RegisterWithOtp;
-import com.omniwyse.dod.service.RegistrationService;
 import com.omniwyse.dod.service.impl.ConsumerServiceImpl;
 import com.omniwyse.dod.service.impl.RegistrationServiceImpl;
 
