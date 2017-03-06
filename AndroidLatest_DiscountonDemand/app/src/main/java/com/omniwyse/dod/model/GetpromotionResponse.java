@@ -11,6 +11,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Created by Mukesh checking aain on 2/22/2017.
+ */
+
 public class GetpromotionResponse {
 
     @SerializedName("id")

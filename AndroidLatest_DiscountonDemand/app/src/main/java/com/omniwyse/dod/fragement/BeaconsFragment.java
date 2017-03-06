@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.omniwyse.dod.R;
 
 /**
- * Created by surya on 2/22/2017.
+ * Created by surya not using  npwon 2/22/2017.
  */
 
 public class BeaconsFragment extends Fragment {
