@@ -110,7 +110,7 @@ public class DODController {
 	
 	private static final Logger logger = Logger.getLogger(AppConfiguration.class);	
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity SavewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
 		final String METHOD_NAME="SavewithOTP";
@@ -159,7 +159,7 @@ public class DODController {
 		return responseEntity;
 	}	
 	/*======================================================================================================*/			
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = "/consumerRegistration", method = RequestMethod.POST)
 	public ResponseEntity Registerconsumer(@RequestBody ConsumerProfile consumerProfile) {
 		final String METHOD_NAME="Registerconsumer";
@@ -566,7 +566,7 @@ public class DODController {
 	public ResponseEntity CategoryIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {	
 		final String METHOD_NAME="CategoryIdPromotion";
 		ResponseEntity responseEntity = null;
-		PromotionDto promotionDto;
+		//PromotionDto promotionDto;
 		List<PromotionDto> promotions = promotionService.CategoryIdPromotions(categoryPromotion);		
 		try{
 		if (!promotions.isEmpty()) {
@@ -1086,7 +1086,7 @@ public class DODController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_MERCHANT_PROMOTION_BEACONS , method = RequestMethod.GET)
 	public ResponseEntity getbeacons() {
-		final String METHOD_NAME="createLocation";
+		final String METHOD_NAME="getbeacons";
 		ResponseEntity responseEntity = null;		
 		List<Object[]> resp=merchantPromotionBeaconService.getbeacons();
 		MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo = null;		

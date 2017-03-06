@@ -1,11 +1,9 @@
 package com.omniwyse.dod.DTO;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
-public class MerchantPromotionBeaconSearchVo implements Serializable{
-	
+public class MerchantPromotionBeaconSearchVo implements Serializable{	
 	/**
 	 * 
 	 */
@@ -56,8 +54,6 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	private Integer promotionId;
 	private String cityId;
 	private String countryId;
-	
-	
 	
 	public MerchantPromotionBeaconSearchVo(){
 	}
