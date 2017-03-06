@@ -2,41 +2,36 @@ package com.omniwyse.dod.model;
 
 
 /**
- * Created by Mukesh checking aain on 2/22/2017.
+ * Created by Mukesh checking aain on 06-03-2017.
+ *
  */
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class BrandResponse {
+public class Brand {
 
+    @SerializedName("brandId")
+    @Expose
     private String brandId;
+    @SerializedName("brandName")
+    @Expose
     private String brandName;
+    @SerializedName("created")
+    @Expose
     private String created;
+    @SerializedName("brandRating")
+    @Expose
     private String brandRating;
+    @SerializedName("brandImage")
+    @Expose
     private String brandImage;
+    @SerializedName("brandDescription")
+    @Expose
     private String brandDescription;
-
-    // Getter and Setter model for recycler view items
-    private String title;
-    private int image;
-
-    public BrandResponse(String title, int image) {
-
-        this.title = title;
-
-        this.image = image;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-
-    public int getImage() {
-        return image;
-    }
-
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getBrandId() {
@@ -96,3 +91,4 @@ public class BrandResponse {
     }
 
 }
+
