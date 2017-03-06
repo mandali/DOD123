@@ -1,7 +1,6 @@
+<!DOCTYPE html>
 <html>
 <body>
-<h2>
-<center> Welcome to Discount On Demand APP Running in AWS Instance !! </center></h2>
-
+<div style="text-align:center; height: 169px"><h2>Welcome to Discount On Demand App ... </h2></div>
 </body>
 </html>

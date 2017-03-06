@@ -25,46 +25,57 @@ public class MerchantServiceImpl implements MerchantService{
 	@Autowired
 	MerchantDao MerchantDao;
 	
+	/*===========================================================================================================*/	
+	
 	public MerchantProfile registermerchant(MerchantProfile merchantProfile) {
 		Date date=new Date();
 		merchantProfile.setCreateddate(date);
 		MerchantProfile resp=MerchantDao.registermerchant(merchantProfile);
 		return resp;		
 	}
+	/*===========================================================================================================*/	
 	public MerchantProfile GetmerchantMobile(GetMerchantById getMerchantById) {
 		MerchantProfile resp=MerchantDao.GetMerchatByMobile(getMerchantById);
 		return resp;
 	}
+	/*===========================================================================================================*/	
 
 	public MerchantProfile MerchatLogin(MerchantLogin merchantLogin) {		
 			
 			return MerchantDao.MerchantLogin(merchantLogin);
 		}
+	/*===========================================================================================================*/	
 	
 	public MerchantProfile merchatAutheticateWithEmail(MerchantLoginwithEmail merchantLoginwithEmail) {
 		
 		return MerchantDao.merchantautheticateWithEmail(merchantLoginwithEmail);
 	}
+	/*===========================================================================================================*/	
 	public MerchantProfile merchatAutheticateWithMobile(MerchantLoginwithMobile merchantLoginwithMobile) {
 		
 		return MerchantDao.merchantautheticateWithMobile(merchantLoginwithMobile);
 	}
+	/*===========================================================================================================*/	
 	public MerchantProfile MerchatProfile(GetMerchatProfile getMerchatProfile) {
 		
 		return MerchantDao.MerchantProfile(getMerchatProfile);
 	}
+	/*===========================================================================================================*/	
 	public List<MerchantProfile> AllMerchants() {
 		
 		return MerchantDao.AllMerchants();
 	}
+	/*===========================================================================================================*/	
 	public MerchantProfile getMerchatByID(Integer id) {
 		
 		return MerchantDao.getMerchantbyID(id);
 	}
+	/*===========================================================================================================*/	
 	public List<Promotion> MerchatPromotion(MerchantPromotions MerchantPromotions, Date date) {
 		
 		 return MerchantDao.MerchantPromotions(MerchantPromotions, date);
 	}
+	/*===========================================================================================================*/	
 	
 	}
 

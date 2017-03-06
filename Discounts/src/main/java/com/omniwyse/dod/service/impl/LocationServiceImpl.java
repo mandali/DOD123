@@ -25,15 +25,16 @@ public class LocationServiceImpl implements LocationService{
 		// TODO Auto-generated method stub
 		return locationDao.fetchCountriesList();
 	}
-
+	/*===========================================================================================================*/	
 	public List<Cities> fetchCitiesList() {
 		// TODO Auto-generated method stub
 		return locationDao.fetchCitiesList();
 	}
-
+	/*===========================================================================================================*/	
 	public List<Location> fetchLocationsList() {
 		// TODO Auto-generated method stub
 		return locationDao.fetchLocationsList();
 	}
+	/*===========================================================================================================*/	
 
 }

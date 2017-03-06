@@ -7,10 +7,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -47,11 +45,13 @@ public class MetaDataDaoImpl implements MetaDataDao {
 
 	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
 
+	@SuppressWarnings("unused")
 	private static final String MerchantProfile = null;
 
 	@Autowired
 	SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	public List<Category> fetchCategories() {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query = (Query) session.createQuery("from Category c order by c.categoryRank desc");
@@ -59,7 +59,8 @@ public class MetaDataDaoImpl implements MetaDataDao {
 
 		return categories;
 	}
-
+	/*===========================================================================================================*/	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<CategoryBrandVO> fetchBrands() {
 		List<Object> objects = null;
 		final String METHOD_NAME = "fetchBrands";
@@ -126,7 +127,9 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		return categoryVOs;
 	}
+	/*===========================================================================================================*/	
 
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	public List<ProductVO> fetchMerchantProducts(ProductVO productVO) {
 		Session session;
 		Query query;
@@ -169,7 +172,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		
 		return productVOs;
 	}
-
+	/*===========================================================================================================*/	
 	public Location createLocation(LocationVO locationVo) {
 		Session session = this.sessionFactory.openSession();
 		Location location=new Location();
@@ -185,7 +188,8 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		Location resp=(Location) session.get(Location.class, id);		
 		return resp;		
 	}
-
+	/*===========================================================================================================*/	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
@@ -212,7 +216,8 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		return mpbObjects;
 	}
-
+	/*===========================================================================================================*/	
+	@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
 	public List<Object> fetchMPBObjects(MerchantPromotionBeaconSearchVo merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
@@ -251,7 +256,9 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		return mpbObjects;
 	}
+	/*===========================================================================================================*/	
 
+	@SuppressWarnings("rawtypes")
 	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
 		MerchantPromotionBeacon beacon;
@@ -280,5 +287,6 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		return resp;
 	}
+	/*===========================================================================================================*/	
 
 }

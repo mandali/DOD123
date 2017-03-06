@@ -25,8 +25,10 @@ public interface MetaDataService {
 	
 	public Location createLocation(LocationVO locationVO);
 	
+	@SuppressWarnings("rawtypes")
 	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO);
 	
+	@SuppressWarnings("rawtypes")
 	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO);
 	
 

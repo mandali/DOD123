@@ -21,10 +21,12 @@ public interface MetaDataDao {
 	
 	public Location createLocation(LocationVO locationVo) ;
 		
+	@SuppressWarnings("rawtypes")
 	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO);
 	
 	public List<Object> fetchMPBObjects(MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo);
 	
+	@SuppressWarnings("rawtypes")
 	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO);
 	
 	

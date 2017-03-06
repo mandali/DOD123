@@ -26,6 +26,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 		ConsumerProfile resp=(ConsumerProfile)query.uniqueResult();			
 		return resp;		
 	}
+	/*===========================================================================================================*/	
 	public MerchantProfile getmobilenoandemail(MerchantProfile merchantProfile) {
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query)session.createQuery("from MerchantProfile where mobilenumber=:phoneno and emailid=:emailid")
@@ -34,6 +35,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 		MerchantProfile resp=(MerchantProfile)query.uniqueResult();
 		return resp;
 	}
+	/*===========================================================================================================*/	
 	public RegisterWithOtp getmobileno(RegisterWithOtp RegisterWithOtp) {
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query)session.createQuery("from RegisterWithOtp where user_id=:userid")
@@ -41,6 +43,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 		RegisterWithOtp resp=(RegisterWithOtp)query.uniqueResult();
 		return resp;
 	}
+	/*===========================================================================================================*/	
 	public RegisterWithOtp getOTP(OTPValidation oTPValidation) {
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query)session.createQuery("from RegisterWithOtp where otpno=:otpno and user_id=:mobile")				
@@ -49,4 +52,5 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 		RegisterWithOtp resp=(RegisterWithOtp)query.uniqueResult();
 		return resp;
 	}
+	/*===========================================================================================================*/	
 }
