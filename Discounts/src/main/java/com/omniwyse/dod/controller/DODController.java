@@ -925,8 +925,7 @@ public class DODController {
 		DataResult resultError;
 		try{
 			
-			if (!productVOs.isEmpty()) {	
-				
+			if (!productVOs.isEmpty()) {				
 				result=new DataResultlist<ProductVO>(true, AppConstants.LIST_MERCHANT_PRODUCTS_SUCCESS_MSG,HttpStatus.OK.value(), productVOs);	
 				return new ResponseEntity(result , HttpStatus.OK);			
 			}
