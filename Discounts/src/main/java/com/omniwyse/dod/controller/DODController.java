@@ -4,7 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.LocationsVO;
+import com.omniwyse.dod.DTO.MPBSearchVO;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
@@ -532,6 +535,7 @@ public class DODController {
 				promotionDto.setBrandDescription(resp.getBrandId().getBrandDescription());
 				promotionDto.setCatid(resp.getCatid().getCategoryId());
 				promotionDto.setBrandId(resp.getBrandId().getBrandid());
+				promotionDto.setDiscountText(resp.getDiscountText());
 				promotionDtos.add(promotionDto);				
 			}
 			DataResultlist<PromotionDto> result=new DataResultlist<PromotionDto>(true, " available Promotions are ,", HttpStatus.OK.value(), promotionDtos);
@@ -1147,11 +1151,83 @@ public class DODController {
 	public ResponseEntity fetchBeaconsInformation(@RequestBody BeaconInformationVO beaconInformationVO) {
 	ResponseEntity responseEntity = null;		
 	final String METHOD_NAME="fetchBeaconsInformation";
+	List<MPBSearchVO> mpbSearchVOs=new ArrayList<MPBSearchVO>();
+	MPBSearchVO mpbSearchVO;
+	PromotionDto promotionDto;
+	Map<String,List<PromotionDto>> beaconsMap=new LinkedHashMap<String,List<PromotionDto>>();
+	boolean mapFlag = false;
 	try{		
 		List<MerchantPromotionBeacon> merchantPromotionBeacons=merchantPromotionBeaconService.fetchMerchantPromotionBeacons(beaconInformationVO);
 		DataResult resultError;
 		if (merchantPromotionBeacons!=null) {
-			DataResultlist<MerchantPromotionBeacon> result=new DataResultlist<MerchantPromotionBeacon>(true, AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(),merchantPromotionBeacons);
+			
+			for(MerchantPromotionBeacon merchantPromotionBeacon:merchantPromotionBeacons){
+				if(beaconsMap!=null && !beaconsMap.isEmpty()){
+					List<PromotionDto> existingPromotion=beaconsMap.get(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()));
+					if(existingPromotion!=null && !existingPromotion.isEmpty()){
+					promotionDto=new PromotionDto();
+					promotionDto.setId(merchantPromotionBeacon.getPromotion().getId());
+					promotionDto.setProduct_id(merchantPromotionBeacon.getPromotion().getProduct_id());
+					promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
+					promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatid());
+					promotionDto.setProduct_image(merchantPromotionBeacon.getPromotion().getProduct_image());
+					promotionDto.setOriginalPrice(merchantPromotionBeacon.getPromotion().getOriginalPrice());
+					promotionDto.setDiscount(merchantPromotionBeacon.getPromotion().getDiscount());
+					promotionDto.setLocation(merchantPromotionBeacon.getPromotion().getLocation());
+					promotionDto.setCreateddate(merchantPromotionBeacon.getPromotion().getCreateddate());
+					promotionDto.setStartdate(merchantPromotionBeacon.getPromotion().getStartdate());
+					promotionDto.setEnddate(merchantPromotionBeacon.getPromotion().getEnddate());
+					promotionDto.setCategoryName(merchantPromotionBeacon.getPromotion().getCatid().getCategoryName());
+					promotionDto.setBrandName(merchantPromotionBeacon.getPromotion().getBrandId().getBrandName());
+					promotionDto.setBrandRating(merchantPromotionBeacon.getPromotion().getBrandId().getBrandRating());
+					promotionDto.setBrandImage(merchantPromotionBeacon.getPromotion().getBrandId().getBrandImage());
+					promotionDto.setBrandDescription(merchantPromotionBeacon.getPromotion().getBrandId().getBrandDescription());
+					promotionDto.setCatid(merchantPromotionBeacon.getPromotion().getCatid().getCategoryId());
+					promotionDto.setBrandId(merchantPromotionBeacon.getPromotion().getBrandId().getBrandid());
+					promotionDto.setDiscountText(merchantPromotionBeacon.getPromotion().getDiscountText());
+					existingPromotion.add(promotionDto);
+					mapFlag=true;
+					}
+				}
+				if(!mapFlag){
+				mpbSearchVO=new MPBSearchVO();
+				mpbSearchVO.setBeaconId(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()));
+				mpbSearchVO.setBeaconName(merchantPromotionBeacon.getBeacon().getBeaconName());
+				mpbSearchVO.setMerchantId(String.valueOf(merchantPromotionBeacon.getMerchantProfile().getId()));
+				mpbSearchVO.setMerchantName(merchantPromotionBeacon.getMerchantProfile().getFirstname()+""+merchantPromotionBeacon.getMerchantProfile().getLastname());
+				mpbSearchVO.setLocationId(merchantPromotionBeacon.getPromotion().getLocation());
+				mpbSearchVO.setLocationName("");
+				mpbSearchVO.setAisleId(String.valueOf(merchantPromotionBeacon.getMerchantAisle().getAisleId()));
+				mpbSearchVO.setAisleName(merchantPromotionBeacon.getMerchantAisle().getAisleName());
+				promotionDto=new PromotionDto();
+				promotionDto.setId(merchantPromotionBeacon.getPromotion().getId());
+				promotionDto.setProduct_id(merchantPromotionBeacon.getPromotion().getProduct_id());
+				promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
+				promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatid());
+				promotionDto.setProduct_image(merchantPromotionBeacon.getPromotion().getProduct_image());
+				promotionDto.setOriginalPrice(merchantPromotionBeacon.getPromotion().getOriginalPrice());
+				promotionDto.setDiscount(merchantPromotionBeacon.getPromotion().getDiscount());
+				promotionDto.setLocation(merchantPromotionBeacon.getPromotion().getLocation());
+				promotionDto.setCreateddate(merchantPromotionBeacon.getPromotion().getCreateddate());
+				promotionDto.setStartdate(merchantPromotionBeacon.getPromotion().getStartdate());
+				promotionDto.setEnddate(merchantPromotionBeacon.getPromotion().getEnddate());
+				promotionDto.setCategoryName(merchantPromotionBeacon.getPromotion().getCatid().getCategoryName());
+				promotionDto.setBrandName(merchantPromotionBeacon.getPromotion().getBrandId().getBrandName());
+				promotionDto.setBrandRating(merchantPromotionBeacon.getPromotion().getBrandId().getBrandRating());
+				promotionDto.setBrandImage(merchantPromotionBeacon.getPromotion().getBrandId().getBrandImage());
+				promotionDto.setBrandDescription(merchantPromotionBeacon.getPromotion().getBrandId().getBrandDescription());
+				promotionDto.setCatid(merchantPromotionBeacon.getPromotion().getCatid().getCategoryId());
+				promotionDto.setBrandId(merchantPromotionBeacon.getPromotion().getBrandId().getBrandid());
+				promotionDto.setDiscountText(merchantPromotionBeacon.getPromotion().getDiscountText());
+				mpbSearchVO.getPromotionDtos().add(promotionDto);
+				mpbSearchVOs.add(mpbSearchVO);
+				beaconsMap.put(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()), mpbSearchVO.getPromotionDtos());
+				mapFlag=false;
+				}
+				
+			}
+			
+			DataResultlist<MPBSearchVO> result=new DataResultlist<MPBSearchVO>(true, AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(),mpbSearchVOs);
 			return new ResponseEntity(result, HttpStatus.OK); 			
 		}
 		else {
