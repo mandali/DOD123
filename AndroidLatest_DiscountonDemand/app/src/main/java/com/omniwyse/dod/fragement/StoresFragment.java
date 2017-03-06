@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.omniwyse.dod.R;
 
 /**
- * Created by surya on 2/22/2017.
+ * Created by checking again on 2/22/2017.
  */
 
 public class StoresFragment extends Fragment {

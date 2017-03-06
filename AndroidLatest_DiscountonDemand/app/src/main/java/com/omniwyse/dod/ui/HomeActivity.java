@@ -21,6 +21,10 @@ import com.omniwyse.dod.fragement.StoresFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Created by Mukesh checking aain on 2/22/2017.
+ */
 public class HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;

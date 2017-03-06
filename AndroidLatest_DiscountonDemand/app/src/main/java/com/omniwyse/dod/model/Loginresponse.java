@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Created by Mukesh checking aain on 2/22/2017.
+ */
 public class Loginresponse {
 
     @SerializedName("otpType")

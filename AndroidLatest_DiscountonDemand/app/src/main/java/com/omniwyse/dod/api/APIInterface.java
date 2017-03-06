@@ -17,7 +17,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
- * Created by omniwyse on 30-01-2017.
+ * Created by Mukesh on 30-01-2017.
  * The Communicator class performs the call and contains the methods which create the Rest Adapter.
  */
 
