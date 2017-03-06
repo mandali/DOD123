@@ -1176,7 +1176,7 @@ public class DODController {
 					beaconSearchVos.add(merchantPromotionBeaconSearchVo);
 					
 				}
-				result=new DataResultlist<MerchantPromotionBeaconSearchVo>(true, AppConstants.LIST_MERCHANT_PRODUCTS_SUCCESS_MSG,HttpStatus.OK.value(), beaconSearchVos);	
+				result=new DataResultlist<MerchantPromotionBeaconSearchVo>(true, AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG,HttpStatus.OK.value(), beaconSearchVos);	
 				return new ResponseEntity(result, HttpStatus.OK);
 			}		
 			else

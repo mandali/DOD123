@@ -39,6 +39,7 @@ public class AppConstants {
 	public static final String CREATE_MERCHANT_PROMOTION_BEACON_SUCCESS_MSG="Merchant Promotion Beacon Created";
 	public static final String CREATE_MERCHANT_PROMOTION_BEACON_ERROR_MSG="Merchant Promotion Beacon Cannot be Created ";
 	public static final String CREATE_MERCHANT_PROMOTION_BEACON="/createmerchantpromotionbeacon";
+	public static final String LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG="available Merchant Promotion Beacon's are";
 
 	
 }
