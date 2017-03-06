@@ -50,9 +50,11 @@ public class MetaDataServiceImpl implements MetaDataService {
 	/*===========================================================================================================*/	
 
 
+
 	public Product createProduct(NewProductVO newProductVO,MerchantProfile merchantProfile) {
 		// TODO Auto-generated method stub
 		return productDao.createProduct(newProductVO,merchantProfile);
+
 	}
 	
 	/*===========================================================================================================*/	
