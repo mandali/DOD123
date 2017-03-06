@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.omniwyse.dod.AppConstants.AppConstants;
+import com.omniwyse.dod.DTO.BeaconInformationVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CategoryVO;
@@ -1192,6 +1193,32 @@ public class DODController {
 		return responseEntity; 
 		
 	}
+	
+
+@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_BEACONS_PROMOTIONS_INFO , method = RequestMethod.POST)
+	public ResponseEntity fetchBeaconsInformation(@RequestBody BeaconInformationVO beaconInformationVO) {
+	ResponseEntity responseEntity = null;		
+	final String METHOD_NAME="fetchBeaconsInformation";
+	try{
+		
+		List<MerchantPromotionBeacon> merchantPromotionBeacons=merchantPromotionBeaconService.fetchMerchantPromotionBeacons(beaconInformationVO);
+		DataResult resultError;
+		if (merchantPromotionBeacons!=null) {
+			DataResultlist<MerchantPromotionBeacon> result=new DataResultlist<MerchantPromotionBeacon>(true, AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(),merchantPromotionBeacons);
+			return new ResponseEntity(result, HttpStatus.OK); 			
+		}
+		else {
+			resultError=new DataResult(false, "Sorry , No data found ... ", HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	catch(Exception exception){
+		logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+	}
+	return responseEntity;	
+}
 	
 	
 	
