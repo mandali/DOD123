@@ -991,7 +991,7 @@ public class DODController {
 		List<Product> products= productDao.validateProductname(newProductVO);		
 		try{					
 			if (merchantId!=null && products.isEmpty()){				
-				Product resp = metaDataService.createProduct(newProductVO);	
+				Product resp = metaDataService.createProduct(newProductVO,merchantId);	
 				if (resp!=null) {
 					DataResult result=new DataResult(true, " Product Created successfully ... ", HttpStatus.OK.value());	
 					return new ResponseEntity(result, HttpStatus.OK);

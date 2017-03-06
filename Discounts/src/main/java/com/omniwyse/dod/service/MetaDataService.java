@@ -9,6 +9,7 @@ import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
 
@@ -20,7 +21,7 @@ public interface MetaDataService {
 	
 	public List<ProductVO> fetchMerchantProducts(ProductVO productVO);
 	
-	public Product createProduct(NewProductVO newProductVO) ; 
+	public Product createProduct(NewProductVO newProductVO,MerchantProfile merchantProfile) ; 
 	
 	public Location createLocation(LocationVO locationVO);
 	

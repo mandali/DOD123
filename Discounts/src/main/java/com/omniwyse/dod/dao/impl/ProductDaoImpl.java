@@ -23,14 +23,14 @@ public class ProductDaoImpl implements ProductDao{
 	@Autowired
 	SessionFactory sessionFactory;
 
-	public Product createProduct(NewProductVO newProductVO) {
+	public Product createProduct(NewProductVO newProductVO,MerchantProfile merchantProfile) {
 		Session session;
 		Product product = null;
 		try{
 		// TODO Auto-generated method stub
 		session = this.sessionFactory.getCurrentSession();
 		product=new Product();
-		product.setMerchantId(Integer.valueOf(newProductVO.getMerchantId()));
+		product.setMerchantId(merchantProfile);
 		product.setProductDescription(newProductVO.getProductDescription());
 		product.setProductImageLocation(newProductVO.getProductImage());
 		Long id = (Long) session.save(product);
