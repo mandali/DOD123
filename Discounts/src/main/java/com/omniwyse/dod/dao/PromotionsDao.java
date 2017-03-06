@@ -10,7 +10,6 @@ import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
-import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.Promotionsummary;
 

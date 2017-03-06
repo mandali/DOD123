@@ -33,8 +33,7 @@ public interface MerchantDao {
 	
 	public MerchantProfile getMerchantbyID(Integer id);
 	
-	public List<Promotion> MerchantPromotions(MerchantPromotions MerchantPromotions , Date date); 
-	
+	public List<Promotion> MerchantPromotions(MerchantPromotions MerchantPromotions , Date date); 	
 	
 	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo);
 }

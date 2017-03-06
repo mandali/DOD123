@@ -32,33 +32,48 @@ public class MetaDataServiceImpl implements MetaDataService {
 	public List<Category> fetchCategories() {
 		return metaDataDao.fetchCategories();
 	}
+	
+	/*===========================================================================================================*/	
 
 	public List<CategoryBrandVO> fetchBrands() {
 		return metaDataDao.fetchBrands();
 	}
+	
+	/*===========================================================================================================*/	
 
 	public List<ProductVO> fetchMerchantProducts(ProductVO productVO) {
-		// TODO Auto-generated method stub
+		
 		return metaDataDao.fetchMerchantProducts(productVO);
 	}
+	
+	/*===========================================================================================================*/	
 
 	public Product createProduct(NewProductVO newProductVO) {
-		// TODO Auto-generated method stub
+		
 		return productDao.createProduct(newProductVO);
 	}
+	
+	/*===========================================================================================================*/	
 
 	public Location createLocation(LocationVO locationVO) {	
 		return metaDataDao.createLocation(locationVO);
 	}
+	
+	/*===========================================================================================================*/	
 
-	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
-		// TODO Auto-generated method stub
+	@SuppressWarnings("rawtypes")
+	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {		
 		return metaDataDao.validateMPBCreation(merchantPromotionBeaconVO);
 	}
+	
+	/*===========================================================================================================*/	
 
+	@SuppressWarnings("rawtypes")
 	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO) {
-		// TODO Auto-generated method stub
+		
 		return metaDataDao.createMerchantPromotionBeacon(merchantPromotionBeaconVO);
 	}
+	
+	/*===========================================================================================================*/	
 
 }

@@ -1,13 +1,8 @@
 package com.omniwyse.dod.dao.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,7 +17,6 @@ import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
-import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.Promotionsummary;
 
@@ -170,7 +164,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		}		
 		return promotionDtos;	
 	}
-
+	/*===========================================================================================================*/	
 	@SuppressWarnings("unchecked")
 	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion) {
 		
@@ -202,5 +196,6 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		}		
 		return promotionDtos;
 	}
+	/*===========================================================================================================*/	
 
 }

@@ -3,9 +3,6 @@ package com.omniwyse.dod.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-
 public class ProductVO implements java.io.Serializable {
 
 	/**
