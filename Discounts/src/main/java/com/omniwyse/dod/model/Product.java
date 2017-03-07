@@ -39,12 +39,6 @@ public class Product  implements Serializable{
 	
 	public Product(){
 	}
-	
-	
-	
-
-
-
 	public Product(Long productId, String productDescription, String productImageLocation, Timestamp productCreatedDate,
 			MerchantProfile merchantId) {
 		this.productId = productId;
@@ -53,12 +47,6 @@ public class Product  implements Serializable{
 		this.productCreatedDate = productCreatedDate;
 		this.merchantId = merchantId;
 	}
-
-
-
-
-
-
 	public Long getProductId() {
 		return productId;
 	}
@@ -90,27 +78,11 @@ public class Product  implements Serializable{
 	public void setProductCreatedDate(Timestamp productCreatedDate) {
 		this.productCreatedDate = productCreatedDate;
 	}
-
-
-
-
-
 	public MerchantProfile getMerchantId() {
 		return merchantId;
 	}
-
-
-
-
-
 	public void setMerchantId(MerchantProfile merchantId) {
 		this.merchantId = merchantId;
-	}
-
-
-
-	
-	
-	
+	}	
 
 }

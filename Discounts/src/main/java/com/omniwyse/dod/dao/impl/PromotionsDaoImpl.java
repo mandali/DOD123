@@ -29,7 +29,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 	@SuppressWarnings("unchecked")
 	public List<Promotion> getPromotions() {
 		Session session = this.sessionFactory.openSession();		
-		List<Promotion> list = session.createQuery(" from Promotion where startdate = current_date()").list();
+		List<Promotion> list = session.createQuery(" from Promotion").list();
 		return list;	
 	}
 	

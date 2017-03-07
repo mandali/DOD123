@@ -30,8 +30,7 @@ public class MerchantPromotionBeaconDaoImpl implements MerchantPromotionBeaconDa
 	}
 		
 	@SuppressWarnings("unchecked")
-	public List<MerchantPromotionBeacon> fetchMerchantPromotionBeacons(
-			BeaconInformationVO beaconInformationVO) {
+	public List<MerchantPromotionBeacon> fetchMerchantPromotionBeacons(BeaconInformationVO beaconInformationVO) {
 		Session session;
 		Query query;
 		List<Long> bIds=new ArrayList<Long>();

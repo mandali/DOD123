@@ -72,8 +72,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		query.setParameter("emalid", merchantLoginwithEmail.getEmail());
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
-	}
-		
+	}		
 	public MerchantProfile merchantautheticateWithMobile(MerchantLoginwithMobile merchantLoginwithMobile) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where  password=:password and mobilenumber=:mobile");
@@ -81,16 +80,14 @@ public class MerchantDaoImpl implements MerchantDao{
 		query.setParameter("mobile", merchantLoginwithMobile.getMobileno().trim());
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
-	}
-		
+	}		
 	public MerchantProfile MerchantProfile(GetMerchatProfile getMerchatProfile) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where  mobilenumber=:mobileno");
 		query.setParameter("mobileno", getMerchatProfile.getMobileno());		
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
-	}
-		
+	}		
 	@SuppressWarnings("unchecked")
 	public List<MerchantProfile> AllMerchants() {
 		Session session = this.sessionFactory.openSession();			
@@ -104,8 +101,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		List<Promotion> list = session.createQuery(" from Promotion where merchatid=:id")
 		.setParameter("id",MerchantPromotions.getId()).list();			
 		return list;
-	}
-		
+	}		
 	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo) {
 		MerchantProfile resp = null;
 		try{
