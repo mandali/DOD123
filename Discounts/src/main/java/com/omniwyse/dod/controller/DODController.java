@@ -113,7 +113,7 @@ public class DODController {
 
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity SavewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
+	public ResponseEntity savewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
 		final String METHOD_NAME = "SavewithOTP";
 		ResponseEntity responseEntity = null;		
 	
@@ -137,7 +137,7 @@ public class DODController {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/OTPvalidate", method = RequestMethod.POST)
+	@RequestMapping(value = "/otpvalidate", method = RequestMethod.POST)
 	public ResponseEntity getOTP(@RequestBody OTPValidation oTPValidation) {
 		final String METHOD_NAME = "getOTP";
 		ResponseEntity responseEntity = null;
@@ -160,7 +160,7 @@ public class DODController {
 
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = "/consumerRegistration", method = RequestMethod.POST)
-	public ResponseEntity Registerconsumer(@RequestBody ConsumerProfile consumerProfile) {
+	public ResponseEntity registerConsumer(@RequestBody ConsumerProfile consumerProfile) {
 		final String METHOD_NAME = "Registerconsumer";
 		ResponseEntity responseEntity = null;
 		
@@ -187,8 +187,7 @@ public class DODController {
 	@RequestMapping(value = "/consumerlogin", method = RequestMethod.POST)
 	public ResponseEntity checkMobile(@RequestBody ConsumerLogin userLogin) {
 		final String METHOD_NAME = "checkMobile";
-		ResponseEntity responseEntity = null;
-		
+		ResponseEntity responseEntity = null;		
 		try {
 			RegisterWithOtp resp = consumerService.ConsumerLogin(userLogin);
 			if (resp != null) {
@@ -203,9 +202,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
-	
+	}	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumerProfile", method = RequestMethod.POST)
 	public ResponseEntity consumerProfile(@RequestBody ConsumerIdBaseProfile consumerIdBaseProfile) {
@@ -228,7 +225,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumeremaillogin", method = RequestMethod.POST)
@@ -251,7 +247,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/consumermobilelogin", method = RequestMethod.POST)
@@ -274,7 +269,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantRegistration", method = RequestMethod.POST)
@@ -299,7 +293,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantProfile", method = RequestMethod.POST)
@@ -326,13 +319,11 @@ public class DODController {
 		return responseEntity;
 	}
 
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantlist", method = RequestMethod.GET)
 	public ResponseEntity allMerchants() {
 		final String METHOD_NAME = "allMerchants";
-		ResponseEntity responseEntity = null;
-		
+		ResponseEntity responseEntity = null;		
 		List<MercnantDTO> response = new ArrayList<MercnantDTO>();
 		MercnantDTO mercnantDTO;
 		try {
@@ -373,7 +364,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/getmerchatbyMobile", method = RequestMethod.POST)
@@ -398,7 +388,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/promotion/merchantid", method = RequestMethod.POST)
@@ -452,7 +441,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantlogin", method = RequestMethod.POST)
@@ -496,7 +484,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantemaillogin", method = RequestMethod.POST)
@@ -519,7 +506,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/merchantmobilelogin", method = RequestMethod.POST)
@@ -542,8 +528,7 @@ public class DODController {
 		}
 		return responseEntity;
 
-	}
-	
+	}	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/promotions", method = RequestMethod.GET)
@@ -592,11 +577,10 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/promotion/categoryId", method = RequestMethod.POST)
-	public ResponseEntity CategoryIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {
+	public ResponseEntity categoryIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {
 		final String METHOD_NAME = "CategoryIdPromotion";
 		ResponseEntity responseEntity = null;
 		List<PromotionDto> promotions = promotionService.CategoryIdPromotions(categoryPromotion);
@@ -618,7 +602,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.BRANDID_PROMOTIONS, method = RequestMethod.POST)
@@ -641,9 +624,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
-	
+	}	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_BRANDID_CATEGORYID, method = RequestMethod.POST)
@@ -668,11 +649,9 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-	
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/promotionsummary", method = RequestMethod.GET)
-	public ResponseEntity PromotionSummary() {
+	public ResponseEntity promotionSummary() {
 		final String METHOD_NAME = "PromotionSummary";
 		ResponseEntity responseEntity = null;
 		Calendar calendar = Calendar.getInstance();
@@ -697,8 +676,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
-	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.CREATE_PROMOTIONS, method = RequestMethod.POST)
@@ -732,9 +709,7 @@ public class DODController {
 		}
 		return responseEntity;
 
-	}
-
-	
+	}	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/categorypromotions", method = RequestMethod.POST)
 	public ResponseEntity getCategoryPromotion(@RequestBody CategorySelection categorySelection) {
@@ -760,7 +735,6 @@ public class DODController {
 		return responseEntity;
 	}
 	
-	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/IdBasePromotions", method = RequestMethod.POST)
 	public ResponseEntity getIdbasePromotions(@RequestBody IdBasePromotion idBasePromotion) {
@@ -780,9 +754,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
-	
+	}	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_COUNTRIES, method = RequestMethod.GET)
 	public ResponseEntity fetchCountriesList() {
@@ -823,7 +795,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_CITIES, method = RequestMethod.GET)
@@ -862,9 +833,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
-	
+	}	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_LOCATIONS, method = RequestMethod.GET)
 	public ResponseEntity fetchLocationsList() {
@@ -907,9 +876,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
-	
+	}	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_CATEGORIES, method = RequestMethod.GET)
 	public ResponseEntity fetchCategoriesList() {
@@ -951,9 +918,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
-	
+	}	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_BRANDS, method = RequestMethod.GET)
@@ -981,7 +946,6 @@ public class DODController {
 		return responseEntity;
 	}
 
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_MERCHANT_PRODUCTS, method = RequestMethod.POST)
 	public ResponseEntity fetchMerchatProducts(@RequestBody ProductVO productVO) {
@@ -1006,8 +970,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
-
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.CREATE_PRODUCTS, method = RequestMethod.POST)
@@ -1038,9 +1000,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
-	
+	}	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.CREATE_LOCATION, method = RequestMethod.POST)
@@ -1062,9 +1022,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
-	
+	}	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.CREATE_MERCHANT_PROMOTION_BEACON, method = RequestMethod.POST)
@@ -1099,9 +1057,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
-	
+	}	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_MERCHANT_PROMOTION_BEACONS, method = RequestMethod.GET)
@@ -1210,7 +1166,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_BEACONS_PROMOTIONS_INFO, method = RequestMethod.POST)
