@@ -11,13 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.omniwyse.dod.DTO.BeaconInformationVO;
-import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantPromotionBeaconDao;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 @Repository
 public class MerchantPromotionBeaconDaoImpl implements MerchantPromotionBeaconDao{
 	
-	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
+	private static final Logger logger = Logger.getLogger(MerchantPromotionBeaconDaoImpl.class);
 	
 	@Autowired
 	SessionFactory sessionFactory;

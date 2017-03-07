@@ -26,7 +26,6 @@ import com.omniwyse.dod.DTO.MerchantProductVO;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.ProductVO;
-import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MetaDataDao;
 import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.Brand;
@@ -43,7 +42,7 @@ import com.omniwyse.dod.model.Promotion;
 @Repository
 public class MetaDataDaoImpl implements MetaDataDao {
 
-	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
+	private static final Logger logger = Logger.getLogger(MetaDataDaoImpl.class);
 
 	@SuppressWarnings("unused")
 	private static final String MerchantProfile = null;
@@ -239,8 +238,8 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			promotionId=(Promotion)session.get(Promotion.class,Integer.valueOf(merchantPromotionBeaconVO.getPromotionId()));
 			beaconId=(Beacon)session.get(Beacon.class, Long.valueOf(merchantPromotionBeaconVO.getBeaconId()));
 			merchantAisle=(MerchantAisle)session.get(MerchantAisle.class,Long.valueOf(merchantPromotionBeaconVO.getAisleId()));
-			if(promotionId!=null && promotionId.getLocation()!=null){
-				location=(Location) session.get(Location.class, Long.valueOf(promotionId.getLocation()));
+			if(promotionId!=null && promotionId.getLocationId()!=null){
+				location=(Location) session.get(Location.class, Long.valueOf(promotionId.getLocationId().getLocationId()));
 				if(location!=null && location.getCountryId().getId()!=null && location.getCitiesId().getCityId()!=null){
 					country=(Country) session.get(Country.class, Long.valueOf(location.getCountryId().getId()));
 					cities=(Cities) session.get(Cities.class, Long.valueOf(location.getCitiesId().getCityId()));
