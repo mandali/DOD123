@@ -28,36 +28,29 @@ public class ConsumerServiceImpl implements ConsumerService{
 	public ConsumerProfile consumerautheticatewithemail(ConsumerLoginwithEmail userLogin) {
 		
 		return consumerDao.consumerautheticatewithemail(userLogin);
-	}
-		
+	}		
 	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin) {
 		
 		return consumerDao.consumerautheticatewithMobile(userLogin);
-	}
-		
-	
+	}	
 	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin) {
 		
 		return consumerDao.ConsumerLogin(userLogin);
-	}
-		
+	}		
 	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
 		Date date=new Date();
 		consumerProfile.setCreateddate(date);
 		ConsumerProfile resp=consumerDao.registerconsumer(consumerProfile);
 		return resp;
-	}
-		
+	}		
 	public com.omniwyse.dod.model.ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile) {
 		
 		return consumerDao.ConsumerProfile(consumerIdBaseProfile);
-	}
-		
+	}		
 	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData consumerPromotionData) {
 		
 		return consumerDao.ConsumerPromotion(consumerPromotionData);
-	}
-		
+	}	
 
 	}
 
