@@ -147,8 +147,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
 				DataResult result = new DataResult(true, AppConstants.OTP_VALIDATE_ERROR_MSG,HttpStatus.OK.value());
-				DataResult result = new DataResult(true, "Sorry , Wrong OTP No / Mobile no . ",
-						HttpStatus.OK.value());
+				
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
@@ -216,8 +215,6 @@ public class DODController {
 				return new ResponseEntity(data, HttpStatus.OK);
 			} else {
 				DataResult result = new DataResult(true, AppConstants.CONSUMER_PROFILE_ERROR_MSG , HttpStatus.OK.value());
-				DataResult result = new DataResult(true, " Sorry , No data available on selected mobile no ... ",
-						HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
@@ -405,7 +402,7 @@ public class DODController {
 					for (Promotion promotion : data) {
 						promotionDto.setProduct_id(String.valueOf(promotion.getProductID().getProductId()));
 						promotionDto.setId(response.getId());
-						promotionDto.setProduct_image(promotion.getProduct_image());
+						promotionDto.setProduct_image(promotion.getProductID().getProductImageLocation());
 						promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 						promotionDto.setDiscount(promotion.getDiscount());
 						promotionDto.setStartdate(promotion.getStartdate());
@@ -546,8 +543,8 @@ public class DODController {
 					promotionDto.setProduct_id(String.valueOf(resp.getProductID().getProductId()));
 					promotionDto.setProduct_image(resp.getProductID().getProductImageLocation());
 					promotionDto.setDescription(resp.getDescription());
-					promotionDto.setMerchatId(resp.getMerchatid());
-					promotionDto.setProduct_image(resp.getProduct_image());
+					promotionDto.setMerchatId(resp.getMerchatId().getId());
+					promotionDto.setProduct_image(resp.getProductID().getProductImageLocation());
 					promotionDto.setOriginalPrice(resp.getOriginalPrice());
 					promotionDto.setDiscount(resp.getDiscount());
 					promotionDto.setLocationId(String.valueOf(resp.getLocationId().getLocationId()));
@@ -1196,8 +1193,8 @@ public class DODController {
 							promotionDto.setId(merchantPromotionBeacon.getPromotion().getId());
 							promotionDto.setProduct_id(String.valueOf(merchantPromotionBeacon.getPromotion().getProductID().getProductId()));
 							promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
-							promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatid());
-							promotionDto.setProduct_image(merchantPromotionBeacon.getPromotion().getProduct_image());
+							promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getId());
+							promotionDto.setProduct_image(merchantPromotionBeacon.getPromotion().getProductID().getProductImageLocation());
 							promotionDto.setOriginalPrice(merchantPromotionBeacon.getPromotion().getOriginalPrice());
 							promotionDto.setDiscount(merchantPromotionBeacon.getPromotion().getDiscount());
 							promotionDto.setLocationId(String.valueOf(merchantPromotionBeacon.getPromotion().getLocationId().getLocationId()));
@@ -1237,11 +1234,12 @@ public class DODController {
 						promotionDto.setId(merchantPromotionBeacon.getPromotion().getId());
 						promotionDto.setProduct_id(String.valueOf(merchantPromotionBeacon.getPromotion().getProductID().getProductId()));
 						promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
-						promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatid());
-						promotionDto.setProduct_image(merchantPromotionBeacon.getPromotion().getProduct_image());
+						promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getId());
+						promotionDto.setProduct_image(merchantPromotionBeacon.getPromotion().getProductID().getProductImageLocation());
 						promotionDto.setOriginalPrice(merchantPromotionBeacon.getPromotion().getOriginalPrice());
 						promotionDto.setDiscount(merchantPromotionBeacon.getPromotion().getDiscount());
-						promotionDto.setLocation(merchantPromotionBeacon.getPromotion().getLocation());
+						promotionDto.setLocationId(String.valueOf(merchantPromotionBeacon.getPromotion().getLocationId().getLocationId()));
+						promotionDto.setLocationName(String.valueOf(merchantPromotionBeacon.getPromotion().getLocationId().getLocationName()));
 						promotionDto.setCreateddate(merchantPromotionBeacon.getPromotion().getCreateddate());
 						promotionDto.setStartdate(merchantPromotionBeacon.getPromotion().getStartdate());
 						promotionDto.setEnddate(merchantPromotionBeacon.getPromotion().getEnddate());
