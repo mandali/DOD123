@@ -125,9 +125,9 @@ public class DODController {
 				RegisterWithOtp model = registrationService.Register(registerWithOtp);
 				return new ResponseEntity(otpBean, HttpStatus.OK);
 			} else {
-				DataResult dataResult = new DataResult(false, " Sorry , Mobile no is alredy exist ... ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(dataResult, HttpStatus.BAD_REQUEST);
+				DataResult dataResult = new DataResult(true, " Sorry , Mobile no is alredy exist ... ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -147,9 +147,9 @@ public class DODController {
 				DataResult result = new DataResult(true, " OTP Validation successfully ... ", HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, "Sorry , Wrong OTP No / Mobile no . ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, "Sorry , Wrong OTP No / Mobile no . ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -171,9 +171,9 @@ public class DODController {
 						HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , Mobile no and Mail address is alredy exist !!",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , Mobile no and Mail address is alredy exist !!",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -193,9 +193,9 @@ public class DODController {
 				DataResult result = new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , Wrong Credentials ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , Wrong Credentials ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -215,9 +215,9 @@ public class DODController {
 						"Consumer Details is , ", HttpStatus.OK.value(), resp);
 				return new ResponseEntity(data, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , No data available on selected mobile no ... ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , No data available on selected mobile no ... ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -237,9 +237,9 @@ public class DODController {
 				DataResult result = new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , Wrong Credentials ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , Wrong Credentials ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -259,9 +259,9 @@ public class DODController {
 				DataResult result = new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , Wrong Credentials ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , Wrong Credentials ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -283,9 +283,9 @@ public class DODController {
 						"Registration successfully", HttpStatus.OK.value(), model);
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, "Sorry , Mobile no and Mail address is alredy exist !!",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, "Sorry , Mobile no and Mail address is alredy exist !!",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -308,9 +308,9 @@ public class DODController {
 						"Success , Merchant Details found ", HttpStatus.OK.value(), model);
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , no details found on selected mobile no ... ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , no details found on selected mobile no ... ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -354,9 +354,9 @@ public class DODController {
 						HttpStatus.OK.value(), response);
 				return new ResponseEntity(resp, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , merchants are not found right now  ... ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , merchants are not found right now  ... ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -378,9 +378,9 @@ public class DODController {
 
 				return new ResponseEntity(merchantProfile, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, "Sorry , No details found on selected id ... ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, "Sorry , No details found on selected id ... ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -431,9 +431,9 @@ public class DODController {
 						HttpStatus.OK.value(), promotionDtos);
 				return new ResponseEntity(resp, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, "Sorry , No Promotion found on selected Merchantid ... ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, "Sorry , No Promotion found on selected Merchantid ... ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -474,9 +474,9 @@ public class DODController {
 						" Login successfully ... ", HttpStatus.OK.value(), merchnantDTO);
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , Wrong Credentials ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , Wrong Credentials ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -496,9 +496,9 @@ public class DODController {
 				DataResult result = new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , Wrong Credentials ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , Wrong Credentials ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -518,9 +518,9 @@ public class DODController {
 				DataResult result = new DataResult(true, " Login Succes ... ", HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, " Sorry , Wrong Credentials ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, " Sorry , Wrong Credentials ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -567,9 +567,9 @@ public class DODController {
 						" available Promotions are ,", HttpStatus.OK.value(), promotionDtos);
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, "Sorry , No Promotions are available right now ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, "Sorry , No Promotions are available right now ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -591,10 +591,10 @@ public class DODController {
 				return new ResponseEntity(dataResultlist, HttpStatus.OK);
 
 			} else {
-				DataResult result = new DataResult(false,
+				DataResult result = new DataResult(true,
 						"Sorry , No Promotions are available on selected Id right now ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -615,9 +615,9 @@ public class DODController {
 						AppConstants.AVAILABE_PROMOTIONS_SUCCESS_MSG, HttpStatus.OK.value(), promotions);
 				return new ResponseEntity(resp, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, AppConstants.AVAILABE_PROMOTIONS_ERROR_MSG,
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, AppConstants.AVAILABE_PROMOTIONS_ERROR_MSG,
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -638,10 +638,10 @@ public class DODController {
 						" available promotions are ... ", HttpStatus.OK.value(), promotions);
 				return new ResponseEntity(resp, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false,
+				DataResult result = new DataResult(true,
 						"Sorry , No Promotions are available on selected Id right now ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -666,9 +666,9 @@ public class DODController {
 						" available Promotions Summary are ,", HttpStatus.OK.value(), promotions);
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, "Sorry , No Promotions Summary are available right now ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, "Sorry , No Promotions Summary are available right now ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -693,14 +693,14 @@ public class DODController {
 							HttpStatus.OK.value());
 					return new ResponseEntity(result, HttpStatus.OK);
 				} else {
-					DataResult result = new DataResult(false, AppConstants.PROMOTIONS_ERROR_MSG,
-							HttpStatus.BAD_REQUEST.value());
-					return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+					DataResult result = new DataResult(true, AppConstants.PROMOTIONS_ERROR_MSG,
+							HttpStatus.OK.value());
+					return new ResponseEntity(result, HttpStatus.OK);
 				}
 			} else {
-				DataResult result = new DataResult(false, AppConstants.PROMOTIONS_ERROR_MSG,
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, AppConstants.PROMOTIONS_ERROR_MSG,
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error(" Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -723,10 +723,10 @@ public class DODController {
 						HttpStatus.OK.value(), promotions);
 				return new ResponseEntity(data, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false,
+				DataResult result = new DataResult(true,
 						" Sorry , No Promotions are available on selected category right now ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -745,9 +745,9 @@ public class DODController {
 			if (promotions != null) {
 				return new ResponseEntity(promotions, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, "Sorry , No Promotions are available on selected id ... ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, "Sorry , No Promotions are available on selected id ... ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -784,9 +784,9 @@ public class DODController {
 						HttpStatus.OK.value(), countryVOs);
 				responseEntity = new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				resultError = new DataResult(false, AppConstants.LIST_COUNTRIES_ERROR_MSG,
-						HttpStatus.BAD_REQUEST.value());
-				responseEntity = new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				resultError = new DataResult(true, AppConstants.LIST_COUNTRIES_ERROR_MSG,
+						HttpStatus.OK.value());
+				responseEntity = new ResponseEntity(resultError, HttpStatus.OK);
 			}
 
 		} catch (Exception exception) {
@@ -825,8 +825,8 @@ public class DODController {
 						citiesVOs);
 				responseEntity = new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				resultError = new DataResult(false, AppConstants.LIST_CITIES_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
-				responseEntity = new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				resultError = new DataResult(true, AppConstants.LIST_CITIES_ERROR_MSG, HttpStatus.OK.value());
+				responseEntity = new ResponseEntity(resultError, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -866,9 +866,9 @@ public class DODController {
 						HttpStatus.OK.value(), locationsVOs);
 				responseEntity = new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				resultError = new DataResult(false, AppConstants.LIST_LOCATIONS_ERROR_MSG,
-						HttpStatus.BAD_REQUEST.value());
-				responseEntity = new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				resultError = new DataResult(true, AppConstants.LIST_LOCATIONS_ERROR_MSG,
+						HttpStatus.OK.value());
+				responseEntity = new ResponseEntity(resultError, HttpStatus.OK);
 
 			}
 		} catch (Exception exception) {
@@ -909,9 +909,9 @@ public class DODController {
 				responseEntity = new ResponseEntity(result, HttpStatus.OK);
 			} else {
 
-				resultError = new DataResult(false, AppConstants.LIST_CATEGORIES_ERROR_MSG,
-						HttpStatus.BAD_REQUEST.value());
-				responseEntity = new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				resultError = new DataResult(true, AppConstants.LIST_CATEGORIES_ERROR_MSG,
+						HttpStatus.OK.value());
+				responseEntity = new ResponseEntity(resultError, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -935,8 +935,8 @@ public class DODController {
 						HttpStatus.OK.value(), categories);
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				resultError = new DataResult(false, AppConstants.LIST_BRANDS_ERROR_MSG, HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				resultError = new DataResult(true, AppConstants.LIST_BRANDS_ERROR_MSG, HttpStatus.OK.value());
+				return new ResponseEntity(resultError, HttpStatus.OK);
 			}
 
 		} catch (Exception exception) {
@@ -960,9 +960,9 @@ public class DODController {
 						HttpStatus.OK.value(), productVOs);
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				resultError = new DataResult(false, AppConstants.LIST_MERCHANT_PRODUCTS_ERROR_MSG,
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				resultError = new DataResult(true, AppConstants.LIST_MERCHANT_PRODUCTS_ERROR_MSG,
+						HttpStatus.OK.value());
+				return new ResponseEntity(resultError, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -986,14 +986,14 @@ public class DODController {
 							HttpStatus.OK.value());
 					return new ResponseEntity(result, HttpStatus.OK);
 				} else {
-					DataResult result = new DataResult(false, "Sorry , Please check merchantId/productId   ",
-							HttpStatus.BAD_REQUEST.value());
-					return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+					DataResult result = new DataResult(true, "Sorry , Please check merchantId/productId   ",
+							HttpStatus.OK.value());
+					return new ResponseEntity(result, HttpStatus.OK);
 				}
 			} else {
-				DataResult result = new DataResult(false, "Sorry , Please check merchantId/productId    ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, "Sorry , Please check merchantId/productId    ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -1013,9 +1013,9 @@ public class DODController {
 				DataResult result = new DataResult(true, " Location Created successfully ... ", HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				DataResult result = new DataResult(false, "Sorry , Please enter valied details ... ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+				DataResult result = new DataResult(true, "Sorry , Please enter valied details ... ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -1042,15 +1042,15 @@ public class DODController {
 							merchantPromotionBeacon);
 					return new ResponseEntity(result, HttpStatus.OK);
 				} else {
-					DataResult result = new DataResult(false,
+					DataResult result = new DataResult(true,
 							"Sorry , Please check merchantId/promotionId/beaconId/aisleId    ",
-							HttpStatus.BAD_REQUEST.value());
-					return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+							HttpStatus.OK.value());
+					return new ResponseEntity(result, HttpStatus.OK);
 				}
 			} else {
-				resultError = new DataResult(false, "Sorry , Please check merchantId/promotionId/beaconId/aisleId    ",
-						HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				resultError = new DataResult(true, "Sorry , Please check merchantId/promotionId/beaconId/aisleId    ",
+						HttpStatus.OK.value());
+				return new ResponseEntity(resultError, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -1156,8 +1156,8 @@ public class DODController {
 						beaconSearchVos);
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				resultError = new DataResult(false, "Sorry , No data found ... ", HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				resultError = new DataResult(true, "Sorry , No data found ... ", HttpStatus.OK.value());
+				return new ResponseEntity(resultError, HttpStatus.OK);
 			}
 
 		} catch (Exception exception) {
@@ -1175,7 +1175,7 @@ public class DODController {
 		MPBSearchVO mpbSearchVO;
 		PromotionDto promotionDto;
 		Map<String, List<PromotionDto>> beaconsMap = new LinkedHashMap<String, List<PromotionDto>>();
-		boolean mapFlag = false;
+		boolean mapFlag = true;
 		try {
 			List<MerchantPromotionBeacon> merchantPromotionBeacons = merchantPromotionBeaconService
 					.fetchMerchantPromotionBeacons(beaconInformationVO);
@@ -1254,7 +1254,7 @@ public class DODController {
 						mpbSearchVOs.add(mpbSearchVO);
 						beaconsMap.put(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()),
 								mpbSearchVO.getPromotionDtos());
-						mapFlag = false;
+						mapFlag = true;
 					}
 
 				}
@@ -1263,8 +1263,8 @@ public class DODController {
 						AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(), mpbSearchVOs);
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {
-				resultError = new DataResult(false, " Sorry , No data found ... ", HttpStatus.BAD_REQUEST.value());
-				return new ResponseEntity(resultError, HttpStatus.BAD_REQUEST);
+				resultError = new DataResult(true, " Sorry , No data found ... ", HttpStatus.OK.value());
+				return new ResponseEntity(resultError, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());

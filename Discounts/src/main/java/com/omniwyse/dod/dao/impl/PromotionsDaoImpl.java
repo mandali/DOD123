@@ -29,11 +29,9 @@ public class PromotionsDaoImpl implements PromotionsDao{
 	@SuppressWarnings("unchecked")
 	public List<Promotion> getPromotions() {
 		Session session = this.sessionFactory.openSession();		
-		List<Promotion> list = session.createQuery(" from Promotion").list();
+		List<Promotion> list = session.createQuery(" from Promotion ").list();
 		return list;	
 	}
-	
-	
 	
 	@SuppressWarnings("unchecked")
 	public List<Promotion> getCategoryPromotions(Date currentdate, CategorySelection categorySelection) {
@@ -43,8 +41,6 @@ public class PromotionsDaoImpl implements PromotionsDao{
 				.setParameter("currentDate", currentdate).list();			
 		return list;
 	}
-	
-	
 
 	public Promotion CreatePromotions(CreatePromotionVo createPromotionVo) {				
 		Promotion promotion=new Promotion();
@@ -68,7 +64,6 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		Promotion resp=(Promotion) session.get(Promotion.class, id);		
 		return resp;
 		}
-	
 
 	public Promotion getIdbasePromotion(IdBasePromotion idBasePromotion) {
 		Session session = this.sessionFactory.getCurrentSession();	
@@ -76,7 +71,6 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		Promotion resp=(Promotion)((org.hibernate.Query) query).uniqueResult();
 		return resp;
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	public List<Promotionsummary> PromotionSummary(Date date) {
@@ -84,7 +78,6 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		List<Promotionsummary> list = session.createQuery(" from Promotionsummary ").list();	
 		return list;
 	}
-	
 
 	public Category getcategoryId(CreatePromotionVo createPromotionVo) {
 	
@@ -94,16 +87,13 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		Category category =(Category)query.uniqueResult();	
 		return category;
 	}
-	
-
 	public Brand getBrandId(CreatePromotionVo createPromotionVo) {
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query)session.createQuery(" from Brand where brandId=:brandId ")
 				.setParameter("brandId",createPromotionVo.getBrandId());
 		Brand brand =(Brand)query.uniqueResult();	
 		return brand;
-	}
-	
+	}	
 	@SuppressWarnings({"unchecked" })
 	public List<PromotionDto> CategoryIdPromotion(CategoryPromotion categoryPromotion) {		
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
