@@ -13,8 +13,8 @@ import com.omniwyse.dod.model.Promotionsummary;
 
 public interface PromotionService {
 	
-    @SuppressWarnings("rawtypes")
-	public List getPromotions();
+    
+	public List<Promotion> getPromotions();
 	
 	public List<Promotion> getCategoryPromotions(Date currentdate ,CategorySelection categorySelection);
 	

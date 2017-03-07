@@ -119,8 +119,9 @@ public class DODController {
 	public ResponseEntity SavewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
 		final String METHOD_NAME="SavewithOTP";
 		ResponseEntity responseEntity = null;
-		RegisterWithOtp data=ConsumerRegisterValidate.getmobileno(registerWithOtp);
-		try {		
+		
+		try {
+			RegisterWithOtp data=ConsumerRegisterValidate.getmobileno(registerWithOtp);
 		if (data==null) {			
 			Integer otp=1234;				
 			OtpBean otpBean=new OtpBean("OTP For Registration !!", otp);
@@ -137,7 +138,7 @@ public class DODController {
 		}
 		return responseEntity;		
 	}
-	/*======================================================================================================*/	
+		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/OTPvalidate", method = RequestMethod.POST)
 	public ResponseEntity getOTP(@RequestBody OTPValidation oTPValidation) {
@@ -1160,8 +1161,7 @@ public class DODController {
 	try{		
 		List<MerchantPromotionBeacon> merchantPromotionBeacons=merchantPromotionBeaconService.fetchMerchantPromotionBeacons(beaconInformationVO);
 		DataResult resultError;
-		if (merchantPromotionBeacons!=null) {
-			
+		if (merchantPromotionBeacons!=null) {			
 			for(MerchantPromotionBeacon merchantPromotionBeacon:merchantPromotionBeacons){
 				if(beaconsMap!=null && !beaconsMap.isEmpty()){
 					List<PromotionDto> existingPromotion=beaconsMap.get(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()));
@@ -1186,7 +1186,7 @@ public class DODController {
 					promotionDto.setCatid(merchantPromotionBeacon.getPromotion().getCatid().getCategoryId());
 					promotionDto.setBrandId(merchantPromotionBeacon.getPromotion().getBrandId().getBrandid());
 					promotionDto.setDiscountText(merchantPromotionBeacon.getPromotion().getDiscountText());
-					existingPromotion.add(promotionDto);
+					existingPromotion.add(promotionDto);					
 					mapFlag=true;
 					}
 				}

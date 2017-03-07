@@ -32,8 +32,8 @@ public class PromotionServiceImpl implements PromotionService{
 	
 	
 
-	@SuppressWarnings("rawtypes")
-	public List getPromotions() {
+	
+	public List<Promotion> getPromotions() {
 		
 		return promotionsDao.getPromotions();
 	}
