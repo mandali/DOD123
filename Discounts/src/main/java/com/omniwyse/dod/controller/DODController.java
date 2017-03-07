@@ -404,15 +404,15 @@ public class DODController {
 					promotionDto = new PromotionDto();
 					promotionDto.setId(response.getId());
 					for (Promotion promotion : data) {
-						promotionDto.setProduct_id(promotion.getProduct_id());
+						promotionDto.setProduct_id(String.valueOf(promotion.getProductID().getProductId()));
 						promotionDto.setId(response.getId());
-						promotionDto.setProduct_image(promotion.getProduct_image());
 						promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 						promotionDto.setDiscount(promotion.getDiscount());
 						promotionDto.setStartdate(promotion.getStartdate());
 						promotionDto.setEnddate(promotion.getEnddate());
-						promotionDto.setLocation(promotion.getLocation());
-						promotionDto.setMerchatId(promotion.getMerchatid());
+						promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
+						promotionDto.setLocationName(promotion.getLocationId().getLocationName());
+						promotionDto.setMerchatId(promotion.getMerchatId().getId());
 						promotionDto.setDiscountText(promotion.getDiscountText());
 						promotionDto.setCatid(promotion.getCatid().getCategoryId());
 						promotionDto.setCategoryName(response.getCatid().getCategoryName());
@@ -543,13 +543,14 @@ public class DODController {
 				for (Promotion resp : promotions) {
 					promotionDto = new PromotionDto();
 					promotionDto.setId(resp.getId());
-					promotionDto.setProduct_id(resp.getProduct_id());
+					promotionDto.setProduct_id(String.valueOf(resp.getProductID().getProductId()));
+					promotionDto.setProduct_image(resp.getProductID().getProductImageLocation());
 					promotionDto.setDescription(resp.getDescription());
-					promotionDto.setMerchatId(resp.getMerchatid());
-					promotionDto.setProduct_image(resp.getProduct_image());
+					promotionDto.setMerchatId(resp.getMerchatId().getId());
 					promotionDto.setOriginalPrice(resp.getOriginalPrice());
 					promotionDto.setDiscount(resp.getDiscount());
-					promotionDto.setLocation(resp.getLocation());
+					promotionDto.setLocationId(String.valueOf(resp.getLocationId().getLocationId()));
+					promotionDto.setLocationName(resp.getLocationId().getLocationName());
 					promotionDto.setCreateddate(resp.getCreateddate());
 					promotionDto.setStartdate(resp.getStartdate());
 					promotionDto.setEnddate(resp.getEnddate());
@@ -582,7 +583,7 @@ public class DODController {
 	public ResponseEntity categoryIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {
 		final String METHOD_NAME = "CategoryIdPromotion";
 		ResponseEntity responseEntity = null;
-		List<PromotionDto> promotions = promotionService.CategoryIdPromotions(categoryPromotion);
+		List<PromotionDto> promotions = promotionService.categoryIdPromotions(categoryPromotion);
 		try {
 			if (!promotions.isEmpty()) {
 
@@ -686,8 +687,11 @@ public class DODController {
 			MerchantProfile merchantId = merchantDao.validatePromotion(createPromotionVo);
 			Category categoryid = promotionsDao.getcategoryId(createPromotionVo);
 			Brand brandid = promotionsDao.getBrandId(createPromotionVo);
-			if (merchantId != null && categoryid != null && brandid != null) {
-				Promotion resp = promotionService.CreatePromotions(createPromotionVo);
+			Product productId=promotionsDao.fetchProductById(createPromotionVo);
+			if (merchantId != null && categoryid != null && brandid != null && productId!=null) {
+				createPromotionVo.setProductId(productId);
+				createPromotionVo.setMerchantProfile(merchantId);
+				Promotion resp = promotionService.createPromotions(createPromotionVo);
 				if (resp != null) {
 					DataResult result = new DataResult(true, AppConstants.PROMOTIONS_SUCCESS_MSG,
 							HttpStatus.OK.value());
@@ -741,7 +745,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 		
 		try {
-			Promotion promotions = promotionService.IdBasePromotions(idBasePromotion);
+			Promotion promotions = promotionService.idBasePromotions(idBasePromotion);
 			if (promotions != null) {
 				return new ResponseEntity(promotions, HttpStatus.OK);
 			} else {
@@ -1112,10 +1116,10 @@ public class DODController {
 						merchantPromotionBeaconSearchVo.setOriginalPrice(promotionId.getOriginalPrice());
 						merchantPromotionBeaconSearchVo.setDiscount(promotionId.getDiscount());
 						merchantPromotionBeaconSearchVo.setDiscountText(promotionId.getDiscountText());
-						merchantPromotionBeaconSearchVo.setLocation(promotionId.getLocation());
-						merchantPromotionBeaconSearchVo.setMerchantId(promotionId.getMerchatid());
-						merchantPromotionBeaconSearchVo.setProduct_id(promotionId.getProduct_id());
-						merchantPromotionBeaconSearchVo.setProduct_image(promotionId.getProduct_image());
+						merchantPromotionBeaconSearchVo.setLocationId(String.valueOf(promotionId.getLocationId().getLocationId()));
+						merchantPromotionBeaconSearchVo.setLocationName(promotionId.getLocationId().getLocationName());
+						merchantPromotionBeaconSearchVo.setMerchantId(promotionId.getMerchatId().getId());
+						merchantPromotionBeaconSearchVo.setProduct_id(String.valueOf(promotionId.getProductID().getProductId()));
 						merchantPromotionBeaconSearchVo.setProductname(promotionId.getDescription());
 						merchantPromotionBeaconSearchVo.setBrandId(promotionId.getBrandId().getBrandid());
 						merchantPromotionBeaconSearchVo.setBrandName(promotionId.getBrandId().getBrandName());
@@ -1189,13 +1193,13 @@ public class DODController {
 						if (existingPromotion != null && !existingPromotion.isEmpty()) {
 							promotionDto = new PromotionDto();
 							promotionDto.setId(merchantPromotionBeacon.getPromotion().getId());
-							promotionDto.setProduct_id(merchantPromotionBeacon.getPromotion().getProduct_id());
+							promotionDto.setProduct_id(String.valueOf(merchantPromotionBeacon.getPromotion().getProductID().getProductId()));
 							promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
-							promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatid());
-							promotionDto.setProduct_image(merchantPromotionBeacon.getPromotion().getProduct_image());
+							promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getId());
 							promotionDto.setOriginalPrice(merchantPromotionBeacon.getPromotion().getOriginalPrice());
 							promotionDto.setDiscount(merchantPromotionBeacon.getPromotion().getDiscount());
-							promotionDto.setLocation(merchantPromotionBeacon.getPromotion().getLocation());
+							promotionDto.setLocationId(String.valueOf(merchantPromotionBeacon.getPromotion().getLocationId().getLocationId()));
+							promotionDto.setLocationName(merchantPromotionBeacon.getPromotion().getLocationId().getLocationName());
 							promotionDto.setCreateddate(merchantPromotionBeacon.getPromotion().getCreateddate());
 							promotionDto.setStartdate(merchantPromotionBeacon.getPromotion().getStartdate());
 							promotionDto.setEnddate(merchantPromotionBeacon.getPromotion().getEnddate());
@@ -1223,19 +1227,17 @@ public class DODController {
 						mpbSearchVO.setMerchantId(String.valueOf(merchantPromotionBeacon.getMerchantProfile().getId()));
 						mpbSearchVO.setMerchantName(merchantPromotionBeacon.getMerchantProfile().getFirstname() + ""
 								+ merchantPromotionBeacon.getMerchantProfile().getLastname());
-						mpbSearchVO.setLocationId(merchantPromotionBeacon.getPromotion().getLocation());
-						mpbSearchVO.setLocationName("");
+						mpbSearchVO.setLocationId(String.valueOf(merchantPromotionBeacon.getPromotion().getLocationId().getLocationId()));
+						mpbSearchVO.setLocationName(merchantPromotionBeacon.getPromotion().getLocationId().getLocationName());
 						mpbSearchVO.setAisleId(String.valueOf(merchantPromotionBeacon.getMerchantAisle().getAisleId()));
 						mpbSearchVO.setAisleName(merchantPromotionBeacon.getMerchantAisle().getAisleName());
 						promotionDto = new PromotionDto();
 						promotionDto.setId(merchantPromotionBeacon.getPromotion().getId());
-						promotionDto.setProduct_id(merchantPromotionBeacon.getPromotion().getProduct_id());
+						promotionDto.setProduct_id(String.valueOf(merchantPromotionBeacon.getPromotion().getProductID().getProductId()));
 						promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
-						promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatid());
-						promotionDto.setProduct_image(merchantPromotionBeacon.getPromotion().getProduct_image());
+						promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getId());
 						promotionDto.setOriginalPrice(merchantPromotionBeacon.getPromotion().getOriginalPrice());
 						promotionDto.setDiscount(merchantPromotionBeacon.getPromotion().getDiscount());
-						promotionDto.setLocation(merchantPromotionBeacon.getPromotion().getLocation());
 						promotionDto.setCreateddate(merchantPromotionBeacon.getPromotion().getCreateddate());
 						promotionDto.setStartdate(merchantPromotionBeacon.getPromotion().getStartdate());
 						promotionDto.setEnddate(merchantPromotionBeacon.getPromotion().getEnddate());

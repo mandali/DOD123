@@ -18,15 +18,15 @@ public interface PromotionService {
 	
 	public List<Promotion> getCategoryPromotions(Date currentdate ,CategorySelection categorySelection);
 	
-	public Promotion CreatePromotions(CreatePromotionVo createPromotionVo); 
+	public Promotion createPromotions(CreatePromotionVo createPromotionVo); 
 	
-	public Promotion CreatePromotions(PromotionDto promotionDto); 
+	 
 	
-	public Promotion IdBasePromotions(IdBasePromotion idBasePromotion); 
+	public Promotion idBasePromotions(IdBasePromotion idBasePromotion); 
 	
 	public List<Promotionsummary> promotionSummary( String date ); 
 	
-	public List<PromotionDto> CategoryIdPromotions(CategoryPromotion categoryPromotion); 
+	public List<PromotionDto> categoryIdPromotions(CategoryPromotion categoryPromotion); 
 	
 	public List<PromotionDto> brandIdPromotions(CategoryPromotion categoryPromotion);
 	

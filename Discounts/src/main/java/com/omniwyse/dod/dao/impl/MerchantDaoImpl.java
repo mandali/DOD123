@@ -3,6 +3,7 @@ package com.omniwyse.dod.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +14,7 @@ import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.model.GetMerchantById;
 import com.omniwyse.dod.model.GetMerchatProfile;
+import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
@@ -25,7 +27,7 @@ public class MerchantDaoImpl implements MerchantDao{
 	
 	@Autowired
 	SessionFactory sessionFactory;
-
+	private static final Logger logger = Logger.getLogger(MerchantDaoImpl.class);
 	public MerchantProfile registermerchant(MerchantProfile merchantProfile) {					
 			Session session = this.sessionFactory.getCurrentSession();
 			Integer id = (Integer) session.save(merchantProfile);
@@ -111,7 +113,21 @@ public class MerchantDaoImpl implements MerchantDao{
 		 resp=(MerchantProfile) query.uniqueResult();
 		}
 		catch(Exception exception){
-			System.out.println("Exception in validate promotion method"+exception.getMessage());
+			logger.error("Exception in validate promotion method"+exception.getMessage());
+		}
+		return resp;
+	}
+	
+	public Location fetchLocationById(Long locationId) {
+		Location resp = null;
+		try{
+		Session session = this.sessionFactory.openSession();		
+		Query query=(Query) session.createQuery("from Location where locationId=:locationId");
+		query.setParameter("locationId", locationId);		
+		 resp=(Location) query.uniqueResult();
+		}
+		catch(Exception exception){
+			logger.error("Exception fetchLocationById method"+exception.getMessage());
 		}
 		return resp;
 	}

@@ -15,7 +15,6 @@ import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
-import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.Promotionsummary;
 import com.omniwyse.dod.service.PromotionService;
@@ -47,37 +46,21 @@ public class PromotionServiceImpl implements PromotionService{
 	
 		
 
-	public Promotion CreatePromotions(CreatePromotionVo createPromotionVo) {
+	public Promotion createPromotions(CreatePromotionVo createPromotionVo) {
 		Date date=new Date();
 		createPromotionVo.setCreateddate(date);
 		createPromotionVo.setStartdate(date);
 		createPromotionVo.setEnddate(date);				
-		return promotionsDao.CreatePromotions(createPromotionVo);
+		return promotionsDao.createPromotions(createPromotionVo);
 	}
 	
 		
 	
-	@SuppressWarnings("unused")
-	public Promotion CreatePromotions(PromotionDto promotionDto) {		
-		Date date=new Date();
-		Promotion promotion=new Promotion();
-		MerchantProfile merchantProfile=merchantDao.getMerchantbyID(promotionDto.getMerchatId());			
-		promotion.setOriginalPrice(promotionDto.getOriginalPrice());
-		promotion.setDiscount(promotionDto.getDiscount());
-		promotion.setStartdate(date);
-		promotion.setEnddate(date);
-		promotion.setDescription(promotionDto.getDescription());
-		promotion.setProduct_image(promotionDto.getProduct_image());
-		promotion.setLocation(promotionDto.getLocation());		
-		promotion.setCreateddate(date);
-		promotion.setProduct_id(promotionDto.getProduct_id());
-		promotion.setMerchatid(promotionDto.getMerchatId());		
-		return promotion;
-	}
+	
 	
 		
 
-	public Promotion IdBasePromotions(IdBasePromotion idBasePromotion) {
+	public Promotion idBasePromotions(IdBasePromotion idBasePromotion) {
 		
 		return promotionsDao.getIdbasePromotion(idBasePromotion);
 	}
@@ -91,7 +74,7 @@ public class PromotionServiceImpl implements PromotionService{
 	
 		
 
-	public List<PromotionDto> CategoryIdPromotions(CategoryPromotion categoryPromotion) {
+	public List<PromotionDto> categoryIdPromotions(CategoryPromotion categoryPromotion) {
 		
 		return promotionsDao.CategoryIdPromotion(categoryPromotion);
 		

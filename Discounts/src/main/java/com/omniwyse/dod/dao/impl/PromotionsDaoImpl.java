@@ -3,6 +3,8 @@ package com.omniwyse.dod.dao.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,19 +14,26 @@ import org.springframework.stereotype.Repository;
 import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.PromotionDto;
+import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
+import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.Promotionsummary;
 
 @Repository
 public class PromotionsDaoImpl implements PromotionsDao{
 	
+	private static final Logger logger = Logger.getLogger(PromotionsDaoImpl.class);
+	
 	@Autowired
 	SessionFactory sessionFactory;
+	@Autowired
+    MerchantDao merchantDao;
 
 	@SuppressWarnings("unchecked")
 	public List<Promotion> getPromotions() {
@@ -42,20 +51,22 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		return list;
 	}
 
-	public Promotion CreatePromotions(CreatePromotionVo createPromotionVo) {				
+	public Promotion createPromotions(CreatePromotionVo createPromotionVo) {				
 		Promotion promotion=new Promotion();
 		Session session = this.sessionFactory.getCurrentSession();
 		Brand brand= (Brand) session.get(Brand.class, createPromotionVo.getBrandId());
 		promotion.setBrandId(brand);
 		Category category=(Category) session.get(Category.class, createPromotionVo.getCatid());
 		promotion.setCatid(category);
-		promotion.setProduct_id(createPromotionVo.getProduct_id());
+		promotion.setProductID(createPromotionVo.getProductId());
 		promotion.setDescription(createPromotionVo.getDescription());
-		promotion.setMerchatid(createPromotionVo.getMerchatid());
-		promotion.setProduct_image(createPromotionVo.getProduct_image());
+		promotion.setMerchatId(createPromotionVo.getMerchantProfile());
 		promotion.setOriginalPrice(createPromotionVo.getOriginalPrice());
 		promotion.setDiscount(createPromotionVo.getDiscount());
-		promotion.setLocation(createPromotionVo.getLocation());
+		Location location=merchantDao.fetchLocationById(Long.valueOf(createPromotionVo.getLocationId()));
+		if(location!=null){
+		promotion.setLocationId(location);
+		}
 		promotion.setCreateddate(createPromotionVo.getCreateddate());
 		promotion.setStartdate(createPromotionVo.getStartdate());
 		promotion.setEnddate(createPromotionVo.getEnddate());
@@ -103,16 +114,16 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		for(Promotion promotion:promotions){
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());
-			promotionDto.setProduct_id(promotion.getProduct_id());
+			promotionDto.setProduct_id(String.valueOf(promotion.getProductID().getProductId()));
 			promotionDto.setDescription(promotion.getDescription());
-			promotionDto.setProduct_image(promotion.getProduct_image());
 			promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 			promotionDto.setDiscount(promotion.getDiscount());
 			promotionDto.setStartdate(promotion.getStartdate());
 			promotionDto.setCreateddate(promotion.getCreateddate());
 			promotionDto.setEnddate(promotion.getEnddate());
-			promotionDto.setLocation(promotion.getLocation());
-			promotionDto.setMerchatId(promotion.getMerchatid());
+			promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
+			promotionDto.setLocationName(promotion.getLocationId().getLocationName());
+			promotionDto.setMerchatId(promotion.getMerchatId().getId());
 			promotionDto.setBrandName(promotion.getBrandId().getBrandName());
 			promotionDto.setBrandImage(promotion.getBrandId().getBrandImage());
 			promotionDto.setBrandRating(promotion.getBrandId().getBrandRating());
@@ -134,16 +145,16 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		for(Promotion promotion:promotions){
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());
-			promotionDto.setProduct_id(promotion.getProduct_id());
+			promotionDto.setProduct_id(String.valueOf(promotion.getProductID().getProductId()));
 			promotionDto.setDescription(promotion.getDescription());
-			promotionDto.setProduct_image(promotion.getProduct_image());
 			promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 			promotionDto.setDiscount(promotion.getDiscount());
 			promotionDto.setStartdate(promotion.getStartdate());
 			promotionDto.setCreateddate(promotion.getCreateddate());
 			promotionDto.setEnddate(promotion.getEnddate());
-			promotionDto.setLocation(promotion.getLocation());
-			promotionDto.setMerchatId(promotion.getMerchatid());
+			promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
+			promotionDto.setLocationName(promotion.getLocationId().getLocationName());
+			promotionDto.setMerchatId(promotion.getMerchatId().getId());
 			promotionDto.setBrandName(promotion.getBrandId().getBrandName());
 			promotionDto.setBrandImage(promotion.getBrandId().getBrandImage());
 			promotionDto.setBrandRating(promotion.getBrandId().getBrandRating());
@@ -165,16 +176,17 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		for(Promotion promotion:promotions){
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());
-			promotionDto.setProduct_id(promotion.getProduct_id());
+			promotionDto.setProduct_id(String.valueOf(promotion.getProductID().getProductId()));
+			promotionDto.setProduct_image(promotion.getProductID().getProductImageLocation());
 			promotionDto.setDescription(promotion.getDescription());
-			promotionDto.setProduct_image(promotion.getProduct_image());
 			promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 			promotionDto.setDiscount(promotion.getDiscount());
 			promotionDto.setStartdate(promotion.getStartdate());
 			promotionDto.setCreateddate(promotion.getCreateddate());
 			promotionDto.setEnddate(promotion.getEnddate());
-			promotionDto.setLocation(promotion.getLocation());
-			promotionDto.setMerchatId(promotion.getMerchatid());
+			promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
+			promotionDto.setLocationName(promotion.getLocationId().getLocationName());
+			promotionDto.setMerchatId(promotion.getMerchatId().getId());
 			promotionDto.setBrandName(promotion.getBrandId().getBrandName());
 			promotionDto.setBrandImage(promotion.getBrandId().getBrandImage());
 			promotionDto.setBrandRating(promotion.getBrandId().getBrandRating());
@@ -182,9 +194,29 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDto.setCategoryName(promotion.getCatid().getCategoryName());
 			promotionDto.setCatid(promotion.getCatid().getCategoryId());
 			promotionDto.setBrandId(promotion.getBrandId().getBrandid());
+			promotionDto.setDiscountText(promotion.getDiscountText());
 			promotionDtos.add(promotionDto);	
 		}		
 		return promotionDtos;
+	}
+
+	public Product fetchProductById(CreatePromotionVo createPromotionVo) {
+		// TODO Auto-generated method stub
+		final String METHOD_NAME="fetchProductById";
+		Product product = null;
+		try{
+			Session session = this.sessionFactory.openSession();		
+			Query query=(Query) session.createQuery("from Product where productId=:productId");
+			query.setParameter("productId", Long.valueOf(createPromotionVo.getProduct_id()));		
+			product=(Product) query.uniqueResult();
+			
+		}
+		catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
+		
+		
+		return product;
 	}
 		
 
