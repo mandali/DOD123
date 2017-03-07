@@ -1,8 +1,65 @@
 package com.omniwyse.dod.AppConstants;
 
-public class AppConstants {
+public class AppConstants {//
 	
+	
+	public static final String REGISTER="/register";
+	public static final String REGISTER_ERROR_MSG=" Sorry , Mobile no is alredy exist ... ";
 	public static final String OTP="12345";
+	public static final String OTP_VALIDATE="/otpvalidate";
+	public static final String OTP_VALIDATE_SUCCESS_MSG=" OTP Validation successfully ... ";
+	public static final String OTP_VALIDATE_ERROR_MSG="Sorry , Wrong OTP No / Mobile no . ";
+	
+	public static final String CONSUMER_REGISTER="/consumerRegistration";
+	public static final String CONSUMER_REGISTER_SUCCESS_MSG="Consumer Registration successfully ...";
+	public static final String CONSUMER_REGISTER_ERROR_MSG=" Sorry , Mobile no and Mail address is alredy exist ... ";
+	public static final String CONSUMER_LOGIN="/consumerlogin";
+	public static final String CONSUMER_LOGIN_SUCCESS_MSG=" Login Succes ... ";
+	public static final String CONSUMER_LOGIN_ERROR_MSG=" Sorry , Wrong Credentials ...";
+	public static final String CONSUMER_PROFILE="/consumerProfile";
+	public static final String CONSUMER_PROFILE_SUCCESS_MSG=" Consumer Details is , ";
+	public static final String CONSUMER_PROFILE_ERROR_MSG=" Sorry , No data available on selected mobile no ... ";
+	
+	public static final String CONSUMER_EMAIL_LOGIN="/consumeremaillogin";
+	public static final String CONSUMER_MOBILE_LOGIN="/consumermobilelogin";
+	
+	public static final String MERCHANT_REGISTER="/merchantRegistration";	
+	public static final String MERCHANT_REGISTER_SUCCESS_MSG=" Merchant Registration successfully";
+	public static final String MERCHANT_REGISTER_ERROR_MSG=" Sorry , Mobile no and Mail address is alredy exist ... ";
+	
+	public static final String MERCHANT_LOGIN="/merchantlogin"; 
+	public static final String MERCHANT_LOGIN_SUCCESS_MSG=" Login successfully ... ";
+	public static final String MERCHANT_LOGIN_ERROR_MSG=" Sorry , Wrong Credentials "; 
+	
+	public static final String LIST_PROMOTIONS="/promotions"; 
+	public static final String PROMOTION_SUCCESS_MSG=" Promotions are , ";
+	public static final String PROMOTION_ERROR_MSG=" Sorry , No Promotions are available right now ";
+	
+	public static final String LIST_PROMOTIONS_CATEGORYID="/promotion/categoryId"; 
+	
+	public static final String IDBASE_PROMOTIONS="/IdBasePromotions";
+	
+	public static final String MERCHANT_EMAIL_LOGIN="/merchantemaillogin";
+	public static final String MERCHANT_MOBILE_LOGIN="/merchantmobilelogin";
+	
+	public static final String MERCHANT_PROFILE="/merchantProfile";	
+	public static final String MERCHANT_PROFILE_SUCCESS_MSG=" Success , Merchant Details found ";
+	public static final String MERCHANT_PROFILE_ERROR_MSG=" Sorry , no details found on selected mobile no ... ";
+	
+	public static final String MERCHANT_LIST="/merchantlist";	
+	public static final String MERCHANT_LIST_SUCCESS_MSG=" all merchants details are ,";
+	public static final String MERCHANT_LIST_ERROR_MSG=" Sorry , merchants are not found right now  ...  "; 
+	
+	public static final String MERCHANT_PROMOTION_MERCHANTID="/promotion/merchantid";	
+	public static final String MERCHANT_PROMOTION_SUCCESS_MSG=" Promotions are , ";
+	public static final String MERCHANT_PROMOTION_ERROR_MSG="Sorry , No Promotion found on selected Merchantid ... ";
+	
+	public static final String PROMOTION_SUMMERY="/promotionsummary";
+	
+	
+	
+	
+	
 	public static final String LIST_COUNTRIES="/countries";
 	public static final String LIST_CITIES="/cities";
 	public static final String LIST_LOCATIONS="/locations";
@@ -25,7 +82,7 @@ public class AppConstants {
 	public static final String CREATE_PROMOTIONS="/createpromotions";
 	public static final String PROMOTIONS_SUCCESS_MSG=" Promotion Posted successfully ... ";
 	public static final String PROMOTIONS_ERROR_MSG="Sorry , Please check categoryId/brandId/merchantId ...  "; 
-	public static final String BRANDID_PROMOTIONS="/promotion/brandId"; 
+	public static final String LIST_BRANDID_PROMOTIONS="/promotion/brandId"; 
 	public static final String AVAILABE_PROMOTIONS_SUCCESS_MSG=" available promotions are ... ";
 	public static final String AVAILABE_PROMOTIONS_ERROR_MSG="Sorry , No Promotions are available right now ";
 	public static final String CREATE_PRODUCTS_SUCCESS_MSG="Product Created";
