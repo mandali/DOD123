@@ -34,20 +34,20 @@ public class MetaDataServiceImpl implements MetaDataService {
 		return metaDataDao.fetchCategories();
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public List<CategoryBrandVO> fetchBrands() {
 		return metaDataDao.fetchBrands();
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public List<ProductVO> fetchMerchantProducts(ProductVO productVO) {
 		
 		return metaDataDao.fetchMerchantProducts(productVO);
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 
 
@@ -57,20 +57,20 @@ public class MetaDataServiceImpl implements MetaDataService {
 
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public Location createLocation(LocationVO locationVO) {	
 		return metaDataDao.createLocation(locationVO);
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	@SuppressWarnings("rawtypes")
 	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {		
 		return metaDataDao.validateMPBCreation(merchantPromotionBeaconVO);
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	@SuppressWarnings("rawtypes")
 	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO) {
@@ -78,6 +78,6 @@ public class MetaDataServiceImpl implements MetaDataService {
 		return metaDataDao.createMerchantPromotionBeacon(merchantPromotionBeaconVO);
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 }

@@ -30,7 +30,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		ConsumerProfile login=(ConsumerProfile)query.uniqueResult();			
 		 return login;					
 	}
-	/*===========================================================================================================*/	
+		
 	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from ConsumerProfile where  password=:password and phone_no=:phoneno");
@@ -39,7 +39,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		ConsumerProfile resp=(ConsumerProfile) query.uniqueResult();		
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from RegisterWithOtp where user_id=:mobile");
@@ -47,14 +47,14 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		RegisterWithOtp login=(RegisterWithOtp)query.uniqueResult();		
 		 return login;
 	}
-	/*===========================================================================================================*/	
+		
 	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
 		Session session = this.sessionFactory.getCurrentSession();			
 		Integer id = (Integer) session.save(consumerProfile);
 		ConsumerProfile resp=(ConsumerProfile) session.get(ConsumerProfile.class, id);				
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	public ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile ConsumerIdBaseProfile) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from ConsumerProfile where phone_no=:mobileno");
@@ -62,13 +62,13 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		ConsumerProfile resp=(ConsumerProfile) query.uniqueResult();		
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData consumerPromotionData) {
 		Session session = this.sessionFactory.getCurrentSession();			
 		Integer id = (Integer) session.save(consumerPromotionData);
 		ConsumerPromotionData resp=(ConsumerPromotionData) session.get(ConsumerPromotionData.class, id);				
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	
 }

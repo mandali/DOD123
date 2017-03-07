@@ -32,7 +32,7 @@ public class MerchantDaoImpl implements MerchantDao{
 			MerchantProfile resp=(MerchantProfile) session.get(MerchantProfile.class, id);		
 			return resp;	
 		}
-	/*===========================================================================================================*/	
+		
 	public MerchantProfile GetMerchatByMobile(GetMerchantById getMerchantById) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where  mobilenumber=:mobileno")
@@ -40,7 +40,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
 	}
-	/*===========================================================================================================*/		
+			
 	public MerchantProfile getMerchantbyID(Integer getMerchantById) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where  id=:id")
@@ -48,14 +48,14 @@ public class MerchantDaoImpl implements MerchantDao{
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	public MerchantProfile GetMerchant(MerchantLogin MerchantLogin) {
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where mobilenumber=:mobile").setParameter("mobile", MerchantLogin.getMobileno());
 		MerchantProfile MerchantProfile=(MerchantProfile)query.uniqueResult();
 		return MerchantProfile;
 	}
-	/*===========================================================================================================*/	
+		
 	public MerchantProfile MerchantLogin(com.omniwyse.dod.model.MerchantLogin merchantLogin) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where mobilenumber=:mobileno and password=:password");
@@ -64,7 +64,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	public MerchantProfile merchantautheticateWithEmail(MerchantLoginwithEmail merchantLoginwithEmail) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where  password=:password and emailid=:emalid");
@@ -73,7 +73,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	public MerchantProfile merchantautheticateWithMobile(MerchantLoginwithMobile merchantLoginwithMobile) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where  password=:password and mobilenumber=:mobile");
@@ -82,7 +82,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	public MerchantProfile MerchantProfile(GetMerchatProfile getMerchatProfile) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where  mobilenumber=:mobileno");
@@ -90,14 +90,14 @@ public class MerchantDaoImpl implements MerchantDao{
 		MerchantProfile resp=(MerchantProfile) query.uniqueResult();		
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	@SuppressWarnings("unchecked")
 	public List<MerchantProfile> AllMerchants() {
 		Session session = this.sessionFactory.openSession();			
 		List<MerchantProfile> list = session.createQuery(" from MerchantProfile ").list();					
 		return list;
 	}
-	/*===========================================================================================================*/	
+		
 	public List<Promotion> MerchantPromotions(MerchantPromotions MerchantPromotions, Date date) {		
 		Session session = this.sessionFactory.openSession();
 		@SuppressWarnings("unchecked")
@@ -105,7 +105,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		.setParameter("id",MerchantPromotions.getId()).list();			
 		return list;
 	}
-	/*===========================================================================================================*/	
+		
 	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo) {
 		MerchantProfile resp = null;
 		try{
@@ -119,7 +119,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		}
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	}
 
 
