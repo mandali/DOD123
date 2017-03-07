@@ -4,6 +4,7 @@
     android:layout_margin="5dp"
     android:layout_height="110dp">
     <ImageView
+        android:id="@+id/beacon_list_image"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:padding="5dp"
@@ -24,17 +25,17 @@
             android:layout_marginStart="10dp"
             android:textSize="20sp"
             android:layout_marginTop="30dp"
-            android:id="@+id/textView2" />
+            android:id="@+id/beacon_category_tv" />
 
         <TextView
             android:text="Inorbit mall,Titan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
-            android:layout_alignStart="@+id/textView2"
+            android:layout_below="@+id/beacon_category_tv"
+            android:layout_alignStart="@+id/beacon_category_tv"
             android:layout_marginTop="15dp"
             android:textSize="15sp"
-            android:id="@+id/textView3" />
+            android:id="@+id/beacon_store_tv" />
 
         <TextView
             android:text="50%"
@@ -45,7 +46,7 @@
             android:paddingRight="10dp"
             android:textSize="50sp"
             android:layout_marginTop="20dp"
-            android:id="@+id/textView4" />
+            android:id="@+id/beacon_discount" />
     </RelativeLayout>
 
 </LinearLayout>
