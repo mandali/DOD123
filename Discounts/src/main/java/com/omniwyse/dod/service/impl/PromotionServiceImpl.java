@@ -32,20 +32,20 @@ public class PromotionServiceImpl implements PromotionService{
 	
 	
 
-	@SuppressWarnings("rawtypes")
-	public List getPromotions() {
+	
+	public List<Promotion> getPromotions() {
 		
 		return promotionsDao.getPromotions();
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public List<Promotion> getCategoryPromotions(Date currentdate, CategorySelection categorySelection) {
 		
 		return promotionsDao.getCategoryPromotions(currentdate, categorySelection);
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public Promotion CreatePromotions(CreatePromotionVo createPromotionVo) {
 		Date date=new Date();
@@ -55,7 +55,7 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotionsDao.CreatePromotions(createPromotionVo);
 	}
 	
-	/*===========================================================================================================*/	
+		
 	
 	@SuppressWarnings("unused")
 	public Promotion CreatePromotions(PromotionDto promotionDto) {		
@@ -75,21 +75,21 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotion;
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public Promotion IdBasePromotions(IdBasePromotion idBasePromotion) {
 		
 		return promotionsDao.getIdbasePromotion(idBasePromotion);
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public List<Promotionsummary> promotionSummary(String date) {
 		Date date1=new Date();
 		return promotionsDao.PromotionSummary(date1);
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public List<PromotionDto> CategoryIdPromotions(CategoryPromotion categoryPromotion) {
 		
@@ -97,20 +97,20 @@ public class PromotionServiceImpl implements PromotionService{
 		
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public List<PromotionDto> brandIdPromotions(CategoryPromotion categoryPromotion) {
 		
 		return promotionsDao.brandIdPromotion(categoryPromotion);
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion) {
 		
 		return promotionsDao.brandCatIdPromotion(categoryPromotion);
 	}
 	
-	/*===========================================================================================================*/	
+		
 
 }

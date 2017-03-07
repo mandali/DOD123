@@ -28,8 +28,6 @@ public class LocationDaoImpl implements LocationDao{
 		List<Country> countries=(List<Country>)query.list();
 		return countries;
 	}
-	/*===========================================================================================================*/	
-
 	@SuppressWarnings("unchecked")
 	public List<Cities> fetchCitiesList() {
 		// TODO Auto-generated method stub
@@ -38,8 +36,6 @@ public class LocationDaoImpl implements LocationDao{
 		List<Cities> cities=(List<Cities>)query.list();
 		return cities;
 	}
-	/*===========================================================================================================*/	
-
 	@SuppressWarnings("unchecked")
 	public List<Location> fetchLocationsList() {
 		// TODO Auto-generated method stub
@@ -48,6 +44,4 @@ public class LocationDaoImpl implements LocationDao{
 		List<Location> locations=(List<Location>)query.list();
 		return locations;
 	}
-	/*===========================================================================================================*/	
-
 }

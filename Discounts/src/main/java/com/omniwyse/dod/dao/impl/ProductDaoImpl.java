@@ -41,7 +41,7 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return product;
 	}
-	/*===========================================================================================================*/		
+			
 	public MerchantProfile validateProduct(NewProductVO productVO) {
 		MerchantProfile resp = null;
 		try{
@@ -55,19 +55,26 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	@SuppressWarnings("unchecked")
-	public List<Product> validateProductname(NewProductVO productVO) {
+	public Product validateProductname(NewProductVO productVO) {
 		List<Product> resp=null;
+		Product product = null;
 			Session session = this.sessionFactory.openSession();		
 			 resp= session.createQuery("from Product where productDescription=:productDescription")
 					.setParameter("productDescription", productVO.getProductDescription()).list();	
 			if(!resp.isEmpty()){
-				if(resp.contains(productVO.getProductDescription())){
-					return resp;
+				
+				for(Product productLocal:resp){
+					if(productLocal.getProductDescription().equalsIgnoreCase(productVO.getProductDescription())){
+					product=productLocal;
+					break;
+					}
 				}
+			return product;
 			}
-			return resp;			
+			
+			return product;			
 	}
-	/*===========================================================================================================*/	
+		
 }

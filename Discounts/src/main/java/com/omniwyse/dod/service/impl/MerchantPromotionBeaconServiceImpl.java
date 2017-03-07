@@ -23,13 +23,13 @@ public class MerchantPromotionBeaconServiceImpl implements MerchantPromotionBeac
 		
 		return merchantPromotionBeaconDao.getbeacons();
 	}
-	/*===========================================================================================================*/	
+		
 
 	public List<MerchantPromotionBeacon> fetchMerchantPromotionBeacons(
 			BeaconInformationVO beaconInformationVO) {
 		// TODO Auto-generated method stub
 		return merchantPromotionBeaconDao.fetchMerchantPromotionBeacons(beaconInformationVO);
 	}
-	/*===========================================================================================================*/	
+		
 
 }

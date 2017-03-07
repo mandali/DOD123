@@ -29,7 +29,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		return con;
 	}
 	
-	/*===========================================================================================================*/	
+		
 	
 	public UserProfile registeruser(UserProfile userProfile) {		
 		Date date=new Date();
@@ -38,6 +38,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 		return resp;
 	}
 	
-	/*===========================================================================================================*/	
+		
 	
 }

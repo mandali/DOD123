@@ -31,21 +31,13 @@ public class Beacon implements java.io.Serializable{
 	private Timestamp created;
 	
 	public Beacon(){
-	}
-	
-	
-	
-	
+	}	
 	public Beacon(Long beaconId, String beaconName, String beaconStatus, Timestamp created) {
 		this.beaconId = beaconId;
 		this.beaconName = beaconName;
 		this.beaconStatus = beaconStatus;
 		this.created = created;
 	}
-
-
-
-
 	public Long getBeaconId() {
 		return beaconId;
 	}
@@ -69,8 +61,6 @@ public class Beacon implements java.io.Serializable{
 	}
 	public void setCreated(Timestamp created) {
 		this.created = created;
-	}
-	
-	
+	}	
 
 }
