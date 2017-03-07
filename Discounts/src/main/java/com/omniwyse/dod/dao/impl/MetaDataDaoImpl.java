@@ -123,7 +123,9 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		} finally {
+			if(session!=null){
 			session.close();
+			}
 		}
 		return categoryVOs;
 	}

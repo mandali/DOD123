@@ -123,7 +123,6 @@ public class DODController {
 				Integer otp = 1234;
 				OtpBean otpBean = new OtpBean("OTP For Registration !!", otp);
 				RegisterWithOtp model = registrationService.Register(registerWithOtp);
-				DataResult data1 = new DataResult(true, "success", HttpStatus.OK.value());
 				return new ResponseEntity(otpBean, HttpStatus.OK);
 			} else {
 				DataResult dataResult = new DataResult(false, " Sorry , Mobile no is alredy exist ... ",
@@ -1017,8 +1016,8 @@ public class DODController {
 		
 		try {
 			MerchantProfile merchantId = productDao.validateProduct(newProductVO);
-			List<Product> products = productDao.validateProductname(newProductVO);
-			if (merchantId != null && products.isEmpty()) {
+			Product products = productDao.validateProductname(newProductVO);
+			if (merchantId != null && products==null) {
 				Product resp = metaDataService.createProduct(newProductVO, merchantId);
 				if (resp != null) {
 					DataResult result = new DataResult(true, " Product Created successfully ... ",
