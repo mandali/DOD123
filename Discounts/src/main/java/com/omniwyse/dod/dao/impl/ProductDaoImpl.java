@@ -41,7 +41,7 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return product;
 	}
-	/*===========================================================================================================*/		
+			
 	public MerchantProfile validateProduct(NewProductVO productVO) {
 		MerchantProfile resp = null;
 		try{
@@ -55,7 +55,7 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 	@SuppressWarnings("unchecked")
 	public List<Product> validateProductname(NewProductVO productVO) {
 		List<Product> resp=null;
@@ -69,5 +69,5 @@ public class ProductDaoImpl implements ProductDao{
 			}
 			return resp;			
 	}
-	/*===========================================================================================================*/	
+		
 }

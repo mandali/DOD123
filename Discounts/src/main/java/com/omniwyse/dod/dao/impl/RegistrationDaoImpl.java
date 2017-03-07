@@ -20,12 +20,12 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			RegisterWithOtp reg=(RegisterWithOtp) session.get(RegisterWithOtp.class, id);
 			return reg;
 		}
-		/*===========================================================================================================*/	
+			
 		public UserProfile registeruser(UserProfile userProfile) {		
 			Session session = this.sessionFactory.getCurrentSession();
 			Integer id = (Integer) session.save(userProfile);
 			UserProfile resp=(UserProfile) session.get(UserProfile.class, id);		
 			return resp;
 		}
-		/*===========================================================================================================*/	
+			
 }

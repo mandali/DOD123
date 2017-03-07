@@ -59,7 +59,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 
 		return categories;
 	}
-	/*===========================================================================================================*/	
+		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<CategoryBrandVO> fetchBrands() {
 		List<Object> objects = null;
@@ -127,7 +127,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		return categoryVOs;
 	}
-	/*===========================================================================================================*/	
+	
 
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	public List<ProductVO> fetchMerchantProducts(ProductVO productVO) {
@@ -172,7 +172,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		
 		return productVOs;
 	}
-	/*===========================================================================================================*/	
+		
 	public Location createLocation(LocationVO locationVo) {
 		Session session = this.sessionFactory.openSession();
 		Location location=new Location();
@@ -188,7 +188,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		Location resp=(Location) session.get(Location.class, id);		
 		return resp;		
 	}
-	/*===========================================================================================================*/	
+		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
@@ -216,7 +216,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		return mpbObjects;
 	}
-	/*===========================================================================================================*/	
+		
 	@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
 	public List<Object> fetchMPBObjects(MerchantPromotionBeaconSearchVo merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
@@ -256,7 +256,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		return mpbObjects;
 	}
-	/*===========================================================================================================*/	
+		
 
 	@SuppressWarnings("rawtypes")
 	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO) {
@@ -287,6 +287,6 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		return resp;
 	}
-	/*===========================================================================================================*/	
+		
 
 }
