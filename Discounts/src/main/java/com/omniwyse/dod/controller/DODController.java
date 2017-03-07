@@ -118,8 +118,7 @@ public class DODController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity SavewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
 		final String METHOD_NAME="SavewithOTP";
-		ResponseEntity responseEntity = null;
-		
+		ResponseEntity responseEntity = null;		
 		try {
 			RegisterWithOtp data=ConsumerRegisterValidate.getmobileno(registerWithOtp);
 		if (data==null) {			
