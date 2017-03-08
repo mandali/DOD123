@@ -70,7 +70,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		return resp;
 	}
 		
-	public MerchantProfile GetMerchant(MerchantLogin MerchantLogin) {
+	public MerchantProfile getMerchant(MerchantLogin MerchantLogin) {
 		final String METHOD_NAME = "GetMerchant";
 		MerchantProfile MerchantProfile = null;
 		try{

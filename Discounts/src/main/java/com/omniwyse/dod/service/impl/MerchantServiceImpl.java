@@ -34,13 +34,13 @@ public class MerchantServiceImpl implements MerchantService{
 		return resp;		
 	}
 		
-	public MerchantProfile GetmerchantMobile(GetMerchantById getMerchantById) {
+	public MerchantProfile getmerchantMobile(GetMerchantById getMerchantById) {
 		MerchantProfile resp=MerchantDao.GetMerchatByMobile(getMerchantById);
 		return resp;
 	}
 		
 
-	public MerchantProfile MerchatLogin(MerchantLogin merchantLogin) {		
+	public MerchantProfile merchatLogin(MerchantLogin merchantLogin) {		
 			
 			return MerchantDao.MerchantLogin(merchantLogin);
 		}
@@ -56,12 +56,12 @@ public class MerchantServiceImpl implements MerchantService{
 		return MerchantDao.merchantautheticateWithMobile(merchantLoginwithMobile);
 	}
 		
-	public MerchantProfile MerchatProfile(GetMerchatProfile getMerchatProfile) {
+	public MerchantProfile merchatProfile(GetMerchatProfile getMerchatProfile) {
 		
 		return MerchantDao.MerchantProfile(getMerchatProfile);
 	}
 		
-	public List<MerchantProfile> AllMerchants() {
+	public List<MerchantProfile> allMerchants() {
 		
 		return MerchantDao.AllMerchants();
 	}
@@ -71,7 +71,7 @@ public class MerchantServiceImpl implements MerchantService{
 		return MerchantDao.getMerchantbyID(id);
 	}
 		
-	public List<Promotion> MerchatPromotion(MerchantPromotions MerchantPromotions, Date date) {
+	public List<Promotion> merchatPromotion(MerchantPromotions MerchantPromotions, Date date) {
 		
 		 return MerchantDao.MerchantPromotions(MerchantPromotions, date);
 	}

@@ -20,7 +20,7 @@ public interface MerchantDao {
 	
 	public MerchantProfile GetMerchatByMobile(GetMerchantById getMerchantById);
 	
-	public MerchantProfile GetMerchant(MerchantLogin MerchantLogin);
+	public MerchantProfile getMerchant(MerchantLogin MerchantLogin);
 	
 	public MerchantProfile MerchantLogin(MerchantLogin merchantLogin);
 	

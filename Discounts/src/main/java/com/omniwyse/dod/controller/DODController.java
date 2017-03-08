@@ -141,7 +141,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 	
 		try {
-			RegisterWithOtp data = validationService.Getotp(oTPValidation);
+			RegisterWithOtp data = validationService.getotp(oTPValidation);
 			if (data != null) {
 				DataResult result = new DataResult(true, AppConstants.OTP_VALIDATE_SUCCESS_MSG, HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
@@ -187,7 +187,7 @@ public class DODController {
 		final String METHOD_NAME = "checkMobile";
 		ResponseEntity responseEntity = null;		
 		try {
-			RegisterWithOtp resp = consumerService.ConsumerLogin(userLogin);
+			RegisterWithOtp resp = consumerService.consumerLogin(userLogin);
 			if (resp != null) {
 				DataResult result = new DataResult(true, AppConstants.CONSUMER_LOGIN_SUCCESS_MSG, HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
@@ -208,7 +208,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 		
 		try {
-			ConsumerProfile resp = consumerService.ConsumerProfile(consumerIdBaseProfile);
+			ConsumerProfile resp = consumerService.consumerProfile(consumerIdBaseProfile);
 			if (resp != null) {
 				DataResultEntity<ConsumerProfile> data = new DataResultEntity<ConsumerProfile>(true,
 						AppConstants.CONSUMER_PROFILE_SUCCESS_MSG, HttpStatus.OK.value(), resp);
@@ -297,10 +297,10 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 		
 		try {
-			MerchantProfile data = merchantService.MerchatProfile(GetMerchatProfile);
+			MerchantProfile data = merchantService.merchatProfile(GetMerchatProfile);
 			if (data != null) {
 				
-				MerchantProfile model = merchantService.MerchatProfile(GetMerchatProfile);
+				MerchantProfile model = merchantService.merchatProfile(GetMerchatProfile);
 				DataResultEntity<MerchantProfile> dataResult = new DataResultEntity<MerchantProfile>(true,AppConstants.MERCHANT_PROFILE_SUCCESS_MSG, HttpStatus.OK.value(), model);
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			} else {
@@ -322,7 +322,7 @@ public class DODController {
 		List<MercnantDTO> response = new ArrayList<MercnantDTO>();
 		MercnantDTO mercnantDTO;
 		try {
-			List<MerchantProfile> data = merchantService.AllMerchants();
+			List<MerchantProfile> data = merchantService.allMerchants();
 			if (!data.isEmpty()) {
 				for (MerchantProfile response1 : data) {
 					mercnantDTO = new MercnantDTO();
@@ -367,7 +367,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 		
 		try {
-			MerchantProfile data = merchantService.GetmerchantMobile(getMerchantById);
+			MerchantProfile data = merchantService.getmerchantMobile(getMerchantById);
 			if (data != null) {
 				DataResultEntity<MerchantProfile> merchantProfile = new DataResultEntity<MerchantProfile>(true,
 						" Succes ,  Merchant Details is  ", HttpStatus.OK.value(), data);
@@ -394,7 +394,7 @@ public class DODController {
 		List<PromotionDto> promotionDtos = new ArrayList<PromotionDto>();
 		PromotionDto promotionDto;
 		try {
-			List<Promotion> data = merchantService.MerchatPromotion(MerchantPromotions, date);
+			List<Promotion> data = merchantService.merchatPromotion(MerchantPromotions, date);
 			if (!data.isEmpty()) {
 				for (Promotion response : data) {
 					promotionDto = new PromotionDto();
@@ -445,9 +445,9 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 		
 		try {
-			MerchantProfile resp = merchantService.MerchatLogin(merchantLogin);
+			MerchantProfile resp = merchantService.merchatLogin(merchantLogin);
 			if (resp != null) {
-				MerchantProfile merchantProfile = merchantDao.GetMerchant(merchantLogin);
+				MerchantProfile merchantProfile = merchantDao.getMerchant(merchantLogin);
 				MercnantDTO merchnantDTO = new MercnantDTO();
 				merchnantDTO.setId(merchantProfile.getId().toString());
 				merchnantDTO.setFirstname(merchantProfile.getFirstname());

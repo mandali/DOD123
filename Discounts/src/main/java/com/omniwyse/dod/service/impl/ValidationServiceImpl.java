@@ -17,7 +17,7 @@ public class ValidationServiceImpl implements ValidationService{
 	@Autowired
 	RegisterationValidateDao registerationValidateDao;
 	
-	public RegisterWithOtp Getotp(OTPValidation oTPValidation) {
+	public RegisterWithOtp getotp(OTPValidation oTPValidation) {
 		
 	return registerationValidateDao.getOTP(oTPValidation);
 		
