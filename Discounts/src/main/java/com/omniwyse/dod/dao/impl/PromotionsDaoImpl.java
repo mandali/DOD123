@@ -37,21 +37,36 @@ public class PromotionsDaoImpl implements PromotionsDao{
 
 	@SuppressWarnings("unchecked")
 	public List<Promotion> getPromotions() {
+		final String METHOD_NAME="getPromotions";
+		List<Promotion> list = null;
+		try{
 		Session session = this.sessionFactory.openSession();		
-		List<Promotion> list = session.createQuery(" from Promotion ").list();
+		list = session.createQuery(" from Promotion ").list();
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
 		return list;	
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Promotion> getCategoryPromotions(Date currentdate, CategorySelection categorySelection) {
+		final String METHOD_NAME="getCategoryPromotions";
+		List<Promotion> list = null;
+		try{
 		Session session = this.sessionFactory.getCurrentSession();	
-		List<Promotion> list = session.createQuery(" from Promotion p where :currentDate between p.startdate and p.enddate and p.category_name =:name")
+		list = session.createQuery(" from Promotion p where :currentDate between p.startdate and p.enddate and p.category_name =:name")
 				.setParameter("name", categorySelection.getCategoryname().trim())
-				.setParameter("currentDate", currentdate).list();			
+				.setParameter("currentDate", currentdate).list();	
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
 		return list;
 	}
 
-	public Promotion createPromotions(CreatePromotionVo createPromotionVo) {				
+	public Promotion createPromotions(CreatePromotionVo createPromotionVo) {
+		final String METHOD_NAME="createPromotions";
+		Promotion resp = null;
+		try{
 		Promotion promotion=new Promotion();
 		Session session = this.sessionFactory.getCurrentSession();
 		Brand brand= (Brand) session.get(Brand.class, createPromotionVo.getBrandId());
@@ -72,42 +87,70 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		promotion.setEnddate(createPromotionVo.getEnddate());
 		promotion.setDiscountText(createPromotionVo.getDiscountText());
 		Integer id = (Integer) session.save(promotion);
-		Promotion resp=(Promotion) session.get(Promotion.class, id);		
+		resp=(Promotion) session.get(Promotion.class, id);
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+		}
 		return resp;
 		}
 
 	public Promotion getIdbasePromotion(IdBasePromotion idBasePromotion) {
+		final String METHOD_NAME="getIdbasePromotion";
+		Promotion resp = null;
+		try{
 		Session session = this.sessionFactory.getCurrentSession();	
 		Query query=(Query)session.createQuery(" from Promotion where id=:id").setParameter("id",idBasePromotion.getPromotion_id());
-		Promotion resp=(Promotion)((org.hibernate.Query) query).uniqueResult();
+		resp=(Promotion)((org.hibernate.Query) query).uniqueResult();
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+		}
 		return resp;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Promotionsummary> PromotionSummary(Date date) {
+		final String METHOD_NAME="getIdbasePromotion";
+		List<Promotionsummary> list = null ;
+		try{
 		Session session = this.sessionFactory.openSession();			
-		List<Promotionsummary> list = session.createQuery(" from Promotionsummary ").list();	
+		list = session.createQuery(" from Promotionsummary ").list();
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+		}
 		return list;
 	}
 
 	public Category getcategoryId(CreatePromotionVo createPromotionVo) {
-	
+		final String METHOD_NAME="getcategoryId";
+		Category category = null;
+		try{
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query)session.createQuery(" from Category where categoryId=:categoryId ")
 				.setParameter("categoryId",createPromotionVo.getCatid());
-		Category category =(Category)query.uniqueResult();	
+		category =(Category)query.uniqueResult();
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
 		return category;
 	}
 	public Brand getBrandId(CreatePromotionVo createPromotionVo) {
+		final String METHOD_NAME="getBrandId";
+		Brand brand = null ;
+		try{
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query)session.createQuery(" from Brand where brandId=:brandId ")
 				.setParameter("brandId",createPromotionVo.getBrandId());
-		Brand brand =(Brand)query.uniqueResult();	
+		brand =(Brand)query.uniqueResult();
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
 		return brand;
 	}	
 	@SuppressWarnings({"unchecked" })
-	public List<PromotionDto> CategoryIdPromotion(CategoryPromotion categoryPromotion) {		
+	public List<PromotionDto> CategoryIdPromotion(CategoryPromotion categoryPromotion) {	
+		final String METHOD_NAME="CategoryIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
+		try{
 		Session session = this.sessionFactory.openSession();	
 		List<Promotion> promotions =session.createQuery("select distinct p from Promotion p where p.catid.categoryId=:id")
 				.setParameter("id" ,categoryPromotion.getCategoryId()).list();	
@@ -131,15 +174,20 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDto.setCategoryName(promotion.getCatid().getCategoryName());
 			promotionDto.setCatid(promotion.getCatid().getCategoryId());
 			promotionDtos.add(promotionDto);	
-		}		
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
 		return promotionDtos;			
 	}
 	
 	
 	
 	@SuppressWarnings({ "unchecked"})
-	public List<PromotionDto> brandIdPromotion(CategoryPromotion categoryPromotion) {	
+	public List<PromotionDto> brandIdPromotion(CategoryPromotion categoryPromotion) {
+		final String METHOD_NAME="brandIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
+		try{
 		Session session = this.sessionFactory.openSession();			
 		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:id").setParameter("id" , categoryPromotion.getBrandId()).list();		
 		for(Promotion promotion:promotions){
@@ -162,14 +210,18 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDto.setCategoryName(promotion.getCatid().getCategoryName());
 			promotionDto.setCatid(promotion.getCatid().getCategoryId());
 			promotionDtos.add(promotionDto);	
-		}		
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
 		return promotionDtos;	
 	}
 		
 	@SuppressWarnings("unchecked")
 	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion) {
-		
+		final String METHOD_NAME="brandIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
+		try{
 		Session session = this.sessionFactory.openSession();			
 		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:brandId and p.catid.categoryId=:categoryId")
 				.setParameter("brandId" , categoryPromotion.getBrandId()).setParameter("categoryId",categoryPromotion.getCategoryId()).list();		
@@ -196,12 +248,14 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDto.setBrandId(promotion.getBrandId().getBrandid());
 			promotionDto.setDiscountText(promotion.getDiscountText());
 			promotionDtos.add(promotionDto);	
-		}		
+		}
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}
 		return promotionDtos;
 	}
 
-	public Product fetchProductById(CreatePromotionVo createPromotionVo) {
-		// TODO Auto-generated method stub
+	public Product fetchProductById(CreatePromotionVo createPromotionVo) {		
 		final String METHOD_NAME="fetchProductById";
 		Product product = null;
 		try{
@@ -213,9 +267,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		}
 		catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
-		}
-		
-		
+		}		
 		return product;
 	}
 		

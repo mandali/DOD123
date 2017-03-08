@@ -52,9 +52,16 @@ public class MetaDataDaoImpl implements MetaDataDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Category> fetchCategories() {
+		
+		final String METHOD_NAME = "fetchCategories";
+		List<Category> categories = null;
+		try{
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query = (Query) session.createQuery("from Category c order by c.categoryRank desc");
-		List<Category> categories = (List<Category>) query.list();
+		categories = (List<Category>) query.list();
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
 
 		return categories;
 	}
@@ -175,6 +182,9 @@ public class MetaDataDaoImpl implements MetaDataDao {
 	}
 		
 	public Location createLocation(LocationVO locationVo) {
+		final String METHOD_NAME = "createLocation";
+		Location resp = null;
+		try{
 		Session session = this.sessionFactory.openSession();
 		Location location=new Location();
 		location.setLocationName(locationVo.getLocationName());
@@ -186,7 +196,10 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		Cities cities=(Cities)session.get(Cities.class, locationVo.getCityId());
 		location.setCitiesId(cities);
 		Long id = (Long) session.save(location);
-		Location resp=(Location) session.get(Location.class, id);		
+		resp=(Location) session.get(Location.class, id);
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
 		return resp;		
 	}
 		

@@ -2,6 +2,7 @@ package com.omniwyse.dod.dao.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,30 +19,51 @@ public class LocationDaoImpl implements LocationDao{
 	
 	@Autowired
 	SessionFactory sessionFactory;	
+	
+	private static final Logger logger = Logger.getLogger(LocationDaoImpl.class);
+;
 
 	@SuppressWarnings("unchecked")
 	public List<Country> fetchCountriesList() {
-		// TODO Auto-generated method stub
-		
+		final String METHOD_NAME = "fetchCountriesList";
+		List<Country> countries = null;
+		try{
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from Country");
-		List<Country> countries=(List<Country>)query.list();
+		countries=(List<Country>)query.list();
+		}catch(Exception exception)
+		{
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+
+		}
 		return countries;
 	}
 	@SuppressWarnings("unchecked")
 	public List<Cities> fetchCitiesList() {
-		// TODO Auto-generated method stub
+		final String METHOD_NAME = "fetchCitiesList";
+		List<Cities> cities = null;
+		try{
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from Cities");
-		List<Cities> cities=(List<Cities>)query.list();
+		cities=(List<Cities>)query.list();
+		}catch(Exception exception)
+		{
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
 		return cities;
 	}
 	@SuppressWarnings("unchecked")
 	public List<Location> fetchLocationsList() {
-		// TODO Auto-generated method stub
+		final String METHOD_NAME = "fetchCitiesList";
+		List<Location> locations = null;
+		try{
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from Location");
-		List<Location> locations=(List<Location>)query.list();
+		locations=(List<Location>)query.list();
+		}catch(Exception  exception)
+		{
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
 		return locations;
 	}
 }

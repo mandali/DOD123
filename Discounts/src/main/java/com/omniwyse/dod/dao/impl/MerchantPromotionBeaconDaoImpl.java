@@ -20,11 +20,18 @@ public class MerchantPromotionBeaconDaoImpl implements MerchantPromotionBeaconDa
 	
 	@Autowired
 	SessionFactory sessionFactory;
+	final String METHOD_NAME = "MerchantPromotions";
 
 	@SuppressWarnings("unchecked")
 	public List<Object[]>  getbeacons() {
+		final String METHOD_NAME = "getbeacons";
+		List<Object[]> result = null;
+		try{
 		Session session = this.sessionFactory.openSession();
-		List<Object[]> result= session.createSQLQuery(" select distinct m.ID as MerchantId,mpb.A_ID as asileId,mpb.BC_ID as BeaconId,mpb.P_ID as promotionId from merchant_profile m join merchant_pm_bc mpb where m.ID=mpb.M_ID").list();	
+		result= session.createSQLQuery(" select distinct m.ID as MerchantId,mpb.A_ID as asileId,mpb.BC_ID as BeaconId,mpb.P_ID as promotionId from merchant_profile m join merchant_pm_bc mpb where m.ID=mpb.M_ID").list();
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}		
 		return result;
 	}
 		
