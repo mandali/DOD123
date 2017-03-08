@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,14 +115,15 @@ public class DODController {
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = AppConstants.REGISTER, method = RequestMethod.POST)
 	public ResponseEntity savewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
-		final String METHOD_NAME = "SavewithOTP";
-		ResponseEntity responseEntity = null;		
-	
+		final String METHOD_NAME = "savewithOTP";
+		ResponseEntity responseEntity = null;	
 		try {
 			RegisterWithOtp data = consumerRegisterValidate.getmobileno(registerWithOtp);
-			if (data == null) {
-				Integer otp = 1234;
-				OtpBean otpBean = new OtpBean("OTP For Registration !!", otp);
+			if (data == null) {				 
+				Random random=new Random();
+				int number=random.nextInt(9999999);						
+				registerWithOtp.setOtpno(String.valueOf(number));				
+				OtpBean otpBean = new OtpBean("OTP For Registration !!", number);
 				RegisterWithOtp model = registrationService.register(registerWithOtp);
 				return new ResponseEntity(otpBean, HttpStatus.OK);
 			} else {
@@ -133,7 +135,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.OTP_VALIDATE, method = RequestMethod.POST)
 	public ResponseEntity getOTP(@RequestBody OTPValidation oTPValidation) {
@@ -1061,7 +1062,7 @@ public class DODController {
 	}	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.LIST_MERCHANT_PROMOTION_BEACONS, method = RequestMethod.GET)
+	@RequestMapping(value = AppConstants.LIST_BEACONS_PROMOTIONS_INFO, method = RequestMethod.GET)
 	public ResponseEntity getbeacons() {
 		final String METHOD_NAME = "getbeacons";
 		ResponseEntity responseEntity = null;
@@ -1169,7 +1170,7 @@ public class DODController {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.LIST_BEACONS_PROMOTIONS_INFO, method = RequestMethod.POST)
+	@RequestMapping(value = AppConstants.LIST_MERCHANT_PROMOTION_BEACONS, method = RequestMethod.POST)
 	public ResponseEntity fetchBeaconsInformation(@RequestBody BeaconInformationVO beaconInformationVO) {
 		ResponseEntity responseEntity = null;
 		final String METHOD_NAME = "fetchBeaconsInformation";
