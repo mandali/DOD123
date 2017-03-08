@@ -18,9 +18,7 @@ public interface PromotionService {
 	
 	public List<Promotion> getCategoryPromotions(Date currentdate ,CategorySelection categorySelection);
 	
-	public Promotion createPromotions(CreatePromotionVo createPromotionVo); 
-	
-	 
+	public Promotion createPromotions(CreatePromotionVo createPromotionVo); 	 
 	
 	public Promotion idBasePromotions(IdBasePromotion idBasePromotion); 
 	

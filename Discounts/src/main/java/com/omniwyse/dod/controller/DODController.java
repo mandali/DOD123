@@ -114,9 +114,8 @@ public class DODController {
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = AppConstants.REGISTER, method = RequestMethod.POST)
 	public ResponseEntity savewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
-		final String METHOD_NAME = "SavewithOTP";
-		ResponseEntity responseEntity = null;		
-	
+		final String METHOD_NAME = "savewithOTP";
+		ResponseEntity responseEntity = null;	
 		try {
 			RegisterWithOtp data = consumerRegisterValidate.getmobileno(registerWithOtp);
 			if (data == null) {
@@ -133,7 +132,6 @@ public class DODController {
 		}
 		return responseEntity;
 	}
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.OTP_VALIDATE, method = RequestMethod.POST)
 	public ResponseEntity getOTP(@RequestBody OTPValidation oTPValidation) {
