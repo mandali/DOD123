@@ -42,7 +42,7 @@ public class MerchantDaoImpl implements MerchantDao{
 			return resp;	
 		}
 		
-	public MerchantProfile GetMerchatByMobile(GetMerchantById getMerchantById) {
+	public MerchantProfile getMerchatByMobile(GetMerchantById getMerchantById) {
 		final String METHOD_NAME = "GetMerchatByMobile";
 		MerchantProfile resp = null;
 		try{
@@ -83,7 +83,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		return MerchantProfile;
 	}
 		
-	public MerchantProfile MerchantLogin(com.omniwyse.dod.model.MerchantLogin merchantLogin) {
+	public MerchantProfile merchantLogin(com.omniwyse.dod.model.MerchantLogin merchantLogin) {
 		final String METHOD_NAME = "MerchantLogin";
 		MerchantProfile resp = null;
 		try{
@@ -126,7 +126,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		}
 		return resp;
 	}		
-	public MerchantProfile MerchantProfile(GetMerchatProfile getMerchatProfile) {
+	public MerchantProfile merchantProfile(GetMerchatProfile getMerchatProfile) {
 		final String METHOD_NAME = "MerchantProfile";
 		MerchantProfile resp = null;
 		try{
@@ -140,7 +140,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		return resp;
 	}		
 	@SuppressWarnings("unchecked")
-	public List<MerchantProfile> AllMerchants() {
+	public List<MerchantProfile> allMerchants() {
 		final String METHOD_NAME = "AllMerchants";
 		List<MerchantProfile> list = null ;
 		try{
@@ -152,7 +152,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		return list;
 	}		
 	@SuppressWarnings("unchecked")
-	public List<Promotion> MerchantPromotions(MerchantPromotions MerchantPromotions, Date date) {
+	public List<Promotion> merchantPromotions(MerchantPromotions MerchantPromotions, Date date) {
 		final String METHOD_NAME = "MerchantPromotions";
 		List<Promotion> list = null;
 		try{

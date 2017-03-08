@@ -5,7 +5,7 @@ import com.omniwyse.dod.model.UserProfile;
 
 public interface RegistrationDao {
 	
-	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp); 
+	public RegisterWithOtp register(RegisterWithOtp registerWithOtp); 
 	
 	public UserProfile registeruser(UserProfile userProfile);
 	

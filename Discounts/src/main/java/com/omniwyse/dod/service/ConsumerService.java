@@ -20,5 +20,5 @@ public interface ConsumerService {
 	
 	public ConsumerProfile consumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile);
 	
-	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData ConsumerPromotionData);
+	public ConsumerPromotionData consumerPromotion(ConsumerPromotionData ConsumerPromotionData);
 }

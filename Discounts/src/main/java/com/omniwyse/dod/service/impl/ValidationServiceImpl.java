@@ -22,5 +22,4 @@ public class ValidationServiceImpl implements ValidationService{
 	return registerationValidateDao.getOTP(oTPValidation);
 		
 	}
-
 }

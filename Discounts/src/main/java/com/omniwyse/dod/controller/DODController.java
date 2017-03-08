@@ -122,7 +122,7 @@ public class DODController {
 			if (data == null) {
 				Integer otp = 1234;
 				OtpBean otpBean = new OtpBean("OTP For Registration !!", otp);
-				RegisterWithOtp model = registrationService.Register(registerWithOtp);
+				RegisterWithOtp model = registrationService.register(registerWithOtp);
 				return new ResponseEntity(otpBean, HttpStatus.OK);
 			} else {
 				DataResult dataResult = new DataResult(true, AppConstants.REGISTER_ERROR_MSG ,HttpStatus.OK.value());
@@ -1262,7 +1262,6 @@ public class DODController {
 					}
 
 				}
-
 				DataResultlist<MPBSearchVO> result = new DataResultlist<MPBSearchVO>(true,
 						AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(), mpbSearchVOs);
 				return new ResponseEntity(result, HttpStatus.OK);

@@ -24,7 +24,7 @@ public List<Promotion> getPromotions();
 	
 	public Promotion getIdbasePromotion(IdBasePromotion idBasePromotion);
 
-	public List<Promotionsummary> PromotionSummary(Date date);
+	public List<Promotionsummary> promotionSummary(Date date);
 	
 	public Category getcategoryId(CreatePromotionVo createPromotionVo); 
 	
@@ -32,7 +32,7 @@ public List<Promotion> getPromotions();
 	
 	public Product fetchProductById(CreatePromotionVo createPromotionVo);	
 	
-	public List<PromotionDto> CategoryIdPromotion(CategoryPromotion categoryPromotion );
+	public List<PromotionDto> categoryIdPromotion(CategoryPromotion categoryPromotion );
 	
 	public List<PromotionDto> brandIdPromotion(CategoryPromotion categoryPromotion );
 	

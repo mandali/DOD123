@@ -64,8 +64,8 @@ public class TestDODService {
 		regOTP.setUser_id("9491779827");
 		regOTP.setCreatedate(date);
 		regOTP.setOtpno("1234");
-		Mockito.when(registrationDao.Register(regOTP)).thenReturn(regOTP);
-		RegisterWithOtp registerWithOtp=RegistrationServiceImpl.Register(regOTP);
+		Mockito.when(registrationDao.register(regOTP)).thenReturn(regOTP);
+		RegisterWithOtp registerWithOtp=RegistrationServiceImpl.register(regOTP);
 		Assert.assertEquals("1234", registerWithOtp.getOtpno());
 		Assert.assertEquals("9491779827", registerWithOtp.getUser_id());
 	}

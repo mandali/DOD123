@@ -108,7 +108,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Promotionsummary> PromotionSummary(Date date) {
+	public List<Promotionsummary> promotionSummary(Date date) {
 		final String METHOD_NAME="getIdbasePromotion";
 		List<Promotionsummary> list = null ;
 		try{
@@ -147,7 +147,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		return brand;
 	}	
 	@SuppressWarnings({"unchecked" })
-	public List<PromotionDto> CategoryIdPromotion(CategoryPromotion categoryPromotion) {	
+	public List<PromotionDto> categoryIdPromotion(CategoryPromotion categoryPromotion) {	
 		final String METHOD_NAME="CategoryIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
 		try{

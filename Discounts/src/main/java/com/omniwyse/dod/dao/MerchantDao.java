@@ -18,23 +18,23 @@ public interface MerchantDao {
 	
 	public MerchantProfile registermerchant(MerchantProfile merchantProfile);
 	
-	public MerchantProfile GetMerchatByMobile(GetMerchantById getMerchantById);
+	public MerchantProfile getMerchatByMobile(GetMerchantById getMerchantById);
 	
 	public MerchantProfile getMerchant(MerchantLogin MerchantLogin);
 	
-	public MerchantProfile MerchantLogin(MerchantLogin merchantLogin);
+	public MerchantProfile merchantLogin(MerchantLogin merchantLogin);
 	
     public MerchantProfile merchantautheticateWithEmail(MerchantLoginwithEmail merchantLoginwithEmail); 
 	
 	public MerchantProfile merchantautheticateWithMobile(MerchantLoginwithMobile merchantLoginwithMobile); 
 
-	public MerchantProfile MerchantProfile(GetMerchatProfile getMerchatProfile);
+	public MerchantProfile merchantProfile(GetMerchatProfile getMerchatProfile);
 	
-	public List<MerchantProfile> AllMerchants();  
+	public List<MerchantProfile> allMerchants();  
 	
 	public MerchantProfile getMerchantbyID(Integer id);
 	
-	public List<Promotion> MerchantPromotions(MerchantPromotions MerchantPromotions , Date date); 	
+	public List<Promotion> merchantPromotions(MerchantPromotions MerchantPromotions , Date date); 	
 	
 	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo);
 	

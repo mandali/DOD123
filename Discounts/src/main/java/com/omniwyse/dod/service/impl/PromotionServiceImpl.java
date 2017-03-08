@@ -36,64 +36,43 @@ public class PromotionServiceImpl implements PromotionService{
 		
 		return promotionsDao.getPromotions();
 	}
-	
-		
 
 	public List<Promotion> getCategoryPromotions(Date currentdate, CategorySelection categorySelection) {
 		
 		return promotionsDao.getCategoryPromotions(currentdate, categorySelection);
 	}
-	
-		
-
 	public Promotion createPromotions(CreatePromotionVo createPromotionVo) {
 		Date date=new Date();
 		createPromotionVo.setCreateddate(date);
 		createPromotionVo.setStartdate(date);
 		createPromotionVo.setEnddate(date);				
 		return promotionsDao.createPromotions(createPromotionVo);
-	}
-	
-		
-	
-	
-	
-		
+	}		
 
 	public Promotion idBasePromotions(IdBasePromotion idBasePromotion) {
 		
 		return promotionsDao.getIdbasePromotion(idBasePromotion);
-	}
-	
-		
+	}	
 
 	public List<Promotionsummary> promotionSummary(String date) {
 		Date date1=new Date();
-		return promotionsDao.PromotionSummary(date1);
-	}
-	
-		
+		return promotionsDao.promotionSummary(date1);
+	}	
 
 	public List<PromotionDto> categoryIdPromotions(CategoryPromotion categoryPromotion) {
 		
-		return promotionsDao.CategoryIdPromotion(categoryPromotion);
+		return promotionsDao.categoryIdPromotion(categoryPromotion);
 		
-	}
-	
-		
+	}	
 
 	public List<PromotionDto> brandIdPromotions(CategoryPromotion categoryPromotion) {
 		
 		return promotionsDao.brandIdPromotion(categoryPromotion);
-	}
-	
-		
+	}	
 
 	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion) {
 		
 		return promotionsDao.brandCatIdPromotion(categoryPromotion);
-	}
-	
-		
+	}	
 
 }

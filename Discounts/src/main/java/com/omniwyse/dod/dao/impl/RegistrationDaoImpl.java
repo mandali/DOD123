@@ -17,7 +17,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	
 	private static final Logger logger = Logger.getLogger(RegistrationDaoImpl.class);
 
-		public RegisterWithOtp Register(RegisterWithOtp registerWithOtp) {
+		public RegisterWithOtp register(RegisterWithOtp registerWithOtp) {
 			final String METHOD_NAME="Register";
 			RegisterWithOtp reg = null;
 			try{

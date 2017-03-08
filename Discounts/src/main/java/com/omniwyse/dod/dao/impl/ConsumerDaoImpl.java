@@ -57,7 +57,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		return resp;
 	}
 		
-	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin) {
+	public RegisterWithOtp consumerLogin(ConsumerLogin userLogin) {
 		final String METHOD_NAME = "ConsumerLogin";
 		RegisterWithOtp login=null;
 		try{
@@ -85,7 +85,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		return resp;
 	}
 		
-	public ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile ConsumerIdBaseProfile) {
+	public ConsumerProfile consumerProfile(ConsumerIdBaseProfile ConsumerIdBaseProfile) {
 		final String METHOD_NAME = "ConsumerProfile";
 		ConsumerProfile resp = null;
 		try{
@@ -99,7 +99,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		return resp;
 	}
 		
-	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData consumerPromotionData) {
+	public ConsumerPromotionData consumerPromotion(ConsumerPromotionData consumerPromotionData) {
 		final String METHOD_NAME = "ConsumerPromotion";
 		ConsumerPromotionData resp = null;
 		try{
