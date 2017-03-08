@@ -1177,7 +1177,7 @@ public class DODController {
 		MPBSearchVO mpbSearchVO;
 		PromotionDto promotionDto;
 		Map<String, List<PromotionDto>> beaconsMap = new LinkedHashMap<String, List<PromotionDto>>();
-		boolean mapFlag = true;
+		boolean mapFlag = false;
 		try {
 			List<MerchantPromotionBeacon> merchantPromotionBeacons = merchantPromotionBeaconService
 					.fetchMerchantPromotionBeacons(beaconInformationVO);
@@ -1258,7 +1258,6 @@ public class DODController {
 						mpbSearchVOs.add(mpbSearchVO);
 						beaconsMap.put(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()),
 								mpbSearchVO.getPromotionDtos());
-						mapFlag = true;
 					}
 
 				}

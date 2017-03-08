@@ -235,10 +235,10 @@ public class MetaDataDaoImpl implements MetaDataDao {
 	public List<Object> fetchMPBObjects(MerchantPromotionBeaconSearchVo merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
-		MerchantProfile merchantProfileId;
-		Promotion promotionId;
-		Beacon beaconId;
-		MerchantAisle merchantAisle;
+		MerchantProfile merchantProfileId = null;
+		Promotion promotionId = null;
+		Beacon beaconId = null;
+		MerchantAisle merchantAisle = null;
 		Location location;
 		Country country = null;
 		Cities cities = null;
@@ -247,10 +247,18 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		List<Object> mpbObjects=new LinkedList();
 	
 		try{
+			if(merchantPromotionBeaconVO.getMerchantId()!=null && !merchantPromotionBeaconVO.getMerchantId().toString().isEmpty()){
 			merchantProfileId=(MerchantProfile) session.get(MerchantProfile.class, Integer.valueOf(merchantPromotionBeaconVO.getMerchantId()));
+			}
+			if(merchantPromotionBeaconVO.getPromotionId()!=null && !merchantPromotionBeaconVO.getPromotionId().toString().isEmpty()){
 			promotionId=(Promotion)session.get(Promotion.class,Integer.valueOf(merchantPromotionBeaconVO.getPromotionId()));
+			}
+			if(merchantPromotionBeaconVO.getBeaconId()!=null && !merchantPromotionBeaconVO.getBeaconId().toString().isEmpty()){
 			beaconId=(Beacon)session.get(Beacon.class, Long.valueOf(merchantPromotionBeaconVO.getBeaconId()));
+			}
+			if(merchantPromotionBeaconVO.getAisleId()!=null && !merchantPromotionBeaconVO.getAisleId().toString().isEmpty()){
 			merchantAisle=(MerchantAisle)session.get(MerchantAisle.class,Long.valueOf(merchantPromotionBeaconVO.getAisleId()));
+			}
 			if(promotionId!=null && promotionId.getLocationId()!=null){
 				location=(Location) session.get(Location.class, Long.valueOf(promotionId.getLocationId().getLocationId()));
 				if(location!=null && location.getCountryId().getId()!=null && location.getCitiesId().getCityId()!=null){
@@ -300,6 +308,20 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> fetchNoBeaconPromotions() {
+		// TODO Auto-generated method stub
+		final String METHOD_NAME = "fetchNoBeaconPromotions";
+		List<Object[]> result = null;
+		try{
+		Session session = this.sessionFactory.openSession();
+		result= session.createSQLQuery(" SELECT p.PRMS_ID as promotionId,p.Merchant_ID as merchantId,p.LO_ID as location  FROM dod_db.promotions p where p.PRMS_ID not in(select m.P_ID from merchant_pm_bc m);").list();
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}		
+		return result;
 	}
 		
 
