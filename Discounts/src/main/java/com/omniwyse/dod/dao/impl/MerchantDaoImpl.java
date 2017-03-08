@@ -157,7 +157,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		List<Promotion> list = null;
 		try{
 		Session session = this.sessionFactory.openSession();		
-		list= session.createQuery(" from Promotion where merchatid=:id").setParameter("id",MerchantPromotions.getId()).list();
+		list= session.createQuery(" from Promotion p where p.merchatId.id=:id").setParameter("id",MerchantPromotions.getId()).list();
 		}catch(Exception exception){
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}

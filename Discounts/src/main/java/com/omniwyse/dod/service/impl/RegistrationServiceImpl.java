@@ -23,8 +23,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	public RegisterWithOtp register(RegisterWithOtp registerWithOtp) {		
 		Date date=new Date();		
 		registerWithOtp.setExpdate(date);	
-		registerWithOtp.setCreatedate(date);
-		registerWithOtp.setOtpno("1234");
+		registerWithOtp.setCreatedate(date);		
 		RegisterWithOtp con=registrationDao.register(registerWithOtp);		
 		return con;
 	}	

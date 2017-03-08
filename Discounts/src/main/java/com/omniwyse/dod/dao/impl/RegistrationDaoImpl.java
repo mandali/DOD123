@@ -14,36 +14,35 @@ import com.omniwyse.dod.model.UserProfile;
 public class RegistrationDaoImpl implements RegistrationDao {
 	@Autowired
 	SessionFactory sessionFactory;
-	
+
 	private static final Logger logger = Logger.getLogger(RegistrationDaoImpl.class);
 
-		public RegisterWithOtp register(RegisterWithOtp registerWithOtp) {
-			final String METHOD_NAME="Register";
-			RegisterWithOtp reg = null;
-			try{
-				
-			Session session = this.sessionFactory.getCurrentSession();
+	public RegisterWithOtp register(RegisterWithOtp registerWithOtp) {
+		final String METHOD_NAME = "register";
+		RegisterWithOtp reg = null;
+		try {
+
+			Session session = this.sessionFactory.openSession();
 			Integer id = (Integer) session.save(registerWithOtp);
-			reg=(RegisterWithOtp) session.get(RegisterWithOtp.class, id);
-			}catch(Exception exception){
-				logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
-			}
-			return reg;
+			reg = (RegisterWithOtp) session.get(RegisterWithOtp.class, id);
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
-			
-		public UserProfile registeruser(UserProfile userProfile) {
-			final String METHOD_NAME="registeruser";
-			UserProfile resp = null;
-			try{
+		return reg;
+	}
+
+	public UserProfile registeruser(UserProfile userProfile) {
+		final String METHOD_NAME = "registeruser";
+		UserProfile resp = null;
+		try {
 			Session session = this.sessionFactory.getCurrentSession();
 			Integer id = (Integer) session.save(userProfile);
-			resp=(UserProfile) session.get(UserProfile.class, id);	
-			}catch(Exception exception)
-			{
-				logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			resp = (UserProfile) session.get(UserProfile.class, id);
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 
-			}
-			return resp;
 		}
-			
+		return resp;
+	}
+
 }
