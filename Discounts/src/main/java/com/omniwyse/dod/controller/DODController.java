@@ -1188,7 +1188,7 @@ public class DODController {
 				for (MerchantPromotionBeacon merchantPromotionBeacon : merchantPromotionBeacons) {
 					if (beaconsMap != null && !beaconsMap.isEmpty()) {
 						List<PromotionDto> existingPromotion = beaconsMap
-								.get(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()));
+								.get(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()+merchantPromotionBeacon.getMerchantProfile().getId()));
 						if (existingPromotion != null && !existingPromotion.isEmpty()) {
 							promotionDto = new PromotionDto();
 							promotionDto.setId(merchantPromotionBeacon.getPromotion().getId());
@@ -1257,7 +1257,7 @@ public class DODController {
 						promotionDto.setDiscountText(merchantPromotionBeacon.getPromotion().getDiscountText());
 						mpbSearchVO.getPromotionDtos().add(promotionDto);
 						mpbSearchVOs.add(mpbSearchVO);
-						beaconsMap.put(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()),
+						beaconsMap.put(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()+merchantPromotionBeacon.getMerchantProfile().getId()),
 								mpbSearchVO.getPromotionDtos());
 					}
 
