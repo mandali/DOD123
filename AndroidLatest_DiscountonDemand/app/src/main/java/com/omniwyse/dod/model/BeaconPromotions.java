@@ -9,50 +9,70 @@ import com.google.gson.annotations.SerializedName;
 public class BeaconPromotions {
 
     @SerializedName("id")
-    private int id;
+    private Integer id;
     @SerializedName("product_id")
+    
     private String productId;
     @SerializedName("description")
+    
     private String description;
     @SerializedName("product_image")
+    
     private String productImage;
     @SerializedName("originalPrice")
+    
     private String originalPrice;
     @SerializedName("discount")
+    
     private String discount;
     @SerializedName("createddate")
-    private double createddate;
+    
+    private long createddate;
     @SerializedName("startdate")
-    private double startdate;
+    
+    private long startdate;
     @SerializedName("enddate")
-    private double enddate;
-    @SerializedName("location")
-    private String location;
+    
+    private long enddate;
     @SerializedName("merchatId")
-    private int merchatId;
+    
+    private Integer merchatId;
     @SerializedName("brandName")
+    
     private String brandName;
     @SerializedName("brandRating")
+    
     private String brandRating;
     @SerializedName("brandImage")
+    
     private String brandImage;
     @SerializedName("brandDescription")
+    
     private String brandDescription;
     @SerializedName("categoryName")
+    
     private String categoryName;
     @SerializedName("catid")
-    private int catid;
+    
+    private Integer catid;
     @SerializedName("brandId")
-    private int brandId;
+    
+    private Integer brandId;
     @SerializedName("discountText")
     
     private String discountText;
+    @SerializedName("locationId")
+    
+    private String locationId;
+    @SerializedName("locationName")
+    
+    private String locationName;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -96,43 +116,35 @@ public class BeaconPromotions {
         this.discount = discount;
     }
 
-    public double getCreateddate() {
+    public long getCreateddate() {
         return createddate;
     }
 
-    public void setCreateddate(double createddate) {
+    public void setCreateddate(long createddate) {
         this.createddate = createddate;
     }
 
-    public double getStartdate() {
+    public long getStartdate() {
         return startdate;
     }
 
-    public void setStartdate(double startdate) {
+    public void setStartdate(long startdate) {
         this.startdate = startdate;
     }
 
-    public double getEnddate() {
+    public long getEnddate() {
         return enddate;
     }
 
-    public void setEnddate(double enddate) {
+    public void setEnddate(long enddate) {
         this.enddate = enddate;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getMerchatId() {
+    public Integer getMerchatId() {
         return merchatId;
     }
 
-    public void setMerchatId(int merchatId) {
+    public void setMerchatId(Integer merchatId) {
         this.merchatId = merchatId;
     }
 
@@ -176,19 +188,19 @@ public class BeaconPromotions {
         this.categoryName = categoryName;
     }
 
-    public int getCatid() {
+    public Integer getCatid() {
         return catid;
     }
 
-    public void setCatid(int catid) {
+    public void setCatid(Integer catid) {
         this.catid = catid;
     }
 
-    public int getBrandId() {
+    public Integer getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(int brandId) {
+    public void setBrandId(Integer brandId) {
         this.brandId = brandId;
     }
 
@@ -198,6 +210,22 @@ public class BeaconPromotions {
 
     public void setDiscountText(String discountText) {
         this.discountText = discountText;
+    }
+
+    public String getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
 }

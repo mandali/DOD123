@@ -1,29 +1,25 @@
 package com.omniwyse.dod.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.omniwyse.dod.R;
 import com.omniwyse.dod.model.BeaconPromotions;
-import com.omniwyse.dod.model.Datum;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by surya on 3/7/2017.
- * @author surya
+ * @author surya.g21@gmail.com
  */
 
-public class BeaconLiveAdapter extends RecyclerView.Adapter<BeaconLiveAdapter.ItemRowHolder> {
+public class BeaconLiveAdapter extends RecyclerView.Adapter<BeaconLiveAdapter.ItemHolder> {
 
 
     private List<BeaconPromotions> promotions;
@@ -34,26 +30,31 @@ public class BeaconLiveAdapter extends RecyclerView.Adapter<BeaconLiveAdapter.It
         this.mContext = context;
     }
 
-
     @Override
-    public BeaconLiveAdapter.ItemRowHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.discount_list_item, null);
-        BeaconLiveAdapter.ItemRowHolder mh = new BeaconLiveAdapter.ItemRowHolder(v);
-        return mh;
+    public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.discount_list_item, null);
+        return new BeaconLiveAdapter.ItemHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(BeaconLiveAdapter.ItemRowHolder itemRowHolder, int i) {
+    public void onBindViewHolder(ItemHolder holder, int position) {
+        holder.itemDiscount.setText(position+"%");
 
-        Picasso.with(mContext).load(promotions.get(i).getBrandImage()).resize(100, 100).into(itemRowHolder.brandImage);
+//        itemHolder.itemDiscount.setText(position+"%");
+////        final BeaconPromotions data= promotions.get(position);
+////        itemHolder.itemDiscount.setText(data.getDiscount());
+////        itemHolder.itemCategory.setText(data.getCategoryName());
+////        itemHolder.itemStore.setText(data.getBrandDescription());
+////        Picasso.with(mContext).load(data.getBrandImage()).resize(100, 100).into(itemHolder.brandImage);
     }
 
     @Override
     public int getItemCount() {
-        return (null != promotions ? promotions.size() : 0);
+        return 40;
     }
 
-    public class ItemRowHolder extends RecyclerView.ViewHolder {
+
+    public class ItemHolder extends RecyclerView.ViewHolder {
 
         private TextView itemStore;
         private TextView itemCategory;
@@ -61,7 +62,7 @@ public class BeaconLiveAdapter extends RecyclerView.Adapter<BeaconLiveAdapter.It
 
         private ImageView brandImage;
 
-        public ItemRowHolder(View view) {
+        public ItemHolder(View view) {
             super(view);
 
             this.itemCategory = (TextView) view.findViewById(R.id.beacon_category_tv);

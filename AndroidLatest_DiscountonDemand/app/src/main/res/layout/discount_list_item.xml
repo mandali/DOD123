@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_margin="5dp"
-    android:layout_height="110dp">
+    android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/beacon_list_image"
         android:layout_width="110dp"

@@ -54,7 +54,7 @@ public interface APIInterface {
     Call<GetBrandsresponse> getBrands();
 
     @Headers("Content-Type: application/json")
-    @POST("getbeaconsinfo")
+    @POST("listmerchantpromotionbeacons")
     Call<Beacon> beaconLive(@Body BeaconRequest body);
 
 
