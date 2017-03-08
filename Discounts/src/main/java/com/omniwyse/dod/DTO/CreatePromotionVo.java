@@ -3,6 +3,9 @@ package com.omniwyse.dod.DTO;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.Product;
+
 public class CreatePromotionVo implements Serializable{
 	
 	/**
@@ -17,15 +20,22 @@ public class CreatePromotionVo implements Serializable{
 	private String product_image;
 	private String originalPrice;
 	private String discount;
-	private String location;
+	private String locationId;
 	private Date createddate;
 	private Date startdate;	
 	private Date enddate;
 	private Long catid;
 	private Long brandId;
 	private String discountText;
+	private Product productId;
+	private MerchantProfile merchantProfile;
 	
 	
+	
+	
+	public CreatePromotionVo(){
+		
+	}
 	
 	
 	
@@ -78,12 +88,7 @@ public class CreatePromotionVo implements Serializable{
 	public void setDiscount(String discount) {
 		this.discount = discount;
 	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
-	}
+	
 	public Date getCreateddate() {
 		return createddate;
 	}
@@ -114,7 +119,44 @@ public class CreatePromotionVo implements Serializable{
 	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
-	
-	
+
+
+
+	public String getLocationId() {
+		return locationId;
+	}
+
+
+
+	public void setLocationId(String locationId) {
+		this.locationId = locationId;
+	}
+
+
+
+	public Product getProductId() {
+		return productId;
+	}
+
+
+
+	public void setProductId(Product productId) {
+		this.productId = productId;
+	}
+
+
+
+	public MerchantProfile getMerchantProfile() {
+		return merchantProfile;
+	}
+
+
+
+	public void setMerchantProfile(MerchantProfile merchantProfile) {
+		this.merchantProfile = merchantProfile;
+	}
+
+
+
 
 }

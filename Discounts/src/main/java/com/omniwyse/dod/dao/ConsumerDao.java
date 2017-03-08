@@ -16,11 +16,11 @@ public interface ConsumerDao {
 	
 	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin);	
 	
-	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin);	
+	public RegisterWithOtp consumerLogin(ConsumerLogin userLogin);	
 	
-	public ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile ConsumerIdBaseProfile); 
+	public ConsumerProfile consumerProfile(ConsumerIdBaseProfile ConsumerIdBaseProfile); 
 	
-	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData consumerPromotionData);
+	public ConsumerPromotionData consumerPromotion(ConsumerPromotionData consumerPromotionData);
 	
 	
 	

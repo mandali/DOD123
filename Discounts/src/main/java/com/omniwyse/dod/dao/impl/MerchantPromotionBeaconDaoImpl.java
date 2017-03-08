@@ -11,21 +11,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.omniwyse.dod.DTO.BeaconInformationVO;
-import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MerchantPromotionBeaconDao;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 @Repository
 public class MerchantPromotionBeaconDaoImpl implements MerchantPromotionBeaconDao{
 	
-	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
+	private static final Logger logger = Logger.getLogger(MerchantPromotionBeaconDaoImpl.class);
 	
 	@Autowired
 	SessionFactory sessionFactory;
+	final String METHOD_NAME = "MerchantPromotions";
 
 	@SuppressWarnings("unchecked")
 	public List<Object[]>  getbeacons() {
+		final String METHOD_NAME = "getbeacons";
+		List<Object[]> result = null;
+		try{
 		Session session = this.sessionFactory.openSession();
-		List<Object[]> result= session.createSQLQuery(" select distinct m.ID as MerchantId,mpb.A_ID as asileId,mpb.BC_ID as BeaconId,mpb.P_ID as promotionId from merchant_profile m join merchant_pm_bc mpb where m.ID=mpb.M_ID").list();	
+		result= session.createSQLQuery(" select distinct m.ID as MerchantId,mpb.A_ID as asileId,mpb.BC_ID as BeaconId,mpb.P_ID as promotionId from merchant_profile m join merchant_pm_bc mpb where m.ID=mpb.M_ID").list();
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}		
 		return result;
 	}
 		

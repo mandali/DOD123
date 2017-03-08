@@ -34,15 +34,15 @@ public class MerchantServiceImpl implements MerchantService{
 		return resp;		
 	}
 		
-	public MerchantProfile GetmerchantMobile(GetMerchantById getMerchantById) {
-		MerchantProfile resp=MerchantDao.GetMerchatByMobile(getMerchantById);
+	public MerchantProfile getmerchantMobile(GetMerchantById getMerchantById) {
+		MerchantProfile resp=MerchantDao.getMerchatByMobile(getMerchantById);
 		return resp;
 	}
 		
 
-	public MerchantProfile MerchatLogin(MerchantLogin merchantLogin) {		
+	public MerchantProfile merchatLogin(MerchantLogin merchantLogin) {		
 			
-			return MerchantDao.MerchantLogin(merchantLogin);
+			return MerchantDao.merchantLogin(merchantLogin);
 		}
 		
 	
@@ -56,14 +56,14 @@ public class MerchantServiceImpl implements MerchantService{
 		return MerchantDao.merchantautheticateWithMobile(merchantLoginwithMobile);
 	}
 		
-	public MerchantProfile MerchatProfile(GetMerchatProfile getMerchatProfile) {
+	public MerchantProfile merchatProfile(GetMerchatProfile getMerchatProfile) {
 		
-		return MerchantDao.MerchantProfile(getMerchatProfile);
+		return MerchantDao.merchantProfile(getMerchatProfile);
 	}
 		
-	public List<MerchantProfile> AllMerchants() {
+	public List<MerchantProfile> allMerchants() {
 		
-		return MerchantDao.AllMerchants();
+		return MerchantDao.allMerchants();
 	}
 		
 	public MerchantProfile getMerchatByID(Integer id) {
@@ -71,9 +71,9 @@ public class MerchantServiceImpl implements MerchantService{
 		return MerchantDao.getMerchantbyID(id);
 	}
 		
-	public List<Promotion> MerchatPromotion(MerchantPromotions MerchantPromotions, Date date) {
+	public List<Promotion> merchatPromotion(MerchantPromotions MerchantPromotions, Date date) {
 		
-		 return MerchantDao.MerchantPromotions(MerchantPromotions, date);
+		 return MerchantDao.merchantPromotions(MerchantPromotions, date);
 	}
 		
 	

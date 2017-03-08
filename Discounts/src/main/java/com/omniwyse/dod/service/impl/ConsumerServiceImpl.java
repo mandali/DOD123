@@ -33,9 +33,9 @@ public class ConsumerServiceImpl implements ConsumerService{
 		
 		return consumerDao.consumerautheticatewithMobile(userLogin);
 	}	
-	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin) {
+	public RegisterWithOtp consumerLogin(ConsumerLogin userLogin) {
 		
-		return consumerDao.ConsumerLogin(userLogin);
+		return consumerDao.consumerLogin(userLogin);
 	}		
 	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
 		Date date=new Date();
@@ -43,13 +43,13 @@ public class ConsumerServiceImpl implements ConsumerService{
 		ConsumerProfile resp=consumerDao.registerconsumer(consumerProfile);
 		return resp;
 	}		
-	public com.omniwyse.dod.model.ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile) {
+	public com.omniwyse.dod.model.ConsumerProfile consumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile) {
 		
-		return consumerDao.ConsumerProfile(consumerIdBaseProfile);
+		return consumerDao.consumerProfile(consumerIdBaseProfile);
 	}		
-	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData consumerPromotionData) {
+	public ConsumerPromotionData consumerPromotion(ConsumerPromotionData consumerPromotionData) {
 		
-		return consumerDao.ConsumerPromotion(consumerPromotionData);
+		return consumerDao.consumerPromotion(consumerPromotionData);
 	}	
 
 	}

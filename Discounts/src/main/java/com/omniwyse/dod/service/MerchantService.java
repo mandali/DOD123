@@ -16,18 +16,18 @@ public interface MerchantService {
 	
 	public MerchantProfile registermerchant(MerchantProfile merchantProfile); 
 	
-	public MerchantProfile GetmerchantMobile(GetMerchantById getMerchantById);
+	public MerchantProfile getmerchantMobile(GetMerchantById getMerchantById);
 	
-	public MerchantProfile MerchatLogin(MerchantLogin merchantLogin);
+	public MerchantProfile merchatLogin(MerchantLogin merchantLogin);
 	
     public MerchantProfile merchatAutheticateWithEmail(MerchantLoginwithEmail merchantLoginwithEmail);
 	
 	public MerchantProfile merchatAutheticateWithMobile(MerchantLoginwithMobile merchantLoginwithMobile); 
 	
-	public MerchantProfile MerchatProfile(GetMerchatProfile GetMerchatProfile); //MerchantPromotions
+	public MerchantProfile merchatProfile(GetMerchatProfile GetMerchatProfile); //MerchantPromotions
 	
-	public List<MerchantProfile> AllMerchants();
+	public List<MerchantProfile> allMerchants();
 	
-	public List<Promotion> MerchatPromotion(MerchantPromotions MerchantPromotions , Date date);
+	public List<Promotion> merchatPromotion(MerchantPromotions MerchantPromotions , Date date);
 
 }

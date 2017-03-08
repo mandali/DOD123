@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.omniwyse.dod.DTO.NewProductVO;
-import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Product;
@@ -18,7 +17,7 @@ import com.omniwyse.dod.model.Product;
 @Repository
 public class ProductDaoImpl implements ProductDao{
 	
-	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
+	private static final Logger logger = Logger.getLogger(ProductDaoImpl.class);
 	
 	@Autowired
 	SessionFactory sessionFactory;

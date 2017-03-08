@@ -10,6 +10,7 @@ import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
+import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.Promotionsummary;
 
@@ -19,17 +20,19 @@ public List<Promotion> getPromotions();
 	
 	public List<Promotion> getCategoryPromotions(Date currentdate, CategorySelection categorySelection);
 	
-	public Promotion CreatePromotions(CreatePromotionVo createPromotionVo); 
+	public Promotion createPromotions(CreatePromotionVo createPromotionVo); 
 	
 	public Promotion getIdbasePromotion(IdBasePromotion idBasePromotion);
 
-	public List<Promotionsummary> PromotionSummary(Date date);
+	public List<Promotionsummary> promotionSummary(Date date);
 	
 	public Category getcategoryId(CreatePromotionVo createPromotionVo); 
 	
-	public Brand getBrandId(CreatePromotionVo createPromotionVo);	
+	public Brand getBrandId(CreatePromotionVo createPromotionVo);
 	
-	public List<PromotionDto> CategoryIdPromotion(CategoryPromotion categoryPromotion );
+	public Product fetchProductById(CreatePromotionVo createPromotionVo);	
+	
+	public List<PromotionDto> categoryIdPromotion(CategoryPromotion categoryPromotion );
 	
 	public List<PromotionDto> brandIdPromotion(CategoryPromotion categoryPromotion );
 	

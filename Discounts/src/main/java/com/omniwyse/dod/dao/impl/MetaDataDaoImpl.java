@@ -26,7 +26,6 @@ import com.omniwyse.dod.DTO.MerchantProductVO;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.ProductVO;
-import com.omniwyse.dod.config.AppConfiguration;
 import com.omniwyse.dod.dao.MetaDataDao;
 import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.Brand;
@@ -43,7 +42,7 @@ import com.omniwyse.dod.model.Promotion;
 @Repository
 public class MetaDataDaoImpl implements MetaDataDao {
 
-	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
+	private static final Logger logger = Logger.getLogger(MetaDataDaoImpl.class);
 
 	@SuppressWarnings("unused")
 	private static final String MerchantProfile = null;
@@ -53,9 +52,16 @@ public class MetaDataDaoImpl implements MetaDataDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Category> fetchCategories() {
+		
+		final String METHOD_NAME = "fetchCategories";
+		List<Category> categories = null;
+		try{
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query = (Query) session.createQuery("from Category c order by c.categoryRank desc");
-		List<Category> categories = (List<Category>) query.list();
+		categories = (List<Category>) query.list();
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
 
 		return categories;
 	}
@@ -176,6 +182,9 @@ public class MetaDataDaoImpl implements MetaDataDao {
 	}
 		
 	public Location createLocation(LocationVO locationVo) {
+		final String METHOD_NAME = "createLocation";
+		Location resp = null;
+		try{
 		Session session = this.sessionFactory.openSession();
 		Location location=new Location();
 		location.setLocationName(locationVo.getLocationName());
@@ -187,7 +196,10 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		Cities cities=(Cities)session.get(Cities.class, locationVo.getCityId());
 		location.setCitiesId(cities);
 		Long id = (Long) session.save(location);
-		Location resp=(Location) session.get(Location.class, id);		
+		resp=(Location) session.get(Location.class, id);
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
 		return resp;		
 	}
 		
@@ -223,10 +235,10 @@ public class MetaDataDaoImpl implements MetaDataDao {
 	public List<Object> fetchMPBObjects(MerchantPromotionBeaconSearchVo merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
-		MerchantProfile merchantProfileId;
-		Promotion promotionId;
-		Beacon beaconId;
-		MerchantAisle merchantAisle;
+		MerchantProfile merchantProfileId = null;
+		Promotion promotionId = null;
+		Beacon beaconId = null;
+		MerchantAisle merchantAisle = null;
 		Location location;
 		Country country = null;
 		Cities cities = null;
@@ -235,12 +247,20 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		List<Object> mpbObjects=new LinkedList();
 	
 		try{
+			if(merchantPromotionBeaconVO.getMerchantId()!=null && !merchantPromotionBeaconVO.getMerchantId().toString().isEmpty()){
 			merchantProfileId=(MerchantProfile) session.get(MerchantProfile.class, Integer.valueOf(merchantPromotionBeaconVO.getMerchantId()));
+			}
+			if(merchantPromotionBeaconVO.getPromotionId()!=null && !merchantPromotionBeaconVO.getPromotionId().toString().isEmpty()){
 			promotionId=(Promotion)session.get(Promotion.class,Integer.valueOf(merchantPromotionBeaconVO.getPromotionId()));
+			}
+			if(merchantPromotionBeaconVO.getBeaconId()!=null && !merchantPromotionBeaconVO.getBeaconId().toString().isEmpty()){
 			beaconId=(Beacon)session.get(Beacon.class, Long.valueOf(merchantPromotionBeaconVO.getBeaconId()));
+			}
+			if(merchantPromotionBeaconVO.getAisleId()!=null && !merchantPromotionBeaconVO.getAisleId().toString().isEmpty()){
 			merchantAisle=(MerchantAisle)session.get(MerchantAisle.class,Long.valueOf(merchantPromotionBeaconVO.getAisleId()));
-			if(promotionId!=null && promotionId.getLocation()!=null){
-				location=(Location) session.get(Location.class, Long.valueOf(promotionId.getLocation()));
+			}
+			if(promotionId!=null && promotionId.getLocationId()!=null){
+				location=(Location) session.get(Location.class, Long.valueOf(promotionId.getLocationId().getLocationId()));
 				if(location!=null && location.getCountryId().getId()!=null && location.getCitiesId().getCityId()!=null){
 					country=(Country) session.get(Country.class, Long.valueOf(location.getCountryId().getId()));
 					cities=(Cities) session.get(Cities.class, Long.valueOf(location.getCitiesId().getCityId()));
@@ -288,6 +308,20 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> fetchNoBeaconPromotions() {
+		// TODO Auto-generated method stub
+		final String METHOD_NAME = "fetchNoBeaconPromotions";
+		List<Object[]> result = null;
+		try{
+		Session session = this.sessionFactory.openSession();
+		result= session.createSQLQuery(" SELECT p.PRMS_ID as promotionId,p.Merchant_ID as merchantId,p.LO_ID as location  FROM dod_db.promotions p where p.PRMS_ID not in(select m.P_ID from merchant_pm_bc m);").list();
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}		
+		return result;
 	}
 		
 

@@ -18,7 +18,7 @@ public class PromotionDto implements Serializable{
 	private Date createddate;
 	private Date startdate;	
 	private Date enddate;
-	private String location;
+	
 	private Integer merchatId;
 	private String brandName;
 	private String brandRating;
@@ -27,7 +27,13 @@ public class PromotionDto implements Serializable{
 	private String categoryName;
 	private Long catid;
 	private Long brandId;
-	private String discountText;	
+	private String discountText;
+	private String locationId;
+	private String locationName;
+	
+	
+	
+	
 	public String getDiscountText() {
 		return discountText;
 	}
@@ -136,12 +142,19 @@ public class PromotionDto implements Serializable{
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
 	}
-	public String getLocation() {
-		return location;
+	public String getLocationId() {
+		return locationId;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLocationId(String locationId) {
+		this.locationId = locationId;
 	}
+	public String getLocationName() {
+		return locationName;
+	}
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
+	
 	
 	
 	

@@ -20,24 +20,18 @@ public class RegistrationServiceImpl implements RegistrationService {
 	RegistrationDao registrationDao;
 	
 
-	public RegisterWithOtp Register(RegisterWithOtp registerWithOtp) {		
+	public RegisterWithOtp register(RegisterWithOtp registerWithOtp) {		
 		Date date=new Date();		
 		registerWithOtp.setExpdate(date);	
-		registerWithOtp.setCreatedate(date);
-		registerWithOtp.setOtpno("1234");
-		RegisterWithOtp con=registrationDao.Register(registerWithOtp);		
+		registerWithOtp.setCreatedate(date);		
+		RegisterWithOtp con=registrationDao.register(registerWithOtp);		
 		return con;
-	}
-	
-		
-	
+	}	
 	public UserProfile registeruser(UserProfile userProfile) {		
 		Date date=new Date();
 		userProfile.setCreteddate(date);
 		UserProfile resp=registrationDao.registeruser(userProfile);		
 		return resp;
-	}
-	
-		
+	}	
 	
 }

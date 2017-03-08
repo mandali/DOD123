@@ -12,13 +12,13 @@ public interface ConsumerService {
 	
 	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile); 
 	
-	public RegisterWithOtp ConsumerLogin(ConsumerLogin userLogin); 
+	public RegisterWithOtp consumerLogin(ConsumerLogin userLogin); 
 	
 	public ConsumerProfile consumerautheticatewithemail(ConsumerLoginwithEmail userLogin); 
 	
 	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin); 
 	
-	public ConsumerProfile ConsumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile);
+	public ConsumerProfile consumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile);
 	
-	public ConsumerPromotionData ConsumerPromotion(ConsumerPromotionData ConsumerPromotionData);
+	public ConsumerPromotionData consumerPromotion(ConsumerPromotionData ConsumerPromotionData);
 }

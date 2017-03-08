@@ -1,5 +1,6 @@
 package com.omniwyse.dod.dao.impl;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +15,34 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	@Autowired
 	SessionFactory sessionFactory;
 
-		public RegisterWithOtp Register(RegisterWithOtp registerWithOtp) {		
-			Session session = this.sessionFactory.getCurrentSession();
+	private static final Logger logger = Logger.getLogger(RegistrationDaoImpl.class);
+
+	public RegisterWithOtp register(RegisterWithOtp registerWithOtp) {
+		final String METHOD_NAME = "register";
+		RegisterWithOtp reg = null;
+		try {
+
+			Session session = this.sessionFactory.openSession();
 			Integer id = (Integer) session.save(registerWithOtp);
-			RegisterWithOtp reg=(RegisterWithOtp) session.get(RegisterWithOtp.class, id);
-			return reg;
+			reg = (RegisterWithOtp) session.get(RegisterWithOtp.class, id);
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
-			
-		public UserProfile registeruser(UserProfile userProfile) {		
+		return reg;
+	}
+
+	public UserProfile registeruser(UserProfile userProfile) {
+		final String METHOD_NAME = "registeruser";
+		UserProfile resp = null;
+		try {
 			Session session = this.sessionFactory.getCurrentSession();
 			Integer id = (Integer) session.save(userProfile);
-			UserProfile resp=(UserProfile) session.get(UserProfile.class, id);		
-			return resp;
+			resp = (UserProfile) session.get(UserProfile.class, id);
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+
 		}
-			
+		return resp;
+	}
+
 }

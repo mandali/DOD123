@@ -29,6 +29,8 @@ public interface MetaDataDao {
 	@SuppressWarnings("rawtypes")
 	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO);
 	
+	public List<Object[]> fetchNoBeaconPromotions();
+	
 	
 	
 }

@@ -5,7 +5,7 @@ import com.omniwyse.dod.model.RegisterWithOtp;
 
 public interface ValidationService {
 	
-	public RegisterWithOtp Getotp(OTPValidation oTPValidation);
+	public RegisterWithOtp getotp(OTPValidation oTPValidation);
 	
 
 }

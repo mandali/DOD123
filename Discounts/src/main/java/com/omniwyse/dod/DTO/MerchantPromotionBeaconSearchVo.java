@@ -17,7 +17,7 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	private Date createddate;
 	private Date startdate;	
 	private Date enddate;
-	private String location;
+	
 	private String brandName;
 	private String brandRating;
 	private String brandImage;
@@ -54,6 +54,8 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	private Integer promotionId;
 	private String cityId;
 	private String countryId;
+	private String locationId;
+	private String locationName;
 	
 	public MerchantPromotionBeaconSearchVo(){
 	}
@@ -112,12 +114,6 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 	}
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
-	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
 	}
 	
 	public String getBrandName() {
@@ -381,6 +377,26 @@ public class MerchantPromotionBeaconSearchVo implements Serializable{
 
 	public void setCreated(Date created) {
 		this.created = created;
+	}
+
+
+	public String getLocationId() {
+		return locationId;
+	}
+
+
+	public void setLocationId(String locationId) {
+		this.locationId = locationId;
+	}
+
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 	
 	
