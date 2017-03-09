@@ -56,7 +56,6 @@ public class LiveFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_live, container, false);
         loadBeaconData();
-//        setAdapter();
         return rootView;
     }
 
@@ -108,15 +107,11 @@ public class LiveFragment extends Fragment {
     }
 
     private void setAdapter(){
-        StoresAdapter storesAdapter = new StoresAdapter(getActivity(), promotionsList);
-        ListView listView = (ListView)getActivity().findViewById(R.id.list_stores);
-        listView.setAdapter(storesAdapter);
-
-//        RecyclerView my_recycler_view = (RecyclerView) rootView.findViewById(R.id.beacon_list);
-//        my_recycler_view.setHasFixedSize(true);
-//        BeaconLiveAdapter adapter = new BeaconLiveAdapter(getActivity(), promotionsList);
-//        my_recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-//        my_recycler_view.setAdapter(adapter);
+        RecyclerView my_recycler_view = (RecyclerView) rootView.findViewById(R.id.beacon_list);
+        my_recycler_view.setHasFixedSize(true);
+        BeaconLiveAdapter adapter = new BeaconLiveAdapter(getActivity(), promotionsList);
+        my_recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        my_recycler_view.setAdapter(adapter);
     }
 
 }

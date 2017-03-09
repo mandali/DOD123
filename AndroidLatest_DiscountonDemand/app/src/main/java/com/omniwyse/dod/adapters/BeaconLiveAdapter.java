@@ -37,20 +37,17 @@ public class BeaconLiveAdapter extends RecyclerView.Adapter<BeaconLiveAdapter.It
     }
 
     @Override
-    public void onBindViewHolder(ItemHolder holder, int position) {
-        holder.itemDiscount.setText(position+"%");
-
-//        itemHolder.itemDiscount.setText(position+"%");
-////        final BeaconPromotions data= promotions.get(position);
-////        itemHolder.itemDiscount.setText(data.getDiscount());
-////        itemHolder.itemCategory.setText(data.getCategoryName());
-////        itemHolder.itemStore.setText(data.getBrandDescription());
-////        Picasso.with(mContext).load(data.getBrandImage()).resize(100, 100).into(itemHolder.brandImage);
+    public void onBindViewHolder(ItemHolder itemHolder, int position) {
+        final BeaconPromotions data= promotions.get(position);
+        itemHolder.itemDiscount.setText(data.getDiscount());
+        itemHolder.itemCategory.setText(data.getCategoryName());
+        itemHolder.itemStore.setText(data.getBrandDescription());
+        Picasso.with(mContext).load(data.getBrandImage()).resize(100, 100).into(itemHolder.brandImage);
     }
 
     @Override
     public int getItemCount() {
-        return 40;
+        return promotions!=null?promotions.size():0;
     }
 
 
