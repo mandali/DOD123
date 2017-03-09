@@ -26,7 +26,7 @@ import com.omniwyse.dod.service.MetaDataService;
 public class BeaconController {
 
 	private static final Logger logger = Logger.getLogger(BeaconController.class);
-
+	private static final String CLASS_NAME = BeaconController.class.getName();
 	@Autowired
 	MetaDataService metaDataService;
 
@@ -39,6 +39,7 @@ public class BeaconController {
 		List<BeaconVO> beaconVOs;
 		DataResultlist<BeaconVO> result;
 		try {
+			logger.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
 
 			List<Beacon> beacons = metaDataService.fetchBeacons();
 			beaconVOs = new ArrayList<BeaconVO>();
@@ -61,15 +62,16 @@ public class BeaconController {
 			}
 
 		} catch (Exception exception) {
-			logger.error("Exception in" + METHOD_NAME + "" + exception.getMessage());
+			logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
 		}
+		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
 		return responseEntity;
 
 	}
 
 	@RequestMapping(value = AppConstants.LIST_AISLE, method = RequestMethod.POST)
 	public ResponseEntity<Object> fetchAisle(@RequestBody IAliseVO ialiseVO) {
-		final String METHOD_NAME="fetchAisle";
+		final String METHOD_NAME = "fetchAisle";
 		ResponseEntity<Object> responseEntity = null;
 		DataResult resultError;
 		AliseVO aliseVO;
@@ -77,45 +79,46 @@ public class BeaconController {
 		List<MerchantAisle> aisles = null;
 		DataResultlist<AliseVO> result;
 		try {
-			
-			if(ialiseVO.getMerchantId()!=null && !ialiseVO.getMerchantId().isEmpty()){
-				
-				aisles=metaDataService.fetchAisle(ialiseVO.getMerchantId());
+			logger.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
+			if (ialiseVO.getMerchantId() != null && !ialiseVO.getMerchantId().isEmpty()) {
+
+				aisles = metaDataService.fetchAisle(ialiseVO.getMerchantId());
 			}
-			
-			if(aisles!=null && !aisles.isEmpty()){
-				aliseVOs=new ArrayList<AliseVO>();
-				for(MerchantAisle merchantAisle:aisles){
-					aliseVO=new AliseVO();
+
+			if (aisles != null && !aisles.isEmpty()) {
+				aliseVOs = new ArrayList<AliseVO>();
+				for (MerchantAisle merchantAisle : aisles) {
+					aliseVO = new AliseVO();
 					aliseVO.setAliseId(String.valueOf(merchantAisle.getAisleId()));
 					aliseVO.setAliseName(merchantAisle.getAisleName());
 					aliseVO.setFloor(String.valueOf(merchantAisle.getFloor()));
 					aliseVO.setxAxis(String.valueOf(merchantAisle.getxAxis()));
 					aliseVO.setyAxis(String.valueOf(merchantAisle.getyAxis()));
 					aliseVOs.add(aliseVO);
-					
+
 				}
-				
+
 			}
-			
-			if(aliseVOs!=null && !aliseVOs.isEmpty()){
-				result = new DataResultlist<AliseVO>(true, AppConstants.LIST_AISLE_SUCCESS_MSG,
-						HttpStatus.OK.value(), aliseVOs);
+
+			if (aliseVOs != null && !aliseVOs.isEmpty()) {
+				result = new DataResultlist<AliseVO>(true, AppConstants.LIST_AISLE_SUCCESS_MSG, HttpStatus.OK.value(),
+						aliseVOs);
 				responseEntity = new ResponseEntity<Object>(result, HttpStatus.OK);
-				
-			}
-			else{
+
+			} else {
 				resultError = new DataResult(false, "Sorry , No data found ... ", HttpStatus.OK.value());
 				responseEntity = new ResponseEntity<Object>(resultError, HttpStatus.OK);
-				
+
 			}
-			
 
 		}
 
 		catch (Exception exception) {
-			logger.error("Exception in" + METHOD_NAME + "" + exception.getMessage());
+			logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
 		}
+
+		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
+
 		return responseEntity;
 	}
 
