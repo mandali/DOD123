@@ -99,7 +99,7 @@ public class BeaconController {
 			}
 			
 			if(aliseVOs!=null && !aliseVOs.isEmpty()){
-				result = new DataResultlist<AliseVO>(true, AppConstants.LIST_BEACONS_SUCCESS_MSG,
+				result = new DataResultlist<AliseVO>(true, AppConstants.LIST_AISLE_SUCCESS_MSG,
 						HttpStatus.OK.value(), aliseVOs);
 				responseEntity = new ResponseEntity<Object>(result, HttpStatus.OK);
 				
