@@ -323,6 +323,21 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}		
 		return result;
 	}
+
+	public List<Beacon> fetchBeacons() {
+		// TODO Auto-generated method stub
+		final String METHOD_NAME="fetchBeacons";
+		List<Beacon> beacons = null;
+		try{
+			Session session = this.sessionFactory.openSession();
+			beacons=session.createQuery(" from Beacon ").list();
+		}
+		catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		
+		return beacons;
+	}
 		
 
 }

@@ -99,5 +99,9 @@ public class AppConstants {//
 	public static final String LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG="available Merchant Promotion Beacon's are";
 	public static final String LIST_BEACONS_PROMOTIONS_INFO="/getbeaconsinfo";
 	public static final String LIST_BEACONS_PROMOTIONS_INFO_SUCCESS_MSG="available Beacons Information";
+	public static final String LIST_BEACONS="listbeacons";
+	public static final String LIST_BEACONS_SUCCESS_MSG="available Beacons Information";
+	public static final String LIST_AISLE="listaisle";
+	public static final String LIST_AISLE_SUCCESS_MSG="available Aisle Information";
 	
 }

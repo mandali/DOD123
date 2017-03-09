@@ -7,6 +7,7 @@ import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.ProductVO;
+import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
@@ -31,6 +32,7 @@ public interface MetaDataDao {
 	
 	public List<Object[]> fetchNoBeaconPromotions();
 	
+	public List<Beacon> fetchBeacons();
 	
 	
 }
