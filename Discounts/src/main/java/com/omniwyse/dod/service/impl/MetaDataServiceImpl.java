@@ -17,6 +17,7 @@ import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.MerchantAisle;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
@@ -62,6 +63,10 @@ public class MetaDataServiceImpl implements MetaDataService {
 	public List<Beacon> fetchBeacons() {
 		// TODO Auto-generated method stub
 		return metaDataDao.fetchBeacons();
+	}
+	public List<MerchantAisle> fetchAisle(String merchantId) {
+		// TODO Auto-generated method stub
+		return metaDataDao.fetchAisle(merchantId);
 	}
 
 }

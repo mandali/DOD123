@@ -338,6 +338,23 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		
 		return beacons;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<MerchantAisle> fetchAisle(String merchantId) {
+		// TODO Auto-generated method stub
+		final String METHOD_NAME="fetchAisle";
+		List<MerchantAisle> aisles = null;
+		try{
+			Session session = this.sessionFactory.openSession();
+			aisles=(List<MerchantAisle>) session.createQuery(" from MerchantAisle m where m.merchantProfile.id=:merchantId").setParameter("merchantId", Integer.valueOf(merchantId)).list();
+		}
+		
+		catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		return aisles;
+		
+	}
 		
 
 }

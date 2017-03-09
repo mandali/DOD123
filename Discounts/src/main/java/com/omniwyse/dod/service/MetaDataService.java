@@ -10,6 +10,7 @@ import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.MerchantAisle;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
@@ -33,6 +34,8 @@ public interface MetaDataService {
 	public MerchantPromotionBeacon createMerchantPromotionBeacon(List merchantPromotionBeaconVO);
 	
 	public List<Beacon> fetchBeacons();
+	
+	public List<MerchantAisle> fetchAisle(String merchantId);
 	
 
 }
