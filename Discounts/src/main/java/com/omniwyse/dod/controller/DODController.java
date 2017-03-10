@@ -251,8 +251,7 @@ public class DODController {
 	@RequestMapping(value = AppConstants.CONSUMER_MOBILE_LOGIN, method = RequestMethod.POST)
 	public ResponseEntity checkMobilenoAndPassword(@RequestBody ConsumerLoginwithMobile userLogin) {
 		final String METHOD_NAME = "checkMobilenoAndPassword";
-		ResponseEntity responseEntity = null;
-		
+		ResponseEntity responseEntity = null;		
 		try {
 			ConsumerProfile resp = consumerService.consumerautheticatewithMobile(userLogin);
 			if (resp != null) {

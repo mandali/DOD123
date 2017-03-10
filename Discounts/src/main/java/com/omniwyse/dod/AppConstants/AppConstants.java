@@ -1,8 +1,6 @@
 package com.omniwyse.dod.AppConstants;
 
-public class AppConstants {//
-	
-	
+public class AppConstants {
 	public static final String REGISTER="/register";
 	public static final String REGISTER_ERROR_MSG=" Sorry , Mobile no is alredy exist ... ";
 	public static final String OTP="12345";
