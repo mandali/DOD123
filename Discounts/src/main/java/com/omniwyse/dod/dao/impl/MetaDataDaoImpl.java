@@ -373,7 +373,6 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}		
 		return brandVOs;
 	}
-
 	public Brand createBrand(BrandVO brand) {
 		final String METHOD_NAME="createBrand";
 		Brand resp= null;	
@@ -395,7 +394,6 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}		
 		return resp;
 	}
-
 	public Brand getBrandname(BrandVO brand) {
 		final String METHOD_NAME="getBrandname";
 		Brand brandname= null;

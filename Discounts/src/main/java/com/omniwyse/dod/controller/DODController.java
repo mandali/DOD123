@@ -400,27 +400,26 @@ public class DODController {
 			if (!data.isEmpty()) {
 				for (Promotion response : data) {
 					promotionDto = new PromotionDto();
-					promotionDto.setId(response.getId());
-					for (Promotion promotion : data) {
-						promotionDto.setProduct_id(String.valueOf(promotion.getProductID().getProductId()));
+					promotionDto.setId(response.getId());					
+						promotionDto.setProduct_id(String.valueOf(response.getProductID().getProductId()));
 						promotionDto.setId(response.getId());
-						promotionDto.setProduct_image(promotion.getProductID().getProductImageLocation());
-						promotionDto.setOriginalPrice(promotion.getOriginalPrice());
-						promotionDto.setDiscount(promotion.getDiscount());
-						promotionDto.setStartdate(promotion.getStartdate());
-						promotionDto.setEnddate(promotion.getEnddate());
-						promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
-						promotionDto.setLocationName(promotion.getLocationId().getLocationName());
-						promotionDto.setMerchatId(promotion.getMerchatId().getId());
-						promotionDto.setDiscountText(promotion.getDiscountText());
-						promotionDto.setCatid(promotion.getCatid().getCategoryId());
+						promotionDto.setProduct_image(response.getProductID().getProductImageLocation());
+						promotionDto.setOriginalPrice(response.getOriginalPrice());
+						promotionDto.setDiscount(response.getDiscount());
+						promotionDto.setStartdate(response.getStartdate());
+						promotionDto.setEnddate(response.getEnddate());
+						promotionDto.setLocationId(String.valueOf(response.getLocationId().getLocationId()));
+						promotionDto.setLocationName(response.getLocationId().getLocationName());
+						promotionDto.setMerchatId(response.getMerchatId().getId());
+						promotionDto.setDiscountText(response.getDiscountText());
+						promotionDto.setCatid(response.getCatid().getCategoryId());
 						promotionDto.setCategoryName(response.getCatid().getCategoryName());
 						promotionDto.setBrandId(response.getBrandId().getBrandid());
 						promotionDto.setBrandName(response.getBrandId().getBrandName());
 						promotionDto.setBrandImage(response.getBrandId().getBrandImage());
 						promotionDto.setBrandRating(response.getBrandId().getBrandRating());
 						promotionDto.setBrandDescription(response.getBrandId().getBrandDescription());
-					}
+				
 					promotionDto.setDescription(response.getDescription());
 					promotionDto.setCreateddate(response.getCreateddate());
 					promotionDto.setBrandDescription(response.getBrandId().getBrandDescription());
