@@ -158,6 +158,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());
 			promotionDto.setProduct_id(String.valueOf(promotion.getProductID().getProductId()));
+			promotionDto.setProduct_image(promotion.getProductID().getProductImageLocation());
 			promotionDto.setDescription(promotion.getDescription());
 			promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 			promotionDto.setDiscount(promotion.getDiscount());
@@ -167,12 +168,14 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
 			promotionDto.setLocationName(promotion.getLocationId().getLocationName());
 			promotionDto.setMerchatId(promotion.getMerchatId().getId());
+			promotionDto.setBrandId(promotion.getBrandId().getBrandid());
 			promotionDto.setBrandName(promotion.getBrandId().getBrandName());
 			promotionDto.setBrandImage(promotion.getBrandId().getBrandImage());
 			promotionDto.setBrandRating(promotion.getBrandId().getBrandRating());
 			promotionDto.setBrandDescription(promotion.getBrandId().getBrandDescription());
 			promotionDto.setCategoryName(promotion.getCatid().getCategoryName());
 			promotionDto.setCatid(promotion.getCatid().getCategoryId());
+			promotionDto.setDiscountText(promotion.getDiscountText());
 			promotionDtos.add(promotionDto);	
 		}
 		}catch(Exception exception){
@@ -194,6 +197,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());
 			promotionDto.setProduct_id(String.valueOf(promotion.getProductID().getProductId()));
+			promotionDto.setProduct_image(promotion.getProductID().getProductImageLocation());
 			promotionDto.setDescription(promotion.getDescription());
 			promotionDto.setOriginalPrice(promotion.getOriginalPrice());
 			promotionDto.setDiscount(promotion.getDiscount());
@@ -203,12 +207,14 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
 			promotionDto.setLocationName(promotion.getLocationId().getLocationName());
 			promotionDto.setMerchatId(promotion.getMerchatId().getId());
+			promotionDto.setBrandId(promotion.getBrandId().getBrandid());			
 			promotionDto.setBrandName(promotion.getBrandId().getBrandName());
 			promotionDto.setBrandImage(promotion.getBrandId().getBrandImage());
 			promotionDto.setBrandRating(promotion.getBrandId().getBrandRating());
 			promotionDto.setBrandDescription(promotion.getBrandId().getBrandDescription());
 			promotionDto.setCategoryName(promotion.getCatid().getCategoryName());
 			promotionDto.setCatid(promotion.getCatid().getCategoryId());
+			promotionDto.setDiscountText(promotion.getDiscountText());
 			promotionDtos.add(promotionDto);	
 		}
 		}catch(Exception exception){
