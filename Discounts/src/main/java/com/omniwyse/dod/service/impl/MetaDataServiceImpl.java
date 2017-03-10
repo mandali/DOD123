@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omniwyse.dod.DTO.BrandVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
@@ -15,6 +16,7 @@ import com.omniwyse.dod.DTO.ProductVO;
 import com.omniwyse.dod.dao.MetaDataDao;
 import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.model.Beacon;
+import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantAisle;
@@ -67,6 +69,14 @@ public class MetaDataServiceImpl implements MetaDataService {
 	public List<MerchantAisle> fetchAisle(String merchantId) {
 		// TODO Auto-generated method stub
 		return metaDataDao.fetchAisle(merchantId);
+	}
+	public List<BrandVO> listBrands() {
+		// TODO Auto-generated method stub
+		return metaDataDao.listBrands();
+	}
+	public Brand createBrand(BrandVO brand) {
+		// TODO Auto-generated method stub
+		return metaDataDao.createBrand(brand);
 	}
 
 }

@@ -55,8 +55,14 @@ public class AppConstants {//
 	public static final String LIST_CATEGORIES="/categories";
 	public static final String LIST_CATEGORIES_SUCCESS_MSG=" available Categories are ,";
 	public static final String LIST_CATEGORIES_ERROR_MSG="Sorry , No Categories are available right now ";
+	public static final String CREATE_BRANDS="/createbrands";
+	public static final String CREATE_BRAND_SUCCESS_MSG=" brand created successfully ... ";
+	public static final String CREATE_BRAND_ERROR_MSG=" brand name is already exist ... ";
 	public static final String LIST_BRANDS="/brands";
+	public static final String LIST_All_BRANDS="/listbrands";
 	public static final String LIST_BRANDS_SUCCESS_MSG=" available Categories with Brands are ,";
+	public static final String LIST_ALL_BRANDS_SUCCESS_MSG=" available Brands are ,";
+	public static final String LIST_ALL_BRANDS_ERROR_MSG=" Sorry , No brands are available right now ";
 	public static final String LIST_BRANDS_ERROR_MSG="Sorry , No Categories are available right now ";
 	public static final String LIST_MERCHANT_PRODUCTS_SUCCESS_MSG=" available Products are";
 	public static final String LIST_MERCHANT_PRODUCTS_ERROR_MSG="Sorry , No Products are available right now ";

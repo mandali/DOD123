@@ -1,5 +1,6 @@
 package com.omniwyse.dod.dao.impl;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,6 +39,7 @@ import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
+import com.omniwyse.dod.model.RegisterWithOtp;
 
 @Repository
 public class MetaDataDaoImpl implements MetaDataDao {
@@ -356,6 +358,55 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		return aisles;
 		
 	}
+
+	public List<BrandVO> listBrands() {
 		
+		final String METHOD_NAME="listBrands";
+		List<BrandVO> brandVOs = null;
+		try{
+			Session session = this.sessionFactory.openSession();
+			brandVOs=session.createQuery(" from Brand b order by b.brandRating desc").list();
+			
+		}catch(Exception exception){
+			
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}		
+		return brandVOs;
+	}
+
+	public Brand createBrand(BrandVO brand) {
+		final String METHOD_NAME="createBrand";
+		Brand resp= null;	
+		Calendar calendar = Calendar.getInstance();
+	    java.sql.Timestamp ourJavaTimestampObject = new java.sql.Timestamp(calendar.getTime().getTime());
+		try{
+			Brand brandlocal=new Brand();
+			brandlocal.setBrandid(Long.valueOf(brand.getBrandId()));
+			brandlocal.setBrandName(brand.getBrandName());
+			brandlocal.setBrandDescription(brand.getBrandDescription());
+			brandlocal.setBrandRating(brand.getBrandRating());
+			brandlocal.setCreatedDate(ourJavaTimestampObject);
+			Session session = this.sessionFactory.openSession();
+			Long id=(Long) session.save(brandlocal);
+			resp = (Brand) session.get(Brand.class, id);			
+		}
+		catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}		
+		return resp;
+	}
+
+	public Brand getBrandname(BrandVO brand) {
+		final String METHOD_NAME="getBrandname";
+		Brand brandname= null;
+		try{			
+			Session session = this.sessionFactory.openSession();
+			Query query=(Query) session.createQuery(" from Brand where brandName=:brandname").setParameter("brandname", brand.getBrandName());
+			brandname=(Brand) query.uniqueResult();			
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		return brandname;
+	}
 
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.omniwyse.dod.AppConstants.AppConstants;
 import com.omniwyse.dod.DTO.BeaconInformationVO;
+import com.omniwyse.dod.DTO.BrandVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CategoryVO;
@@ -919,8 +920,61 @@ public class DODController {
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
+		return responseEntity; 
+	}
+	
+	
+	
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.CREATE_BRANDS, method = RequestMethod.POST)
+	public ResponseEntity createBrands(@RequestBody BrandVO brandVO) {
+		final String METHOD_NAME = "createBrands";		
+		ResponseEntity responseEntity = null;
+		DataResultEntity<Brand> result;
+		DataResult resultError;
+		try {
+			Brand brandname=metaDataDao.getBrandname(brandVO);	
+			if (brandname==null) {
+				Brand brandVOs = metaDataService.createBrand(brandVO);
+				result = new DataResultEntity<Brand>(true, AppConstants.CREATE_BRAND_SUCCESS_MSG,
+						HttpStatus.OK.value(),brandVOs);				
+				return new ResponseEntity(result, HttpStatus.OK);
+			} else {
+				resultError = new DataResult(true, AppConstants.CREATE_BRAND_ERROR_MSG , HttpStatus.OK.value());
+				return new ResponseEntity(resultError, HttpStatus.OK);
+			}
+
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
 		return responseEntity;
 	}	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LIST_All_BRANDS, method = RequestMethod.GET)
+	public ResponseEntity BrandsList() {
+		final String METHOD_NAME = "BrandsList";		
+		ResponseEntity<BrandVO> responseEntity = null;
+		DataResultlist<BrandVO> result;
+		DataResult resultError;
+		try {
+			List<BrandVO> brandVOs = metaDataService.listBrands();
+
+			if (!brandVOs.isEmpty()) {
+				result = new DataResultlist<BrandVO>(true, AppConstants.LIST_ALL_BRANDS_SUCCESS_MSG,
+						HttpStatus.OK.value(), brandVOs);
+				return new ResponseEntity(result, HttpStatus.OK);
+			} else {
+				resultError = new DataResult(true, AppConstants.LIST_ALL_BRANDS_ERROR_MSG , HttpStatus.OK.value());
+				return new ResponseEntity(resultError, HttpStatus.OK);
+			}
+
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		return responseEntity;
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_BRANDS, method = RequestMethod.GET)
