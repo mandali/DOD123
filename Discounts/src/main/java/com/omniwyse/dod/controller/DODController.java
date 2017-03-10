@@ -391,16 +391,15 @@ public class DODController {
 	public ResponseEntity merchantPromotions(@RequestBody MerchantPromotions MerchantPromotions) {
 		final String METHOD_NAME = "merchantPromotions";
 		ResponseEntity responseEntity = null;
-		Date date = new Date();
-		
+		Date date = new Date();		
 		List<PromotionDto> promotionDtos = new ArrayList<PromotionDto>();
 		PromotionDto promotionDto;
 		try {
 			List<Promotion> data = merchantService.merchatPromotion(MerchantPromotions, date);
 			if (!data.isEmpty()) {
 				for (Promotion response : data) {
-					promotionDto = new PromotionDto();
-					promotionDto.setId(response.getId());					
+						promotionDto = new PromotionDto();
+						promotionDto.setId(response.getId());					
 						promotionDto.setProduct_id(String.valueOf(response.getProductID().getProductId()));
 						promotionDto.setId(response.getId());
 						promotionDto.setProduct_image(response.getProductID().getProductImageLocation());
@@ -418,12 +417,11 @@ public class DODController {
 						promotionDto.setBrandName(response.getBrandId().getBrandName());
 						promotionDto.setBrandImage(response.getBrandId().getBrandImage());
 						promotionDto.setBrandRating(response.getBrandId().getBrandRating());
+						promotionDto.setBrandDescription(response.getBrandId().getBrandDescription());				
+						promotionDto.setDescription(response.getDescription());
+						promotionDto.setCreateddate(response.getCreateddate());
 						promotionDto.setBrandDescription(response.getBrandId().getBrandDescription());
-				
-					promotionDto.setDescription(response.getDescription());
-					promotionDto.setCreateddate(response.getCreateddate());
-					promotionDto.setBrandDescription(response.getBrandId().getBrandDescription());
-					promotionDtos.add(promotionDto);
+						promotionDtos.add(promotionDto);
 				}
 				DataResultlist<PromotionDto> resp = new DataResultlist<PromotionDto>(true, AppConstants.MERCHANT_PROMOTION_SUCCESS_MSG,
 						HttpStatus.OK.value(), promotionDtos);
@@ -443,8 +441,7 @@ public class DODController {
 	@RequestMapping(value = AppConstants.MERCHANT_LOGIN, method = RequestMethod.POST)
 	public ResponseEntity checkMerchatUsernameAndPassword(@RequestBody MerchantLogin merchantLogin) {
 		final String METHOD_NAME = "checkMerchatUsernameAndPassword";
-		ResponseEntity responseEntity = null;
-		
+		ResponseEntity responseEntity = null;		
 		try {
 			MerchantProfile resp = merchantService.merchatLogin(merchantLogin);
 			if (resp != null) {
@@ -486,8 +483,7 @@ public class DODController {
 	@RequestMapping(value = AppConstants.MERCHANT_EMAIL_LOGIN, method = RequestMethod.POST)
 	public ResponseEntity checkEmailAndPassword(@RequestBody MerchantLoginwithEmail merchantLoginwithEmail) {
 		final String METHOD_NAME = "checkEmailAndPassword";
-		ResponseEntity responseEntity = null;
-		
+		ResponseEntity responseEntity = null;		
 		try {
 			MerchantProfile resp = merchantService.merchatAutheticateWithEmail(merchantLoginwithEmail);
 			if (resp != null) {
@@ -508,8 +504,7 @@ public class DODController {
 	@RequestMapping(value = AppConstants.MERCHANT_MOBILE_LOGIN, method = RequestMethod.POST)
 	public ResponseEntity checkMobileAndPassword(@RequestBody MerchantLoginwithMobile merchantLoginwithMobile) {
 		final String METHOD_NAME = "checkMobileAndPassword";
-		ResponseEntity responseEntity = null;
-		
+		ResponseEntity responseEntity = null;		
 		try {
 			MerchantProfile resp = merchantService.merchatAutheticateWithMobile(merchantLoginwithMobile);
 			if (resp != null) {
