@@ -324,6 +324,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Beacon> fetchBeacons() {
 		// TODO Auto-generated method stub
 		final String METHOD_NAME="fetchBeacons";
