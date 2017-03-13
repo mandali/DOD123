@@ -43,5 +43,6 @@ public interface MetaDataService {
 	
 	public Brand createBrand(BrandVO brandVO);
 	
+	public List<Beacon> fetchBeaconByUidMajorMinor(List<String> uid, List<Integer> major, List<Integer> minor);
 
 }

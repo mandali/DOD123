@@ -78,5 +78,10 @@ public class MetaDataServiceImpl implements MetaDataService {
 		// TODO Auto-generated method stub
 		return metaDataDao.createBrand(brand);
 	}
+	
+	public List<Beacon> fetchBeaconByUidMajorMinor(List<String> uid, List<Integer> major, List<Integer> minor) {
+		// TODO Auto-generated method stub
+		return metaDataDao.fetchBeaconByUidMajorMinor(uid, major, minor);
+	}
 
 }

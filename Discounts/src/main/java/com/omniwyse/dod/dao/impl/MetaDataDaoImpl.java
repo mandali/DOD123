@@ -406,5 +406,24 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		return brandname;
 	}
+	
+	public List<Beacon> fetchBeaconByUidMajorMinor(List<String> uid, List<Integer> major, List<Integer> minor) {
+		// TODO Auto-generated method stub
+		final String METHOD_NAME = "fetchBeaconByUidMajorMinor";
+		List<Beacon> beacons = null;
+		Query query;
+		try {
+			Session session = this.sessionFactory.openSession();
+			query = (Query) session.createQuery(
+					" from Beacon b where b.uid in (:beaconuids) and b.major in(:beaconmajors) and b.minor in (:beaconminors) ");
+			query.setParameterList("beaconuids", uid);
+			query.setParameterList("beaconmajors", major);
+			query.setParameterList("beaconminors", minor);
+			beacons = query.list();
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		return beacons;
+	}
 
 }

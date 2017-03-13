@@ -45,5 +45,6 @@ public interface MetaDataDao {
 	
 	public Brand getBrandname(BrandVO brandVO); 
 	
+	public List<Beacon> fetchBeaconByUidMajorMinor(List<String> uid,List<Integer> major,List<Integer> minor);
 	
 }
