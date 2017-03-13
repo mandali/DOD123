@@ -1,6 +1,5 @@
 package com.omniwyse.dod.dao.impl;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,11 +34,11 @@ import com.omniwyse.dod.model.Cities;
 import com.omniwyse.dod.model.Country;
 import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantAisle;
+import com.omniwyse.dod.model.MerchantBeacon;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
-import com.omniwyse.dod.model.RegisterWithOtp;
 
 @Repository
 public class MetaDataDaoImpl implements MetaDataDao {
@@ -419,6 +418,21 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			query.setParameterList("beaconuids", uid);
 			query.setParameterList("beaconmajors", major);
 			query.setParameterList("beaconminors", minor);
+			beacons = query.list();
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		return beacons;
+	}
+	
+	public List<MerchantBeacon> fetchMerchantBeacons(String merchantId) {
+		// TODO Auto-generated method stub
+		final String METHOD_NAME = "fetchMerchantBeacons";
+		List<MerchantBeacon> beacons = null;
+		try {
+			Session session = this.sessionFactory.openSession();
+			Query query = (Query) session.createQuery(" from MerchantBeacon m where m.merchantProfile.id=:merchantId")
+					.setParameter("merchantId", Integer.valueOf(merchantId));
 			beacons = query.list();
 		} catch (Exception exception) {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());

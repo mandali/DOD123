@@ -13,6 +13,7 @@ import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantAisle;
+import com.omniwyse.dod.model.MerchantBeacon;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
@@ -44,5 +45,7 @@ public interface MetaDataService {
 	public Brand createBrand(BrandVO brandVO);
 	
 	public List<Beacon> fetchBeaconByUidMajorMinor(List<String> uid, List<Integer> major, List<Integer> minor);
+	
+	public List<MerchantBeacon> fetchMerchantBeacons(String merchantId);
 
 }

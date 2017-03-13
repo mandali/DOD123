@@ -19,10 +19,12 @@ import com.omniwyse.dod.DTO.AliseVO;
 import com.omniwyse.dod.DTO.BeaconVO;
 import com.omniwyse.dod.DTO.IAliseVO;
 import com.omniwyse.dod.DTO.IBeaconVO;
+import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.bean.DataResult;
 import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.MerchantAisle;
+import com.omniwyse.dod.model.MerchantBeacon;
 import com.omniwyse.dod.service.MetaDataService;
 
 @RestController
@@ -32,7 +34,6 @@ public class BeaconController {
 	private static final String CLASS_NAME = BeaconController.class.getName();
 	@Autowired
 	MetaDataService metaDataService;
-	private IBeaconVO iBeaconVO;
 
 	@RequestMapping(value = AppConstants.LIST_BEACONS, method = RequestMethod.GET)
 	public ResponseEntity<Object> fetchBeacons() {
@@ -208,6 +209,51 @@ public class BeaconController {
 		}
 		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
 
+		return responseEntity;
+
+	}
+	
+	
+	@RequestMapping(value = AppConstants.LIST_BEACONS_BY_MERCHANTIS, method = RequestMethod.POST)
+	public ResponseEntity<Object> fetchMerchantBeacons(@RequestBody NewProductVO merchantId) {
+		ResponseEntity<Object> responseEntity = null;
+		final String METHOD_NAME = "fetchBeacons";
+		DataResult resultError;
+		BeaconVO beaconVO;
+		List<BeaconVO> beaconVOs = null;
+		DataResultlist<BeaconVO> result;
+		try {
+			logger.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
+           if(merchantId.getMerchantId()!=null && !merchantId.getMerchantId().isEmpty()){
+			List<MerchantBeacon> beacons = metaDataService.fetchMerchantBeacons(merchantId.getMerchantId());
+			beaconVOs = new ArrayList<BeaconVO>();
+			for (MerchantBeacon beacon : beacons) {
+				beaconVO = new BeaconVO();
+				beaconVO.setBeaconId(String.valueOf(beacon.getBeaconId().getBeaconId()));
+				beaconVO.setBeaconName(beacon.getBeaconId().getBeaconName());
+				beaconVO.setBeaconStatus(beacon.getBeaconId().getBeaconStatus());
+				beaconVO.setCreatedDate(beacon.getBeaconId().getCreated());
+				beaconVO.setBeaconUid(String.valueOf(beacon.getBeaconId().getUid()));
+				beaconVO.setBeaconMajorValue(String.valueOf(beacon.getBeaconId().getMajor()));
+				beaconVO.setBeaconMinorValue(String.valueOf(beacon.getBeaconId().getMinor()));
+				beaconVOs.add(beaconVO);
+			}
+			
+           }
+
+			if (beaconVOs!=null && !beaconVOs.isEmpty()) {
+				result = new DataResultlist<BeaconVO>(true, AppConstants.LIST_BEACONS_INFO_SUCCESS_MSG,
+						HttpStatus.OK.value(), beaconVOs);
+				responseEntity = new ResponseEntity<Object>(result, HttpStatus.OK);
+			} else {
+				resultError = new DataResult(false, "Sorry , No data found ... ", HttpStatus.OK.value());
+				responseEntity = new ResponseEntity<Object>(resultError, HttpStatus.OK);
+			}
+
+		} catch (Exception exception) {
+			logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
+		}
+		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
 		return responseEntity;
 
 	}
