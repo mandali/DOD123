@@ -49,6 +49,9 @@ public class BeaconController {
 				beaconVO.setBeaconName(beacon.getBeaconName());
 				beaconVO.setBeaconStatus(beacon.getBeaconStatus());
 				beaconVO.setCreatedDate(beacon.getCreated());
+				beaconVO.setBeaconUid(String.valueOf(beacon.getUid()));
+				beaconVO.setBeaconMajorValue(String.valueOf(beacon.getMajor()));
+				beaconVO.setBeaconMinorValue(String.valueOf(beacon.getMinor()));
 				beaconVOs.add(beaconVO);
 			}
 

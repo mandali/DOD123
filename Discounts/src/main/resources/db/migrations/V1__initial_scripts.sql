@@ -178,9 +178,9 @@ B_ID int NOT NULL AUTO_INCREMENT,
 B_NAME varchar(255),
 B_STATUS varchar(255),
 BRD_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-B_UID varchar(255),
-B_MAJ varchar(255),
-B_MIN varchar(255),
+B_UID varchar(2000),
+B_MAJ int,
+B_MIN int,
 primary key(B_ID)
 );
 
