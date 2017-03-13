@@ -1,14 +1,3 @@
-create table dod_db.user_table
-(
-USER_ID varchar(255),
-USER_TYPE varchar(255),
-EMAIL_ID varchar(255),  	
-PHONE_NO varchar(255),
-PASSWORD varchar(255),
-CRETATED_DATE DATE,
-PRIMARY KEY (USER_ID)
-);
-
 create table dod_db.merchant_profile
 (
 ID int NOT NULL AUTO_INCREMENT,
@@ -50,36 +39,6 @@ create table dod_db.product
 );
 
 
-
-create table dod_db.user_profile_table
-(
- USER_ID varchar(255),
- USER_TYPE varchar(255),
-EMAIL_ID varchar(255),
-PHONE_NO varchar(255),
-NICKNAME varchar(255),
-FIRST_NAME varchar(255),		
-LAST_NAME varchar(255),
-ADDRESS varchar(255),
-CITY varchar(255),
-DATE_BIRTH varchar(255),
-AGE varchar(255),
-ZIPCODE varchar(255),
-CRETATED_DATE DATE,
-primary key(USER_ID),
-UNIQUE (EMAIL_ID),
-UNIQUE(PHONE_NO)
-);
-
-create table dod_db.beacons_table
-(
- BEACONS_ID varchar(255),			
- LOCATION varchar(255),
-LATTITUDE varchar(255),
-LONGITUDE varchar(255),
-CRETATED_DATE DATE,
-primary key(BEACONS_ID)
-); 
  
  create table dod_db.category
 (
@@ -106,39 +65,9 @@ PRIMARY KEY (id),
 UNIQUE (email_id),
 UNIQUE(phone_no)
 );
-create table dod_db.mar_becons_proms_table
-(
- M_ID varchar(255),			
- PRMS_ID varchar(255),
-BECONS_ID varchar(255),
-CRETATED_DATE DATE,
-PRIMARY KEY (M_ID)
-);
 
-create table dod_db.mar_becons_table
-(
- MAR_BECONS_ID varchar(255),			
- M_ID varchar(255),
-BECONS_ID varchar(255),
-ISACTIVE TINYINT(4),
-LOCATION varchar(255),
-CRETATED_DATE DATE,
-PRIMARY KEY (MAR_BECONS_ID)
 
-);
 
-create table dod_db.mar_bus_table
-(
- MAR_BECONS_ID varchar(255),			
- M_ID varchar(255),
-BUS_NAME varchar(255),
-LOCATION TINYINT(4),
-LATTITUDE varchar(255),
-LONGITUDE varchar(255),
-DESCRIPTION varchar(255),
-CRETATED_DATE DATE,
-PRIMARY KEY (MAR_BECONS_ID)
-);
 
 create table dod_db.otp_table
 (
@@ -227,19 +156,20 @@ create table dod_db.promotions
  PRMS_DISC_TXT varchar(1000));
 
 
- create table promotionsummary
-(
-SUMMARY_ID  int NOT NULL AUTO_INCREMENT,
-CREATED_DATE DATE,
-IMAGE int,
-CATEGORY_ID varchar(255),
-CATEGORY_NAME varchar(255) ,
-COUNT varchar(255),
-MIN_DISCOUNT varchar(255),
-MAX_DISCOUNT varchar(255),
-BRAND_ID int,
-primary key(SUMMARY_ID)
-);
+create table promotions_summary(
+SUMMARY_ID int NOT NULL AUTO_INCREMENT,
+CREATED_DATE timestamp, 
+CAT_ID int(11), 
+PRM_COUNT int, 
+MIN_DISCOUNT int, 
+MAX_DISCOUNT int, 
+BRD_ID int(11),
+FOREIGN KEY (CAT_ID) REFERENCES category(CAT_ID),
+FOREIGN KEY (BRD_ID) REFERENCES brand(BRD_ID),
+PRIMARY KEY (SUMMARY_ID));
+
+
+
 
 
 create table beacon
@@ -248,6 +178,9 @@ B_ID int NOT NULL AUTO_INCREMENT,
 B_NAME varchar(255),
 B_STATUS varchar(255),
 BRD_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+B_UID varchar(2000),
+B_MAJ int,
+B_MIN int,
 primary key(B_ID)
 );
 

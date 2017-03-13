@@ -12,7 +12,7 @@
   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
   http://www.springframework.org/schema/task https://www.springframework.org/task/spring-task-3.0.xsd">
 
-<task:annotation-driven/>
+   <task:annotation-driven/>
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -50,7 +50,7 @@
 				<value> com.omniwyse.dod.model.Cities</value>	
 				<value> com.omniwyse.dod.model.Location</value>	
 				<value> com.omniwyse.dod.model.Brand</value>	
-				<value> com.omniwyse.dod.model.Promotionsummary</value>
+				<value> com.omniwyse.dod.model.PromotionSummary</value>
 				<value>com.omniwyse.dod.model.Product</value>
 				<value>com.omniwyse.dod.model.Beacon</value>
 				<value>com.omniwyse.dod.model.MerchantBeacon</value>

@@ -12,7 +12,7 @@ import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
-import com.omniwyse.dod.model.Promotionsummary;
+import com.omniwyse.dod.model.PromotionSummary;
 
 public interface PromotionsDao {
 	
@@ -24,7 +24,7 @@ public List<Promotion> getPromotions();
 	
 	public Promotion getIdbasePromotion(IdBasePromotion idBasePromotion);
 
-	public List<Promotionsummary> promotionSummary(Date date);
+	public List<PromotionSummary> promotionSummary(Date date);
 	
 	public Category getcategoryId(CreatePromotionVo createPromotionVo); 
 	

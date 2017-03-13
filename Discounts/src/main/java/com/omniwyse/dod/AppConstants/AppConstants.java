@@ -1,15 +1,12 @@
 package com.omniwyse.dod.AppConstants;
 
-public class AppConstants {//
-	
-	
+public class AppConstants {
 	public static final String REGISTER="/register";
 	public static final String REGISTER_ERROR_MSG=" Sorry , Mobile no is alredy exist ... ";
 	public static final String OTP="12345";
 	public static final String OTP_VALIDATE="/otpvalidate";
 	public static final String OTP_VALIDATE_SUCCESS_MSG=" OTP Validation successfully ... ";
-	public static final String OTP_VALIDATE_ERROR_MSG="Sorry , Wrong OTP No / Mobile no . ";
-	
+	public static final String OTP_VALIDATE_ERROR_MSG="Sorry , Wrong OTP No / Mobile no . ";	
 	public static final String CONSUMER_REGISTER="/consumerRegistration";
 	public static final String CONSUMER_REGISTER_SUCCESS_MSG="Consumer Registration successfully ...";
 	public static final String CONSUMER_REGISTER_ERROR_MSG=" Sorry , Mobile no and Mail address is alredy exist ... ";
@@ -18,48 +15,32 @@ public class AppConstants {//
 	public static final String CONSUMER_LOGIN_ERROR_MSG=" Sorry , Wrong Credentials ...";
 	public static final String CONSUMER_PROFILE="/consumerProfile";
 	public static final String CONSUMER_PROFILE_SUCCESS_MSG=" Consumer Details is , ";
-	public static final String CONSUMER_PROFILE_ERROR_MSG=" Sorry , No data available on selected mobile no ... ";
-	
+	public static final String CONSUMER_PROFILE_ERROR_MSG=" Sorry , No data available on selected mobile no ... ";	
 	public static final String CONSUMER_EMAIL_LOGIN="/consumeremaillogin";
-	public static final String CONSUMER_MOBILE_LOGIN="/consumermobilelogin";
-	
+	public static final String CONSUMER_MOBILE_LOGIN="/consumermobilelogin";	
 	public static final String MERCHANT_REGISTER="/merchantRegistration";	
 	public static final String MERCHANT_REGISTER_SUCCESS_MSG=" Merchant Registration successfully";
-	public static final String MERCHANT_REGISTER_ERROR_MSG=" Sorry , Mobile no and Mail address is alredy exist ... ";
-	
+	public static final String MERCHANT_REGISTER_ERROR_MSG=" Sorry , Mobile no and Mail address is alredy exist ... ";	
 	public static final String MERCHANT_LOGIN="/merchantlogin"; 
 	public static final String MERCHANT_LOGIN_SUCCESS_MSG=" Login successfully ... ";
-	public static final String MERCHANT_LOGIN_ERROR_MSG=" Sorry , Wrong Credentials "; 
-	
+	public static final String MERCHANT_LOGIN_ERROR_MSG=" Sorry , Wrong Credentials "; 	
 	public static final String LIST_PROMOTIONS="/promotions"; 
 	public static final String PROMOTION_SUCCESS_MSG=" Promotions are , ";
-	public static final String PROMOTION_ERROR_MSG=" Sorry , No Promotions are available right now ";
-	
-	public static final String LIST_PROMOTIONS_CATEGORYID="/promotion/categoryId"; 
-	
-	public static final String IDBASE_PROMOTIONS="/IdBasePromotions";
-	
+	public static final String PROMOTION_ERROR_MSG=" Sorry , No Promotions are available right now ";	
+	public static final String LIST_PROMOTIONS_CATEGORYID="/promotion/categoryId"; 	
+	public static final String IDBASE_PROMOTIONS="/IdBasePromotions";	
 	public static final String MERCHANT_EMAIL_LOGIN="/merchantemaillogin";
-	public static final String MERCHANT_MOBILE_LOGIN="/merchantmobilelogin";
-	
+	public static final String MERCHANT_MOBILE_LOGIN="/merchantmobilelogin";	
 	public static final String MERCHANT_PROFILE="/merchantProfile";	
 	public static final String MERCHANT_PROFILE_SUCCESS_MSG=" Success , Merchant Details found ";
-	public static final String MERCHANT_PROFILE_ERROR_MSG=" Sorry , no details found on selected mobile no ... ";
-	
+	public static final String MERCHANT_PROFILE_ERROR_MSG=" Sorry , no details found on selected mobile no ... ";	
 	public static final String MERCHANT_LIST="/merchantlist";	
 	public static final String MERCHANT_LIST_SUCCESS_MSG=" all merchants details are ,";
-	public static final String MERCHANT_LIST_ERROR_MSG=" Sorry , merchants are not found right now  ...  "; 
-	
+	public static final String MERCHANT_LIST_ERROR_MSG=" Sorry , merchants are not found right now  ...  "; 	
 	public static final String MERCHANT_PROMOTION_MERCHANTID="/promotion/merchantid";	
 	public static final String MERCHANT_PROMOTION_SUCCESS_MSG=" Promotions are , ";
 	public static final String MERCHANT_PROMOTION_ERROR_MSG="Sorry , No Promotion found on selected Merchantid ... ";
-	
-	public static final String PROMOTION_SUMMERY="/promotionsummary";
-	
-	
-	
-	
-	
+	public static final String PROMOTION_SUMMERY="/promotionsummary";	
 	public static final String LIST_COUNTRIES="/countries";
 	public static final String LIST_CITIES="/cities";
 	public static final String LIST_LOCATIONS="/locations";
@@ -72,8 +53,14 @@ public class AppConstants {//
 	public static final String LIST_CATEGORIES="/categories";
 	public static final String LIST_CATEGORIES_SUCCESS_MSG=" available Categories are ,";
 	public static final String LIST_CATEGORIES_ERROR_MSG="Sorry , No Categories are available right now ";
+	public static final String CREATE_BRANDS="/createbrands";
+	public static final String CREATE_BRAND_SUCCESS_MSG=" brand created successfully ... ";
+	public static final String CREATE_BRAND_ERROR_MSG=" brand name is already exist ... ";
 	public static final String LIST_BRANDS="/brands";
+	public static final String LIST_All_BRANDS="/listbrands";
 	public static final String LIST_BRANDS_SUCCESS_MSG=" available Categories with Brands are ,";
+	public static final String LIST_ALL_BRANDS_SUCCESS_MSG=" available Brands are ,";
+	public static final String LIST_ALL_BRANDS_ERROR_MSG=" Sorry , No brands are available right now ";
 	public static final String LIST_BRANDS_ERROR_MSG="Sorry , No Categories are available right now ";
 	public static final String LIST_MERCHANT_PRODUCTS_SUCCESS_MSG=" available Products are";
 	public static final String LIST_MERCHANT_PRODUCTS_ERROR_MSG="Sorry , No Products are available right now ";
@@ -88,16 +75,17 @@ public class AppConstants {//
 	public static final String CREATE_PRODUCTS_SUCCESS_MSG="Product Created";
 	public static final String CREATE_PRODUCTS_ERROR_MSG="Product Cannot be Created ";
 	public static final String CREATE_PRODUCTS="/createproduct";
-
 	public static final String CREATE_LOCATION="/createlocation";	
-	public static final String LIST_MERCHANT_PROMOTION_BEACONS="/listmerchantpromotionbeacons";
-
-	//public static final String CREATE_LOCATION="/createlocation";
+	public static final String LIST_MERCHANT_PROMOTION_BEACONS="/listmerchantpromotionbeacons";	
 	public static final String CREATE_MERCHANT_PROMOTION_BEACON_SUCCESS_MSG="Merchant Promotion Beacon Created";
 	public static final String CREATE_MERCHANT_PROMOTION_BEACON_ERROR_MSG="Merchant Promotion Beacon Cannot be Created ";
 	public static final String CREATE_MERCHANT_PROMOTION_BEACON="/createmerchantpromotionbeacon";
 	public static final String LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG="available Merchant Promotion Beacon's are";
 	public static final String LIST_BEACONS_PROMOTIONS_INFO="/getbeaconsinfo";
 	public static final String LIST_BEACONS_PROMOTIONS_INFO_SUCCESS_MSG="available Beacons Information";
+	public static final String LIST_BEACONS="listbeacons";
+	public static final String LIST_BEACONS_SUCCESS_MSG="available Beacons Information";
+	public static final String LIST_AISLE="listaisle";
+	public static final String LIST_AISLE_SUCCESS_MSG="available Aisle Information";
 	
 }

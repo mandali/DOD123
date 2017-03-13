@@ -29,15 +29,33 @@ public class Beacon implements java.io.Serializable{
 	private String beaconStatus;
 	@Column(name = "BRD_CREATED")
 	private Timestamp created;
+	@Column(name = "B_UID")
+	private String uid;
+	@Column(name = "B_MAJ")
+	private Integer major;
+	@Column(name = "B_MIN")
+	private Integer minor;
 	
 	public Beacon(){
-	}	
-	public Beacon(Long beaconId, String beaconName, String beaconStatus, Timestamp created) {
+	}
+	
+	
+
+
+	public Beacon(Long beaconId, String beaconName, String beaconStatus, Timestamp created, String uid, Integer major,
+			Integer minor) {
 		this.beaconId = beaconId;
 		this.beaconName = beaconName;
 		this.beaconStatus = beaconStatus;
 		this.created = created;
+		this.uid = uid;
+		this.major = major;
+		this.minor = minor;
 	}
+
+
+
+
 	public Long getBeaconId() {
 		return beaconId;
 	}
@@ -61,6 +79,35 @@ public class Beacon implements java.io.Serializable{
 	}
 	public void setCreated(Timestamp created) {
 		this.created = created;
+	}
+	
+	public Integer getMajor() {
+		return major;
+	}
+	public void setMajor(Integer major) {
+		this.major = major;
+	}
+	public Integer getMinor() {
+		return minor;
+	}
+	public void setMinor(Integer minor) {
+		this.minor = minor;
+	}
+
+
+
+
+	public String getUid() {
+		return uid;
+	}
+
+
+
+
+	public void setUid(String uid) {
+		this.uid = uid;
 	}	
+	
+	
 
 }

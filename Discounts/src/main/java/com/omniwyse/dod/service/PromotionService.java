@@ -9,7 +9,7 @@ import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Promotion;
-import com.omniwyse.dod.model.Promotionsummary;
+import com.omniwyse.dod.model.PromotionSummary;
 
 public interface PromotionService {
 	
@@ -22,7 +22,7 @@ public interface PromotionService {
 	
 	public Promotion idBasePromotions(IdBasePromotion idBasePromotion); 
 	
-	public List<Promotionsummary> promotionSummary( String date ); 
+	public List<PromotionSummary> promotionSummary( String date ); 
 	
 	public List<PromotionDto> categoryIdPromotions(CategoryPromotion categoryPromotion); 
 	
