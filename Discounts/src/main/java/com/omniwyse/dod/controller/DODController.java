@@ -70,7 +70,7 @@ import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.OTPValidation;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
-import com.omniwyse.dod.model.Promotionsummary;
+import com.omniwyse.dod.model.PromotionSummary;
 import com.omniwyse.dod.model.RegisterWithOtp;
 import com.omniwyse.dod.service.ConsumerService;
 import com.omniwyse.dod.service.LocationService;
@@ -652,10 +652,10 @@ public class DODController {
 		String formattedDate = DATE_FORMAT.format(date);
 
 		try {
-			List<Promotionsummary> promotions = promotionService.promotionSummary(formattedDate);
+			List<PromotionSummary> promotions = promotionService.promotionSummary(formattedDate);
 			if (!promotions.isEmpty()) {
 
-				DataResultlist<Promotionsummary> result = new DataResultlist<Promotionsummary>(true,
+				DataResultlist<PromotionSummary> result = new DataResultlist<PromotionSummary>(true,
 						AppConstants.AVAILABE_PROMOTIONS_SUCCESS_MSG, HttpStatus.OK.value(), promotions);
 				return new ResponseEntity(result, HttpStatus.OK);
 			} else {

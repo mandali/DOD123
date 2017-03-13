@@ -1,20 +1,22 @@
 package com.omniwyse.dod.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @Entity
-@Table(name = "promotionsummary")
+@Table(name = "promotions_summary")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Promotionsummary implements Serializable{
+public class PromotionSummary implements Serializable{
 	
 	/**
 	 * 
@@ -23,79 +25,118 @@ public class Promotionsummary implements Serializable{
 	@Id
 	@Column(name = "SUMMARY_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long promotionSummeryId;	
-	@Column(name = "IMAGE")	
-	private String image;	
-	@Column(name = "CATEGORY_ID")	
-	private String categoryID;
-	@Column(name = "CATEGORY_NAME")	
-	private String categoryName;	
-	@Column(name = "COUNT")	
-	private String count;	
+	private Integer promotionSummaryId;	
+	@OneToOne
+	@JoinColumn(name="CAT_ID")
+	private Category categoryID;
+	@Column(name = "PRM_COUNT")	
+	private Integer count;	
 	@Column(name = "MIN_DISCOUNT")	
-	private String minDiscount;	
+	private Integer minDiscount;	
 	@Column(name = "MAX_DISCOUNT")	
-	private String maxDiscount;	
-	@Column(name = "BRAND_ID")	
-	private String brandId;	
+	private Integer maxDiscount;	
+	@OneToOne
+	@JoinColumn(name="BRD_ID")
+	private Brand brandId;	
 	@Column(name = "CREATED_DATE")
-	private Date createddate;
+	private Timestamp createddate;
 	
-	public Long getPromotionSummeryId() {
-		return promotionSummeryId;
+	
+	public PromotionSummary() {
 	}
-	public void setPromotionSummeryId(Long promotionSummeryId) {
-		this.promotionSummeryId = promotionSummeryId;
+
+
+	public PromotionSummary(Integer promotionSummaryId, Category categoryID, Integer count, Integer minDiscount,
+			Integer maxDiscount, Brand brandId, Timestamp createddate) {
+		this.promotionSummaryId = promotionSummaryId;
+		this.categoryID = categoryID;
+		this.count = count;
+		this.minDiscount = minDiscount;
+		this.maxDiscount = maxDiscount;
+		this.brandId = brandId;
+		this.createddate = createddate;
 	}
-	public String getImage() {
-		return image;
+
+
+	public Integer getPromotionSummaryId() {
+		return promotionSummaryId;
 	}
-	public void setImage(String image) {
-		this.image = image;
+
+
+	public void setPromotionSummaryId(Integer promotionSummaryId) {
+		this.promotionSummaryId = promotionSummaryId;
 	}
-	public String getCategoryID() {
+
+
+	public Category getCategoryID() {
 		return categoryID;
 	}
-	public void setCategoryID(String categoryID) {
+
+
+	public void setCategoryID(Category categoryID) {
 		this.categoryID = categoryID;
 	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-	public String getCount() {
+
+
+	public Integer getCount() {
 		return count;
 	}
-	public void setCount(String count) {
+
+
+	public void setCount(Integer count) {
 		this.count = count;
 	}
-	public String getMinDiscount() {
+
+
+	public Integer getMinDiscount() {
 		return minDiscount;
 	}
-	public void setMinDiscount(String minDiscount) {
+
+
+	public void setMinDiscount(Integer minDiscount) {
 		this.minDiscount = minDiscount;
 	}
-	public String getMaxDiscount() {
+
+
+	public Integer getMaxDiscount() {
 		return maxDiscount;
 	}
-	public void setMaxDiscount(String maxDiscount) {
+
+
+	public void setMaxDiscount(Integer maxDiscount) {
 		this.maxDiscount = maxDiscount;
 	}
-	public String getBrandId() {
+
+
+	public Brand getBrandId() {
 		return brandId;
 	}
-	public void setBrandId(String brandId) {
+
+
+	public void setBrandId(Brand brandId) {
 		this.brandId = brandId;
 	}
-	public Date getCreateddate() {
+
+
+	public Timestamp getCreateddate() {
 		return createddate;
 	}
-	public void setCreateddate(Date createddate) {
+
+
+	public void setCreateddate(Timestamp createddate) {
 		this.createddate = createddate;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 
 }

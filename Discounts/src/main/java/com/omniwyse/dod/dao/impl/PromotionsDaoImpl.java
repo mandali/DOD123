@@ -23,7 +23,7 @@ import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
-import com.omniwyse.dod.model.Promotionsummary;
+import com.omniwyse.dod.model.PromotionSummary;
 
 @Repository
 public class PromotionsDaoImpl implements PromotionsDao{
@@ -108,9 +108,9 @@ public class PromotionsDaoImpl implements PromotionsDao{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Promotionsummary> promotionSummary(Date date) {
+	public List<PromotionSummary> promotionSummary(Date date) {
 		final String METHOD_NAME="getIdbasePromotion";
-		List<Promotionsummary> list = null ;
+		List<PromotionSummary> list = null ;
 		try{
 		Session session = this.sessionFactory.openSession();			
 		list = session.createQuery(" from Promotionsummary ").list();
