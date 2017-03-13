@@ -1,14 +1,19 @@
 package com.omniwyse.dod.adapters;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.omniwyse.dod.R;
+import com.omniwyse.dod.databinding.DiscountListItemBinding;
 import com.omniwyse.dod.model.BeaconPromotions;
 import com.squareup.picasso.Picasso;
 
@@ -19,64 +24,75 @@ import java.util.List;
  * @author surya.g21@gmail.com
  */
 
-public class StoresAdapter extends BaseAdapter {
+public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ItemHolder> {
 
-    private List<BeaconPromotions> promotionsList;
-    private Context context;
-    private LayoutInflater  inflater;
-    public StoresAdapter(Context context,  List<BeaconPromotions> promotionsList){
-        this.context = context;
-        this.promotionsList = promotionsList;
-        inflater = LayoutInflater.from(context);
-    }
-    @Override
-    public int getCount() {
-        return promotionsList.size();
+    private List<BeaconPromotions> promotions;
+    private Context mContext;
+    // Allows to remember the last item shown on screen
+    private int lastPosition = -1;
+
+    public StoresAdapter(Context context, List<BeaconPromotions> promotions) {
+        this.promotions = promotions;
+        this.mContext = context;
     }
 
     @Override
-    public Object getItem(int position) {
-        return promotionsList.get(position);
+    public StoresAdapter.ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.discount_list_item, null);
+        DiscountListItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.discount_list_item, parent, false);
+        return new StoresAdapter.ItemHolder(view);
     }
 
     @Override
-    public long getItemId(int position) {
-        return 50;
+    public void onBindViewHolder(BeaconLiveAdapter.ItemHolder itemHolder, int position) {
+        final BeaconPromotions data= promotions.get(position);
+
+
+//        itemHolder.itemDiscount.setText(data.getDiscount());
+//        itemHolder.itemCategory.setText(data.getCategoryName());
+//        itemHolder.itemStore.setText(data.getBrandDescription());
+//        Picasso.with(mContext).load(data.getBrandImage()).resize(100, 100).into(itemHolder.brandImage);
+
+//        setAnimation(itemHolder.itemView, position);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public int getItemCount() {
+        return promotions!=null?promotions.size():0;
+    }
 
-        MyViewHolder mViewHolder;
 
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.discount_list_item, parent, false);
-            mViewHolder = new MyViewHolder(convertView);
-            convertView.setTag(mViewHolder);
-        } else {
-            mViewHolder = (MyViewHolder) convertView.getTag();
+    public class ItemHolder extends RecyclerView.ViewHolder {
+
+        private final DiscountListItemBinding binding;
+//        private TextView itemStore;
+//        private TextView itemCategory;
+//        private TextView itemDiscount;
+
+        private ImageView brandImage;
+
+        public ItemHolder(View view) {
+            super(view);
+
+//            this.itemCategory = (TextView) view.findViewById(R.id.beacon_category_tv);
+//            this.itemStore = (TextView) view.findViewById(R.id.beacon_store_tv);
+//            this.itemDiscount = (TextView) view.findViewById(R.id.beacon_discount);
+            this.brandImage = (ImageView) view.findViewById(R.id.beacon_list_image);
+
+
+            this.binding = DataBindingUtil.bind(view);
         }
-        mViewHolder.discount.setText(position+"%");
-        final BeaconPromotions promotions= promotionsList.get(position);
-        mViewHolder.category.setText(promotions.getCategoryName());
-        mViewHolder.discount.setText(promotions.getDiscount());
-        mViewHolder.mallInfo.setText(promotions.getDescription());
-        Picasso.with(context).load(promotions.getBrandImage()).resize(100, 100).into(mViewHolder.ivIcon);
-
-        return convertView;
 
     }
 
-    private class MyViewHolder {
-        TextView category,mallInfo, discount;
-        ImageView ivIcon;
-
-        public MyViewHolder(View item) {
-            category = (TextView) item.findViewById(R.id.beacon_category_tv);
-            discount = (TextView) item.findViewById(R.id.beacon_discount);
-            mallInfo = (TextView) item.findViewById(R.id.beacon_store_tv);
-
-            ivIcon = (ImageView)item.findViewById(R.id.beacon_list_image);
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
         }
     }
 }

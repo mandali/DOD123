@@ -20,6 +20,8 @@ import com.omniwyse.dod.adapters.StoresAdapter;
 import com.omniwyse.dod.api.APIInterface;
 import com.omniwyse.dod.api.ApiClient;
 import com.omniwyse.dod.api.BeaconRequest;
+import com.omniwyse.dod.customUtils.Connectivity;
+import com.omniwyse.dod.customUtils.DialogUtil;
 import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.BeaconData;
 import com.omniwyse.dod.model.BeaconPromotions;
@@ -41,8 +43,8 @@ public class LiveFragment extends Fragment {
 
 
     private static final String TAG = "LiveFragment";
-    List<BeaconPromotions> promotionsList = new ArrayList<>();
-    View rootView;
+    private List<BeaconPromotions> promotionsList = new ArrayList<>();
+    private View rootView;
     public LiveFragment() {
     }
 
@@ -59,7 +61,12 @@ public class LiveFragment extends Fragment {
         return rootView;
     }
 
+
     private void loadBeaconData() {
+        if(!Connectivity.isConnected(getActivity())){
+            DialogUtil.createSimpleOkErrorDialog(getActivity(),"No Network","It seems your device is not connected with Internet").show();
+            return;
+        }
         final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Authenticating...");
@@ -99,9 +106,8 @@ public class LiveFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Beacon> call, Throwable t) {
-                if (mProgressDialog.isShowing())
-                    mProgressDialog.dismiss();
-                Toast.makeText(getActivity(), "Please try some other time " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                if (mProgressDialog.isShowing()) mProgressDialog.dismiss();
+                DialogUtil.createGenericErrorDialog(getActivity(),"Please try after sometime").show();
             }
         });
     }
