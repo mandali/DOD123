@@ -1,5 +1,9 @@
 package com.omniwyse.dod.ui;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.TabLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import com.estimote.sdk.SystemRequirementsChecker;
 import com.omniwyse.dod.R;
+import com.omniwyse.dod.beacon.EstimoteReceiver;
+import com.omniwyse.dod.beacon.EstimoteService;
 import com.omniwyse.dod.fragement.BeaconsFragment;
 import com.omniwyse.dod.fragement.BrandFragment;
 import com.omniwyse.dod.fragement.DiscountFragment;
@@ -29,11 +36,24 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    static boolean alreadyListening = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-//
+
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
+
+        if (!alreadyListening) {
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("android.bluetooth.BluetoothAdapter.ACTION_STATE_CHANGED");
+            this.registerReceiver(new EstimoteReceiver(), filter);
+            alreadyListening = true;
+        }
+
+
+        //
 //        toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        toolbar.setContentInsetStartWithNavigation(R.drawable.app_logo);
@@ -42,6 +62,12 @@ public class HomeActivity extends AppCompatActivity {
 
 //        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //        setSupportActionBar(toolbar);
+
+        if (!isMyServiceRunning(EstimoteService.class)) {
+            Intent estimoteServiceIntent = new Intent(this,
+                    EstimoteService.class);
+            startService(estimoteServiceIntent);
+        }
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -78,13 +104,13 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         public void addFragment(Fragment fragment, String title) {
-            if(title.equals("Live")){
+            if (title.equals("Live")) {
                 mFragmentList.add(new LiveFragment());
-            }else if(title.equals("Brands")){
+            } else if (title.equals("Brands")) {
                 mFragmentList.add(new BrandFragment());
-            }else if(title.equals("Stores")){
+            } else if (title.equals("Stores")) {
                 mFragmentList.add(new StoresFragment());
-            }else if(title.equals("Beacons")){
+            } else if (title.equals("Beacons")) {
                 mFragmentList.add(new BeaconsFragment());
             }
             mFragmentTitleList.add(title);
@@ -103,5 +129,16 @@ public class HomeActivity extends AppCompatActivity {
 
         return true;
     }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
