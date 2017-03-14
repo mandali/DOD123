@@ -1080,12 +1080,11 @@ public class DODController {
 				MerchantPromotionBeacon merchantPromotionBeacon = metaDataService
 						.createMerchantPromotionBeacon(dependentObjects);
 				if (merchantPromotionBeacon != null) {
-					DataResultEntity<MerchantPromotionBeacon> result = new DataResultEntity<MerchantPromotionBeacon>(
-							true, " Merchant Promotion Beacon Created successfully ... ", HttpStatus.OK.value(),
-							merchantPromotionBeacon);
+					DataResult result = new DataResult(true, "Merchant Promotion Beacon Created successfully ... ", HttpStatus.OK.value());
+							
 					return new ResponseEntity(result, HttpStatus.OK);
 				} else {
-					DataResult result = new DataResult(true,
+					DataResult result = new DataResult(false,
 							"Sorry , Please check merchantId/promotionId/beaconId/aisleId    ", HttpStatus.OK.value());
 					return new ResponseEntity(result, HttpStatus.OK);
 				}
