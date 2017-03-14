@@ -71,23 +71,19 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 	public boolean insertPromotions(List<PromotionSummary> list) {	
 		
 		final String METHOD_NAME = "insertPromotions";		
-		PromotionSummary promotionSummary = null;
 		boolean flag=false;
 		try{
 			Session session = this.sessionFactory.openSession();
-			for(PromotionSummary promotionSummary2:list){
+			for(PromotionSummary promotionSummary2:list){				
 			session.save(promotionSummary2);
 			}
 						
 		}catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
-			flag=true;
-			
+			flag=true;			
 		}	
-		return flag;
-		
+		return flag;		
 	}
-
 	public Category fetchCategoryID(Integer categoryId) {
 		long brandIds=categoryId.longValue();		
 		final String METHOD_NAME = "fetchCategoryID";
