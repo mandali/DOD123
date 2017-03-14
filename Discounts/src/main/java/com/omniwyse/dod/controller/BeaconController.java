@@ -239,7 +239,7 @@ public class BeaconController {
 				beacons = metaDataService.fetchBeaconByUidMajorMinor(buid, bmajor, bminor);
 			}
 
-			if (!beacons.isEmpty() && beacons.size() > 0) {
+			if (beacons!=null && !beacons.isEmpty() && beacons.size() > 0) {
 				beaconVOs = new ArrayList<BeaconVO>();
 				for (Beacon beacon : beacons) {
 
@@ -384,14 +384,20 @@ public class BeaconController {
 						}
 							mapFlag=false;
 					}
-					result = new DataResultlist<MPBSearchVO>(true,
-							AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(),
-							mpbSearchVOs);
-					return new ResponseEntity<Object>(result, HttpStatus.OK);
-				} else {
-					resultError = new DataResult(false, " Sorry , No data found ... ", HttpStatus.OK.value());
-					return new ResponseEntity<Object>(resultError, HttpStatus.OK);
+				
 				}
+				
+			}
+			
+			if(mpbSearchVOs!=null && !mpbSearchVOs.isEmpty()){
+				result = new DataResultlist<MPBSearchVO>(true,
+						AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(),
+						mpbSearchVOs);
+				return new ResponseEntity<Object>(result, HttpStatus.OK);
+			}
+			 else {
+				resultError = new DataResult(false, " Sorry , No data found ... ", HttpStatus.OK.value());
+				return new ResponseEntity<Object>(resultError, HttpStatus.OK);
 
 			}
 
