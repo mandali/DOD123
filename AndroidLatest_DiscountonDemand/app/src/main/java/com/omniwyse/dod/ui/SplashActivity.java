@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import com.estimote.sdk.SystemRequirementsChecker;
 import com.omniwyse.dod.R;
 import com.omniwyse.dod.ui.MainActivity;
 
@@ -20,6 +21,8 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
 
 // METHOD 1
 

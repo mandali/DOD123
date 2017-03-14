@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.estimote.sdk.SystemRequirementsChecker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -38,6 +39,11 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
