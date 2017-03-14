@@ -16,7 +16,7 @@ public class CreatePromotionVo implements Serializable{
 	private Integer id;	
 	private String product_id;
 	private String description;
-	private Integer merchatid;
+	private String merchatid;
 	private String product_image;
 	private String originalPrice;
 	private String discount;
@@ -24,8 +24,8 @@ public class CreatePromotionVo implements Serializable{
 	private Date createddate;
 	private Date startdate;	
 	private Date enddate;
-	private Long catid;
-	private Long brandId;
+	private String catid;
+	private String brandId;
 	private String discountText;
 	private Product productId;
 	private MerchantProfile merchantProfile;
@@ -64,12 +64,7 @@ public class CreatePromotionVo implements Serializable{
 		this.description = description;
 	}
 	
-	public Integer getMerchatid() {
-		return merchatid;
-	}
-	public void setMerchatid(Integer merchatid) {
-		this.merchatid = merchatid;
-	}
+	
 	public String getProduct_image() {
 		return product_image;
 	}
@@ -107,18 +102,7 @@ public class CreatePromotionVo implements Serializable{
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
 	}
-	public Long getCatid() {
-		return catid;
-	}
-	public void setCatid(Long catid) {
-		this.catid = catid;
-	}
-	public Long getBrandId() {
-		return brandId;
-	}
-	public void setBrandId(Long brandId) {
-		this.brandId = brandId;
-	}
+	
 
 
 
@@ -154,6 +138,42 @@ public class CreatePromotionVo implements Serializable{
 
 	public void setMerchantProfile(MerchantProfile merchantProfile) {
 		this.merchantProfile = merchantProfile;
+	}
+
+
+
+	public String getMerchatid() {
+		return merchatid;
+	}
+
+
+
+	public void setMerchatid(String merchatid) {
+		this.merchatid = merchatid;
+	}
+
+
+
+	public String getCatid() {
+		return catid;
+	}
+
+
+
+	public void setCatid(String catid) {
+		this.catid = catid;
+	}
+
+
+
+	public String getBrandId() {
+		return brandId;
+	}
+
+
+
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
 	}
 
 

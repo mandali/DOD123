@@ -169,7 +169,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		try{
 		Session session = this.sessionFactory.openSession();		
 		Query query=(Query) session.createQuery("from MerchantProfile where  id=:merchatid");
-		query.setParameter("merchatid", createPromotionVo.getMerchatid());		
+		query.setParameter("merchatid", Integer.parseInt(createPromotionVo.getMerchatid()));		
 		 resp=(MerchantProfile) query.uniqueResult();
 		}
 		catch(Exception exception){

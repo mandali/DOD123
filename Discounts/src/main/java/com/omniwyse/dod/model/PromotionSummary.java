@@ -21,20 +21,22 @@ public class PromotionSummary implements Serializable{
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "SUMMARY_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer promotionSummaryId;	
-	@OneToOne
-	@JoinColumn(name="CAT_ID")
-	private Category categoryID;
+	private Integer promotionSummaryId;		
 	@Column(name = "PRM_COUNT")	
 	private Integer count;	
 	@Column(name = "MIN_DISCOUNT")	
 	private Integer minDiscount;	
 	@Column(name = "MAX_DISCOUNT")	
 	private Integer maxDiscount;	
+	
+	@OneToOne
+	@JoinColumn(name="CAT_ID")
+	private Category categoryID;
 	@OneToOne
 	@JoinColumn(name="BRD_ID")
 	private Brand brandId;	
@@ -44,7 +46,6 @@ public class PromotionSummary implements Serializable{
 	
 	public PromotionSummary() {
 	}
-
 
 	public PromotionSummary(Integer promotionSummaryId, Category categoryID, Integer count, Integer minDiscount,
 			Integer maxDiscount, Brand brandId, Timestamp createddate) {
