@@ -4,9 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.omniwyse.dod.AppConstants.AppConstants;
-import com.omniwyse.dod.DTO.BeaconInformationVO;
 import com.omniwyse.dod.DTO.BrandVO;
 import com.omniwyse.dod.DTO.CategoryBrandVO;
 import com.omniwyse.dod.DTO.CategoryPromotion;
@@ -29,8 +26,6 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.LocationsVO;
-import com.omniwyse.dod.DTO.MPBSearchVO;
-import com.omniwyse.dod.DTO.MerchantPromotionBeaconSearchVo;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
 import com.omniwyse.dod.DTO.NewProductVO;
@@ -45,7 +40,6 @@ import com.omniwyse.dod.dao.MetaDataDao;
 import com.omniwyse.dod.dao.ProductDao;
 import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.dao.RegisterationValidateDao;
-import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
@@ -60,7 +54,6 @@ import com.omniwyse.dod.model.GetMerchantById;
 import com.omniwyse.dod.model.GetMerchatProfile;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Location;
-import com.omniwyse.dod.model.MerchantAisle;
 import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
@@ -1099,232 +1092,7 @@ public class DODController {
 		return responseEntity;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.LIST_BEACONS_PROMOTIONS_INFO, method = RequestMethod.GET)
-	public ResponseEntity getbeacons() {
-		final String METHOD_NAME = "getbeacons";
-		ResponseEntity responseEntity = null;
-		MerchantPromotionBeaconSearchVo merchantPromotionBeaconSearchVo = null;
-		MerchantProfile merchantProfileId;
-		Promotion promotionId;
-		Beacon beaconId;
-		MerchantAisle merchantAisle;
-		Cities cities;
-		Country country;
-		List<MerchantPromotionBeaconSearchVo> beaconSearchVos = new ArrayList<MerchantPromotionBeaconSearchVo>();
-		DataResultlist<MerchantPromotionBeaconSearchVo> result;
-		DataResult resultError;
-		try {
-			List<Object[]> resp = merchantPromotionBeaconService.getbeacons();
-			if (!resp.isEmpty()) {
-				for (Object[] response : resp) {
-					merchantPromotionBeaconSearchVo = new MerchantPromotionBeaconSearchVo();
-					merchantPromotionBeaconSearchVo.setMerchantId((Integer) response[0]);
-					merchantPromotionBeaconSearchVo.setAisleId(String.valueOf(response[1]));
-					merchantPromotionBeaconSearchVo.setBeaconId(String.valueOf(response[2]));
-					merchantPromotionBeaconSearchVo.setPromotionId((Integer) response[3]);
-					List<Object> dependentObjects = metaDataDao.fetchMPBObjects(merchantPromotionBeaconSearchVo);
-					if (dependentObjects.size() > 0) {
-						merchantProfileId = (MerchantProfile) dependentObjects.get(0);
-						merchantPromotionBeaconSearchVo.setMerchantemailid(merchantProfileId.getEmailid());
-						merchantPromotionBeaconSearchVo.setMerchantfirstname(merchantProfileId.getFirstname());
-						merchantPromotionBeaconSearchVo.setMerchantId(merchantProfileId.getId());
-						merchantPromotionBeaconSearchVo.setMerchantlastname(merchantProfileId.getLastname());
-						merchantPromotionBeaconSearchVo.setMobilenumber(merchantProfileId.getMobilenumber());
-						merchantPromotionBeaconSearchVo.setStreet(merchantProfileId.getStreet());
-						merchantPromotionBeaconSearchVo.setState(merchantProfileId.getState());
-						merchantPromotionBeaconSearchVo.setCountry(merchantProfileId.getCountry());
-						merchantPromotionBeaconSearchVo.setZipcode(merchantProfileId.getZipcode());
-						merchantPromotionBeaconSearchVo.setNickname(merchantProfileId.getNickname());
-						merchantPromotionBeaconSearchVo.setTown(merchantProfileId.getTown());
-						merchantPromotionBeaconSearchVo.setTags(merchantProfileId.getTags());
-						merchantPromotionBeaconSearchVo.setLandlineno(merchantProfileId.getLandlineno());
-						merchantPromotionBeaconSearchVo.setBusinessname(merchantProfileId.getBusinessname());
-						merchantPromotionBeaconSearchVo.setBusinessoffaddr(merchantProfileId.getBusinessoffaddr());
-						merchantPromotionBeaconSearchVo.setDescription(merchantProfileId.getDescription());
-						merchantPromotionBeaconSearchVo.setCreated(merchantProfileId.getCreateddate());
-					}
-					if (dependentObjects.size() >= 1) {
-						promotionId = (Promotion) dependentObjects.get(1);
-						merchantPromotionBeaconSearchVo.setPromotionId(promotionId.getId());
-						merchantPromotionBeaconSearchVo.setStartdate(promotionId.getStartdate());
-						merchantPromotionBeaconSearchVo.setEnddate(promotionId.getEnddate());
-						merchantPromotionBeaconSearchVo.setCreateddate(promotionId.getCreateddate());
-						merchantPromotionBeaconSearchVo.setOriginalPrice(promotionId.getOriginalPrice());
-						merchantPromotionBeaconSearchVo.setDiscount(promotionId.getDiscount());
-						merchantPromotionBeaconSearchVo.setDiscountText(promotionId.getDiscountText());
-						merchantPromotionBeaconSearchVo
-								.setLocationId(String.valueOf(promotionId.getLocationId().getLocationId()));
-						merchantPromotionBeaconSearchVo.setLocationName(promotionId.getLocationId().getLocationName());
-						merchantPromotionBeaconSearchVo.setMerchantId(promotionId.getMerchatId().getId());
-						merchantPromotionBeaconSearchVo
-								.setProduct_id(String.valueOf(promotionId.getProductID().getProductId()));
-						merchantPromotionBeaconSearchVo.setProductname(promotionId.getDescription());
-						merchantPromotionBeaconSearchVo.setBrandId(promotionId.getBrandId().getBrandid());
-						merchantPromotionBeaconSearchVo.setBrandName(promotionId.getBrandId().getBrandName());
-						merchantPromotionBeaconSearchVo.setBrandRating(promotionId.getBrandId().getBrandRating());
-						merchantPromotionBeaconSearchVo.setBrandImage(promotionId.getBrandId().getBrandImage());
-						merchantPromotionBeaconSearchVo
-								.setBrandDescription(promotionId.getBrandId().getBrandDescription());
-						merchantPromotionBeaconSearchVo.setCatid(promotionId.getCatid().getCategoryId());
-						merchantPromotionBeaconSearchVo.setCategoryName(promotionId.getCatid().getCategoryName());
-					}
-					if (dependentObjects.size() >= 5) {
-						cities = (Cities) dependentObjects.get(5);
-						merchantPromotionBeaconSearchVo.setCity(cities.getCityName());
-						merchantPromotionBeaconSearchVo.setCityId(String.valueOf(cities.getCityId()));
-					}
-					if (dependentObjects.size() >= 4) {
-						country = (Country) dependentObjects.get(4);
-						merchantPromotionBeaconSearchVo.setCountry(country.getName());
-						merchantPromotionBeaconSearchVo.setCountryId(String.valueOf(country.getId()));
-					}
-					if (dependentObjects.size() >= 2) {
-						beaconId = (Beacon) dependentObjects.get(2);
-						merchantPromotionBeaconSearchVo.setBeaconName(String.valueOf(beaconId.getBeaconName()));
-						merchantPromotionBeaconSearchVo.setBeaconStatus(beaconId.getBeaconStatus());
-					}
-					if (dependentObjects.size() >= 3) {
-						merchantAisle = (MerchantAisle) dependentObjects.get(3);
-						merchantPromotionBeaconSearchVo.setAisleId(String.valueOf(merchantAisle.getAisleId()));
-						merchantPromotionBeaconSearchVo.setAisleName(merchantAisle.getAisleName());
-						merchantPromotionBeaconSearchVo.setxAxis(String.valueOf(merchantAisle.getxAxis()));
-						merchantPromotionBeaconSearchVo.setyAxis(String.valueOf(merchantAisle.getyAxis()));
-						merchantPromotionBeaconSearchVo.setFloor(String.valueOf(merchantAisle.getFloor()));
-					}
-					beaconSearchVos.add(merchantPromotionBeaconSearchVo);
-				}
-				result = new DataResultlist<MerchantPromotionBeaconSearchVo>(true,
-						AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(),
-						beaconSearchVos);
-				return new ResponseEntity(result, HttpStatus.OK);
-			} else {
-				resultError = new DataResult(true, "Sorry , No data found ... ", HttpStatus.OK.value());
-				return new ResponseEntity(resultError, HttpStatus.OK);
-			}
+	
 
-		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
-		}
-		return responseEntity;
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.LIST_MERCHANT_PROMOTION_BEACONS, method = RequestMethod.POST)
-	public ResponseEntity fetchBeaconsInformation(@RequestBody BeaconInformationVO beaconInformationVO) {
-		ResponseEntity responseEntity = null;
-		final String METHOD_NAME = "fetchBeaconsInformation";
-		List<MPBSearchVO> mpbSearchVOs = new ArrayList<MPBSearchVO>();
-		MPBSearchVO mpbSearchVO;
-		PromotionDto promotionDto;
-		Map<String, List<PromotionDto>> beaconsMap = new LinkedHashMap<String, List<PromotionDto>>();
-		boolean mapFlag = false;
-		try {
-			List<MerchantPromotionBeacon> merchantPromotionBeacons = merchantPromotionBeaconService
-					.fetchMerchantPromotionBeacons(beaconInformationVO);
-			DataResult resultError;
-			if (merchantPromotionBeacons != null) {
-
-				for (MerchantPromotionBeacon merchantPromotionBeacon : merchantPromotionBeacons) {
-					if (beaconsMap != null && !beaconsMap.isEmpty()) {
-						List<PromotionDto> existingPromotion = beaconsMap
-								.get(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()
-										+ merchantPromotionBeacon.getMerchantProfile().getId()));
-						if (existingPromotion != null && !existingPromotion.isEmpty()) {
-							promotionDto = new PromotionDto();
-							promotionDto.setId(merchantPromotionBeacon.getPromotion().getId());
-							promotionDto.setProduct_id(String
-									.valueOf(merchantPromotionBeacon.getPromotion().getProductID().getProductId()));
-							promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
-							promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getId());
-							promotionDto.setProduct_image(
-									merchantPromotionBeacon.getPromotion().getProductID().getProductImageLocation());
-							promotionDto.setOriginalPrice(merchantPromotionBeacon.getPromotion().getOriginalPrice());
-							promotionDto.setDiscount(merchantPromotionBeacon.getPromotion().getDiscount());
-							promotionDto.setLocationId(String
-									.valueOf(merchantPromotionBeacon.getPromotion().getLocationId().getLocationId()));
-							promotionDto.setLocationName(
-									merchantPromotionBeacon.getPromotion().getLocationId().getLocationName());
-							promotionDto.setCreateddate(merchantPromotionBeacon.getPromotion().getCreateddate());
-							promotionDto.setStartdate(merchantPromotionBeacon.getPromotion().getStartdate());
-							promotionDto.setEnddate(merchantPromotionBeacon.getPromotion().getEnddate());
-							promotionDto.setCategoryName(
-									merchantPromotionBeacon.getPromotion().getCatid().getCategoryName());
-							promotionDto
-									.setBrandName(merchantPromotionBeacon.getPromotion().getBrandId().getBrandName());
-							promotionDto.setBrandRating(
-									merchantPromotionBeacon.getPromotion().getBrandId().getBrandRating());
-							promotionDto
-									.setBrandImage(merchantPromotionBeacon.getPromotion().getBrandId().getBrandImage());
-							promotionDto.setBrandDescription(
-									merchantPromotionBeacon.getPromotion().getBrandId().getBrandDescription());
-							promotionDto.setCatid(merchantPromotionBeacon.getPromotion().getCatid().getCategoryId());
-							promotionDto.setBrandId(merchantPromotionBeacon.getPromotion().getBrandId().getBrandid());
-							promotionDto.setDiscountText(merchantPromotionBeacon.getPromotion().getDiscountText());
-							existingPromotion.add(promotionDto);
-							mapFlag = true;
-						}
-					}
-					if (!mapFlag) {
-						mpbSearchVO = new MPBSearchVO();
-						mpbSearchVO.setBeaconId(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()));
-						mpbSearchVO.setBeaconName(merchantPromotionBeacon.getBeacon().getBeaconName());
-						mpbSearchVO.setMerchantId(String.valueOf(merchantPromotionBeacon.getMerchantProfile().getId()));
-						mpbSearchVO.setMerchantName(merchantPromotionBeacon.getMerchantProfile().getFirstname() + ""
-								+ merchantPromotionBeacon.getMerchantProfile().getLastname());
-						mpbSearchVO.setLocationId(
-								String.valueOf(merchantPromotionBeacon.getPromotion().getLocationId().getLocationId()));
-						mpbSearchVO.setLocationName(
-								merchantPromotionBeacon.getPromotion().getLocationId().getLocationName());
-						mpbSearchVO.setAisleId(String.valueOf(merchantPromotionBeacon.getMerchantAisle().getAisleId()));
-						mpbSearchVO.setAisleName(merchantPromotionBeacon.getMerchantAisle().getAisleName());
-						promotionDto = new PromotionDto();
-						promotionDto.setId(merchantPromotionBeacon.getPromotion().getId());
-						promotionDto.setProduct_id(
-								String.valueOf(merchantPromotionBeacon.getPromotion().getProductID().getProductId()));
-						promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
-						promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getId());
-						promotionDto.setProduct_image(
-								merchantPromotionBeacon.getPromotion().getProductID().getProductImageLocation());
-						promotionDto.setOriginalPrice(merchantPromotionBeacon.getPromotion().getOriginalPrice());
-						promotionDto.setDiscount(merchantPromotionBeacon.getPromotion().getDiscount());
-						promotionDto.setLocationId(
-								String.valueOf(merchantPromotionBeacon.getPromotion().getLocationId().getLocationId()));
-						promotionDto.setLocationName(String
-								.valueOf(merchantPromotionBeacon.getPromotion().getLocationId().getLocationName()));
-						promotionDto.setCreateddate(merchantPromotionBeacon.getPromotion().getCreateddate());
-						promotionDto.setStartdate(merchantPromotionBeacon.getPromotion().getStartdate());
-						promotionDto.setEnddate(merchantPromotionBeacon.getPromotion().getEnddate());
-						promotionDto
-								.setCategoryName(merchantPromotionBeacon.getPromotion().getCatid().getCategoryName());
-						promotionDto.setBrandName(merchantPromotionBeacon.getPromotion().getBrandId().getBrandName());
-						promotionDto
-								.setBrandRating(merchantPromotionBeacon.getPromotion().getBrandId().getBrandRating());
-						promotionDto.setBrandImage(merchantPromotionBeacon.getPromotion().getBrandId().getBrandImage());
-						promotionDto.setBrandDescription(
-								merchantPromotionBeacon.getPromotion().getBrandId().getBrandDescription());
-						promotionDto.setCatid(merchantPromotionBeacon.getPromotion().getCatid().getCategoryId());
-						promotionDto.setBrandId(merchantPromotionBeacon.getPromotion().getBrandId().getBrandid());
-						promotionDto.setDiscountText(merchantPromotionBeacon.getPromotion().getDiscountText());
-						mpbSearchVO.getPromotionDtos().add(promotionDto);
-						mpbSearchVOs.add(mpbSearchVO);
-						beaconsMap.put(
-								String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()
-										+ merchantPromotionBeacon.getMerchantProfile().getId()),
-								mpbSearchVO.getPromotionDtos());
-					}
-
-				}
-				DataResultlist<MPBSearchVO> result = new DataResultlist<MPBSearchVO>(true,
-						AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(), mpbSearchVOs);
-				return new ResponseEntity(result, HttpStatus.OK);
-			} else {
-				resultError = new DataResult(true, " Sorry , No data found ... ", HttpStatus.OK.value());
-				return new ResponseEntity(resultError, HttpStatus.OK);
-			}
-		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
-		}
-		return responseEntity;
-	}
+	
 }
