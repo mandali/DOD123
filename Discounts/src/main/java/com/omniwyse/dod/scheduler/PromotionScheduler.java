@@ -36,7 +36,7 @@ public class PromotionScheduler  implements Serializable{
 	PromotionSummaryDao promotionSummaryDao;
 
 	@SuppressWarnings({ "rawtypes", "unused" })
-	@Scheduled(fixedDelay=18000000)
+	@Scheduled(fixedDelay=3600)
 	public void startPromotionScheduler(){
 		System.out.println("In startPromotionScheduler");
 		List<Object[]> promotions;
@@ -80,7 +80,7 @@ public class PromotionScheduler  implements Serializable{
 		if(promotionSummaries!=null && !promotionSummaries.isEmpty()){
 			boolean b=promotionSummaryService.insertPromotions(promotionSummaries);	
 			if(b){
-				DataResult dataResult=new DataResult(true, " success ... ", HttpStatus.OK.value());
+				DataResult dataResult=new DataResult(true, " posted successfully ... " , HttpStatus.OK.value());
 			}else{
 				DataResult dataResult=new DataResult(false, " some problem ", HttpStatus.OK.value());				
 			}
