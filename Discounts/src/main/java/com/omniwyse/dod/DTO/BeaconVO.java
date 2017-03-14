@@ -16,6 +16,10 @@ public class BeaconVO implements java.io.Serializable{
 	private String beaconName;
 	private String beaconStatus;
 	private Timestamp createdDate;
+	private String beaconUid;
+	private String beaconMajorValue;
+	private String beaconMinorValue;
+	
 
 	public String getBeaconId() {
 		return beaconId;
@@ -40,6 +44,24 @@ public class BeaconVO implements java.io.Serializable{
 	}
 	public void setCreatedDate(Timestamp createdDate) {
 		this.createdDate = createdDate;
+	}
+	public String getBeaconUid() {
+		return beaconUid;
+	}
+	public void setBeaconUid(String beaconUid) {
+		this.beaconUid = beaconUid;
+	}
+	public String getBeaconMajorValue() {
+		return beaconMajorValue;
+	}
+	public void setBeaconMajorValue(String beaconMajorValue) {
+		this.beaconMajorValue = beaconMajorValue;
+	}
+	public String getBeaconMinorValue() {
+		return beaconMinorValue;
+	}
+	public void setBeaconMinorValue(String beaconMinorValue) {
+		this.beaconMinorValue = beaconMinorValue;
 	}
 	
 	

@@ -87,5 +87,10 @@ public class AppConstants {
 	public static final String LIST_BEACONS_SUCCESS_MSG="available Beacons Information";
 	public static final String LIST_AISLE="listaisle";
 	public static final String LIST_AISLE_SUCCESS_MSG="available Aisle Information";
+	public static final String LIST_BEACONS_INFO="listbeaconsbyuidmajorminor";
+	public static final String LIST_BEACONS__INFO_SUCCESS_MSG="available Beacons Information";
+	public static final String LIST_BEACONS_BY_MERCHANTIS="listbeaconsbymerchantid";
+	public static final String LIST_BEACONS_INFO_SUCCESS_MSG="available Beacons Information";
 	
 }
+

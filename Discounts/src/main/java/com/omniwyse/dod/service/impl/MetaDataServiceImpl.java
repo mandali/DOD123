@@ -20,6 +20,7 @@ import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantAisle;
+import com.omniwyse.dod.model.MerchantBeacon;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
@@ -77,6 +78,15 @@ public class MetaDataServiceImpl implements MetaDataService {
 	public Brand createBrand(BrandVO brand) {
 		// TODO Auto-generated method stub
 		return metaDataDao.createBrand(brand);
+	}
+	
+	public List<Beacon> fetchBeaconByUidMajorMinor(List<String> uid, List<Integer> major, List<Integer> minor) {
+		// TODO Auto-generated method stub
+		return metaDataDao.fetchBeaconByUidMajorMinor(uid, major, minor);
+	}
+	public List<MerchantBeacon> fetchMerchantBeacons(String merchantId) {
+		// TODO Auto-generated method stub
+		return metaDataDao.fetchMerchantBeacons(merchantId);
 	}
 
 }

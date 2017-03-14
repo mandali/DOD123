@@ -12,14 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.omniwyse.dod.AppConstants.AppConstants;
 import com.omniwyse.dod.DTO.AliseVO;
 import com.omniwyse.dod.DTO.BeaconVO;
 import com.omniwyse.dod.DTO.IAliseVO;
+import com.omniwyse.dod.DTO.IBeaconVO;
+import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.bean.DataResult;
 import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.MerchantAisle;
+import com.omniwyse.dod.model.MerchantBeacon;
 import com.omniwyse.dod.service.MetaDataService;
 
 @RestController
@@ -49,6 +54,9 @@ public class BeaconController {
 				beaconVO.setBeaconName(beacon.getBeaconName());
 				beaconVO.setBeaconStatus(beacon.getBeaconStatus());
 				beaconVO.setCreatedDate(beacon.getCreated());
+				beaconVO.setBeaconUid(String.valueOf(beacon.getUid()));
+				beaconVO.setBeaconMajorValue(String.valueOf(beacon.getMajor()));
+				beaconVO.setBeaconMinorValue(String.valueOf(beacon.getMinor()));
 				beaconVOs.add(beaconVO);
 			}
 
@@ -120,6 +128,134 @@ public class BeaconController {
 		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
 
 		return responseEntity;
+	}
+
+	@RequestMapping(value = AppConstants.LIST_BEACONS_INFO, method = RequestMethod.POST)
+	public ResponseEntity<Object> fetchBeaconsByInfo(@RequestBody String jsonArray) {
+		ResponseEntity<Object> responseEntity = null;
+		final String METHOD_NAME = "fetchBeacons";
+		DataResult resultError;
+		BeaconVO beaconVO;
+		List<BeaconVO> beaconVOs;
+		DataResultlist<BeaconVO> result;
+		Gson gson = new Gson();
+		List<String> buid = new ArrayList<String>();
+		List<Integer> bmajor = new ArrayList<Integer>();
+		List<Integer> bminor = new ArrayList<Integer>();
+		List<Beacon> beacons = null;
+		TypeToken<List<IBeaconVO>> token;
+		List<IBeaconVO> iBeaconVOs = null;
+		boolean parseFlag=false;
+		try {
+			logger.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
+			try{
+			token = new TypeToken<List<IBeaconVO>>() {};
+			iBeaconVOs = gson.fromJson(jsonArray, token.getType());
+			}
+			catch(Exception exception){
+				parseFlag=true;
+				logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
+			}
+			if (iBeaconVOs != null && !iBeaconVOs.isEmpty() && !parseFlag) {
+
+				for (IBeaconVO iBeaconVO : iBeaconVOs) {
+					buid.add(iBeaconVO.getBeaconUID()!=null?iBeaconVO.getBeaconUID():"");
+					String maxValue=iBeaconVO.getBeaconMajorValue()!=null?iBeaconVO.getBeaconMajorValue():"";
+					if(maxValue!=null && !maxValue.isEmpty()){
+					bmajor.add(Integer.parseInt(maxValue));
+					}
+					String minValue=iBeaconVO.getBeaconMinorValue()!=null?iBeaconVO.getBeaconMinorValue():"";
+					if(minValue!=null && !minValue.isEmpty()){
+					bminor.add(Integer.parseInt(minValue));
+					}
+
+				}
+			}
+			
+			if (!buid.isEmpty() && !bmajor.isEmpty() && !bminor.isEmpty()) {
+				beacons=metaDataService.fetchBeaconByUidMajorMinor(buid, bmajor, bminor);
+			}
+			
+			if(!beacons.isEmpty() && beacons.size()>0){
+				beaconVOs=new ArrayList<BeaconVO>();
+				for(Beacon beacon:beacons){
+					
+					beaconVO=new BeaconVO();
+					beaconVO.setBeaconId(String.valueOf(beacon.getBeaconId()));
+					beaconVO.setBeaconMajorValue(String.valueOf(beacon.getMajor()));
+					beaconVO.setBeaconMinorValue(String.valueOf(beacon.getMinor()));
+					beaconVO.setBeaconName(String.valueOf(beacon.getBeaconName()));
+					beaconVO.setBeaconStatus(beacon.getBeaconStatus());
+					beaconVO.setBeaconUid(beacon.getUid());
+					beaconVO.setCreatedDate(beacon.getCreated());
+					beaconVOs.add(beaconVO);
+				}
+				
+				
+				result = new DataResultlist<BeaconVO>(true, AppConstants.LIST_BEACONS__INFO_SUCCESS_MSG, HttpStatus.OK.value(),
+						beaconVOs);
+				responseEntity = new ResponseEntity<Object>(result, HttpStatus.OK);
+
+			}
+			
+			else
+			{
+				resultError = new DataResult(false, "Sorry , No data found ... ", HttpStatus.OK.value());
+				responseEntity = new ResponseEntity<Object>(resultError, HttpStatus.OK);
+			}
+
+		} catch (Exception exception) {
+			logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
+		}
+		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
+
+		return responseEntity;
+
+	}
+	
+	
+	@RequestMapping(value = AppConstants.LIST_BEACONS_BY_MERCHANTIS, method = RequestMethod.POST)
+	public ResponseEntity<Object> fetchMerchantBeacons(@RequestBody NewProductVO merchantId) {
+		ResponseEntity<Object> responseEntity = null;
+		final String METHOD_NAME = "fetchBeacons";
+		DataResult resultError;
+		BeaconVO beaconVO;
+		List<BeaconVO> beaconVOs = null;
+		DataResultlist<BeaconVO> result;
+		try {
+			logger.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
+           if(merchantId.getMerchantId()!=null && !merchantId.getMerchantId().isEmpty()){
+			List<MerchantBeacon> beacons = metaDataService.fetchMerchantBeacons(merchantId.getMerchantId());
+			beaconVOs = new ArrayList<BeaconVO>();
+			for (MerchantBeacon beacon : beacons) {
+				beaconVO = new BeaconVO();
+				beaconVO.setBeaconId(String.valueOf(beacon.getBeaconId().getBeaconId()));
+				beaconVO.setBeaconName(beacon.getBeaconId().getBeaconName());
+				beaconVO.setBeaconStatus(beacon.getBeaconId().getBeaconStatus());
+				beaconVO.setCreatedDate(beacon.getBeaconId().getCreated());
+				beaconVO.setBeaconUid(String.valueOf(beacon.getBeaconId().getUid()));
+				beaconVO.setBeaconMajorValue(String.valueOf(beacon.getBeaconId().getMajor()));
+				beaconVO.setBeaconMinorValue(String.valueOf(beacon.getBeaconId().getMinor()));
+				beaconVOs.add(beaconVO);
+			}
+			
+           }
+
+			if (beaconVOs!=null && !beaconVOs.isEmpty()) {
+				result = new DataResultlist<BeaconVO>(true, AppConstants.LIST_BEACONS_INFO_SUCCESS_MSG,
+						HttpStatus.OK.value(), beaconVOs);
+				responseEntity = new ResponseEntity<Object>(result, HttpStatus.OK);
+			} else {
+				resultError = new DataResult(false, "Sorry , No data found ... ", HttpStatus.OK.value());
+				responseEntity = new ResponseEntity<Object>(resultError, HttpStatus.OK);
+			}
+
+		} catch (Exception exception) {
+			logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
+		}
+		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
+		return responseEntity;
+
 	}
 
 }

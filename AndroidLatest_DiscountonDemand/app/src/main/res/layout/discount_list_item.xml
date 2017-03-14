@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="user" type="com.omniwyse.dod.model.BeaconPromotions"/>
+    </data>
+  <LinearLayout
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_margin="5dp"
     android:layout_height="wrap_content">
@@ -17,7 +22,7 @@
 
 
         <TextView
-            android:text="Watches"
+            android:text="@{user.categoryName}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -28,7 +33,7 @@
             android:id="@+id/beacon_category_tv" />
 
         <TextView
-            android:text="Inorbit mall,Titan"
+            android:text="@{user.brandDescription}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/beacon_category_tv"
@@ -38,15 +43,16 @@
             android:id="@+id/beacon_store_tv" />
 
         <TextView
-            android:text="50%"
+            android:text="@{user.discount}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:paddingRight="10dp"
-            android:textSize="50sp"
+            android:textSize="40sp"
             android:layout_marginTop="20dp"
             android:id="@+id/beacon_discount" />
     </RelativeLayout>
 
-</LinearLayout>
+  </LinearLayout>
+</layout>
