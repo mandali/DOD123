@@ -69,9 +69,9 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		try{
 		Promotion promotion=new Promotion();
 		Session session = this.sessionFactory.getCurrentSession();
-		Brand brand= (Brand) session.get(Brand.class, createPromotionVo.getBrandId());
+		Brand brand= (Brand) session.get(Brand.class, Long.valueOf(createPromotionVo.getBrandId()));
 		promotion.setBrandId(brand);
-		Category category=(Category) session.get(Category.class, createPromotionVo.getCatid());
+		Category category=(Category) session.get(Category.class, Long.valueOf(createPromotionVo.getCatid()));
 		promotion.setCatid(category);
 		promotion.setProductID(createPromotionVo.getProductId());
 		promotion.setDescription(createPromotionVo.getDescription());
@@ -126,7 +126,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		try{
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query)session.createQuery(" from Category where categoryId=:categoryId ")
-				.setParameter("categoryId",createPromotionVo.getCatid());
+				.setParameter("categoryId",Long.valueOf(createPromotionVo.getCatid()));
 		category =(Category)query.uniqueResult();
 		}catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
@@ -139,7 +139,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		try{
 		Session session = this.sessionFactory.openSession();
 		Query query=(Query)session.createQuery(" from Brand where brandId=:brandId ")
-				.setParameter("brandId",createPromotionVo.getBrandId());
+				.setParameter("brandId",Long.valueOf(createPromotionVo.getBrandId()));
 		brand =(Brand)query.uniqueResult();
 		}catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
