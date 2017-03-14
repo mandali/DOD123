@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.omniwyse.dod.bean.DataResult;
-import com.omniwyse.dod.bean.DataResultEntity;
 import com.omniwyse.dod.dao.PromotionSummaryDao;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
@@ -36,7 +35,7 @@ public class PromotionScheduler  implements Serializable{
 	PromotionSummaryDao promotionSummaryDao;
 
 	@SuppressWarnings({ "rawtypes", "unused" })
-	@Scheduled(fixedDelay=3600)
+	@Scheduled(fixedDelay=1800000)
 	public void startPromotionScheduler(){
 		System.out.println("In startPromotionScheduler");
 		List<Object[]> promotions;
