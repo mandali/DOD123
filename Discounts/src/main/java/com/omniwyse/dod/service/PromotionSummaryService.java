@@ -9,8 +9,6 @@ public interface PromotionSummaryService {
 	
 	public List<Object[]> fetchPromotionData();
 	
-	public PromotionSummary insertPromotion(PromotionSummary promotionSummary);
-	
 	public boolean insertPromotions(List<PromotionSummary> list);
 	
 	

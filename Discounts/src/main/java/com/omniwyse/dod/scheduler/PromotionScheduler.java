@@ -79,9 +79,11 @@ public class PromotionScheduler  implements Serializable{
 		if(promotionSummaries!=null && !promotionSummaries.isEmpty()){
 			boolean b=promotionSummaryService.insertPromotions(promotionSummaries);	
 			if(b){
-				DataResult dataResult=new DataResult(true, " posted successfully ... " , HttpStatus.OK.value());
+				System.out.println(" promotion Posted successfully ....");
 			}else{
-				DataResult dataResult=new DataResult(false, " some problem ", HttpStatus.OK.value());				
+				
+				System.out.println(" Sorry ,  some problem  ....");
+							
 			}
 		}
 		

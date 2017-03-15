@@ -387,8 +387,7 @@ public class BeaconController {
 				
 				}
 				
-			}
-			
+			}			
 			if(mpbSearchVOs!=null && !mpbSearchVOs.isEmpty()){
 				result = new DataResultlist<MPBSearchVO>(true,
 						AppConstants.LIST_MERCHANT_PROMOTION_BEACONS_SUCCESS_MSG, HttpStatus.OK.value(),
