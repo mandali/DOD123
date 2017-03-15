@@ -19,11 +19,11 @@ import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.PromotionSummary;
 import com.omniwyse.dod.service.PromotionSummaryService;
 
-public class PromotionScheduler  implements Serializable{
+public class PromotionScheduler  implements Serializable{/*
 	
-	/**
+	*//**
 	 * 
-	 */
+	 *//*
 	private static final long serialVersionUID = 1L;
 	
 	private static final Logger logger = Logger.getLogger(PromotionScheduler.class);
@@ -95,4 +95,4 @@ public class PromotionScheduler  implements Serializable{
 		
 	
 
-}
+*/}
