@@ -1,6 +1,8 @@
 package com.omniwyse.dod.api;
 
+import com.omniwyse.dod.customUtils.AppConstants;
 import com.omniwyse.dod.model.Beacon;
+import com.omniwyse.dod.model.BeaconRequestData;
 import com.omniwyse.dod.model.ConsumerRegistresponse;
 import com.omniwyse.dod.model.GetpromotionResponse;
 import com.omniwyse.dod.model.Loginresponse;
@@ -54,8 +56,8 @@ public interface APIInterface {
     Call<GetBrandsresponse> getBrands();
 
     @Headers("Content-Type: application/json")
-    @POST("listmerchantpromotionbeacons")
-    Call<Beacon> beaconLive(@Body BeaconRequest body);
+    @POST(AppConstants.BEACON_LIVE_URL_TAG)
+    Call<Beacon> beaconLive(@Body List<BeaconRequestData>  body);
 
 
 }

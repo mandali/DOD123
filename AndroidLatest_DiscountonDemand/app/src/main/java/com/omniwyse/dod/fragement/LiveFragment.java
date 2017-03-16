@@ -20,11 +20,13 @@ import com.omniwyse.dod.adapters.StoresAdapter;
 import com.omniwyse.dod.api.APIInterface;
 import com.omniwyse.dod.api.ApiClient;
 import com.omniwyse.dod.api.BeaconRequest;
+import com.omniwyse.dod.api.GetBrandsresponse;
 import com.omniwyse.dod.customUtils.Connectivity;
 import com.omniwyse.dod.customUtils.DialogUtil;
 import com.omniwyse.dod.model.Beacon;
 import com.omniwyse.dod.model.BeaconData;
 import com.omniwyse.dod.model.BeaconPromotions;
+import com.omniwyse.dod.model.BeaconRequestData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,16 +74,25 @@ public class LiveFragment extends Fragment {
         mProgressDialog.setMessage("Authenticating...");
         mProgressDialog.show();
 
-        List<String> list = new ArrayList<String>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
+        List<BeaconRequestData> list = new ArrayList<>();
+        BeaconRequestData lData = new BeaconRequestData();
+                lData.setBeaconMajorValue("4");
+                lData.setBeaconMinorValue("9999");
+                lData.setBeaconUID("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+        list.add(lData);
+        lData = new BeaconRequestData();
+                lData.setBeaconMajorValue("555");
+                lData.setBeaconMinorValue("666");
+                lData.setBeaconUID("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+        list.add(lData);
+                lData = new BeaconRequestData();
+                lData.setBeaconMajorValue("4441");
+                lData.setBeaconMinorValue("5585");
+                lData.setBeaconUID("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+        list.add(lData);
 
-        APIInterface apiService =
-                ApiClient.getClient().create(APIInterface.class);
-
-        Call<Beacon> beaconLive = apiService.beaconLive(new BeaconRequest(list));
-
+        APIInterface apiService =ApiClient.getClient().create(APIInterface.class);
+        Call<Beacon> beaconLive = apiService.beaconLive(list);
         beaconLive.enqueue(new Callback<Beacon>() {
             @Override
             public void onResponse(Call<Beacon> call, Response<Beacon> response) {
@@ -89,9 +100,12 @@ public class LiveFragment extends Fragment {
                 if (mProgressDialog.isShowing())
                     mProgressDialog.dismiss();
 
-                if (response.code() == 200) {
-                    Log.d(TAG, new Gson().toJson(response.body()));
+                if (response.body().getStatusCode() == 200 ) {  //&& response.body().isSuccess()
                             promotionsList.clear();
+                    if(response.body().getData()==null){
+                        Log.d(TAG, response.body().getMessage());
+                        return;
+                    }
                     for(BeaconData data : response.body().getData()){
                         for(BeaconPromotions promotions : data.getPromotionDtos()){
                             promotionsList.add(promotions);
@@ -110,6 +124,7 @@ public class LiveFragment extends Fragment {
                 DialogUtil.createGenericErrorDialog(getActivity(),"Please try after sometime").show();
             }
         });
+
     }
 
     private void setAdapter(){
