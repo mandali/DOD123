@@ -36,21 +36,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());			
 		}		
 		return promotions;
-	}
-
-	public PromotionSummary insertPromotion(PromotionSummary promotionSummary) {
-		PromotionSummary promotions=null;
-		final String METHOD_NAME = "insertPromotion";
-		try{
-			
-		}catch(Exception exception){
-			
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
-			
-		}
-		
-		return null;
-	}
+	}	
 
 	public Brand fetchBrandID(Integer brandId) {
 		
@@ -67,27 +53,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 		}		
 		return brand;
 	}
-
-	public boolean insertPromotions(List<PromotionSummary> list) {	
-		
-		final String METHOD_NAME = "insertPromotions";		
-		PromotionSummary promotionSummary = null;
-		boolean flag=false;
-		try{
-			Session session = this.sessionFactory.openSession();
-			for(PromotionSummary promotionSummary2:list){
-			session.save(promotionSummary2);
-			}
-						
-		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
-			flag=true;
-			
-		}	
-		return flag;
-		
-	}
-
+	
 	public Category fetchCategoryID(Integer categoryId) {
 		long brandIds=categoryId.longValue();		
 		final String METHOD_NAME = "fetchCategoryID";
@@ -105,6 +71,22 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 		}
 		
 		return category;
+	}
+	public boolean insertPromotions(List<PromotionSummary> list) {	
+		
+		final String METHOD_NAME = "insertPromotions";		
+		boolean flag=false;
+		try{
+			Session session = this.sessionFactory.openSession();
+			for(PromotionSummary promotionSummary2:list){				
+			session.save(promotionSummary2);
+			}
+						
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			flag=true;			
+		}	
+		return flag;		
 	}
 
 }

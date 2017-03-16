@@ -23,10 +23,7 @@ public class PromotionSummaryServiceImpl implements PromotionSummaryService{
 		return promotionSummaryDao.fetchPromotionData();
 	}
 
-	public PromotionSummary insertPromotion(PromotionSummary promotionSummary) {
-		
-		return promotionSummaryDao.insertPromotion(promotionSummary);
-	}
+	
 
 	public boolean insertPromotions(List<PromotionSummary> list) {
 		

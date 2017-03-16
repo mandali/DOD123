@@ -10,8 +10,6 @@ public interface PromotionSummaryDao {
 	
 	public List<Object[]> fetchPromotionData();
 	
-	public PromotionSummary insertPromotion(PromotionSummary promotionSummary); 
-	
 	public Brand fetchBrandID(Integer brandId);
 	
 	public Category fetchCategoryID(Integer categoryId);

@@ -13,18 +13,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.omniwyse.dod.bean.DataResult;
-import com.omniwyse.dod.bean.DataResultEntity;
 import com.omniwyse.dod.dao.PromotionSummaryDao;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.PromotionSummary;
 import com.omniwyse.dod.service.PromotionSummaryService;
 
-public class PromotionScheduler  implements Serializable{
+public class PromotionScheduler  implements Serializable{/*
 	
-	/**
+	*//**
 	 * 
-	 */
+	 *//*
 	private static final long serialVersionUID = 1L;
 	
 	private static final Logger logger = Logger.getLogger(PromotionScheduler.class);
@@ -36,7 +35,7 @@ public class PromotionScheduler  implements Serializable{
 	PromotionSummaryDao promotionSummaryDao;
 
 	@SuppressWarnings({ "rawtypes", "unused" })
-	@Scheduled(fixedDelay=3600)
+	@Scheduled(fixedDelay=1800000)
 	public void startPromotionScheduler(){
 		System.out.println("In startPromotionScheduler");
 		List<Object[]> promotions;
@@ -80,9 +79,11 @@ public class PromotionScheduler  implements Serializable{
 		if(promotionSummaries!=null && !promotionSummaries.isEmpty()){
 			boolean b=promotionSummaryService.insertPromotions(promotionSummaries);	
 			if(b){
-				DataResult dataResult=new DataResult(true, " posted successfully ... " , HttpStatus.OK.value());
+				System.out.println(" promotion Posted successfully ....");
 			}else{
-				DataResult dataResult=new DataResult(false, " some problem ", HttpStatus.OK.value());				
+				
+				System.out.println(" Sorry ,  some problem  ....");
+							
 			}
 		}
 		
@@ -94,4 +95,4 @@ public class PromotionScheduler  implements Serializable{
 		
 	
 
-}
+*/}
