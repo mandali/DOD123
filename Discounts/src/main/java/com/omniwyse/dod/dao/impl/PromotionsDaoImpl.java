@@ -40,7 +40,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		final String METHOD_NAME="getPromotions";
 		List<Promotion> list = null;
 		try{
-		Session session = this.sessionFactory.openSession();		
+		Session session = this.sessionFactory.getCurrentSession();		
 		list = session.createQuery(" from Promotion ").list();
 		}catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
@@ -112,7 +112,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		final String METHOD_NAME="getIdbasePromotion";
 		List<PromotionSummary> list = null ;
 		try{
-		Session session = this.sessionFactory.openSession();			
+		Session session = this.sessionFactory.getCurrentSession();			
 		list = session.createQuery(" from Promotionsummary ").list();
 		}catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
@@ -124,7 +124,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		final String METHOD_NAME="getcategoryId";
 		Category category = null;
 		try{
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query)session.createQuery(" from Category where categoryId=:categoryId ")
 				.setParameter("categoryId",Long.valueOf(createPromotionVo.getCatid()));
 		category =(Category)query.uniqueResult();
@@ -137,7 +137,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		final String METHOD_NAME="getBrandId";
 		Brand brand = null ;
 		try{
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query)session.createQuery(" from Brand where brandId=:brandId ")
 				.setParameter("brandId",Long.valueOf(createPromotionVo.getBrandId()));
 		brand =(Brand)query.uniqueResult();
@@ -151,7 +151,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		final String METHOD_NAME="CategoryIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
 		try{
-		Session session = this.sessionFactory.openSession();	
+		Session session = this.sessionFactory.getCurrentSession();	
 		List<Promotion> promotions =session.createQuery("select distinct p from Promotion p where p.catid.categoryId=:id")
 				.setParameter("id" ,categoryPromotion.getCategoryId()).list();	
 		for(Promotion promotion:promotions){
@@ -191,7 +191,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		final String METHOD_NAME="brandIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
 		try{
-		Session session = this.sessionFactory.openSession();			
+		Session session = this.sessionFactory.getCurrentSession();			
 		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:id").setParameter("id" , categoryPromotion.getBrandId()).list();		
 		for(Promotion promotion:promotions){
 			PromotionDto promotionDto=new PromotionDto();
@@ -228,7 +228,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		final String METHOD_NAME="brandIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
 		try{
-		Session session = this.sessionFactory.openSession();			
+		Session session = this.sessionFactory.getCurrentSession();			
 		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:brandId and p.catid.categoryId=:categoryId")
 				.setParameter("brandId" , categoryPromotion.getBrandId()).setParameter("categoryId",categoryPromotion.getCategoryId()).list();		
 		for(Promotion promotion:promotions){
@@ -265,7 +265,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		final String METHOD_NAME="fetchProductById";
 		Product product = null;
 		try{
-			Session session = this.sessionFactory.openSession();		
+			Session session = this.sessionFactory.getCurrentSession();		
 			Query query=(Query) session.createQuery("from Product where productId=:productId");
 			query.setParameter("productId", Long.valueOf(createPromotionVo.getProduct_id()));		
 			product=(Product) query.uniqueResult();

@@ -27,7 +27,7 @@ public class MerchantPromotionBeaconDaoImpl implements MerchantPromotionBeaconDa
 		final String METHOD_NAME = "getbeacons";
 		List<Object[]> result = null;
 		try{
-		Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 		result= session.createSQLQuery(" select distinct m.ID as MerchantId,mpb.A_ID as asileId,mpb.BC_ID as BeaconId,mpb.P_ID as promotionId from merchant_profile m join merchant_pm_bc mpb where m.ID=mpb.M_ID").list();
 		}catch(Exception exception){
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -44,7 +44,7 @@ public class MerchantPromotionBeaconDaoImpl implements MerchantPromotionBeaconDa
 		final String METHOD_NAME="fetchMerchantPromotionBeacons";
 		try{
 			
-			 session = this.sessionFactory.openSession();
+			session = this.sessionFactory.getCurrentSession();
 			 query = (Query) session.createQuery(" from MerchantPromotionBeacon m where m.beacon.beaconId in (:beaconnames) ");
 			 for(String string:beaconInformationVO.getBeaconIds()){
 				 bIds.add(Long.valueOf(string));

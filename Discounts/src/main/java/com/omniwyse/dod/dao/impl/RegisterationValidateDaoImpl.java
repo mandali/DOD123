@@ -25,7 +25,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 		final String METHOD_NAME="getmobilenoandemail";
 		ConsumerProfile resp = null;
 		try{
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query)session.createQuery("from ConsumerProfile where phone_no=:phoneno and email_id=:emailid")
 				.setParameter("phoneno", consumerProfile.getPhone_no().trim())
 				.setParameter("emailid",consumerProfile.getEmail_id().trim());		
@@ -38,14 +38,14 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 		
 	public MerchantProfile getmobilenoandemail(MerchantProfile merchantProfile) {
 		final String METHOD_NAME="getmobilenoandemail";
-		MerchantProfile resp = null;
-		try{
-		Session session = this.sessionFactory.openSession();
+		MerchantProfile resp = null ;
+		try{			
+		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query)session.createQuery("from MerchantProfile where mobilenumber=:phoneno and emailid=:emailid")
 				.setParameter("phoneno", merchantProfile.getMobilenumber().trim())
 				.setParameter("emailid", merchantProfile.getEmailid().trim());
 		 resp=(MerchantProfile)query.uniqueResult();
-		}catch(Exception  exception){
+			}catch(Exception  exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
 		}
 		return resp;
@@ -55,7 +55,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 		final String METHOD_NAME="getmobileno";
 		RegisterWithOtp resp = null;
 		try{
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query)session.createQuery("from RegisterWithOtp where user_id=:userid")
 				.setParameter("userid", RegisterWithOtp.getUser_id().trim());
 		resp=(RegisterWithOtp)query.uniqueResult();
@@ -70,7 +70,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 		final String METHOD_NAME="getOTP";
 		RegisterWithOtp resp = null;
 		try{
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query)session.createQuery("from RegisterWithOtp where otpno=:otpno and user_id=:mobile")				
 				.setParameter("otpno",oTPValidation.getOtpno().trim())
 				.setParameter("mobile", oTPValidation.getMobile().trim());

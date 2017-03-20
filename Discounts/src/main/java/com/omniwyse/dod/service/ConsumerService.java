@@ -20,5 +20,7 @@ public interface ConsumerService {
 	
 	public ConsumerProfile consumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile);
 	
+	public RegisterWithOtp getmobileno(RegisterWithOtp RegisterWithOtp); 
+	
 	public ConsumerPromotionData consumerPromotion(ConsumerPromotionData ConsumerPromotionData);
 }

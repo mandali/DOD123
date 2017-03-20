@@ -26,6 +26,7 @@ import com.omniwyse.dod.DTO.CountryVO;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.LocationVO;
 import com.omniwyse.dod.DTO.LocationsVO;
+import com.omniwyse.dod.DTO.MerchantProfileVo;
 import com.omniwyse.dod.DTO.MerchantPromotionBeaconVO;
 import com.omniwyse.dod.DTO.MercnantDTO;
 import com.omniwyse.dod.DTO.NewProductVO;
@@ -35,11 +36,6 @@ import com.omniwyse.dod.bean.DataResult;
 import com.omniwyse.dod.bean.DataResultEntity;
 import com.omniwyse.dod.bean.DataResultlist;
 import com.omniwyse.dod.bean.OtpBean;
-import com.omniwyse.dod.dao.MerchantDao;
-import com.omniwyse.dod.dao.MetaDataDao;
-import com.omniwyse.dod.dao.ProductDao;
-import com.omniwyse.dod.dao.PromotionsDao;
-import com.omniwyse.dod.dao.RegisterationValidateDao;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
@@ -80,29 +76,19 @@ public class DODController {
 	@Autowired
 	RegistrationService registrationService;
 	@Autowired
-	ConsumerService consumerService;
-	@Autowired
-	RegisterationValidateDao consumerRegisterValidate;
+	ConsumerService consumerService;	
 	@Autowired
 	ValidationService validationService;
 	@Autowired
 	PromotionService promotionService;
 	@Autowired
-	MerchantService merchantService;
-	@Autowired
-	MerchantDao merchantDao;
+	MerchantService merchantService;	
 	@Autowired
 	LocationService locationService;
 	@Autowired
-	MetaDataService metaDataService;
+	MetaDataService metaDataService;	
 	@Autowired
-	PromotionsDao promotionsDao;
-	@Autowired
-	ProductDao productDao;
-	@Autowired
-	MerchantPromotionBeaconService merchantPromotionBeaconService;
-	@Autowired
-	MetaDataDao metaDataDao;
+	MerchantPromotionBeaconService merchantPromotionBeaconService;	
 
 	private static final Logger logger = Logger.getLogger(DODController.class);
 
@@ -112,7 +98,7 @@ public class DODController {
 		final String METHOD_NAME = "savewithOTP";
 		ResponseEntity responseEntity = null;
 		try {
-			RegisterWithOtp data = consumerRegisterValidate.getmobileno(registerWithOtp);
+			RegisterWithOtp data = consumerService.getmobileno(registerWithOtp);
 			if (data == null) {
 				Random random = new Random();
 				int number = random.nextInt(9999999);
@@ -159,7 +145,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 
 		try {
-			ConsumerProfile data = consumerRegisterValidate.getmobilenoandemail(consumerProfile);
+			ConsumerProfile data = validationService.getmobilenoandemail(consumerProfile);
 			if (data == null) {
 				ConsumerProfile model = consumerService.registerconsumer(consumerProfile);
 				DataResult result = new DataResult(true, AppConstants.CONSUMER_REGISTER_SUCCESS_MSG,
@@ -270,7 +256,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 
 		try {
-			MerchantProfile data = consumerRegisterValidate.getmobilenoandemail(merchantProfile);
+			MerchantProfile data = validationService.getmobilenoandemail(merchantProfile);
 			if (data == null) {
 				MerchantProfile model = merchantService.registermerchant(merchantProfile);
 				DataResultEntity<MerchantProfile> dataResult = new DataResultEntity<MerchantProfile>(true,
@@ -296,10 +282,28 @@ public class DODController {
 		try {
 			MerchantProfile data = merchantService.merchatProfile(GetMerchatProfile);
 			if (data != null) {
-
-				MerchantProfile model = merchantService.merchatProfile(GetMerchatProfile);
-				DataResultEntity<MerchantProfile> dataResult = new DataResultEntity<MerchantProfile>(true,
-						AppConstants.MERCHANT_PROFILE_SUCCESS_MSG, HttpStatus.OK.value(), model);
+				MerchantProfileVo merchantProfileVo =new  MerchantProfileVo();
+				merchantProfileVo.setId(data.getId());
+				merchantProfileVo.setFirstname(data.getFirstname());
+				merchantProfileVo.setLastname(data.getLastname());
+				merchantProfileVo.setLogo(data.getLogo());				
+				merchantProfileVo.setEmailid(data.getEmailid());
+				merchantProfileVo.setMobilenumber(data.getMobilenumber());
+				merchantProfileVo.setBusinessname(data.getBusinessname());
+				merchantProfileVo.setBusinessoffaddr(data.getBusinessoffaddr());
+				merchantProfileVo.setLandlineno(data.getLandlineno());
+				merchantProfileVo.setCity(data.getCity());
+				merchantProfileVo.setState(data.getState());
+				merchantProfileVo.setCountry(data.getCountry());
+				merchantProfileVo.setStreet(data.getStreet());
+				merchantProfileVo.setTown(data.getTown());
+				merchantProfileVo.setZipcode(data.getZipcode());
+				merchantProfileVo.setDescription(data.getDescription());
+				merchantProfileVo.setTags(data.getTags());
+				merchantProfileVo.setNickname(data.getNickname());
+				merchantProfileVo.setCreateddate(data.getCreateddate());
+				DataResultEntity<MerchantProfileVo> dataResult = new DataResultEntity<MerchantProfileVo>(true,
+						AppConstants.MERCHANT_PROFILE_SUCCESS_MSG, HttpStatus.OK.value(), merchantProfileVo);
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			} else {
 				DataResult result = new DataResult(true, AppConstants.MERCHANT_PROFILE_ERROR_MSG,
@@ -325,6 +329,7 @@ public class DODController {
 				for (MerchantProfile response1 : data) {
 					mercnantDTO = new MercnantDTO();
 					mercnantDTO.setId(response1.getId().toString());
+					mercnantDTO.setLogo(response1.getLogo());
 					mercnantDTO.setFirstname(response1.getFirstname());
 					mercnantDTO.setLastname(response1.getLastname());
 					mercnantDTO.setEmailid(response1.getEmailid());
@@ -440,9 +445,10 @@ public class DODController {
 		try {
 			MerchantProfile resp = merchantService.merchatLogin(merchantLogin);
 			if (resp != null) {
-				MerchantProfile merchantProfile = merchantDao.getMerchant(merchantLogin);
+				MerchantProfile merchantProfile = merchantService.getMerchant(merchantLogin);
 				MercnantDTO merchnantDTO = new MercnantDTO();
 				merchnantDTO.setId(merchantProfile.getId().toString());
+				merchnantDTO.setLogo(merchantProfile.getLogo());
 				merchnantDTO.setFirstname(merchantProfile.getFirstname());
 				merchnantDTO.setLastname(merchantProfile.getLastname());
 				merchnantDTO.setEmailid(merchantProfile.getEmailid());
@@ -667,10 +673,10 @@ public class DODController {
 		final String METHOD_NAME = "createPromotions";
 		ResponseEntity responseEntity = null;
 		try {
-			MerchantProfile merchantId = merchantDao.validatePromotion(createPromotionVo);
-			Category categoryid = promotionsDao.getcategoryId(createPromotionVo);
-			Brand brandid = promotionsDao.getBrandId(createPromotionVo);
-			Product productId = promotionsDao.fetchProductById(createPromotionVo);
+			MerchantProfile merchantId = merchantService.validatePromotion(createPromotionVo);
+			Category categoryid = promotionService.getcategoryId(createPromotionVo);
+			Brand brandid = promotionService.getBrandId(createPromotionVo);
+			Product productId = promotionService.fetchProductById(createPromotionVo);
 			if (merchantId != null && categoryid != null && brandid != null && productId != null) {
 				createPromotionVo.setProductId(productId);
 				createPromotionVo.setMerchantProfile(merchantId);
@@ -913,7 +919,7 @@ public class DODController {
 		DataResultEntity<Brand> result;
 		DataResult resultError;
 		try {
-			Brand brandname = metaDataDao.getBrandname(brandVO);
+			Brand brandname = metaDataService.getBrandname(brandVO);
 			if (brandname == null) {
 				Brand brandVOs = metaDataService.createBrand(brandVO);
 				result = new DataResultEntity<Brand>(true, AppConstants.CREATE_BRAND_SUCCESS_MSG, HttpStatus.OK.value(),
@@ -1013,8 +1019,8 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 
 		try {
-			MerchantProfile merchantId = productDao.validateProduct(newProductVO);
-			Product products = productDao.validateProductname(newProductVO);
+			MerchantProfile merchantId = merchantService.validateProduct(newProductVO);
+			Product products = merchantService.validateProductname(newProductVO);
 			if (merchantId != null && products == null) {
 				Product resp = metaDataService.createProduct(newProductVO, merchantId);
 				if (resp != null) {

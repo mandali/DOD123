@@ -74,7 +74,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		final String METHOD_NAME = "GetMerchant";
 		MerchantProfile MerchantProfile = null;
 		try{
-		Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 		Query query=(Query) session.createQuery("from MerchantProfile where mobilenumber=:mobile").setParameter("mobile", MerchantLogin.getMobileno());
 		MerchantProfile=(MerchantProfile)query.uniqueResult();
 		}catch(Exception exception){
@@ -144,7 +144,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		final String METHOD_NAME = "AllMerchants";
 		List<MerchantProfile> list = null ;
 		try{
-		Session session = this.sessionFactory.openSession();			
+			Session session = this.sessionFactory.getCurrentSession();			
 		list = session.createQuery(" from MerchantProfile ").list();
 		}catch(Exception exception){
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -156,7 +156,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		final String METHOD_NAME = "MerchantPromotions";
 		List<Promotion> list = null;
 		try{
-		Session session = this.sessionFactory.openSession();		
+			Session session = this.sessionFactory.getCurrentSession();		
 		list= session.createQuery(" from Promotion p where p.merchatId.id=:merchantId").setParameter("merchantId",MerchantPromotions.getId()).list();
 		}catch(Exception exception){
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -167,7 +167,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		final String METHOD_NAME = "validatePromotion";
 		MerchantProfile resp = null;
 		try{
-		Session session = this.sessionFactory.openSession();		
+			Session session = this.sessionFactory.getCurrentSession();		
 		Query query=(Query) session.createQuery("from MerchantProfile where  id=:merchatid");
 		query.setParameter("merchatid", Integer.parseInt(createPromotionVo.getMerchatid()));		
 		 resp=(MerchantProfile) query.uniqueResult();
@@ -182,7 +182,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		final String METHOD_NAME = "fetchLocationById";
 		Location resp = null;
 		try{
-		Session session = this.sessionFactory.openSession();		
+			Session session = this.sessionFactory.getCurrentSession();		
 		Query query=(Query) session.createQuery("from Location where locationId=:locationId");
 		query.setParameter("locationId", locationId);		
 		 resp=(Location) query.uniqueResult();

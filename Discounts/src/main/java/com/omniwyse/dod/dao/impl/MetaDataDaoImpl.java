@@ -81,7 +81,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 		try {
 
-			session = this.sessionFactory.openSession();
+			session = this.sessionFactory.getCurrentSession();
 			Query query = (Query) session.createQuery(" from Category c join c.brands b order by c.categoryId");
 			objects = query.list();
 			Iterator iterator = objects.iterator();
@@ -186,7 +186,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		final String METHOD_NAME = "createLocation";
 		Location resp = null;
 		try{
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		Location location=new Location();
 		location.setLocationName(locationVo.getLocationName());
 		location.setLocationLatitude(locationVo.getLocationLatitude());
@@ -207,7 +207,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List validateMPBCreation(MerchantPromotionBeaconVO merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		MerchantProfile merchantProfileId;
 		Promotion promotionId;
 		Beacon beaconId;
@@ -235,7 +235,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 	@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
 	public List<Object> fetchMPBObjects(MerchantPromotionBeaconSearchVo merchantPromotionBeaconVO) {
 		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		MerchantProfile merchantProfileId = null;
 		Promotion promotionId = null;
 		Beacon beaconId = null;
@@ -292,7 +292,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		MerchantPromotionBeacon resp = null;
 		final String METHOD_NAME="createMerchantPromotionBeacon";
 		try{
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		beacon=new MerchantPromotionBeacon();
 		merchantProfile=(com.omniwyse.dod.model.MerchantProfile) merchantPromotionBeaconVO.get(0);
 		promotionId=(Promotion) merchantPromotionBeaconVO.get(1);
@@ -317,7 +317,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		final String METHOD_NAME = "fetchNoBeaconPromotions";
 		List<Object[]> result = null;
 		try{
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		result= session.createSQLQuery(" SELECT p.PRMS_ID as promotionId,p.Merchant_ID as merchantId,p.LO_ID as location  FROM dod_db.promotions p where p.PRMS_ID not in(select m.P_ID from merchant_pm_bc m);").list();
 		}catch(Exception exception){
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
@@ -331,7 +331,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		final String METHOD_NAME="fetchBeacons";
 		List<Beacon> beacons = null;
 		try{
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			beacons=session.createQuery(" from Beacon ").list();
 		}
 		catch(Exception exception){
@@ -347,7 +347,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		final String METHOD_NAME="fetchAisle";
 		List<MerchantAisle> aisles = null;
 		try{
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			aisles=(List<MerchantAisle>) session.createQuery(" from MerchantAisle m where m.merchantProfile.id=:merchantId").setParameter("merchantId", Integer.valueOf(merchantId)).list();
 		}
 		
@@ -358,12 +358,13 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<BrandVO> listBrands() {
 		
 		final String METHOD_NAME="listBrands";
 		List<BrandVO> brandVOs = null;
 		try{
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			brandVOs=session.createQuery(" from Brand b order by b.brandRating desc").list();
 			
 		}catch(Exception exception){
@@ -380,11 +381,12 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		try{
 			Brand brandlocal=new Brand();
 			brandlocal.setBrandid(Long.valueOf(brand.getBrandId()));
+			brandlocal.setBrandImage(brand.getBrandImage());
 			brandlocal.setBrandName(brand.getBrandName());
 			brandlocal.setBrandDescription(brand.getBrandDescription());
 			brandlocal.setBrandRating(brand.getBrandRating());
 			brandlocal.setCreatedDate(ourJavaTimestampObject);
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Long id=(Long) session.save(brandlocal);
 			resp = (Brand) session.get(Brand.class, id);			
 		}
@@ -397,7 +399,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		final String METHOD_NAME="getBrandname";
 		Brand brandname= null;
 		try{			
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Query query=(Query) session.createQuery(" from Brand where brandName=:brandname").setParameter("brandname", brand.getBrandName());
 			brandname=(Brand) query.uniqueResult();			
 		}catch(Exception exception){
@@ -406,13 +408,14 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		return brandname;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Beacon> fetchBeaconByUidMajorMinor(List<String> uid, List<Integer> major, List<Integer> minor) {
 		// TODO Auto-generated method stub
 		final String METHOD_NAME = "fetchBeaconByUidMajorMinor";
 		List<Beacon> beacons = null;
 		Query query;
 		try {
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			query = (Query) session.createQuery(
 					" from Beacon b where b.uid in (:beaconuids) and b.major in(:beaconmajors) and b.minor in (:beaconminors) ");
 			query.setParameterList("beaconuids", uid);
@@ -430,7 +433,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		final String METHOD_NAME = "fetchMerchantBeacons";
 		List<MerchantBeacon> beacons = null;
 		try {
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Query query = (Query) session.createQuery(" from MerchantBeacon m where m.merchantProfile.id=:merchantId")
 					.setParameter("merchantId", Integer.valueOf(merchantId));
 			beacons = query.list();

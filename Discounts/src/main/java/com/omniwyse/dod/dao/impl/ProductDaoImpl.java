@@ -44,7 +44,7 @@ public class ProductDaoImpl implements ProductDao{
 	public MerchantProfile validateProduct(NewProductVO productVO) {
 		MerchantProfile resp = null;
 		try{
-		Session session = this.sessionFactory.openSession();		
+		Session session = this.sessionFactory.getCurrentSession();		
 		Query query=(Query) session.createQuery("from MerchantProfile where  id=:merchatid");
 		query.setParameter("merchatid", Integer.valueOf(productVO.getMerchantId()));		
 		 resp=(MerchantProfile) query.uniqueResult();
@@ -59,7 +59,7 @@ public class ProductDaoImpl implements ProductDao{
 	public Product validateProductname(NewProductVO productVO) {
 		List<Product> resp=null;
 		Product product = null;
-			Session session = this.sessionFactory.openSession();		
+			Session session = this.sessionFactory.getCurrentSession();		
 			 resp= session.createQuery("from Product where productDescription=:productDescription")
 					.setParameter("productDescription", productVO.getProductDescription()).list();	
 			if(!resp.isEmpty()){

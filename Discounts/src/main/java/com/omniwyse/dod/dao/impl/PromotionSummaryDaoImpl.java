@@ -29,7 +29,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 		List<Object[]> promotions=null;
 		final String METHOD_NAME = "fetchPromotionData";
 		try{
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			promotions = session.createSQLQuery("select max(p.DISCOUNT),min(p.DISCOUNT),count(p.DISCOUNT),p.BRD_ID , p.CAT_ID from promotions p group by p.BRD_ID").list();			
 		}catch(Exception exception)
 		{			
@@ -44,7 +44,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 		final String METHOD_NAME = "fetchBrandData";		
 		Brand  brand=null;
 		try{
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFactory.getCurrentSession();
 			Query query=(Query)session.createQuery("from Brand where brandId=:id")
 					.setParameter("id",brandIds);
 			brand =(Brand)query.uniqueResult();						
@@ -59,7 +59,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 		final String METHOD_NAME = "fetchCategoryID";
 		Category category=null;
 		try{			
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Query query=(Query)session.createQuery("from Category where categoryId=:id")
 					.setParameter("id",brandIds);
 			category =(Category)query.uniqueResult();
@@ -77,7 +77,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 		final String METHOD_NAME = "insertPromotions";		
 		boolean flag=false;
 		try{
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			for(PromotionSummary promotionSummary2:list){				
 			session.save(promotionSummary2);
 			}

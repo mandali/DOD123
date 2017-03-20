@@ -53,8 +53,6 @@ public class BeaconController {
 		List<BeaconVO> beaconVOs;
 		DataResultlist<BeaconVO> result;
 		try {
-			logger.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
-
 			List<Beacon> beacons = metaDataService.fetchBeacons();
 			beaconVOs = new ArrayList<BeaconVO>();
 			for (Beacon beacon : beacons) {

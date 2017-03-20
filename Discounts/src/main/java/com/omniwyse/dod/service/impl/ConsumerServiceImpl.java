@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.omniwyse.dod.dao.ConsumerDao;
+import com.omniwyse.dod.dao.RegisterationValidateDao;
 import com.omniwyse.dod.model.ConsumerIdBaseProfile;
 import com.omniwyse.dod.model.ConsumerLogin;
 import com.omniwyse.dod.model.ConsumerLoginwithEmail;
@@ -23,6 +24,9 @@ public class ConsumerServiceImpl implements ConsumerService{
 	
 	@Autowired
 	ConsumerDao consumerDao;
+	
+	@Autowired
+	RegisterationValidateDao consumerRegisterValidate;
 
 	
 	public ConsumerProfile consumerautheticatewithemail(ConsumerLoginwithEmail userLogin) {
@@ -50,6 +54,10 @@ public class ConsumerServiceImpl implements ConsumerService{
 	public ConsumerPromotionData consumerPromotion(ConsumerPromotionData consumerPromotionData) {
 		
 		return consumerDao.consumerPromotion(consumerPromotionData);
+	}
+	public RegisterWithOtp getmobileno(RegisterWithOtp RegisterWithOtp) {
+		// TODO Auto-generated method stub
+		return consumerRegisterValidate.getmobileno(RegisterWithOtp);
 	}	
 
 	}

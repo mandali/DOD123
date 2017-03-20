@@ -88,5 +88,9 @@ public class MetaDataServiceImpl implements MetaDataService {
 		// TODO Auto-generated method stub
 		return metaDataDao.fetchMerchantBeacons(merchantId);
 	}
+	public Brand getBrandname(BrandVO brandVO) {
+		// TODO Auto-generated method stub
+		return metaDataDao.getBrandname(brandVO);
+	}
 
 }

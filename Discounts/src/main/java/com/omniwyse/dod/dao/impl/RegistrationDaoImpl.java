@@ -22,7 +22,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		RegisterWithOtp reg = null;
 		try {
 
-			Session session = this.sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Integer id = (Integer) session.save(registerWithOtp);
 			reg = (RegisterWithOtp) session.get(RegisterWithOtp.class, id);
 		} catch (Exception exception) {

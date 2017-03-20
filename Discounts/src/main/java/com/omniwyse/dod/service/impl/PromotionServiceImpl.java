@@ -13,8 +13,11 @@ import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.PromotionsDao;
+import com.omniwyse.dod.model.Brand;
+import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
+import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.PromotionSummary;
 import com.omniwyse.dod.service.PromotionService;
@@ -73,6 +76,21 @@ public class PromotionServiceImpl implements PromotionService{
 	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion) {
 		
 		return promotionsDao.brandCatIdPromotion(categoryPromotion);
+	}
+
+	public Category getcategoryId(CreatePromotionVo createPromotionVo) {
+		
+		return promotionsDao.getcategoryId(createPromotionVo);
+	}
+
+	public Brand getBrandId(CreatePromotionVo createPromotionVo) {
+		
+		return promotionsDao.getBrandId(createPromotionVo);
+	}
+
+	public Product fetchProductById(CreatePromotionVo createPromotionVo) {
+		
+		return promotionsDao.fetchProductById(createPromotionVo);
 	}	
 
 }
