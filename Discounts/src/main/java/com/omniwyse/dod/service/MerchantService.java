@@ -17,9 +17,9 @@ import com.omniwyse.dod.model.Promotion;
 
 public interface MerchantService {
 	
-	public MerchantProfile registermerchant(MerchantProfile merchantProfile); 
+	public MerchantProfile registerMerchant(MerchantProfile merchantProfile); 
 	
-	public MerchantProfile getmerchantMobile(GetMerchantById getMerchantById);
+	public MerchantProfile getMerchantMobile(GetMerchantById getMerchantById);
 	
 	public MerchantProfile getMerchant(MerchantLogin MerchantLogin);
 	

@@ -43,7 +43,7 @@ public class TestDODService {
 		consumerRegistration.setEmail_id("s.binkam@omniwyse.com");
 		consumerRegistration.setPhone_no("9876543210");
 		Mockito.when(consumerDaoImpl.registerconsumer(consumerRegistration)).thenReturn(createConsumerProfile(consumerRegistration));
-		ConsumerProfile cr=consumerServiceImpl.registerconsumer(consumerRegistration);
+		ConsumerProfile cr=consumerServiceImpl.registerConsumer(consumerRegistration);
 		Assert.assertEquals( consumerRegistration.getPhone_no(), cr.getPhone_no());
 		Assert.assertEquals("s.binkam@omniwyse.com", cr.getEmail_id());
 

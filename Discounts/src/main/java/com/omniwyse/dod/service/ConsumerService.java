@@ -10,17 +10,17 @@ import com.omniwyse.dod.model.RegisterWithOtp;
 
 public interface ConsumerService {
 	
-	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile); 
+	public ConsumerProfile registerConsumer(ConsumerProfile consumerProfile); 
 	
 	public RegisterWithOtp consumerLogin(ConsumerLogin userLogin); 
 	
-	public ConsumerProfile consumerautheticatewithemail(ConsumerLoginwithEmail userLogin); 
+	public ConsumerProfile consumerAutheticateWithEmail(ConsumerLoginwithEmail userLogin); 
 	
-	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin); 
+	public ConsumerProfile consumerAutheticateWithMobile(ConsumerLoginwithMobile userLogin); 
 	
 	public ConsumerProfile consumerProfile(ConsumerIdBaseProfile consumerIdBaseProfile);
 	
-	public RegisterWithOtp getmobileno(RegisterWithOtp RegisterWithOtp); 
+	public RegisterWithOtp getMobileNo(RegisterWithOtp RegisterWithOtp); 
 	
 	public ConsumerPromotionData consumerPromotion(ConsumerPromotionData ConsumerPromotionData);
 }

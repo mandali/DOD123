@@ -22,18 +22,18 @@ public class ValidationServiceImpl implements ValidationService{
 	@Autowired
 	RegisterationValidateDao consumerRegisterValidate;
 	
-	public RegisterWithOtp getotp(OTPValidation oTPValidation) {
+	public RegisterWithOtp getOTP(OTPValidation oTPValidation) {
 		
 	return registerationValidateDao.getOTP(oTPValidation);
 		
 	}
 
-	public ConsumerProfile getmobilenoandemail(ConsumerProfile consumerProfile) {
+	public ConsumerProfile getMobileNoAndEmail(ConsumerProfile consumerProfile) {
 		// TODO Auto-generated method stub
 		return consumerRegisterValidate.getmobilenoandemail(consumerProfile);
 	}
 
-	public MerchantProfile getmobilenoandemail(MerchantProfile merchantProfile) {
+	public MerchantProfile getMobilenoAndEmail(MerchantProfile merchantProfile) {
 		// TODO Auto-generated method stub
 		return consumerRegisterValidate.getmobilenoandemail(merchantProfile);
 	}

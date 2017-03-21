@@ -7,11 +7,11 @@ import com.omniwyse.dod.model.RegisterWithOtp;
 
 public interface ValidationService {
 	
-	public RegisterWithOtp getotp(OTPValidation oTPValidation);
+	public RegisterWithOtp getOTP(OTPValidation oTPValidation);
 	
-	public ConsumerProfile getmobilenoandemail(ConsumerProfile consumerProfile); 
+	public ConsumerProfile getMobileNoAndEmail(ConsumerProfile consumerProfile); 
 	
-	public MerchantProfile getmobilenoandemail(MerchantProfile merchantProfile);
+	public MerchantProfile getMobilenoAndEmail(MerchantProfile merchantProfile);
 	
 	
 

@@ -35,14 +35,14 @@ public class MerchantServiceImpl implements MerchantService{
 	
 		
 	
-	public MerchantProfile registermerchant(MerchantProfile merchantProfile) {
+	public MerchantProfile registerMerchant(MerchantProfile merchantProfile) {
 		Date date=new Date();
 		merchantProfile.setCreateddate(date);
 		MerchantProfile resp=MerchantDao.registermerchant(merchantProfile);
 		return resp;		
 	}
 		
-	public MerchantProfile getmerchantMobile(GetMerchantById getMerchantById) {
+	public MerchantProfile getMerchantMobile(GetMerchantById getMerchantById) {
 		MerchantProfile resp=MerchantDao.getMerchatByMobile(getMerchantById);
 		return resp;
 	}

@@ -94,11 +94,11 @@ public class DODController {
 
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = AppConstants.REGISTER, method = RequestMethod.POST)
-	public ResponseEntity savewithOTP(@RequestBody RegisterWithOtp registerWithOtp) {
-		final String METHOD_NAME = "savewithOTP";
+	public ResponseEntity saveWithOtp(@RequestBody RegisterWithOtp registerWithOtp) {
+		final String METHOD_NAME = "saveWithOtp";
 		ResponseEntity responseEntity = null;
 		try {
-			RegisterWithOtp data = consumerService.getmobileno(registerWithOtp);
+			RegisterWithOtp data = consumerService.getMobileNo(registerWithOtp);
 			if (data == null) {
 				Random random = new Random();
 				int number = random.nextInt(9999999);
@@ -123,7 +123,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 
 		try {
-			RegisterWithOtp data = validationService.getotp(oTPValidation);
+			RegisterWithOtp data = validationService.getOTP(oTPValidation);
 			if (data != null) {
 				DataResult result = new DataResult(true, AppConstants.OTP_VALIDATE_SUCCESS_MSG, HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
@@ -145,9 +145,9 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 
 		try {
-			ConsumerProfile data = validationService.getmobilenoandemail(consumerProfile);
+			ConsumerProfile data = validationService.getMobileNoAndEmail(consumerProfile);
 			if (data == null) {
-				ConsumerProfile model = consumerService.registerconsumer(consumerProfile);
+				ConsumerProfile model = consumerService.registerConsumer(consumerProfile);
 				DataResult result = new DataResult(true, AppConstants.CONSUMER_REGISTER_SUCCESS_MSG,
 						HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
@@ -213,7 +213,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 
 		try {
-			ConsumerProfile resp = consumerService.consumerautheticatewithemail(userLogin);
+			ConsumerProfile resp = consumerService.consumerAutheticateWithEmail(userLogin);
 			if (resp != null) {
 				DataResult result = new DataResult(true, AppConstants.CONSUMER_LOGIN_SUCCESS_MSG,
 						HttpStatus.OK.value());
@@ -234,7 +234,7 @@ public class DODController {
 		final String METHOD_NAME = "checkMobilenoAndPassword";
 		ResponseEntity responseEntity = null;
 		try {
-			ConsumerProfile resp = consumerService.consumerautheticatewithMobile(userLogin);
+			ConsumerProfile resp = consumerService.consumerAutheticateWithMobile(userLogin);
 			if (resp != null) {
 				DataResult result = new DataResult(true, AppConstants.CONSUMER_LOGIN_SUCCESS_MSG,
 						HttpStatus.OK.value());
@@ -256,9 +256,9 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 
 		try {
-			MerchantProfile data = validationService.getmobilenoandemail(merchantProfile);
+			MerchantProfile data = validationService.getMobilenoAndEmail(merchantProfile);
 			if (data == null) {
-				MerchantProfile model = merchantService.registermerchant(merchantProfile);
+				MerchantProfile model = merchantService.registerMerchant(merchantProfile);
 				DataResultEntity<MerchantProfile> dataResult = new DataResultEntity<MerchantProfile>(true,
 						AppConstants.MERCHANT_REGISTER_SUCCESS_MSG, HttpStatus.OK.value(), model);
 				return new ResponseEntity(dataResult, HttpStatus.OK);
@@ -369,7 +369,7 @@ public class DODController {
 		ResponseEntity responseEntity = null;
 
 		try {
-			MerchantProfile data = merchantService.getmerchantMobile(getMerchantById);
+			MerchantProfile data = merchantService.getMerchantMobile(getMerchantById);
 			if (data != null) {
 				DataResultEntity<MerchantProfile> merchantProfile = new DataResultEntity<MerchantProfile>(true,
 						" Succes ,  Merchant Details is  ", HttpStatus.OK.value(), data);
@@ -1028,7 +1028,7 @@ public class DODController {
 							HttpStatus.OK.value());
 					return new ResponseEntity(result, HttpStatus.OK);
 				} else {
-					DataResult result = new DataResult(true, "Sorry , Please check merchantId/productId   ",
+					DataResult result = new DataResult(true, " Sorry , Please check merchantId/productId   ",
 							HttpStatus.OK.value());
 					return new ResponseEntity(result, HttpStatus.OK);
 				}

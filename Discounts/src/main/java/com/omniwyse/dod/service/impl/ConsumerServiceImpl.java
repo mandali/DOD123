@@ -29,11 +29,11 @@ public class ConsumerServiceImpl implements ConsumerService{
 	RegisterationValidateDao consumerRegisterValidate;
 
 	
-	public ConsumerProfile consumerautheticatewithemail(ConsumerLoginwithEmail userLogin) {
+	public ConsumerProfile consumerAutheticateWithEmail(ConsumerLoginwithEmail userLogin) {
 		
 		return consumerDao.consumerautheticatewithemail(userLogin);
 	}		
-	public ConsumerProfile consumerautheticatewithMobile(ConsumerLoginwithMobile userLogin) {
+	public ConsumerProfile consumerAutheticateWithMobile(ConsumerLoginwithMobile userLogin) {
 		
 		return consumerDao.consumerautheticatewithMobile(userLogin);
 	}	
@@ -41,7 +41,7 @@ public class ConsumerServiceImpl implements ConsumerService{
 		
 		return consumerDao.consumerLogin(userLogin);
 	}		
-	public ConsumerProfile registerconsumer(ConsumerProfile consumerProfile) {
+	public ConsumerProfile registerConsumer(ConsumerProfile consumerProfile) {
 		Date date=new Date();
 		consumerProfile.setCreateddate(date);
 		ConsumerProfile resp=consumerDao.registerconsumer(consumerProfile);
@@ -55,7 +55,7 @@ public class ConsumerServiceImpl implements ConsumerService{
 		
 		return consumerDao.consumerPromotion(consumerPromotionData);
 	}
-	public RegisterWithOtp getmobileno(RegisterWithOtp RegisterWithOtp) {
+	public RegisterWithOtp getMobileNo(RegisterWithOtp RegisterWithOtp) {
 		// TODO Auto-generated method stub
 		return consumerRegisterValidate.getmobileno(RegisterWithOtp);
 	}	
