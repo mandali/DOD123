@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +34,7 @@ import com.omniwyse.dod.model.MerchantBeacon;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.service.MerchantPromotionBeaconService;
 import com.omniwyse.dod.service.MetaDataService;
-
+@CrossOrigin(origins = "*")
 @RestController
 public class BeaconController {
 

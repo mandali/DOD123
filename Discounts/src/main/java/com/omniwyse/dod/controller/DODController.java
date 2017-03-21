@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,6 +71,7 @@ import com.omniwyse.dod.service.PromotionService;
 import com.omniwyse.dod.service.RegistrationService;
 import com.omniwyse.dod.service.ValidationService;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class DODController {
 
@@ -92,8 +94,10 @@ public class DODController {
 
 	private static final Logger logger = Logger.getLogger(DODController.class);
 
+
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = AppConstants.REGISTER, method = RequestMethod.POST)
+	@CrossOrigin
 	public ResponseEntity saveWithOtp(@RequestBody RegisterWithOtp registerWithOtp) {
 		final String METHOD_NAME = "saveWithOtp";
 		ResponseEntity responseEntity = null;
