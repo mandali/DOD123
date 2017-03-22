@@ -38,6 +38,10 @@ public List<Promotion> getPromotions();
 	
 	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion );
 	
+	public boolean updatePromotions(CreatePromotionVo createPromotionVo);
+	
+	public boolean deletePromotions(CreatePromotionVo createPromotionVo); 
+	
 	
 	
 }

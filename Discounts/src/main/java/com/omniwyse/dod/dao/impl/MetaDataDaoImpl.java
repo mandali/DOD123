@@ -157,7 +157,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			MerchantProfile merchantProfile = (MerchantProfile) iterator.next();
 			Set<Product> products = merchantProfile.getProducts();
 			productVOData=new ProductVO();
-			productVOData.setMerchantId(String.valueOf(merchantProfile.getId()));			
+			productVOData.setMerchantId(String.valueOf(merchantProfile.getMerchantId()));			
 			for(Product product:products){
 		        merchantProduct=new MerchantProductVO();
 				merchantProduct.setProductId(String.valueOf(product.getProductId()));

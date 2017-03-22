@@ -274,13 +274,13 @@ public class BeaconController {
 					for (MerchantPromotionBeacon merchantPromotionBeacon : merchantPromotionBeacons) {
 						if (beaconsMap != null && !beaconsMap.isEmpty()) {
 							StringBuilder validateData=new StringBuilder();
-							validateData.append(merchantPromotionBeacon.getBeacon().getBeaconId()).append(merchantPromotionBeacon.getMerchantProfile().getId());
+							validateData.append(merchantPromotionBeacon.getBeacon().getBeaconId()).append(merchantPromotionBeacon.getMerchantProfile().getMerchantId());
 							MPBSearchVO existingPromotion = beaconsMap.get(validateData.toString());
 							if (existingPromotion != null && !existingPromotion.getPromotionDtos().isEmpty()) {
 								existingPromotion.setBeaconId(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()));
 								existingPromotion.setBeaconName(merchantPromotionBeacon.getBeacon().getBeaconName());
 								existingPromotion.setMerchantId(
-										String.valueOf(merchantPromotionBeacon.getMerchantProfile().getId()));
+										String.valueOf(merchantPromotionBeacon.getMerchantProfile().getMerchantId()));
 								existingPromotion.setMerchantName(merchantPromotionBeacon.getMerchantProfile().getFirstname() + ""
 										+ merchantPromotionBeacon.getMerchantProfile().getLastname());
 								existingPromotion.setLocationId(String
@@ -296,7 +296,7 @@ public class BeaconController {
 										.valueOf(merchantPromotionBeacon.getPromotion().getProductID().getProductId()));
 								promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
 								promotionDto
-										.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getId());
+										.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getMerchantId());
 								promotionDto.setProduct_image(merchantPromotionBeacon.getPromotion().getProductID()
 										.getProductImageLocation());
 								promotionDto
@@ -334,7 +334,7 @@ public class BeaconController {
 							mpbSearchVO.setBeaconId(String.valueOf(merchantPromotionBeacon.getBeacon().getBeaconId()));
 							mpbSearchVO.setBeaconName(merchantPromotionBeacon.getBeacon().getBeaconName());
 							mpbSearchVO.setMerchantId(
-									String.valueOf(merchantPromotionBeacon.getMerchantProfile().getId()));
+									String.valueOf(merchantPromotionBeacon.getMerchantProfile().getMerchantId()));
 							mpbSearchVO.setMerchantName(merchantPromotionBeacon.getMerchantProfile().getFirstname() + ""
 									+ merchantPromotionBeacon.getMerchantProfile().getLastname());
 							mpbSearchVO.setLocationId(String
@@ -349,7 +349,7 @@ public class BeaconController {
 							promotionDto.setProduct_id(String
 									.valueOf(merchantPromotionBeacon.getPromotion().getProductID().getProductId()));
 							promotionDto.setDescription(merchantPromotionBeacon.getPromotion().getDescription());
-							promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getId());
+							promotionDto.setMerchatId(merchantPromotionBeacon.getPromotion().getMerchatId().getMerchantId());
 							promotionDto.setProduct_image(
 									merchantPromotionBeacon.getPromotion().getProductID().getProductImageLocation());
 							promotionDto.setOriginalPrice(merchantPromotionBeacon.getPromotion().getOriginalPrice());
@@ -376,7 +376,7 @@ public class BeaconController {
 							promotionDto.setDiscountText(merchantPromotionBeacon.getPromotion().getDiscountText());
 							mpbSearchVO.getPromotionDtos().add(promotionDto);
 							mpbSearchVOs.add(mpbSearchVO);
-							validData.append(merchantPromotionBeacon.getBeacon().getBeaconId()).append(merchantPromotionBeacon.getMerchantProfile().getId());
+							validData.append(merchantPromotionBeacon.getBeacon().getBeaconId()).append(merchantPromotionBeacon.getMerchantProfile().getMerchantId());
 							beaconsMap.put(
 									validData.toString(),
 									mpbSearchVO);

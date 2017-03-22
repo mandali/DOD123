@@ -91,6 +91,16 @@ public class PromotionServiceImpl implements PromotionService{
 	public Product fetchProductById(CreatePromotionVo createPromotionVo) {
 		
 		return promotionsDao.fetchProductById(createPromotionVo);
+	}
+
+	public boolean updatePromotions(CreatePromotionVo createPromotionVo) {
+		
+		return promotionsDao.updatePromotions(createPromotionVo);
+	}
+
+	public boolean deletePromotions(CreatePromotionVo createPromotionVo) {
+		
+		return promotionsDao.deletePromotions(createPromotionVo);
 	}	
 
 }

@@ -21,6 +21,7 @@ import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Location;
+import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.PromotionSummary;
@@ -167,7 +168,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDto.setEnddate(promotion.getEnddate());
 			promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
 			promotionDto.setLocationName(promotion.getLocationId().getLocationName());
-			promotionDto.setMerchatId(promotion.getMerchatId().getId());
+			promotionDto.setMerchatId(promotion.getMerchatId().getMerchantId());
 			promotionDto.setBrandId(promotion.getBrandId().getBrandid());
 			promotionDto.setBrandName(promotion.getBrandId().getBrandName());
 			promotionDto.setBrandImage(promotion.getBrandId().getBrandImage());
@@ -206,7 +207,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDto.setEnddate(promotion.getEnddate());
 			promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
 			promotionDto.setLocationName(promotion.getLocationId().getLocationName());
-			promotionDto.setMerchatId(promotion.getMerchatId().getId());
+			promotionDto.setMerchatId(promotion.getMerchatId().getMerchantId());
 			promotionDto.setBrandId(promotion.getBrandId().getBrandid());			
 			promotionDto.setBrandName(promotion.getBrandId().getBrandName());
 			promotionDto.setBrandImage(promotion.getBrandId().getBrandImage());
@@ -244,7 +245,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDto.setEnddate(promotion.getEnddate());
 			promotionDto.setLocationId(String.valueOf(promotion.getLocationId().getLocationId()));
 			promotionDto.setLocationName(promotion.getLocationId().getLocationName());
-			promotionDto.setMerchatId(promotion.getMerchatId().getId());
+			promotionDto.setMerchatId(promotion.getMerchatId().getMerchantId());
 			promotionDto.setBrandName(promotion.getBrandId().getBrandName());
 			promotionDto.setBrandImage(promotion.getBrandId().getBrandImage());
 			promotionDto.setBrandRating(promotion.getBrandId().getBrandRating());
@@ -275,6 +276,65 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}		
 		return product;
+	}
+
+	public boolean updatePromotions(CreatePromotionVo createPromotionVo) {
+		final String METHOD_NAME="updatePromotions";
+		boolean flag=true;
+		Date date=new Date();
+		try{
+			Session session = this.sessionFactory.getCurrentSession();
+			Promotion resp = (Promotion) session.get(Promotion.class, createPromotionVo.getId());
+			resp.setDescription(createPromotionVo.getDescription());
+			resp.setOriginalPrice(createPromotionVo.getOriginalPrice());
+			resp.setDiscount(createPromotionVo.getDiscount());			
+			MerchantProfile merchantProfile=(MerchantProfile) session.get(MerchantProfile.class, Integer.valueOf(createPromotionVo.getMerchatid()));
+			if(merchantProfile!=null){
+			resp.setMerchatId(merchantProfile);
+			}
+			Product product=(Product) session.get(Product.class, Long.valueOf(((createPromotionVo.getpId()))));
+			if(product!=null){
+				resp.setProductID(product);
+			}
+			Category category=(Category) session.get(Category.class, Long.valueOf((createPromotionVo.getCatid())));
+			if(category!=null){
+				resp.setCatid(category);
+			}
+			Brand brand=(Brand) session.get(Brand.class, Long.valueOf((createPromotionVo.getBrandId())));
+			if(brand!=null){
+				resp.setBrandId(brand);
+			}
+			Location location=(Location) session.get(Location.class, Long.valueOf((createPromotionVo.getLocationId())));
+			if(location!=null){
+				resp.setLocationId(location);
+			}
+			resp.setDiscountText(createPromotionVo.getDiscountText());
+			resp.setCreateddate(date);
+			resp.setStartdate(date);
+			resp.setEnddate(date);
+			session.saveOrUpdate(resp);			
+			
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			flag=false;	
+		}
+		return flag;
+	}
+
+	public boolean deletePromotions(CreatePromotionVo createPromotionVo) {
+		final String METHOD_NAME="deletePromotions";
+		boolean flag=true;
+		try{
+			Session session = this.sessionFactory.getCurrentSession();			
+			Promotion promotion =(Promotion) session.load(Promotion.class, createPromotionVo.getId());
+			if (promotion != null) {
+				session.delete(promotion);				
+			}			
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			flag=false;	
+		}
+		return flag;
 	}
 		
 

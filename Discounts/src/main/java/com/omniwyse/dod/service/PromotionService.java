@@ -39,6 +39,10 @@ public interface PromotionService {
 	
 	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion);
 	
+	public boolean updatePromotions(CreatePromotionVo createPromotionVo);
+	
+	public boolean deletePromotions(CreatePromotionVo createPromotionVo);
+	
 	
 
 }

@@ -287,7 +287,7 @@ public class DODController {
 			MerchantProfile data = merchantService.merchatProfile(GetMerchatProfile);
 			if (data != null) {
 				MerchantProfileVo merchantProfileVo =new  MerchantProfileVo();
-				merchantProfileVo.setId(data.getId());
+				merchantProfileVo.setId(data.getMerchantId());
 				merchantProfileVo.setFirstname(data.getFirstname());
 				merchantProfileVo.setLastname(data.getLastname());
 				merchantProfileVo.setLogo(data.getLogo());				
@@ -332,7 +332,7 @@ public class DODController {
 			if (!data.isEmpty()) {
 				for (MerchantProfile response1 : data) {
 					mercnantDTO = new MercnantDTO();
-					mercnantDTO.setId(response1.getId().toString());
+					mercnantDTO.setId(response1.getMerchantId().toString());
 					mercnantDTO.setLogo(response1.getLogo());
 					mercnantDTO.setFirstname(response1.getFirstname());
 					mercnantDTO.setLastname(response1.getLastname());
@@ -413,7 +413,7 @@ public class DODController {
 					promotionDto.setEnddate(response.getEnddate());
 					promotionDto.setLocationId(String.valueOf(response.getLocationId().getLocationId()));
 					promotionDto.setLocationName(response.getLocationId().getLocationName());
-					promotionDto.setMerchatId(response.getMerchatId().getId());
+					promotionDto.setMerchatId(response.getMerchatId().getMerchantId());
 					promotionDto.setDiscountText(response.getDiscountText());
 					promotionDto.setCatid(response.getCatid().getCategoryId());
 					promotionDto.setCategoryName(response.getCatid().getCategoryName());
@@ -451,7 +451,7 @@ public class DODController {
 			if (resp != null) {
 				MerchantProfile merchantProfile = merchantService.getMerchant(merchantLogin);
 				MercnantDTO merchnantDTO = new MercnantDTO();
-				merchnantDTO.setId(merchantProfile.getId().toString());
+				merchnantDTO.setId(merchantProfile.getMerchantId().toString());
 				merchnantDTO.setLogo(merchantProfile.getLogo());
 				merchnantDTO.setFirstname(merchantProfile.getFirstname());
 				merchnantDTO.setLastname(merchantProfile.getLastname());
@@ -543,7 +543,7 @@ public class DODController {
 					promotionDto.setProduct_id(String.valueOf(resp.getProductID().getProductId()));
 					promotionDto.setProduct_image(resp.getProductID().getProductImageLocation());
 					promotionDto.setDescription(resp.getDescription());
-					promotionDto.setMerchatId(resp.getMerchatId().getId());
+					promotionDto.setMerchatId(resp.getMerchatId().getMerchantId());
 					promotionDto.setProduct_image(resp.getProductID().getProductImageLocation());
 					promotionDto.setOriginalPrice(resp.getOriginalPrice());
 					promotionDto.setDiscount(resp.getDiscount());
@@ -963,13 +963,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-	
-	
-	
-	
-	
-	
+	}	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_BRANDS, method = RequestMethod.GET)
@@ -995,11 +989,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-	
-	
-	
-	
+	}	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_MERCHANT_PRODUCTS, method = RequestMethod.POST)
@@ -1110,9 +1100,46 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}
-
+	}	
 	
-
+	
+	@SuppressWarnings({ "rawtypes", "unchecked"})
+	@RequestMapping(value = AppConstants.UPDATE_PROMOTION, method = RequestMethod.POST)
+	public ResponseEntity updatePromotion(@RequestBody CreatePromotionVo createPromotionVo) {
+		final String METHOD_NAME = "updatePromotion";
+		ResponseEntity responseEntity = null;		
+		try{
+			boolean flag=promotionService.updatePromotions(createPromotionVo);
+			if (flag) {
+				DataResult dataResult=new DataResult(true,AppConstants.UPDATE_PROMOTION_SUCCESS_MSG , HttpStatus.OK.value());
+				return new ResponseEntity(dataResult,HttpStatus.OK);
+			}else{
+				DataResult dataResult=new DataResult(true,AppConstants.UPDATE_PROMOTION_ERROR_MSG , HttpStatus.OK.value());
+				return new ResponseEntity(dataResult,HttpStatus.OK);			
+			}			
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
+		}		
+		return responseEntity;
+	}	
+	@SuppressWarnings({ "rawtypes", "unchecked"})
+	@RequestMapping(value = AppConstants.DELETE_PROMOTION, method = RequestMethod.POST)
+	public ResponseEntity deletePromotion(@RequestBody CreatePromotionVo createPromotionVo) {
+		final String METHOD_NAME = "deletePromotion";
+		ResponseEntity responseEntity = null;		
+		try{
+			boolean flag=promotionService.deletePromotions(createPromotionVo);
+			if (flag) {
+				DataResult dataResult=new DataResult(true,AppConstants.DELETE_PROMOTION_SUCCESS_MSG , HttpStatus.OK.value());
+				return new ResponseEntity(dataResult,HttpStatus.OK);
+			}else{
+				DataResult dataResult=new DataResult(true,AppConstants.DELETE_PROMOTION_ERROR_MSG , HttpStatus.OK.value());
+				return new ResponseEntity(dataResult,HttpStatus.OK);			
+			}			
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
+		}		
+		return responseEntity;
+	}
 	
 }

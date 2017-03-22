@@ -32,7 +32,7 @@ public class MerchantProfile implements Serializable{
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;		
+	private Integer merchantId;		
 	
 	@OneToMany(targetEntity =Promotion.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="Merchant_ID" ,referencedColumnName ="ID")
@@ -89,14 +89,6 @@ public class MerchantProfile implements Serializable{
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getFirstname() {
@@ -263,6 +255,12 @@ public class MerchantProfile implements Serializable{
 	}
 	public void setProducts(Set<Product> products) {
 		this.products = products;
+	}
+	public Integer getMerchantId() {
+		return merchantId;
+	}
+	public void setMerchantId(Integer merchantId) {
+		this.merchantId = merchantId;
 	}
 	
 	

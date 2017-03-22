@@ -27,7 +27,9 @@ public class CreatePromotionVo implements Serializable{
 	private String catid;
 	private String brandId;
 	private String discountText;
+	private String pId;
 	private Product productId;
+	
 	private MerchantProfile merchantProfile;
 	
 	
@@ -174,6 +176,18 @@ public class CreatePromotionVo implements Serializable{
 
 	public void setBrandId(String brandId) {
 		this.brandId = brandId;
+	}
+
+
+
+	public String getpId() {
+		return pId;
+	}
+
+
+
+	public void setpId(String pId) {
+		this.pId = pId;
 	}
 
 
