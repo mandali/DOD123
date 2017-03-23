@@ -37,8 +37,8 @@ public class AppConstants {
 	public static final String LIST_BRANDS="/brands";
 	public static final String LIST_All_BRANDS="/listbrands";
 	public static final String LIST_PROMOTIONS="/promotions";
-	public static final String UPDATE_PROMOTION="/updatepromotion";
-	public static final String DELETE_PROMOTION="/deletepromotion";
+	public static final String UPDATE_PROMOTION="/updatepromotion/{id}";
+	public static final String DELETE_PROMOTION="/promotion/{id}";
 	public static final String LIST_AISLE="listaisle";
 	public static final String LIST_BEACONS_PROMOTIONS_INFO="/getbeaconsinfo";
 	public static final String LIST_MERCHANT_PROMOTION_BEACONS="/listmerchantpromotionbeacons";
@@ -47,7 +47,7 @@ public class AppConstants {
 	public static final String UPDATE_PROMOTION_SUCCESS_MSG="Promotion Updated successfully ... ";
 	public static final String UPDATE_PROMOTION_ERROR_MSG=" Please enter valied data ... ";
 	public static final String DELETE_PROMOTION_SUCCESS_MSG="Promotion deleted successfully ... ";
-	public static final String DELETE_PROMOTION_ERROR_MSG=" Please enter valied promotion Id ... ";
+	public static final String DELETE_PROMOTION_ERROR_MSG=" sorry  ... ";
 	public static final String REGISTER_ERROR_MSG=" Sorry , Mobile no is alredy exist ... ";
 	public static final String OTP="12345";
 	public static final String OTP_VALIDATE_SUCCESS_MSG=" OTP Validation successfully ... ";

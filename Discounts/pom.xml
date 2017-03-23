@@ -4,7 +4,7 @@
   <groupId>com.omniwyse.dod</groupId>
   <artifactId>Discounts</artifactId>
   <packaging>war</packaging>
-  <version>0.01</version>
+  <version>0.0.1-SNAPSHOT</version>
   <name>Discounts Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -92,5 +92,8 @@
 		<artifactId>spring-test</artifactId>
 		<version>${spring.version}</version>
 	</dependency>
-	</dependencies> 
+	</dependencies> 	
+	<build>
+    <finalName>Discounts</finalName>
+  </build>
 </project>

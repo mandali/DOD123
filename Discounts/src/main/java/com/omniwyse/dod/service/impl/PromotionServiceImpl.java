@@ -93,14 +93,14 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotionsDao.fetchProductById(createPromotionVo);
 	}
 
-	public boolean updatePromotions(CreatePromotionVo createPromotionVo) {
+	public boolean updatePromotion(Long id,CreatePromotionVo createPromotionVo) {
 		
-		return promotionsDao.updatePromotions(createPromotionVo);
+		return promotionsDao.updatePromotions(id,createPromotionVo);
 	}
 
-	public boolean deletePromotions(CreatePromotionVo createPromotionVo) {
+	public boolean deletePromotion(Long id) {
 		
-		return promotionsDao.deletePromotions(createPromotionVo);
+		return promotionsDao.deletePromotions(id);
 	}	
 
 }

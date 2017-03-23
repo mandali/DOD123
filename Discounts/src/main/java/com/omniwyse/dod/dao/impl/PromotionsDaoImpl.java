@@ -22,6 +22,7 @@ import com.omniwyse.dod.model.CategorySelection;
 import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantProfile;
+import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.PromotionSummary;
@@ -278,13 +279,13 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		return product;
 	}
 
-	public boolean updatePromotions(CreatePromotionVo createPromotionVo) {
+	public boolean updatePromotions(Long id,CreatePromotionVo createPromotionVo) {
 		final String METHOD_NAME="updatePromotions";
 		boolean flag=true;
 		Date date=new Date();
 		try{
 			Session session = this.sessionFactory.getCurrentSession();
-			Promotion resp = (Promotion) session.get(Promotion.class, createPromotionVo.getId());
+			Promotion resp = (Promotion) session.get(Promotion.class,id.intValue());
 			resp.setDescription(createPromotionVo.getDescription());
 			resp.setOriginalPrice(createPromotionVo.getOriginalPrice());
 			resp.setDiscount(createPromotionVo.getDiscount());			
@@ -321,15 +322,25 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		return flag;
 	}
 
-	public boolean deletePromotions(CreatePromotionVo createPromotionVo) {
+	public boolean deletePromotions(Long id) {
 		final String METHOD_NAME="deletePromotions";
 		boolean flag=true;
+		
 		try{
-			Session session = this.sessionFactory.getCurrentSession();			
-			Promotion promotion =(Promotion) session.load(Promotion.class, createPromotionVo.getId());
+			Session session = this.sessionFactory.getCurrentSession();
+			
+			MerchantPromotionBeacon merchantPromotionBeacon=(MerchantPromotionBeacon) session.load(MerchantPromotionBeacon.class,id);
+			
+			if(merchantPromotionBeacon!=null){
+				session.delete(merchantPromotionBeacon);
+			}
+			
+			Promotion promotion =(Promotion) session.load(Promotion.class, id.intValue());
+
 			if (promotion != null) {
 				session.delete(promotion);				
-			}			
+			}
+			
 		}catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 			flag=false;	

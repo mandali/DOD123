@@ -13,21 +13,6 @@
   http://www.springframework.org/schema/task https://www.springframework.org/task/spring-task-3.0.xsd">
   
    <task:annotation-driven/>
-
-	<!-- <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
-	    <property name="locations">
-	        <list>
-	            <value>file:#{ systemProperties['user.home']}/properties/database.properties</value>
-	        </list>
-	    </property>
-	</bean>	
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url"  value="${jdbcUrl}"/>
-		<property name="username" value="${jdbcUsername}"/>
-		<property name="password" value="${jdbcPassword}"/>
-	</bean> -->
 	
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -1104,12 +1105,12 @@ public class DODController {
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked"})
-	@RequestMapping(value = AppConstants.UPDATE_PROMOTION, method = RequestMethod.POST)
-	public ResponseEntity updatePromotion(@RequestBody CreatePromotionVo createPromotionVo) {
+	@RequestMapping(value = AppConstants.UPDATE_PROMOTION, method = RequestMethod.PUT)
+	public ResponseEntity updatePromotion(@PathVariable Long id,@RequestBody CreatePromotionVo createPromotionVo) {
 		final String METHOD_NAME = "updatePromotion";
 		ResponseEntity responseEntity = null;		
 		try{
-			boolean flag=promotionService.updatePromotions(createPromotionVo);
+			boolean flag=promotionService.updatePromotion(id,createPromotionVo);
 			if (flag) {
 				DataResult dataResult=new DataResult(true,AppConstants.UPDATE_PROMOTION_SUCCESS_MSG , HttpStatus.OK.value());
 				return new ResponseEntity(dataResult,HttpStatus.OK);
@@ -1123,12 +1124,12 @@ public class DODController {
 		return responseEntity;
 	}	
 	@SuppressWarnings({ "rawtypes", "unchecked"})
-	@RequestMapping(value = AppConstants.DELETE_PROMOTION, method = RequestMethod.POST)
-	public ResponseEntity deletePromotion(@RequestBody CreatePromotionVo createPromotionVo) {
+	@RequestMapping(value = AppConstants.DELETE_PROMOTION, method = RequestMethod.DELETE)
+	public ResponseEntity deletePromotion(@PathVariable Long id) {
 		final String METHOD_NAME = "deletePromotion";
 		ResponseEntity responseEntity = null;		
 		try{
-			boolean flag=promotionService.deletePromotions(createPromotionVo);
+			boolean flag=promotionService.deletePromotion(id);
 			if (flag) {
 				DataResult dataResult=new DataResult(true,AppConstants.DELETE_PROMOTION_SUCCESS_MSG , HttpStatus.OK.value());
 				return new ResponseEntity(dataResult,HttpStatus.OK);
