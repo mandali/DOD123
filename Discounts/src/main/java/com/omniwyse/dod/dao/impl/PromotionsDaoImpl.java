@@ -329,18 +329,19 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		try{
 			Session session = this.sessionFactory.getCurrentSession();
 			
-			MerchantPromotionBeacon merchantPromotionBeacon=(MerchantPromotionBeacon) session.load(MerchantPromotionBeacon.class,id);
+			MerchantPromotionBeacon merchantPromotionBeacon=(MerchantPromotionBeacon) session.get(MerchantPromotionBeacon.class,id);
 			
 			if(merchantPromotionBeacon!=null){
 				session.delete(merchantPromotionBeacon);
-			}
-			
-			Promotion promotion =(Promotion) session.load(Promotion.class, id.intValue());
+			}			
+			Promotion promotion =(Promotion) session.get(Promotion.class, id.intValue());
 
 			if (promotion != null) {
 				session.delete(promotion);				
 			}
-			
+			if(merchantPromotionBeacon==null && promotion==null ){
+				flag=false;
+			}
 		}catch(Exception exception){
 			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 			flag=false;	

@@ -1130,12 +1130,12 @@ public class DODController {
 		ResponseEntity responseEntity = null;		
 		try{
 			boolean flag=promotionService.deletePromotion(id);
-			if (flag) {
+			if (flag==true) {
 				DataResult dataResult=new DataResult(true,AppConstants.DELETE_PROMOTION_SUCCESS_MSG , HttpStatus.OK.value());
-				return new ResponseEntity(dataResult,HttpStatus.OK);
-			}else{
+				return new ResponseEntity(dataResult,HttpStatus.OK);								
+			}else{				
 				DataResult dataResult=new DataResult(true,AppConstants.DELETE_PROMOTION_ERROR_MSG , HttpStatus.OK.value());
-				return new ResponseEntity(dataResult,HttpStatus.OK);			
+				return new ResponseEntity(dataResult,HttpStatus.OK);
 			}			
 		}catch(Exception exception){
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
