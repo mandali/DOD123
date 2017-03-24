@@ -1,0 +1,69 @@
+  <div class="dashboard-content col-md-10 col-md-offset-2 col-xs-12">
+    
+    <div class="promotions-content">
+      <h3 class="dashboard-content-header">BEACONS <!-- {{globals.currentUser.id}} -->
+       <span class="pull-right"><a href="#!/dashboard/beacons/new" class="btn">Create Beacon</a></span></h3>
+      <hr class="text-silver" />
+
+      <!-- <div ui-view></div> -->
+
+
+      <!-- <div ng-show="class=='addPromotion'">
+        
+
+      </div> -->
+
+      <div class="row reset-padding reset-margin">
+        <div class="table-content">
+
+          <div class="row reset-padding reset-margin">
+            <div class="table-content">
+
+            <div class="search-box col-md-4 col-xs-12">
+              <div class="form-group dashboard-form-group">
+                <input type="text" class="form-control dashboard-form-input" id="filterValue" placeholder="Search" name="filterValue" ng-model="vm.filterValue">
+              </div>
+            </div>
+            <button ng-click='vm.filter()' class="btn btn-sm">Seach</button>
+              
+              <div id="grid1" ui-grid="vm.gridBeacons" ui-grid-edit class="myGrid"></div>
+
+            </div>
+        </div>
+
+
+          <!-- <table class="table  table-bordered table-striped table-hover">
+            <thead>
+              <tr class="text-cadetblue">
+                <th>Beacon Id</th>
+                <th>Beacon Name</th>
+                <th>Beacon Uid</th>
+                <th>Beacon Major Value</th>
+                <th>Beacon Minor Value</th>
+                <th>Beacon Status</th>
+                <th>Created Date</th>
+             
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="beacon in vm.merchantBeacons">
+                <td class="dashboard-table-data">{{beacon.beaconId}}</td>
+                <td class="dashboard-table-data">{{beacon.beaconName}}</td>
+                
+                <td class="dashboard-table-data">{{beacon.beaconUid}}</td>
+                <td class="dashboard-table-data">{{beacon.beaconMajorValue}}</td>
+                <td class="dashboard-table-data">{{beacon.beaconMinorValue}}</td>
+                
+                <td class="dashboard-table-data">{{beacon.beaconStatus}}</td>
+                <td class="dashboard-table-data">{{beacon.createdDate | date}}</td>
+              </tr>
+            </tbody>
+            
+          </table>
+ -->
+        </div>
+      </div>
+
+    </div><!--end  promotinons content -->
+</div>

@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h3>Add Beacon To Promotion</h3>
+</div>
+<form name="form.userForm" ng-submit="vm.submitAddPromotionToBeacon()" novalidate>
+    <div class="modal-body">
+        <!-- NAME -->
+        <div class="form-group dashboard-form-group">
+            <label>Merchant Id</label>
+            <input type="text" name="merchantId" class="form-control" ng-model="globals.currentUser.id" onfocus="this.blur()">
+        </div>
+
+        <!-- USERNAME -->
+        <div class="form-group dashboard-form-group">
+            <label>Promotion Id</label>
+            <input type="text" name="promotionId" class="form-control" ng-model="vm.promotion_id"  onfocus="this.blur()">
+        </div>
+
+        <!-- <div class="form-group">
+            <label>Beacons</label>
+            <input type="email" name="email" class="form-control" ng-model="email" required>
+            <p ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div> -->
+
+
+        <div class="form-group dashboard-form-group" ng-class="{ 'has-error': form.userForm.beacon_id.$dirty && form.userForm.beacon_id.$error.required }" >
+            <label>Beacons</label>
+            <select class="form-control" id="beacon_id" name="beacon_id" ng-model="vm.beaconId" required>
+                <option value="" selected="selected">Select Beacon</option>
+                <option ng-repeat="beacon in vm.merchantBeacons" value="{{beacon.beaconId}}">{{beacon.beaconName}}</option>
+            </select>
+            <span ng-show="form.userForm.beacon_id.$dirty && form.userForm.beacon_id.$error.required" class="help-block">Beacon Id is required</span>
+        </div>
+
+        <div class="form-group dashboard-form-group" ng-class="{ 'has-error': form.userForm.aisleId.$dirty && form.userForm.aisleId.$error.required }" >
+            <label>Beacons</label>
+            <select class="form-control" id="aisleId" name="aisleId" ng-model="vm.aisleId" required>
+                <option value="" selected="selected">Select Ailes</option>
+                <option ng-repeat="ailes in vm.merchantailes" value="{{ailes.aliseId}}">{{ailes.aliseName}}</option>
+            </select>
+            <span ng-show="form.userForm.aisleId.$dirty && form.userForm.aisleId.$error.required" class="help-block">Ailes Id is required</span>
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="form.userForm.$invalid">OK</button>
+        <button class="btn btn-warning" ng-click="vm.cancel()">Cancel</button>
+    </div>
+</form>

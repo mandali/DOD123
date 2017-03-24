@@ -1,0 +1,90 @@
+<div class="row reset-margin">
+          <div class="form-content form-section col-md-4 col-xs-12 col-md-offset-4 fadeInRight animated">
+          <h5 class="text-cadetblue text-center">Create Promotion</h5>
+
+            <form class="form" name="promotionForm" ng-submit="vm.merchantPromotion()" method="POST">
+
+              <!-- <div class="form-group dashboard-form-group">
+                  <input type="text" class="form-control dashboard-form-input" id="product_id" placeholder="Product Id" name="product_id" ng-model="vm.promotion.product_id" >
+              </div> -->
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': promotionForm.product_id.$dirty && promotionForm.product_id.$error.required }" >
+                  <select class="form-control" id="product_id" name="product_id" ng-model="vm.promotion.product_id" autofocus  required>
+                        <option value="" selected="selected">Select Product</option>
+                        <option ng-repeat="product in vm.merchantProducts" value="{{product.productId}}">{{product.productDescription}}</option>
+                  </select>
+                   <span ng-show="promotionForm.product_id.$dirty && promotionForm.product_id.$error.required" class="help-block">Product Id is required</span>
+              </div>
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': promotionForm.catid.$dirty && promotionForm.catid.$error.required }">
+                  <select class="form-control" id="catid" name="catid" ng-model="vm.promotion.catid" ng-change="vm.populateDemands(vm.promotion.catid)" required>
+                        <option value="" selected="selected">Select Category</option>
+                        <option ng-repeat="category in vm.allBrands" value="{{category.categoryId}}">{{category.categoryName}}</option>
+                  </select>
+                   <span ng-show="promotionForm.catid.$dirty && promotionForm.catid.$error.required" class="help-block">Category Id is required</span>
+              </div>
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': promotionForm.brandId.$dirty && promotionForm.brandId.$error.required }">
+                  <select class="form-control" id="select" name="brandId" ng-model="vm.promotion.brandId" required>
+                        <option value="" selected="selected">Select Brand</option>
+                        <option ng-repeat="brand in vm.brands" value="{{brand.brandId}}">{{brand.brandName}}</option>
+                  </select>
+                  <span ng-show="promotionForm.brandId.$dirty && promotionForm.brandId.$error.required" class="help-block">Brand Id is required</span>
+              </div>
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': promotionForm.originalPrice.$dirty && promotionForm.originalPrice.$error.required }">
+                  <input type="text" class="form-control dashboard-form-input" id="originalPrice" placeholder="Original Price" name="originalPrice" ng-model="vm.promotion.originalPrice" required />
+                  <span ng-show="promotionForm.originalPrice.$dirty && promotionForm.originalPrice.$error.required" class="help-block">OriginalPrice is required</span>
+              </div>
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': promotionForm.discount.$dirty && promotionForm.discount.$error.required }">
+                  <input type="text" class="form-control dashboard-form-input" id="discount" placeholder="Doscount % " name="discount" ng-model="vm.promotion.discount" required />
+                  <span ng-show="promotionForm.discount.$dirty && promotionForm.discount.$error.required" class="help-block">Discount % is required</span>
+              </div>
+
+              <div class="form-group dashboard-form-group">
+                  <input type="text" class="form-control dashboard-form-input" id="product_image" placeholder="Product/Store Image" name="product_image" ng-model="vm.promotion.product_image" />
+              </div>
+
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': promotionForm.description.$dirty && promotionForm.description.$error.required }">
+                  <input type="text" class="form-control dashboard-form-input" id="description" placeholder="Description" name="description" ng-model="vm.promotion.description" required />
+                  <span ng-show="promotionForm.description.$dirty && promotionForm.description.$error.required" class="help-block">Description is required</span>
+              </div>
+
+             <!--  <div class="form-group dashboard-form-group" ng-class="{ 'has-error': promotionForm.location.$dirty && promotionForm.location.$error.required }">
+                  <input type="text" class="form-control dashboard-form-input" id="location" placeholder="Location" name="location" ng-model="vm.promotion.location" required />
+                  <span ng-show="promotionForm.location.$dirty && promotionForm.location.$error.required" class="help-block">Location is required</span>
+              </div> -->
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': promotionForm.location_id.$dirty && promotionForm.location_id.$error.required }" >
+                  <select class="form-control" id="location" name="location_id" ng-model="vm.promotion.location_id"  required>
+                        <option value="" selected="selected">Select Location</option>
+                        <option ng-repeat="location in vm.merchantLocations" value="{{location.locationId}}">{{location.locationName}}</option>
+                  </select>
+                   <span ng-show="promotionForm.location_id.$dirty && promotionForm.location_id.$error.required" class="help-block">Location is required</span>
+              </div>
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': promotionForm.discountText.$dirty && promotionForm.discountText.$error.required }">
+                  <input type="text" class="form-control dashboard-form-input" id="discountText" placeholder="discountText" name="discountText" ng-model="vm.promotion.discountText" required />
+                  <span ng-show="promotionForm.discountText.$dirty && promotionForm.discountText.$error.required" class="help-block">discount text is required</span>
+              </div>
+
+              
+
+              <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-block block-level-btn">Login</button> -->
+              <div class="row reset-padding reset-margin">
+                <div class="col-md-6 col-xs-12 reset-margin">
+                  <button class="btn btn-block reset-border-radius" type ="submit">Submit</button>
+                </div>
+
+                <div class="col-md-6 col-xs-12 reset-margin">
+                  <a class="btn btn-default btn-block reset-border-radius" href="#!/dashboard/promotions">Cancel</a>
+                </div>
+              </div> 
+              
+            </form>
+            
+
+          </div>
+        </div>

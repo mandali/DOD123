@@ -1,0 +1,51 @@
+
+
+<div class="container clearfix">
+  <div class="row" id="page-section">
+
+
+
+    <div class="main-content-section col-md-12">
+      <div class="login-form-section form-section col-md-4 col-md-offset-4 col-xs-12 reset-padding">
+
+        <div class="row reset-margin">
+          <div class="form-heading text-center"> 
+            <h3>Login</h3>
+            <hr / class="text-silver">
+          </div>
+        </div>
+
+        <div class="row reset-margin">
+          <div class="form-content">
+            <form class="form" name="form" ng-submit="vm.merchantLogin()" method="POST">
+
+              <div class="form-group" ng-class="{ 'has-error': form.mobileno.$dirty && form.mobileno.$error.required }">
+                  <input type="text" class="form-control" id="mobileno" placeholder="Mobile Number" name="mobileno" ng-model="vm.mobileno" autofocus required />
+                  <span ng-show="form.mobileno.$dirty && form.mobileno.$error.required" class="help-block">Username is required</span>
+              </div>
+
+              <!-- <div class="form-group">
+                  <input type="text" class="form-control" id="mobilenumber" placeholder="Mobile number" name="mobilenumber" ng-model="vm.mobilenumber" autofocus>
+              </div>  -->
+
+              <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                  <input type="password" class="form-control" id="password" placeholder="Password" name="password" ng-model="vm.password" required />
+                  <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+              </div>
+
+              <button type="submit" ng-disabled="form.$invalid" class="btn btn-block block-level-btn">Login</button>
+
+            </form>
+            <div class="form-footer text-center text-silver">
+              <p>Don’t have an account? <a href="#!/merchant_registration" class="text-silver">Sign Up</a></p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+<!--   </div>
+</div> -->
+
+

@@ -1,0 +1,172 @@
+
+
+html,
+body {
+    height: 100%;
+}
+.full-width-container {
+    height: 100%;
+    width:100%;
+}
+.full-width-container #section1{
+	height: 100%;
+}
+/*#page-section{
+	height: 100%;
+}*/
+/*Styles for all reset **********************/
+.text-silver{
+	color: silver;
+}
+.reset-padding{
+	padding:0;
+}
+.reset-margin{
+	margin: 0;
+}
+/*end Styles for all reset*********************/
+
+/*navbar Styles**************************/
+.navbar{
+	color: #fff;
+	background-color: #e84c3d;
+	margin-bottom: 0px;
+	box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.2);
+}
+.dashboard-navbar{
+	margin-bottom: 0px;
+	box-shadow: none;
+	border:1px solid #e7e7e7;
+	background-color: #f8f8f8;
+}
+.dashboard-sidebar{
+	border:1px solid #e7e7e7;
+	background-color: #f8f8f8;
+	z-index: 1;
+    position: fixed;
+    height: 100%;
+}
+
+
+.main-logo img{
+	height: 30px;
+}
+/*.section2-logo{
+	height: 30px;
+}*/
+#section2 .navbar{
+	border-radius:0;
+}
+.navbar-nav li> a{
+	color: #fff;
+}
+.navbar-nav li> a:hover,.navbar-nav li> a:focus{
+	background-color: transparent !important;
+}
+
+.navbar .icon-bar{
+	background-color: silver;
+}
+.navbar-heading-content{
+	color: #c86a1b;
+}
+.navbar-brand{
+	color: #000;
+}
+/*navbar Styles*********************/
+
+/*sidebar Styles*********************/
+/*.sidebar-section{
+	height: 100%;
+}
+*/
+/*sidebar Styles*********************/
+
+
+/*form Styles*********************/
+ .form-section {
+		box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.2);
+		margin-bottom: 10px;
+		padding: 5px;
+}
+/*.form-section{
+	box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.2);
+}*/
+.form-heading{
+	margin-bottom: 25px;
+}
+
+input.form-control,
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],
+[type=text].form-control,
+[type=password].form-control,
+[type=email].form-control,
+[type=tel].form-control,
+[contenteditable].form-control {
+  padding: 0;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-box-shadow: inset 0 -1px 0 #dddddd;
+  box-shadow: inset 0 -1px 0 #dddddd;
+  /*font-size: 16px;*/
+}
+
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+  -webkit-box-shadow: inset 0 -2px 0 #2196f3;
+  box-shadow: inset 0 -2px 0 #2196f3;
+}
+.form-heading h2{
+	margin-bottom: -10px;
+}
+.block-level-btn{
+	border-radius: 0;
+	margin-top: 20px;
+}
+.form-footer{
+	margin-top: 10px;
+}
+.form-footer a{
+	color: #000;
+	text-decoration: none;
+}
+.login-form-section{
+	margin-top: 10%;
+}
+.login-form-section .form-heading h3{
+	margin-top: 4px;
+	color: cadetblue
+}
+.login-form-section .btn{
+	background: cadetblue;
+    color: #fff;
+    font-size: 16px;
+}
+
+/*.signup-form-section{
+	margin-top: 3%;
+}*/
+
+.btn-bg{
+	background-color: cadetblue;
+	color: #fff;
+}
+/*form Styles*********************/
+
+/*flash styles*/
+.flash-message-box .alert{
+	padding: 9px;
+}

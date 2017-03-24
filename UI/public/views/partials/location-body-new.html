@@ -1,0 +1,66 @@
+<div class="row reset-margin">
+          <div class="form-content form-section col-md-4 col-xs-12 col-md-offset-4 fadeInRight animated">
+          <h5 class="text-cadetblue text-center">Create Location</h5>
+
+            <form class="form" name="locationForm" ng-submit="vm.merchantLocation()" method="POST">
+
+              <!-- <div class="form-group dashboard-form-group">
+                  <input type="text" class="form-control dashboard-form-input" id="product_id" placeholder="Product Id" name="product_id" ng-model="vm.promotion.product_id" >
+              </div> -->
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': locationForm.locationName.$dirty && locationForm.locationName.$error.required }">
+                  <input type="text" class="form-control dashboard-form-input" id="locationName" placeholder="Location Name" name="locationName" ng-model="vm.location.locationName" required />
+                  <span ng-show="locationForm.locationName.$dirty && locationForm.locationName.$error.required" class="help-block">locaton name is required</span>
+              </div>
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': locationForm.originalPrice.$dirty && locationForm.originalPrice.$error.required }">
+                  <input type="text" class="form-control dashboard-form-input" id="locationLongitude" placeholder="Longitude" name="locationLongitude" ng-model="vm.location.locationLongitude" required />
+                  <span ng-show="locationForm.locationLongitude.$dirty && locationForm.locationLongitude.$error.required" class="help-block">Longitude is required</span>
+              </div>
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': locationForm.locationLatitude.$dirty && locationForm.originalPrice.$error.required }">
+                  <input type="text" class="form-control dashboard-form-input" id="locationLatitude" placeholder="Latitude" name="locationLatitude" ng-model="vm.location.locationLatitude" required />
+                  <span ng-show="locationForm.locationLatitude.$dirty && locationForm.locationLatitude.$error.required" class="help-block">Latitude is required</span>
+              </div>
+
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': locationForm.countryId.$dirty && locationForm.countryId.$error.required }" >
+                  <select class="form-control" id="countryId" name="countryId" ng-model="vm.location.countryId" required>
+                        <option value="" selected="selected">Select Country</option>
+                        <option ng-repeat="country in vm.allCountries" value="{{country.countryId}}">{{country.countryName}}</option>
+                  </select>
+                   <span ng-show="locationForm.countryId.$dirty && locationForm.countryId.$error.required" class="help-block">country is required</span>
+              </div>
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': locationForm.cityId.$dirty && locationForm.cityId.$error.required }">
+                  <select class="form-control" id="cityId" name="cityId" ng-model="vm.location.cityId" required>
+                        <option value="" selected="selected">Select City</option>
+                        <option ng-repeat="city in vm.allCities" value="{{city.cityId}}">{{city.cityName}}</option>
+                  </select>
+                   <span ng-show="locationForm.cityId.$dirty && locationForm.cityId.$error.required" class="help-block">City is required</span>
+              </div>
+
+              <!-- <div class="form-group dashboard-form-group" ng-class="{ 'has-error': locationForm.brandId.$dirty && locationForm.brandId.$error.required }">
+                  <select class="form-control" id="select" name="brandId" ng-model="vm.promotion.brandId" required>
+                        <option value="" selected="selected">Select Brand</option>
+                        <option ng-repeat="brand in vm.brands" value="{{brand.brandId}}">{{brand.brandName}}</option>
+                  </select>
+                  <span ng-show="locationForm.brandId.$dirty && locationForm.brandId.$error.required" class="help-block">Brand Id is required</span>
+              </div> -->
+
+              
+
+              <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-block block-level-btn">Login</button> -->
+              <div class="row reset-padding reset-margin">
+                <div class="col-md-6 col-xs-12 reset-margin">
+                  <button class="btn btn-block reset-border-radius" type="submit">Submit</button>
+                </div>
+
+                <div class="col-md-6 col-xs-12 reset-margin">
+                  <a class="btn btn-default btn-block reset-border-radius" href="#!/dashboard/locations">Cancel</a>
+                </div>
+              </div> 
+              
+            </form>
+            
+
+          </div>
+        </div>

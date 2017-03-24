@@ -1,0 +1,68 @@
+  <div class="dashboard-content col-md-10 col-md-offset-2 col-xs-12">
+    
+    <div class="promotions-content">
+      <h3 class="dashboard-content-header">LOCATIONS <!-- {{globals.currentUser.id}} -->
+       <span class="pull-right"><a href="#!/dashboard/locations/new" class="btn">Create Location</a></span></h3>
+      <hr class="text-silver" />
+
+      <!-- <div ui-view></div> -->
+
+
+      <!-- <div ng-show="class=='addPromotion'">
+        
+
+      </div> -->
+
+      <div class="row reset-padding reset-margin">
+        <div class="table-content">
+
+
+
+        <div class="row reset-padding reset-margin">
+            <div class="table-content">
+
+            <div class="search-box col-md-4 col-xs-12">
+              <div class="form-group dashboard-form-group">
+                <input type="text" class="form-control dashboard-form-input" id="filterValue" placeholder="Search" name="filterValue" ng-model="vm.filterValue">
+              </div>
+            </div>
+            <button ng-click='vm.filter()' class="btn btn-sm">Seach</button>
+              
+              <div id="grid1" ui-grid="vm.gridLocations" ui-grid-edit class="myGrid"></div>
+
+            </div>
+        </div>
+
+          <!-- <table class="table  table-bordered table-striped table-hover">
+            <thead>
+              <tr class="text-cadetblue">
+                <th>Location Id</th>
+                <th>Location Name</th>
+                <th>Lattitude</th>
+                <th>Longitude</th>
+                <th>Country Id</th>
+                <th>City Id</th>
+                <th>Created Date</th>
+              
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="location in vm.merchantLocations">
+                <td class="dashboard-table-data">{{location.locationId}}</td>
+                <td class="dashboard-table-data">{{location.locationName}}</td>
+                <td class="dashboard-table-data">{{location.lattitude}}</td>
+                <td class="dashboard-table-data">{{location.longitude}}</td>
+                <td class="dashboard-table-data">{{location.countryId}}</td>
+                <td class="dashboard-table-data">{{location.cityId}}</td>
+                <td class="dashboard-table-data">{{location.createdDate | date}}</td>
+        
+              </tr>
+            </tbody>
+          </table> -->
+
+        </div>
+      </div>
+
+    </div><!--end  promotinons content -->
+</div>

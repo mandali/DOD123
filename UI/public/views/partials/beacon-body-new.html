@@ -1,0 +1,33 @@
+  <div class="dashboard-content col-md-10 col-md-offset-2 col-xs-12">
+
+<div class="row reset-margin">
+          <div class="form-content form-section col-md-4 col-xs-12 col-md-offset-4 fadeInRight animated">
+          <h5 class="text-cadetblue text-center">Create Beacon</h5>
+
+            <form class="form" name="productForm" ng-submit="vm.merchantBeacon()" method="POST">
+
+
+              <div class="form-group dashboard-form-group" ng-class="{ 'has-error': productForm.description.$dirty && productForm.description.$error.required }">
+                  <input type="text" class="form-control dashboard-form-input" id="description" placeholder="Description About Product" name="description" ng-model="vm.description" required />
+                  <span ng-show="productForm.description.$dirty && productForm.description.$error.required" class="help-block">Description is required</span>
+              </div>
+
+              
+
+              <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-block block-level-btn">Login</button> -->
+              <div class="row reset-padding reset-margin">
+                <div class="col-md-6 col-xs-12 reset-margin">
+                  <button class="btn btn-block reset-border-radius" type ="submit">Submit</button>
+                </div>
+
+                <div class="col-md-6 col-xs-12 reset-margin">
+                  <a class="btn btn-default btn-block reset-border-radius" href="#!/dashboard/beacons">Cancel</a>
+                </div>
+              </div> 
+              
+            </form>
+            
+
+          </div>
+        </div>
+</div>

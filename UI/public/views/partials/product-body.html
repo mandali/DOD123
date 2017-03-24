@@ -1,0 +1,58 @@
+  <div class="dashboard-content col-md-10 col-md-offset-2 col-xs-12">
+    
+    <div class="promotions-content">
+      <h3 class="dashboard-content-header">PRODUCTS <!-- {{globals.currentUser.id}} -->
+       <span class="pull-right"><a href="#!/dashboard/products/new" class="btn">Create Product</a></span></h3>
+      <hr class="text-silver" />
+
+      <!-- <div ui-view></div> -->
+
+
+      <!-- <div ng-show="class=='addPromotion'">
+        
+
+      </div> -->
+
+      <div class="row reset-padding reset-margin">
+        <div class="table-content">
+
+
+        <div class="row reset-padding reset-margin">
+            <div class="table-content">
+
+            <div class="search-box col-md-4 col-xs-12">
+              <div class="form-group dashboard-form-group">
+                <input type="text" class="form-control dashboard-form-input" id="filterValue" placeholder="Search" name="filterValue" ng-model="vm.filterValue">
+              </div>
+            </div>
+            <button ng-click='vm.filter()' class="btn btn-sm">Seach</button>
+              
+              <div id="grid1" ui-grid="vm.gridProducts" ui-grid-edit class="myGrid"></div>
+
+            </div>
+        </div>
+
+          <!-- <table class="table  table-bordered table-striped table-hover">
+            <thead>
+              <tr class="text-cadetblue">
+                <th>Product Id</th>
+                <th>Product Description</th>
+                <th>Created Date</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="product in vm.merchantProducts">
+                <td class="dashboard-table-data">{{product.productId}}</td>
+                <td class="dashboard-table-data">{{product.productDescription}}</td>
+                <td class="dashboard-table-data">{{product.createdDate | date}}</td>
+              </tr>
+            </tbody>
+            
+          </table> -->
+
+        </div>
+      </div>
+
+    </div><!--end  promotinons content -->
+</div>

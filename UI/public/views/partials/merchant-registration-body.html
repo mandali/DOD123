@@ -1,0 +1,185 @@
+
+
+
+<div class="container">
+  <div class="row" id="page-section">
+    <div class="main-content-section col-md-12">
+      <div class="signup-form-section form-section">
+
+        <div class="row reset-margin">
+          <div class="form-heading col-md-6 col-md-offset-3 text-center">
+
+            <h3 class="text-cadetblue">Merchant SignUp</h3>
+            <hr class="text-silver" />
+          </div>
+        </div>
+
+        <div class="row reset-margin">
+          <div class="form-content clearfix">
+            <form class="form" name="form" ng-submit="vm.merchantSignup()" method="POST">
+
+            <div class="col-md-4 col-md-offset-1 col-xs-12">
+
+              <div class="form-group">
+                <input type="text" class="form-control" id="firstname" placeholder="First Name" name="firstname" ng-model="vm.merchant.firstname" autofocus required>
+                <span ng-show="form.firstname.$dirty && form.firstname.$error.required" class="help-block">
+                  <div ng-messages="form.firstname.$error">
+                    <div ng-message="required">This field is required</div>
+                  </div>
+                </span>
+              </div>
+
+              <div class="form-group">
+                  <input type="text" class="form-control" id="lastname" placeholder="Last Name" name="lastname" ng-model="vm.merchant.lastname">
+              </div>
+
+              <div class="form-group">
+                <input type="email" class="form-control" id="emailid" placeholder="Email" name="emailid" ng-model="vm.merchant.emailid" required>
+                <span ng-show="form.emailid.$dirty && form.emailid.$error.required ||form.emailid.$error.email " class="help-block">
+                  <div ng-messages="form.emailid.$error">
+                    <div ng-message="required">This field is required</div>
+                    <div ng-message="email">Your email address is invalid</div>
+                  </div>
+                </span>
+              </div>
+
+              <div class="form-group">
+                  <input type="number" class="form-control" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" id="mobilenumber" placeholder="Mobile Number" name="mobilenumber" ng-model="vm.merchant.mobilenumber">
+                  <span ng-show="form.mobilenumber.$dirty && form.mobilenumber.$error.required ||form.mobilenumber.$error.number " class="help-block">
+                  <div ng-messages="form.mobilenumber.$error">
+                    <div ng-message="required">This field is required</div>
+                    <div ng-message="pattern">Must be a valid 10 digit mobile number</div>
+                  </div>
+                </span>
+
+              </div>
+              
+              <div class="form-group">
+                  <input type="text" class="form-control" id="description" placeholder="Description" name="description" ng-model="vm.merchant.description">
+              </div>
+
+
+
+              <div class="form-group">
+                  <input type="text" class="form-control" id="tags" placeholder="Tags" name="tags" ng-model="vm.merchant.tags" required>
+                  <span ng-show="form.tags.$dirty && form.tags.$error.required" class="help-block">
+                  <div ng-messages="form.tags.$error">
+                    <div ng-message="required">This field is required</div>
+                  </div>
+                </span>
+              </div>
+
+              <div class="form-group">
+                  <input type="text" class="form-control" id="nickname" placeholder="Nickname" name="nickname" ng-model="vm.merchant.nickname">
+              </div>
+
+              <div class="form-group">
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password" ng-model="vm.merchant.password" minlength="6" maxlength="12" required>
+                <span ng-show="form.$submitted || form.password.$dirty && form.password.$error.required || form.password.$error.minlength" class="help-block">
+                    <div ng-messages="form.password.$error">
+                      <div ng-message="required">This field is required</div>
+                      <div ng-message="minlength">Your password must be longer than 6 characters</div>
+                    </div>
+                </span>
+              </div>
+
+              <div class="form-group">
+                  <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password" name="confirmpassword" ng-model="vm.merchant.confirmpassword" password-match="vm.merchant.password" required>
+
+                  <span ng-show="form.$submitted || form.confirmpassword.$dirty && form.confirmpassword.$error.required || form.confirmpassword.$error.passwordNoMatch" class="help-block">
+                    <div ng-messages="form.confirmpassword.$error ">
+                      <div ng-message="required">You must enter a confirmation password</div>
+                      <div ng-message="passwordNoMatch">Both passwords must match</div>                    
+                    </div>
+                </span>
+
+              </div>
+            </div>
+
+            <div class="col-md-4 col-md-offset-2 col-xs-12">
+              <div class="form-group">
+                  <input type="text" class="form-control" id="businessname" placeholder="Business Name" name="businessname" ng-model="vm.merchant.businessname" required>
+                  <span ng-show="form.$submitted || form.businessname.$dirty && form.businessname.$error.required" class="help-block">
+                    <div ng-messages="form.businessname.$error">
+                      <div ng-message="required">This field is required</div>
+                    </div>
+                </span>
+              </div>
+
+              <div class="form-group">
+                  <input type="text" class="form-control" id="business_off_addr" placeholder="Business Office Address" name="businessoffaddr" ng-model="vm.merchant.businessoffaddr" required>
+                  <span ng-show="form.$submitted || form.businessoffaddr.$dirty && form.businessoffaddr.$error.required" class="help-block">
+                    <div ng-messages="form.businessoffaddr.$error">
+                      <div ng-message="required">This field is required</div>
+                    </div>
+                </span>
+              </div>
+
+              <div class="form-group">
+                  <input type="text" class="form-control" id="landline_numbers" placeholder="Landline Number" name="landlineno" ng-model="vm.merchant.landlineno">
+              </div>
+
+              <div class="form-group">
+                  <input type="text" class="form-control" id="city" placeholder="City" name="city" ng-model="vm.merchant.city" required>
+                  <span ng-show="form.$submitted || form.city.$dirty && form.city.$error.required" class="help-block">
+                    <div ng-messages="form.city.$error">
+                      <div ng-message="required">This field is required</div>
+                    </div>
+                </span>
+              </div>
+
+              <div class="form-group">
+                  <input type="text" class="form-control" id="state" placeholder="State" name="state" ng-model="vm.merchant.state" required>
+                  <span ng-show="form.$submitted || form.state.$dirty && form.state.$error.required" class="help-block">
+                    <div ng-messages="form.state.$error">
+                      <div ng-message="required">This field is required</div>
+                    </div>
+                </span>
+              </div>
+
+              <div class="form-group">
+                  <input type="text" class="form-control" id="country" placeholder="Country" name="country" ng-model="vm.merchant.country" required>
+                  <span ng-show="form.$submitted || form.country.$dirty && form.country.$error.required" class="help-block">
+                    <div ng-messages="form.country.$error">
+                      <div ng-message="required">This field is required</div>
+                    </div>
+                </span>
+              </div>
+
+              <div class="form-group">
+                  <input type="text" class="form-control" id="street" placeholder="Street" name="street" ng-model="vm.merchant.street">
+              </div>
+              <div class="form-group">
+                  <input type="text" class="form-control" id="town" placeholder="Town" name="town" ng-model="vm.merchant.town">
+              </div>
+              <div class="form-group">
+                  <input type="number" class="form-control" id="zipcode" placeholder="Zipcode" name="zipcode" ng-model="vm.merchant.zipcode" required>
+                  <span ng-show="form.$submitted || form.zipcode.$dirty && form.zipcode.$error.required" class="help-block">
+                    <div ng-messages="form.zipcode.$error">
+                      <div ng-message="required">This field is required</div>
+                    </div>
+                </span>
+              </div>
+
+              <button class="btn btn-block block-level-btn btn-bg" type="submit">SignUp</button>
+            </div>
+              
+
+              
+
+              
+            </form>
+            
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- end page section -->
+</div>
+
+
+
+
+
