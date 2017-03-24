@@ -11,6 +11,7 @@ public interface LocationDao {
 	public List<Country> fetchCountriesList();
 	public List<Cities> fetchCitiesList();
 	public List<Location> fetchLocationsList();
+	public Location fetchLocation(Long id);
 	
 	
 	

@@ -75,5 +75,19 @@ public class ProductDaoImpl implements ProductDao{
 			
 			return product;			
 	}
+
+	public Product fetchProduct(Long id) {
+		final String METHOD_NAME = "fetchProduct";
+		Product product=null;		
+		try{
+			Session session = this.sessionFactory.getCurrentSession();
+			Query query=(Query) session.createQuery("from Product where productId=:id").setParameter("id", id);
+			product=(Product)query.uniqueResult();
+			
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+		}		
+		return product;
+	}
 		
 }

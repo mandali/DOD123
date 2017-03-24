@@ -60,14 +60,18 @@ import com.omniwyse.dod.model.MerchantPromotionBeacon;
 import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.OTPValidation;
 import com.omniwyse.dod.model.Product;
+import com.omniwyse.dod.model.ProductsVo;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.PromotionSummary;
 import com.omniwyse.dod.model.RegisterWithOtp;
+import com.omniwyse.dod.service.BrandService;
+import com.omniwyse.dod.service.CategoryService;
 import com.omniwyse.dod.service.ConsumerService;
 import com.omniwyse.dod.service.LocationService;
 import com.omniwyse.dod.service.MerchantPromotionBeaconService;
 import com.omniwyse.dod.service.MerchantService;
 import com.omniwyse.dod.service.MetaDataService;
+import com.omniwyse.dod.service.ProductService;
 import com.omniwyse.dod.service.PromotionService;
 import com.omniwyse.dod.service.RegistrationService;
 import com.omniwyse.dod.service.ValidationService;
@@ -79,22 +83,30 @@ public class DODController {
 	@Autowired
 	RegistrationService registrationService;
 	@Autowired
-	ConsumerService consumerService;	
+	ConsumerService consumerService;
 	@Autowired
 	ValidationService validationService;
 	@Autowired
 	PromotionService promotionService;
 	@Autowired
-	MerchantService merchantService;	
+	MerchantService merchantService;
 	@Autowired
 	LocationService locationService;
 	@Autowired
-	MetaDataService metaDataService;	
+	MetaDataService metaDataService;
 	@Autowired
-	MerchantPromotionBeaconService merchantPromotionBeaconService;	
+	MerchantPromotionBeaconService merchantPromotionBeaconService;
+	
+	@Autowired
+	ProductService productService;
+	
+	@Autowired
+	CategoryService categoryService;
+	
+	@Autowired
+	BrandService brandService;
 
 	private static final Logger logger = Logger.getLogger(DODController.class);
-
 
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = AppConstants.REGISTER, method = RequestMethod.POST)
@@ -287,11 +299,11 @@ public class DODController {
 		try {
 			MerchantProfile data = merchantService.merchatProfile(GetMerchatProfile);
 			if (data != null) {
-				MerchantProfileVo merchantProfileVo =new  MerchantProfileVo();
+				MerchantProfileVo merchantProfileVo = new MerchantProfileVo();
 				merchantProfileVo.setId(data.getMerchantId());
 				merchantProfileVo.setFirstname(data.getFirstname());
 				merchantProfileVo.setLastname(data.getLastname());
-				merchantProfileVo.setLogo(data.getLogo());				
+				merchantProfileVo.setLogo(data.getLogo());
 				merchantProfileVo.setEmailid(data.getEmailid());
 				merchantProfileVo.setMobilenumber(data.getMobilenumber());
 				merchantProfileVo.setBusinessname(data.getBusinessname());
@@ -673,7 +685,7 @@ public class DODController {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.CREATE_PROMOTIONS, method = RequestMethod.POST)
+	@RequestMapping(value = AppConstants.CREATE_PROMOTION, method = RequestMethod.POST)
 	public ResponseEntity createPromotions(@RequestBody CreatePromotionVo createPromotionVo) {
 		final String METHOD_NAME = "createPromotions";
 		ResponseEntity responseEntity = null;
@@ -964,7 +976,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}	
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_BRANDS, method = RequestMethod.GET)
@@ -990,7 +1002,7 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}	
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_MERCHANT_PRODUCTS, method = RequestMethod.POST)
@@ -1084,8 +1096,9 @@ public class DODController {
 				MerchantPromotionBeacon merchantPromotionBeacon = metaDataService
 						.createMerchantPromotionBeacon(dependentObjects);
 				if (merchantPromotionBeacon != null) {
-					DataResult result = new DataResult(true, "Merchant Promotion Beacon Created successfully ... ", HttpStatus.OK.value());
-							
+					DataResult result = new DataResult(true, "Merchant Promotion Beacon Created successfully ... ",
+							HttpStatus.OK.value());
+
 					return new ResponseEntity(result, HttpStatus.OK);
 				} else {
 					DataResult result = new DataResult(false,
@@ -1101,46 +1114,209 @@ public class DODController {
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
-	}	
-	
-	
-	@SuppressWarnings({ "rawtypes", "unchecked"})
-	@RequestMapping(value = AppConstants.UPDATE_PROMOTION, method = RequestMethod.PUT)
-	public ResponseEntity updatePromotion(@PathVariable Long id,@RequestBody CreatePromotionVo createPromotionVo) {
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.PROMOTION_RESOURCE_URL, method = RequestMethod.PUT)
+	public ResponseEntity updatePromotion(@PathVariable Long id, @RequestBody CreatePromotionVo createPromotionVo) {
 		final String METHOD_NAME = "updatePromotion";
-		ResponseEntity responseEntity = null;		
-		try{
-			boolean flag=promotionService.updatePromotion(id,createPromotionVo);
-			if (flag) {
-				DataResult dataResult=new DataResult(true,AppConstants.UPDATE_PROMOTION_SUCCESS_MSG , HttpStatus.OK.value());
-				return new ResponseEntity(dataResult,HttpStatus.OK);
-			}else{
-				DataResult dataResult=new DataResult(true,AppConstants.UPDATE_PROMOTION_ERROR_MSG , HttpStatus.OK.value());
-				return new ResponseEntity(dataResult,HttpStatus.OK);			
-			}			
-		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
-		}		
+		ResponseEntity responseEntity = null;
+		try {
+			boolean flag = promotionService.updatePromotion(id, createPromotionVo);
+			if (flag == true) {
+				DataResult dataResult = new DataResult(true, AppConstants.UPDATE_PROMOTION_SUCCESS_MSG,
+						HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			} else {
+				DataResult dataResult = new DataResult(true, AppConstants.UPDATE_PROMOTION_ERROR_MSG,
+						HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			}
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
 		return responseEntity;
-	}	
-	@SuppressWarnings({ "rawtypes", "unchecked"})
-	@RequestMapping(value = AppConstants.DELETE_PROMOTION, method = RequestMethod.DELETE)
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.PROMOTION_RESOURCE_URL, method = RequestMethod.DELETE)
 	public ResponseEntity deletePromotion(@PathVariable Long id) {
 		final String METHOD_NAME = "deletePromotion";
-		ResponseEntity responseEntity = null;		
-		try{
-			boolean flag=promotionService.deletePromotion(id);
-			if (flag==true) {
-				DataResult dataResult=new DataResult(true,AppConstants.DELETE_PROMOTION_SUCCESS_MSG , HttpStatus.OK.value());
-				return new ResponseEntity(dataResult,HttpStatus.OK);								
-			}else{				
-				DataResult dataResult=new DataResult(true,AppConstants.DELETE_PROMOTION_ERROR_MSG , HttpStatus.OK.value());
-				return new ResponseEntity(dataResult,HttpStatus.OK);
-			}			
-		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
+		ResponseEntity responseEntity = null;
+		try {
+			boolean flag = promotionService.deletePromotion(id);
+			if (flag == true) {
+				DataResult dataResult = new DataResult(true, AppConstants.DELETE_PROMOTION_SUCCESS_MSG,
+						HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			} else {
+				DataResult dataResult = new DataResult(true, AppConstants.DELETE_PROMOTION_ERROR_MSG,
+						HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			}
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+		}
+		return responseEntity;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.MERCHANT_RESOURCE_URL, method = RequestMethod.PUT)
+	public ResponseEntity updateMerchant(@PathVariable Long id, @RequestBody MerchantProfileVo merchantProfileVo) {
+		final String METHOD_NAME = "updateMerchant";
+		ResponseEntity responseEntity = null;
+		boolean flag = false;
+		try {
+			flag = merchantService.updateMerchant(id, merchantProfileVo);
+		} catch (Exception exception) {
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}		
+		if (flag == true) {
+			DataResult dataResult = new DataResult(true, AppConstants.MERCHANT_UPDATE_SUCCESS_MSG,
+					HttpStatus.OK.value());
+			responseEntity = new ResponseEntity(dataResult, HttpStatus.OK);
+		} else {
+			DataResult dataResult = new DataResult(true, AppConstants.MERCHANT_UPDATE_ERROR_MSG, HttpStatus.OK.value());
+			responseEntity = new ResponseEntity(dataResult, HttpStatus.OK);
+		}
 		return responseEntity;
 	}
 	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.MERCHANT_RESOURCE_URL, method = RequestMethod.DELETE)
+	public ResponseEntity deleteMerchant(@PathVariable Long id) {
+		final String METHOD_NAME = "deleteMerchant";
+		ResponseEntity responseEntity = null;		
+		try {
+			boolean flag = merchantService.deleteMerchant(id);
+			if (flag == true){
+				DataResult dataResult = new DataResult(true, AppConstants.MERCHANT_DELETE_SUCCESS_MSG,
+						HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			} else {
+				DataResult dataResult = new DataResult(true, AppConstants.MERCHANT_DELETE_ERROR_MSG, HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			}
+		} catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+		}		
+		return responseEntity; 
+	}
+	
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.PRODUCT_RESOURCE_URL, method = RequestMethod.GET)
+	public ResponseEntity fetchProduct(@PathVariable Long id) {
+		final String METHOD_NAME = "fetchProduct";
+		ResponseEntity responseEntity = null;
+		ProductsVo productsVo;
+		try {
+			Product product= productService.fetchProduct(id);
+			if (product!=null){
+				productsVo=new ProductsVo();
+				productsVo.setProductId(product.getProductId());
+				productsVo.setProductDescription(product.getProductDescription());
+				productsVo.setProductImageLocation(product.getProductImageLocation());
+				productsVo.setProductCreatedDate(product.getProductCreatedDate());
+				DataResultEntity<ProductsVo> dataResult=new DataResultEntity<ProductsVo>(true, AppConstants.PRODUCTS_SUCCESS_MSG, HttpStatus.OK.value(), productsVo);
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			} else {
+				DataResult dataResult = new DataResult(true, AppConstants.PRODUCTS_ERROR_MSG, HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			}
+		} catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+		}		
+		return responseEntity; 
+	}
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.CATEGORY_RESOURCE_URL, method = RequestMethod.GET)
+	public ResponseEntity fetchCategory(@PathVariable Long id) {
+		final String METHOD_NAME = "fetchCategory";
+		ResponseEntity responseEntity = null;
+		CategoryVO categoryVO=null;
+		try {
+			Category category= categoryService.fetchCategory(id);
+			if (category!=null){
+				categoryVO=new CategoryVO();
+				categoryVO.setCategoryId(String.valueOf(category.getCategoryId()));
+				categoryVO.setCategoryName(category.getCategoryName());
+				categoryVO.setCategoryImage(category.getCategoryImage());
+				categoryVO.setCategoryRank(category.getCategoryRank());
+				categoryVO.setCreatedDate(String.valueOf(category.getCreateddate()));
+				DataResultEntity<CategoryVO> dataResult=new DataResultEntity<CategoryVO>(true, AppConstants.CATEGORY_SUCCESS_MSG, HttpStatus.OK.value(), categoryVO);
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			} else {
+				DataResult dataResult = new DataResult(true, AppConstants.CATEGORY_ERROR_MSG, HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			}
+		} catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+		}		
+		return responseEntity; 
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.BRAND_RESOURCE_URL, method = RequestMethod.GET)
+	public ResponseEntity fetchBrand(@PathVariable Long id) {
+		final String METHOD_NAME = "fetchBrand";
+		ResponseEntity responseEntity = null;		
+		BrandVO brandVO =null;
+		try {
+			Brand brand= brandService.fetchBrand(id);
+			if (brand!=null){
+				brandVO=new BrandVO();
+				brandVO.setBrandId(Integer.valueOf(brand.getBrandid().intValue()));
+				brandVO.setBrandName(brand.getBrandName());
+				brandVO.setBrandImage(brand.getBrandImage());
+				brandVO.setBrandRating(brand.getBrandRating());
+				brandVO.setBrandDescription(brand.getBrandDescription());
+				brandVO.setCreated(String.valueOf(brand.getCreatedDate()));
+				DataResultEntity<BrandVO> dataResult=new DataResultEntity<BrandVO>(true, AppConstants.BRAND_SUCCESS_MSG, HttpStatus.OK.value(), brandVO);
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			} else {
+				DataResult dataResult = new DataResult(true, AppConstants.BRAND_ERROR_MSG, HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			}
+		} catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+		}		
+		return responseEntity; 
+	}
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = AppConstants.LOCATION_RESOURCE_URL, method = RequestMethod.GET)
+	public ResponseEntity fetchLocation(@PathVariable Long id) {
+		final String METHOD_NAME = "fetchLocation";
+		ResponseEntity responseEntity = null;		
+		LocationsVO locationsVO=null;
+		try {
+			Location location=locationService.fetchLocation(id);
+			if (location!=null){
+				locationsVO=new LocationsVO();
+				locationsVO.setLocationId(String.valueOf(location.getLocationId()));
+				locationsVO.setLocationName(location.getLocationName());
+				locationsVO.setLattitude(location.getLocationLatitude());
+				locationsVO.setLongitude(location.getLocationLongitude());
+				locationsVO.setCreatedDate(String.valueOf(location.getCreated()));
+				locationsVO.setCityId(String.valueOf(location.getCitiesId().getCityId()));
+				locationsVO.setCityId(String.valueOf(location.getCitiesId().getCityId()));
+				DataResultEntity<LocationsVO> dataResult=new DataResultEntity<LocationsVO>(true, AppConstants.LOCATION_SUCCESS_MSG, HttpStatus.OK.value(), locationsVO);
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			} else {
+				DataResult dataResult = new DataResult(true, AppConstants.LOCATION_ERROR_MSG, HttpStatus.OK.value());
+				return new ResponseEntity(dataResult, HttpStatus.OK);
+			}
+		} catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+		}		
+		return responseEntity; 
+	}
+	
+	
+
 }

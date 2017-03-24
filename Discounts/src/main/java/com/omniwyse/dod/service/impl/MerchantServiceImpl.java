@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.omniwyse.dod.DTO.CreatePromotionVo;
+import com.omniwyse.dod.DTO.MerchantProfileVo;
 import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.dao.ProductDao;
@@ -101,6 +102,16 @@ public class MerchantServiceImpl implements MerchantService{
 	public Product validateProductname(NewProductVO productVO) {
 		
 		return productDao.validateProductname(productVO);
+	}
+
+	public boolean updateMerchant(Long id, MerchantProfileVo merchantProfileVo){
+		
+		return MerchantDao.updateMerchant(id, merchantProfileVo);
+	}
+
+	public boolean deleteMerchant(Long id) {
+		
+		return MerchantDao.deleteMerchant(id);
 	}
 		
 	
