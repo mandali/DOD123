@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.omniwyse.dod.DTO.CreatePromotionVo;
+import com.omniwyse.dod.DTO.MerchantProfileVo;
 import com.omniwyse.dod.model.GetMerchantById;
 import com.omniwyse.dod.model.GetMerchatProfile;
 import com.omniwyse.dod.model.Location;
@@ -38,5 +39,9 @@ public interface MerchantDao {
 	
 	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo);
 	
-	public Location fetchLocationById(Long locationId);
+	public Location fetchLocationById(Long locationId); 
+	
+	public boolean updateMerchant(Long id ,MerchantProfileVo merchantProfileVo );
+	
+	public boolean deleteMerchant(Long id);
 }

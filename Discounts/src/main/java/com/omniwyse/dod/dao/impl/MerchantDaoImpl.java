@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.omniwyse.dod.DTO.CreatePromotionVo;
+import com.omniwyse.dod.DTO.MerchantProfileVo;
 import com.omniwyse.dod.dao.MerchantDao;
 import com.omniwyse.dod.model.GetMerchantById;
 import com.omniwyse.dod.model.GetMerchatProfile;
@@ -191,6 +192,61 @@ public class MerchantDaoImpl implements MerchantDao{
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
+	}
+
+	public boolean updateMerchant(Long id, MerchantProfileVo merchantProfileVo) {
+		final String METHOD_NAME = "updateMerchant";
+		boolean flag=true;
+		try{
+			Session session = this.sessionFactory.getCurrentSession();
+			MerchantProfile merchantProfile = (MerchantProfile) session.get(MerchantProfile.class,id.intValue());
+			if(merchantProfile!=null){
+				merchantProfile.setFirstname(merchantProfileVo.getFirstname());
+				merchantProfile.setLastname(merchantProfileVo.getLastname());
+				merchantProfile.setEmailid(merchantProfileVo.getEmailid());
+				merchantProfile.setMobilenumber(merchantProfileVo.getMobilenumber());
+				merchantProfile.setBusinessname(merchantProfileVo.getBusinessname());
+				merchantProfile.setBusinessoffaddr(merchantProfileVo.getBusinessoffaddr());
+				merchantProfile.setLandlineno(merchantProfileVo.getLandlineno());
+				merchantProfile.setCity(merchantProfileVo.getCity());
+				merchantProfile.setState(merchantProfileVo.getState());
+				merchantProfile.setCountry(merchantProfileVo.getCountry());
+				merchantProfile.setState(merchantProfileVo.getStreet());
+				merchantProfile.setTown(merchantProfileVo.getTown());
+				merchantProfile.setZipcode(merchantProfileVo.getZipcode());
+				merchantProfile.setDescription(merchantProfileVo.getDescription());
+				merchantProfile.setTags(merchantProfileVo.getTags());
+				merchantProfile.setNickname(merchantProfileVo.getNickname());
+				session.saveOrUpdate(merchantProfile);	
+			}else{
+				flag=false;				
+			}
+			
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			flag=false;	
+		}
+		return flag;
+	}
+
+	public boolean deleteMerchant(Long id) {
+		final String METHOD_NAME = "deleteMerchant";
+		boolean flag=true;
+		try{
+			Session session = this.sessionFactory.getCurrentSession();
+			MerchantProfile merchantProfile = (MerchantProfile)session.get(MerchantProfile.class,id.intValue());
+			if(merchantProfile!=null){
+				session.delete(merchantProfile);
+			}
+			if(merchantProfile==null){
+				flag=false;
+			}			
+		}catch(Exception exception){
+			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			flag=false;	
+		}
+		
+		return flag;
 	}
 		
 	}

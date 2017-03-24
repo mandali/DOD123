@@ -5,23 +5,23 @@ import java.util.Date;
 public class MerchantProfileVo {
 	
 	private Integer id;		
-	private String firstname;
-	private String logo;	
-	private String lastname;
+	private String firstname;	
+	private String lastname;	
 	private String emailid;
 	private String mobilenumber;	
 	private String businessname;
 	private String businessoffaddr;
 	private String landlineno;
-	private String city;	
-	private String state;
-	private String country;
-	private String street;
 	private String town;	
 	private String zipcode;
 	private String description;
-	private String tags;	
-	private String nickname;		
+	private String tags;
+	private String logo;
+	private String nickname;
+	private String street;
+	private String city;	
+	private String state;
+	private String country;
 	private Date createddate;
 	
 	

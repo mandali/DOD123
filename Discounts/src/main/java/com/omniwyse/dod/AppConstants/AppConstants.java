@@ -24,10 +24,10 @@ public class AppConstants {
 	public static final String LIST_CITIES="/cities";
 	public static final String LIST_LOCATIONS="/locations";
 	public static final String MERCHANT_LIST="/merchantlist";	
-	public static final String LIST_MERCHANT_PRODUCTS_ERROR_MSG="Sorry , No Products are available right now ";
+	
 	public static final String LIST_MERCHANT_PRODUCTS="/merchantproducts";
 	public static final String LIST_BRANDID_CATEGORYID="/brandcatidpromotion"; 
-	public static final String CREATE_PROMOTIONS="/createpromotions";
+	public static final String CREATE_PROMOTION="/promotion";
 	public static final String LIST_BRANDID_PROMOTIONS="/promotion/brandId";
 	public static final String MERCHANT_PROMOTION_MERCHANTID="/promotion/merchantid";
 	public static final String LIST_CATEGORIES="/categories";
@@ -37,15 +37,32 @@ public class AppConstants {
 	public static final String LIST_BRANDS="/brands";
 	public static final String LIST_All_BRANDS="/listbrands";
 	public static final String LIST_PROMOTIONS="/promotions";
-	public static final String UPDATE_PROMOTION="/updatepromotion/{id}";
-	public static final String DELETE_PROMOTION="/promotion/{id}";
+	public static final String PROMOTION_RESOURCE_URL="/promotion/{id}";
+	
+	public static final String MERCHANT_RESOURCE_URL="/merchant/{id}";
+	public static final String PRODUCT_RESOURCE_URL="/product/{id}";
+	public static final String CATEGORY_RESOURCE_URL="/category/{id}";
+	
+	public static final String BRAND_RESOURCE_URL="/brand/{id}";
+	
+	public static final String LOCATION_RESOURCE_URL="/location/{id}";
 	public static final String LIST_AISLE="listaisle";
 	public static final String LIST_BEACONS_PROMOTIONS_INFO="/getbeaconsinfo";
 	public static final String LIST_MERCHANT_PROMOTION_BEACONS="/listmerchantpromotionbeacons";
 	public static final String CREATE_MERCHANT_PROMOTION_BEACON="/createmerchantpromotionbeacon";
 	
-	public static final String UPDATE_PROMOTION_SUCCESS_MSG="Promotion Updated successfully ... ";
-	public static final String UPDATE_PROMOTION_ERROR_MSG=" Please enter valied data ... ";
+	public static final String MERCHANT_UPDATE_SUCCESS_MSG=" Merchant updated successfully ...";
+	public static final String MERCHANT_UPDATE_ERROR_MSG=" Sorry , Please enter valid Email id / Mobile no  ... ";
+	
+	public static final String MERCHANT_DELETE_SUCCESS_MSG=" Merchant Deleted successfully ...";
+	public static final String MERCHANT_DELETE_ERROR_MSG=" Sorry , Please enter valid merchant Id  ... ";
+	
+	public static final String LIST_MERCHANT_PRODUCTS_ERROR_MSG="Sorry , No Products are available right now ";
+	public static final String PRODUCTS_SUCCESS_MSG=" Product details are ... ";
+	public static final String PRODUCTS_ERROR_MSG=" Sorry , No Products are available right now ";
+	
+	public static final String UPDATE_PROMOTION_SUCCESS_MSG=" Promotion Updated successfully ... ";
+	public static final String UPDATE_PROMOTION_ERROR_MSG=" Please enter existing Promotion Id / No Data Available on selected Promotion Id right now  ... ";
 	public static final String DELETE_PROMOTION_SUCCESS_MSG="Promotion deleted successfully ... ";
 	public static final String DELETE_PROMOTION_ERROR_MSG=" sorry , no Data available on given Promotion Id ... ";
 	public static final String REGISTER_ERROR_MSG=" Sorry , Mobile no is alredy exist ... ";
@@ -75,6 +92,16 @@ public class AppConstants {
 		
 	public static final String MERCHANT_PROMOTION_SUCCESS_MSG=" Promotions are , ";
 	public static final String MERCHANT_PROMOTION_ERROR_MSG="Sorry , No Promotion found on selected Merchantid ... ";
+	
+	public static final String CATEGORY_SUCCESS_MSG=" Category information is , ";
+	public static final String CATEGORY_ERROR_MSG=" Sorry , No data found on Selected Category Id ";
+	
+	public static final String BRAND_SUCCESS_MSG=" Brand information is , ";
+	public static final String BRAND_ERROR_MSG=" Sorry , No data found on Selected Brand Id ";
+	
+	public static final String LOCATION_SUCCESS_MSG=" Location information is , ";
+	public static final String LOCATION_ERROR_MSG=" Sorry , No data found on Selected Location Id ";
+
 
 	public static final String LIST_COUNTRIES_SUCCESS_MSG=" available Countries are ,";
 	public static final String LIST_COUNTRIES_ERROR_MSG="Sorry , No Countries are available right now ";

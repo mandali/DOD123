@@ -13,5 +13,7 @@ public interface LocationService {
 	public List<Cities> fetchCitiesList();
 
 	public List<Location> fetchLocationsList();
+	
+	public Location fetchLocation(Long id);
 
 }

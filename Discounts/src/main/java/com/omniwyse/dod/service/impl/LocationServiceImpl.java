@@ -35,6 +35,11 @@ public class LocationServiceImpl implements LocationService{
 		// TODO Auto-generated method stub
 		return locationDao.fetchLocationsList();
 	}
+
+	public Location fetchLocation(Long id) {
+		// TODO Auto-generated method stub
+		return locationDao.fetchLocation(id);
+	}
 		
 
 }

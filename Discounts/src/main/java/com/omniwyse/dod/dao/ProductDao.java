@@ -11,5 +11,7 @@ public interface ProductDao {
 	public MerchantProfile validateProduct(NewProductVO newProductVO);
 	
 	public Product validateProductname(NewProductVO productVO);
+	
+	public Product fetchProduct(Long id);
 
 }

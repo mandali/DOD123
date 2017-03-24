@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.omniwyse.dod.dao.LocationDao;
+import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.Cities;
 import com.omniwyse.dod.model.Country;
 import com.omniwyse.dod.model.Location;
@@ -65,5 +66,17 @@ public class LocationDaoImpl implements LocationDao{
 			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return locations;
+	}
+	public Location fetchLocation(Long id) {
+		final String METHOD_NAME = "fetchLocation";
+		Location location=null;		
+		try{
+			Session session = this.sessionFactory.getCurrentSession();
+			Query query=(Query) session.createQuery("from Location where locationId=:id").setParameter("id", id);
+			location=(Location)query.uniqueResult();			
+		}catch(Exception exception){
+			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+		}		
+		return location;
 	}
 }

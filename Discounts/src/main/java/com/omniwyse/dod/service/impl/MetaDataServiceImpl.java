@@ -92,5 +92,6 @@ public class MetaDataServiceImpl implements MetaDataService {
 		// TODO Auto-generated method stub
 		return metaDataDao.getBrandname(brandVO);
 	}
+	
 
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.omniwyse.dod.DTO.CreatePromotionVo;
+import com.omniwyse.dod.DTO.MerchantProfileVo;
 import com.omniwyse.dod.DTO.NewProductVO;
 import com.omniwyse.dod.model.GetMerchantById;
 import com.omniwyse.dod.model.GetMerchatProfile;
@@ -40,5 +41,9 @@ public interface MerchantService {
 	public List<MerchantProfile> allMerchants();
 	
 	public List<Promotion> merchatPromotion(MerchantPromotions MerchantPromotions , Date date);
+	
+	public boolean updateMerchant(Long id ,MerchantProfileVo merchantProfileVo );
+	
+	public boolean deleteMerchant(Long id );
 
 }

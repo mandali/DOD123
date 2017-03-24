@@ -279,6 +279,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		return product;
 	}
 
+	@SuppressWarnings("unused")
 	public boolean updatePromotions(Long id,CreatePromotionVo createPromotionVo) {
 		final String METHOD_NAME="updatePromotions";
 		boolean flag=true;
@@ -308,6 +309,9 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			Location location=(Location) session.get(Location.class, Long.valueOf((createPromotionVo.getLocationId())));
 			if(location!=null){
 				resp.setLocationId(location);
+			}
+			if(merchantProfile==null && product==null && category==null && brand==null && location==null && resp==null){
+				flag=false;
 			}
 			resp.setDiscountText(createPromotionVo.getDiscountText());
 			resp.setCreateddate(date);

@@ -49,5 +49,6 @@ public interface MetaDataService {
 	public List<Beacon> fetchBeaconByUidMajorMinor(List<String> uid, List<Integer> major, List<Integer> minor);
 	
 	public List<MerchantBeacon> fetchMerchantBeacons(String merchantId);
+	
 
 }
