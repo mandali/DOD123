@@ -33,6 +33,9 @@ UserService.$inject = ['$http'];
         service.CreatePromotion = CreatePromotion;
         service.CreateMerchantProduct= CreateMerchantProduct;
 
+        service.EditPromotion = EditPromotion;
+        service.DeletePromotion = DeletePromotion;
+
     /*    service.Update = Update;
         service.Delete = Delete;*/
 
@@ -101,6 +104,13 @@ UserService.$inject = ['$http'];
         }
         function CreateMerchantLocation(location) {
             return $http.post('http://54.193.11.3:8080/Discounts/createlocation',location).then(handleSuccess, handleError('Error getting user by username'));
+        }
+
+        function EditPromotion(updatedPromotion,id) {
+            return $http.put('http://54.193.11.3:8080/Discounts/updatepromotion/'+id,updatedPromotion).then(handleSuccess, handleError('Error getting user by username'));
+        }
+        function DeletePromotion(id) {
+            return $http.delete('http://54.193.11.3:8080/Discounts/promotion/'+id).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         /*local APIs*/

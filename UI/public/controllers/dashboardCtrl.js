@@ -261,6 +261,27 @@
 
         };
 
+        vm.deletePromotion = function(grid,row){
+            console.log(grid);
+            console.log(row.entity);
+            vm.promotionId=row.entity.id;
+            UserService.DeletePromotion(vm.promotionId).then(function (response) {
+                if (response.success) {
+                    /*FlashService.Success('Promotion Posted successful', true);*/
+                    /*row.entity = angular.extend(row.entity);*/
+                    loadMerchantPromotions();
+                    console.log(response);                
+                    $uibModalInstance.close('closed');
+
+                } else {
+                    FlashService.Error(response.message);
+                    console.log('errorrrr')
+                    $uibModalInstance.close('closed');
+                    vm.dataLoading = false;
+                }
+            });
+        }
+
         function loadMerchantLocations() {
                 
                 UserService.GetLocations()

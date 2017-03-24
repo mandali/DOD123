@@ -1,49 +1,50 @@
 <div>
   <div class="modal-header">
-    <h3>Add Beacon To Promotion</h3>
+    <h3>Edit Promotion</h3>
 </div>
-<form name="form.userForm" ng-submit="vm.submitAddPromotionToBeacon()" novalidate>
+<form name="promotionEditForm" ng-submit="vm.updatePromotion()" novalidate>
     <div class="modal-body">
-        <!-- NAME -->
+
+        
+        
         <div class="form-group dashboard-form-group">
-            <label>Promotion Id</label>
-            <input type="text" name="merchantId" class="form-control" ng-model="vm.promotion.id" onfocus="this.blur()">
+            <label>Product Id</label>
+            <input type="text" name="pid" class="form-control" ng-model="vm.promotion.product_id" onfocus="this.blur()">
         </div>
 
         <div class="form-group dashboard-form-group">
-            <label>Products</label>
-            <input type="text" name="" class="form-control" ng-model="vm.promotion.product_id">
+            <label>Category</label>
+            <input type="text" name="catid" class="form-control" ng-model="vm.promotion.categoryName" onfocus="this.blur()">
         </div>
 
-        <!-- USERNAME -->
         <div class="form-group dashboard-form-group">
-            <label>Promotion Id</label>
-            <input type="text" name="promotionId" class="form-control" ng-model="vm.promotion_id"  onfocus="this.blur()">
+            <label>Brand Name</label>
+            <input type="text" name="brandName" class="form-control" ng-model="vm.promotion.brandName" onfocus="this.blur()">
         </div>
 
-        <!-- <div class="form-group">
-            <label>Beacons</label>
-            <input type="email" name="email" class="form-control" ng-model="email" required>
-            <p ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block">Enter a valid email.</p>
-        </div> -->
-
-
-        <div class="form-group dashboard-form-group" ng-class="{ 'has-error': form.userForm.beacon_id.$dirty && form.userForm.beacon_id.$error.required }" >
-            <label>Beacons</label>
-            <select class="form-control" id="beacon_id" name="beacon_id" ng-model="vm.beaconId" required>
-                <option value="" selected="selected">Select Beacon</option>
-                <option ng-repeat="beacon in vm.merchantBeacons" value="{{beacon.beaconId}}">{{beacon.beaconName}}</option>
-            </select>
-            <span ng-show="form.userForm.beacon_id.$dirty && form.userForm.beacon_id.$error.required" class="help-block">Beacon Id is required</span>
+        <div class="form-group dashboard-form-group">
+            <label>Original Price</label>
+            <input type="text" name="originalPrice" class="form-control" ng-model="vm.promotion.originalPrice">
         </div>
 
-        <div class="form-group dashboard-form-group" ng-class="{ 'has-error': form.userForm.aisleId.$dirty && form.userForm.aisleId.$error.required }" >
-            <label>Beacons</label>
-            <select class="form-control" id="aisleId" name="aisleId" ng-model="vm.aisleId" required>
-                <option value="" selected="selected">Select Ailes</option>
-                <option ng-repeat="ailes in vm.merchantailes" value="{{ailes.aliseId}}">{{ailes.aliseName}}</option>
-            </select>
-            <span ng-show="form.userForm.aisleId.$dirty && form.userForm.aisleId.$error.required" class="help-block">Ailes Id is required</span>
+        <div class="form-group dashboard-form-group">
+            <label>Discount</label>
+            <input type="text" name="discount" class="form-control" ng-model="vm.promotion.discount">
+        </div>
+
+        <div class="form-group dashboard-form-group">
+            <label>Discount Text</label>
+            <input type="text" name="discountText" class="form-control" ng-model="vm.promotion.discountText">
+        </div>
+
+        <div class="form-group dashboard-form-group">
+            <label>Location</label>
+            <input type="text" name="locationName" class="form-control" ng-model="vm.promotion.locationName">
+        </div>
+
+        <div class="form-group dashboard-form-group">
+            <label>description</label>
+            <input type="text" name="description" class="form-control" ng-model="vm.promotion.description">
         </div>
 
 
@@ -64,4 +65,5 @@
       <button class="btn btn-success" ng-click="vm.save()">Save</button>
       <button class="btn btn-warning" ng-click="$close()">Cancel</button>
   </div> -->
+
 </div>
