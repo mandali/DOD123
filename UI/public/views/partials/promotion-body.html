@@ -1,0 +1,84 @@
+  <div class="dashboard-content col-md-10 col-md-offset-2 col-xs-12">
+    
+    <div class="promotions-content">
+      <h3 class="dashboard-content-header">PROMOTIONS <!-- {{globals.currentUser.id}} -->
+       <span class="pull-right"><a href="#!/dashboard/promotions/new" class="btn">Create Promotion</a></span></h3>
+      <hr class="text-silver" />
+
+      <!-- <div ui-view></div> -->
+
+
+      <!-- <div ng-show="class=='addPromotion'">
+        
+
+      </div> -->
+
+      <div class="row reset-padding reset-margin">
+        <div class="table-content">
+
+          <div class="row reset-padding reset-margin">
+            <div class="table-content">
+
+            <div class="search-box col-md-4 col-xs-12">
+              <div class="form-group dashboard-form-group">
+                <input type="text" class="form-control dashboard-form-input" id="filterValue" placeholder="Search" name="filterValue" ng-model="vm.filterValue">
+              </div>
+            </div>
+            <button ng-click='vm.filter()' class="btn btn-sm">Seach</button>
+
+            <div class="col-md-12">
+              <strong>Total Promotions: </strong> {{ vm.gridPromotions.data.length | number }}
+            </div>
+            
+            <div id="grid1" ui-grid="vm.gridPromotions" ui-grid-pagination class="myGrid" style="height:387px;"></div>
+
+            </div>
+        </div>
+
+
+
+          <!-- <table class="table  table-bordered table-striped table-hover">
+            <thead>
+              <tr class="text-cadetblue">
+                <th>Product Id</th>
+                <th>Category Name</th>
+                <th>Brand Name</th>
+                <th>Discount%</th>
+                <th>Original Price</th>
+                <th>Location</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Description</th>
+                <th>Brand Rating</th>
+                <th>Add Beacon</th>
+               
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="promotion in vm.merchantPromotions">
+                <td class="dashboard-table-data">{{promotion.product_id}}</td>
+                <td class="dashboard-table-data">{{promotion.categoryName}}</td>
+                <td class="dashboard-table-data">{{promotion.brandName}}</td>
+                <td class="dashboard-table-data">{{promotion.discount}}</td>
+                <td class="dashboard-table-data">{{promotion.originalPrice}}</td>
+                <td class="dashboard-table-data">{{promotion.locationName}}</td>
+                <td class="dashboard-table-data">{{promotion.startdate | date}}</td>
+                <td class="dashboard-table-data">{{promotion.enddate | date}}</td>
+                <td class="dashboard-table-data">{{promotion.description}}</td>
+                <td class="dashboard-table-data">{{promotion.brandRating}}</td>
+                <td class="dashboard-table-data">
+
+                  <button class="btn btn-sm" id="btn-dy" ng-click="vm.showBeaconActionForm(promotion.id,$event)">Add Beacon</button>
+                
+                </td>
+              </tr>
+            </tbody>
+            
+          </table> -->
+
+        </div>
+      </div>
+
+    </div><!--end  promotinons content -->
+</div>

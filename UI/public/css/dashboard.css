@@ -1,0 +1,83 @@
+.dashboard-navbar{
+	 background: #e84c3d;
+}
+.dashboard-navbar .navbar-nav li> a{
+	color: white;
+}
+.dashboard-wrapper{
+	margin-top: 51px;
+}
+.dashboard-wrapper hr{
+	margin-top: 0px;
+}
+.dashboard-content-header{
+	font-weight: 500;
+}
+.nav-sidebar li a{
+	color: cadetblue;
+}
+/*.nav > li:active{
+	background-color: #000;
+}*/
+
+.form-group{
+	margin-bottom: 0px;
+}
+
+.dashboard-form-input{
+	background-color: transparent;
+	font-size: 12px;
+}
+.dashboard-table-btn{
+	padding: 0px 10px;
+    font-size: 11px;
+    line-height: 1.5;
+    border-radius: 0px;
+}
+.dashboard-table-data{
+	padding: 5px;
+}
+.table-content{
+	font-weight: 100;
+}
+.text-cadetblue{
+	color:cadetblue;
+}
+
+.reset-border-radius{
+	border-radius: 0;
+}
+
+li.active{
+	background-color: #000;
+	color: #fff;
+}
+
+
+.search-box .form-control{
+	height: 20px;
+	font-size: 16px;
+	color: silver;
+}
+
+.table-content .myGrid{
+	margin-top: 25px;
+	/*color: red;*/
+}
+
+.ui-grid-cell-contents .btn-sm{
+	background-color: transparent;
+	font-size: 15px;
+	line-height: 1;
+    border-radius: 0px;
+}
+
+.ui-grid-cell-contents .btn:focus,
+.ui-grid-cell-contents .btn:active:focus,
+.ui-grid-cell-contents .btn.active:focus,
+.ui-grid-cell-contents .btn.focus,
+.ui-grid-cell-contents .btn:active.focus,
+.ui-grid-cell-contents .btn.active.focus{
+	outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
