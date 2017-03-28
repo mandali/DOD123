@@ -2,7 +2,7 @@ package com.omniwyse.dod.AppConstants;
 
 
 public class AppConstants {	
-	public static final String REGISTER="/register";
+	public static final String REGISTER="/consumer/register";
 	public static final String AUTHENTICATE="/consumer/authenticate";
 	public static final String CONSUMER_REGISTER="/consumerRegistration";
 	public static final String CONSUMER_LOGIN="/consumer/login";
