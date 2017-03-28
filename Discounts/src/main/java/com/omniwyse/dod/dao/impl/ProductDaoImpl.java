@@ -17,7 +17,7 @@ import com.omniwyse.dod.model.Product;
 @Repository
 public class ProductDaoImpl implements ProductDao{
 	
-	private static final Logger logger = Logger.getLogger(ProductDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(ProductDaoImpl.class);
 	
 	@Autowired
 	SessionFactory sessionFactory;
@@ -36,7 +36,7 @@ public class ProductDaoImpl implements ProductDao{
 		product=(Product) session.get(Product.class, id);
 		}
 		catch(Exception exception){
-			logger.error("Exception in createProduct method"+exception.getMessage());
+			LOGGER.error("Exception in createProduct method"+exception.getMessage());
 		}
 		return product;
 	}
@@ -50,7 +50,7 @@ public class ProductDaoImpl implements ProductDao{
 		 resp=(MerchantProfile) query.uniqueResult();
 		}
 		catch(Exception exception){
-			logger.error("Exception in validate promotion method"+exception.getMessage());
+			LOGGER.error("Exception in validate promotion method"+exception.getMessage());
 		}
 		return resp;
 	}
@@ -85,7 +85,7 @@ public class ProductDaoImpl implements ProductDao{
 			product=(Product)query.uniqueResult();
 			
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}		
 		return product;
 	}

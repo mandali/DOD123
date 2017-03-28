@@ -106,7 +106,7 @@ public class DODController {
 	@Autowired
 	BrandService brandService;
 
-	private static final Logger logger = Logger.getLogger(DODController.class);
+	private static final Logger LOGGER = Logger.getLogger(DODController.class);
 
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	@RequestMapping(value = AppConstants.REGISTER, method = RequestMethod.POST)
@@ -128,13 +128,13 @@ public class DODController {
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.OTP_VALIDATE, method = RequestMethod.POST)
+	@RequestMapping(value = AppConstants.AUTHENTICATE, method = RequestMethod.POST)
 	public ResponseEntity getOTP(@RequestBody OTPValidation oTPValidation) {
 		final String METHOD_NAME = "getOTP";
 		ResponseEntity responseEntity = null;
@@ -150,7 +150,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -174,7 +174,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -195,7 +195,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -218,7 +218,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -240,7 +240,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -261,7 +261,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -285,7 +285,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -328,7 +328,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -374,7 +374,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -398,21 +398,20 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.MERCHANT_PROMOTION_MERCHANTID, method = RequestMethod.POST)
-	public ResponseEntity merchantPromotions(@RequestBody MerchantPromotions MerchantPromotions) {
+	@RequestMapping(value = AppConstants.MERCHANT_PROMOTION_MERCHANTID, method = RequestMethod.GET)
+	public ResponseEntity merchantPromotions(@PathVariable Integer merchantId) {
 		final String METHOD_NAME = "merchantPromotions";
-		ResponseEntity responseEntity = null;
-		Date date = new Date();
+		ResponseEntity responseEntity = null;		
 		List<PromotionDto> promotionDtos = new ArrayList<PromotionDto>();
 		PromotionDto promotionDto;
 		try {
-			List<Promotion> data = merchantService.merchatPromotion(MerchantPromotions, date);
+			List<Promotion> data = merchantService.merchatPromotion(merchantId);
 			if (!data.isEmpty()) {
 				for (Promotion response : data) {
 					promotionDto = new PromotionDto();
@@ -449,7 +448,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -491,7 +490,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -512,7 +511,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -533,7 +532,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 
@@ -583,17 +582,17 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.LIST_PROMOTIONS_CATEGORYID, method = RequestMethod.POST)
-	public ResponseEntity categoryIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {
+	@RequestMapping(value = AppConstants.LIST_PROMOTIONS_CATEGORYID, method = RequestMethod.GET)
+	public ResponseEntity categoryIdPromotion(@PathVariable Long categoryId) {
 		final String METHOD_NAME = "CategoryIdPromotion";
 		ResponseEntity responseEntity = null;
-		List<PromotionDto> promotions = promotionService.categoryIdPromotions(categoryPromotion);
+		List<PromotionDto> promotions = promotionService.categoryIdPromotions(categoryId);
 		try {
 			if (!promotions.isEmpty()) {
 
@@ -606,19 +605,19 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.LIST_BRANDID_PROMOTIONS, method = RequestMethod.POST)
-	public ResponseEntity brandIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {
+	@RequestMapping(value = AppConstants.LIST_BRANDID_PROMOTIONS, method = RequestMethod.GET)
+	public ResponseEntity brandIdPromotion(@PathVariable Long brandId) {
 		final String METHOD_NAME = "brandIdPromotion";
 		ResponseEntity responseEntity = null;
 
 		try {
-			List<PromotionDto> promotions = promotionService.brandIdPromotions(categoryPromotion);
+			List<PromotionDto> promotions = promotionService.brandIdPromotions(brandId);
 			if (!promotions.isEmpty()) {
 				DataResultlist<PromotionDto> resp = new DataResultlist<PromotionDto>(true,
 						AppConstants.AVAILABE_PROMOTIONS_SUCCESS_MSG, HttpStatus.OK.value(), promotions);
@@ -629,19 +628,20 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.LIST_BRANDID_CATEGORYID, method = RequestMethod.POST)
-	public ResponseEntity brandCatIdPromotion(@RequestBody CategoryPromotion categoryPromotion) {
+	@RequestMapping(value = AppConstants.LIST_BRANDID_CATEGORYID, method = RequestMethod.GET)
+	public ResponseEntity brandCatIdPromotion(@PathVariable Long categoryId , @PathVariable Long brandId) {
+		
 		final String METHOD_NAME = "brandCatIdPromotion";
 		ResponseEntity responseEntity = null;
 
 		try {
-			List<PromotionDto> promotions = promotionService.brandCatIdPromotion(categoryPromotion);
+			List<PromotionDto> promotions = promotionService.brandCatIdPromotion(categoryId ,brandId);
 			if (!promotions.isEmpty()) {
 				DataResultlist<PromotionDto> resp = new DataResultlist<PromotionDto>(true,
 						" available promotions are ... ", HttpStatus.OK.value(), promotions);
@@ -652,7 +652,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -679,7 +679,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -711,7 +711,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error(" Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error(" Exception in " + METHOD_NAME + "" + exception.getMessage());
 
 		}
 		return responseEntity;
@@ -737,19 +737,19 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.IDBASE_PROMOTIONS, method = RequestMethod.POST)
-	public ResponseEntity getIdbasePromotions(@RequestBody IdBasePromotion idBasePromotion) {
+	@RequestMapping(value = AppConstants.IDBASE_PROMOTIONS, method = RequestMethod.GET)
+	public ResponseEntity getIdbasePromotions(@PathVariable Integer promotionId) {
 		final String METHOD_NAME = "getIdbasePromotions";
 		ResponseEntity responseEntity = null;
 
 		try {
-			Promotion promotions = promotionService.idBasePromotions(idBasePromotion);
+			Promotion promotions = promotionService.idBasePromotions(promotionId);
 			if (promotions != null) {
 				DataResultEntity<Promotion> result = new DataResultEntity<Promotion>(true,
 						AppConstants.PROMOTION_SUCCESS_MSG, HttpStatus.OK.value(), promotions);
@@ -759,7 +759,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -768,7 +768,6 @@ public class DODController {
 	@RequestMapping(value = AppConstants.LIST_COUNTRIES, method = RequestMethod.GET)
 	public ResponseEntity fetchCountriesList() {
 		final String METHOD_NAME = "fetchCountriesList";
-
 		DataResultlist<CountryVO> result;
 		DataResult resultError;
 		ResponseEntity responseEntity = null;
@@ -799,14 +798,14 @@ public class DODController {
 			}
 
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_CITIES, method = RequestMethod.GET)
-	public ResponseEntity fetchCitiesList() {
+	public ResponseEntity fetchCitiesList(@PathVariable Long countryId) {
 		final String METHOD_NAME = "fetchCitiesList";
 
 		DataResultlist<CitiesVO> result;
@@ -815,7 +814,7 @@ public class DODController {
 		List<CitiesVO> citiesVOs = new ArrayList<CitiesVO>();
 		CitiesVO citiesVO;
 		try {
-			List<Cities> cities = locationService.fetchCitiesList();
+			List<Cities> cities = locationService.fetchCitiesList(countryId);
 			if (!cities.isEmpty()) {
 				for (Cities citiesLocal : cities) {
 					Calendar calendar = Calendar.getInstance();
@@ -838,14 +837,14 @@ public class DODController {
 				responseEntity = new ResponseEntity(resultError, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = AppConstants.LIST_LOCATIONS, method = RequestMethod.GET)
-	public ResponseEntity fetchLocationsList() {
+	public ResponseEntity fetchLocationsList(@PathVariable Long countryId , @PathVariable Long cityId) {
 		final String METHOD_NAME = "fetchLocationsList";
 
 		DataResultlist<LocationsVO> result = null;
@@ -854,7 +853,7 @@ public class DODController {
 		List<LocationsVO> locationsVOs = new ArrayList<LocationsVO>();
 		LocationsVO locationsVO;
 		try {
-			List<Location> locations = locationService.fetchLocationsList();
+			List<Location> locations = locationService.fetchLocationsList(countryId, cityId);
 			if (!locations.isEmpty()) {
 				for (Location location : locations) {
 					Calendar calendar = Calendar.getInstance();
@@ -881,7 +880,7 @@ public class DODController {
 
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -923,7 +922,7 @@ public class DODController {
 				responseEntity = new ResponseEntity(resultError, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -948,7 +947,7 @@ public class DODController {
 			}
 
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -973,14 +972,14 @@ public class DODController {
 			}
 
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.LIST_BRANDS, method = RequestMethod.GET)
-	public ResponseEntity fetchBrandsList() {
+	@RequestMapping(value = AppConstants.LIST_CATEGORY_BRANDS, method = RequestMethod.GET)
+	public ResponseEntity fetchBrandsListWithCategory() {
 		final String METHOD_NAME = "fetchBrandsList";
 
 		ResponseEntity<CategoryBrandVO> responseEntity = null;
@@ -999,21 +998,21 @@ public class DODController {
 			}
 
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = AppConstants.LIST_MERCHANT_PRODUCTS, method = RequestMethod.POST)
-	public ResponseEntity fetchMerchatProducts(@RequestBody ProductVO productVO) {
+	@RequestMapping(value = AppConstants.LIST_MERCHANT_PRODUCTS, method = RequestMethod.GET)
+	public ResponseEntity fetchMerchatProducts(@PathVariable Integer merchantId) {
 		final String METHOD_NAME = "fetchMerchatProducts";
 
 		ResponseEntity<ProductVO> responseEntity = null;
 		DataResultlist<ProductVO> result;
 		DataResult resultError;
 		try {
-			List<ProductVO> productVOs = metaDataService.fetchMerchantProducts(productVO);
+			List<ProductVO> productVOs = metaDataService.fetchMerchantProducts(merchantId);
 			if (!productVOs.isEmpty()) {
 				result = new DataResultlist<ProductVO>(true, AppConstants.LIST_MERCHANT_PRODUCTS_SUCCESS_MSG,
 						HttpStatus.OK.value(), productVOs);
@@ -1024,7 +1023,7 @@ public class DODController {
 				return new ResponseEntity(resultError, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -1045,17 +1044,17 @@ public class DODController {
 							HttpStatus.OK.value());
 					return new ResponseEntity(result, HttpStatus.OK);
 				} else {
-					DataResult result = new DataResult(true, " Sorry , Please check merchantId/productId   ",
+					DataResult result = new DataResult(true, " Sorry , Please check merchantId/productName    ",
 							HttpStatus.OK.value());
 					return new ResponseEntity(result, HttpStatus.OK);
 				}
 			} else {
-				DataResult result = new DataResult(true, "Sorry , Please check merchantId/productId    ",
+				DataResult result = new DataResult(true, "Sorry , Please check merchantId/productName    ",
 						HttpStatus.OK.value());
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -1077,7 +1076,7 @@ public class DODController {
 				return new ResponseEntity(result, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -1111,7 +1110,7 @@ public class DODController {
 				return new ResponseEntity(resultError, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -1133,7 +1132,7 @@ public class DODController {
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -1155,7 +1154,7 @@ public class DODController {
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return responseEntity;
 	}
@@ -1168,7 +1167,7 @@ public class DODController {
 		try {
 			flag = merchantService.updateMerchant(id, merchantProfileVo);
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}		
 		if (flag == true) {
 			DataResult dataResult = new DataResult(true, AppConstants.MERCHANT_UPDATE_SUCCESS_MSG,
@@ -1198,7 +1197,7 @@ public class DODController {
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			}
 		} catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}		
 		return responseEntity; 
 	}
@@ -1226,7 +1225,7 @@ public class DODController {
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			}
 		} catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}		
 		return responseEntity; 
 	}
@@ -1254,7 +1253,7 @@ public class DODController {
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			}
 		} catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}		
 		return responseEntity; 
 	}
@@ -1282,7 +1281,7 @@ public class DODController {
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			}
 		} catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}		
 		return responseEntity; 
 	}
@@ -1312,7 +1311,7 @@ public class DODController {
 				return new ResponseEntity(dataResult, HttpStatus.OK);
 			}
 		} catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}		
 		return responseEntity; 
 	}

@@ -26,14 +26,14 @@ public class LocationServiceImpl implements LocationService{
 		return locationDao.fetchCountriesList();
 	}
 		
-	public List<Cities> fetchCitiesList() {
+	public List<Cities> fetchCitiesList(Long countryId) {
 		// TODO Auto-generated method stub
-		return locationDao.fetchCitiesList();
+		return locationDao.fetchCitiesList(countryId);
 	}
 		
-	public List<Location> fetchLocationsList() {
+	public List<Location> fetchLocationsList(Long countryId, Long cityId) {
 		// TODO Auto-generated method stub
-		return locationDao.fetchLocationsList();
+		return locationDao.fetchLocationsList(countryId, cityId);
 	}
 
 	public Location fetchLocation(Long id) {

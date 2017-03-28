@@ -11,7 +11,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.dao.MerchantDao;
@@ -19,7 +18,6 @@ import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
-import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Location;
 import com.omniwyse.dod.model.MerchantProfile;
 import com.omniwyse.dod.model.MerchantPromotionBeacon;
@@ -30,7 +28,7 @@ import com.omniwyse.dod.model.PromotionSummary;
 @Repository
 public class PromotionsDaoImpl implements PromotionsDao{
 	
-	private static final Logger logger = Logger.getLogger(PromotionsDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(PromotionsDaoImpl.class);
 	
 	@Autowired
 	SessionFactory sessionFactory;
@@ -45,7 +43,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		Session session = this.sessionFactory.getCurrentSession();		
 		list = session.createQuery(" from Promotion ").list();
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return list;	
 	}
@@ -60,7 +58,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 				.setParameter("name", categorySelection.getCategoryname().trim())
 				.setParameter("currentDate", currentdate).list();	
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return list;
 	}
@@ -91,20 +89,20 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		Integer id = (Integer) session.save(promotion);
 		resp=(Promotion) session.get(Promotion.class, id);
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
 		}
 		return resp;
 		}
 
-	public Promotion getIdbasePromotion(IdBasePromotion idBasePromotion) {
+	public Promotion getIdbasePromotion(Integer promotionId) {
 		final String METHOD_NAME="getIdbasePromotion";
 		Promotion resp = null;
 		try{
 		Session session = this.sessionFactory.getCurrentSession();	
-		Query query=(Query)session.createQuery(" from Promotion where id=:id").setParameter("id",idBasePromotion.getPromotion_id());
+		Query query=(Query)session.createQuery(" from Promotion where id=:id").setParameter("id",promotionId);
 		resp=(Promotion)((org.hibernate.Query) query).uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
 		}
 		return resp;
 	}
@@ -117,7 +115,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 		Session session = this.sessionFactory.getCurrentSession();			
 		list = session.createQuery(" from Promotionsummary ").list();
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
 		}
 		return list;
 	}
@@ -131,7 +129,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 				.setParameter("categoryId",Long.valueOf(createPromotionVo.getCatid()));
 		category =(Category)query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return category;
 	}
@@ -144,18 +142,18 @@ public class PromotionsDaoImpl implements PromotionsDao{
 				.setParameter("brandId",Long.valueOf(createPromotionVo.getBrandId()));
 		brand =(Brand)query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return brand;
 	}	
 	@SuppressWarnings({"unchecked" })
-	public List<PromotionDto> categoryIdPromotion(CategoryPromotion categoryPromotion) {	
+	public List<PromotionDto> categoryIdPromotion(Long categoryId) {	
 		final String METHOD_NAME="CategoryIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
 		try{
 		Session session = this.sessionFactory.getCurrentSession();	
 		List<Promotion> promotions =session.createQuery("select distinct p from Promotion p where p.catid.categoryId=:id")
-				.setParameter("id" ,categoryPromotion.getCategoryId()).list();	
+				.setParameter("id" ,categoryId).list();	
 		for(Promotion promotion:promotions){
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());
@@ -181,7 +179,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDtos.add(promotionDto);	
 		}
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return promotionDtos;			
 	}
@@ -189,12 +187,12 @@ public class PromotionsDaoImpl implements PromotionsDao{
 	
 	
 	@SuppressWarnings({ "unchecked"})
-	public List<PromotionDto> brandIdPromotion(CategoryPromotion categoryPromotion) {
+	public List<PromotionDto> brandIdPromotion(Long brandId) {
 		final String METHOD_NAME="brandIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
 		try{
 		Session session = this.sessionFactory.getCurrentSession();			
-		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:id").setParameter("id" , categoryPromotion.getBrandId()).list();		
+		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:id").setParameter("id" , brandId).list();		
 		for(Promotion promotion:promotions){
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());
@@ -220,19 +218,19 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDtos.add(promotionDto);	
 		}
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return promotionDtos;	
 	}
 		
 	@SuppressWarnings("unchecked")
-	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion) {
+	public List<PromotionDto> brandCatIdPromotion(Long categoryId, Long brandId) {
 		final String METHOD_NAME="brandIdPromotion";
 		List<PromotionDto>  promotionDtos=new ArrayList<PromotionDto>();
 		try{
 		Session session = this.sessionFactory.getCurrentSession();			
 		List<Promotion> promotions = session.createQuery("select distinct p from Promotion p where p.brandId.brandId=:brandId and p.catid.categoryId=:categoryId")
-				.setParameter("brandId" , categoryPromotion.getBrandId()).setParameter("categoryId",categoryPromotion.getCategoryId()).list();		
+				.setParameter("brandId" , categoryId).setParameter("categoryId",brandId).list();		
 		for(Promotion promotion:promotions){
 			PromotionDto promotionDto=new PromotionDto();
 			promotionDto.setId(promotion.getId());
@@ -258,7 +256,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			promotionDtos.add(promotionDto);	
 		}
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}
 		return promotionDtos;
 	}
@@ -274,7 +272,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			
 		}
 		catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 		}		
 		return product;
 	}
@@ -320,7 +318,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 			session.saveOrUpdate(resp);			
 			
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 			flag=false;	
 		}
 		return flag;
@@ -347,7 +345,7 @@ public class PromotionsDaoImpl implements PromotionsDao{
 				flag=false;
 			}
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 			flag=false;	
 		}
 		return flag;

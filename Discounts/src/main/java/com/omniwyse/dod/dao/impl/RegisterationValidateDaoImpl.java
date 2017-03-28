@@ -19,7 +19,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	private static final Logger logger = Logger.getLogger(RegisterationValidateDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(RegisterationValidateDaoImpl.class);
 
 	public ConsumerProfile getmobilenoandemail(ConsumerProfile consumerProfile) {
 		final String METHOD_NAME="getmobilenoandemail";
@@ -31,7 +31,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 				.setParameter("emailid",consumerProfile.getEmail_id().trim());		
 		 resp=(ConsumerProfile)query.uniqueResult();	
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
 		}
 		return resp;		
 	}
@@ -46,7 +46,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 				.setParameter("emailid", merchantProfile.getEmailid().trim());
 		 resp=(MerchantProfile)query.uniqueResult();
 			}catch(Exception  exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
 		}
 		return resp;
 	}
@@ -60,7 +60,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 				.setParameter("userid", RegisterWithOtp.getUser_id().trim());
 		resp=(RegisterWithOtp)query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
 
 		}
 		return resp;
@@ -76,7 +76,7 @@ public class RegisterationValidateDaoImpl implements RegisterationValidateDao {
 				.setParameter("mobile", oTPValidation.getMobile().trim());
 		resp=(RegisterWithOtp)query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
 
 		}
 		return resp;

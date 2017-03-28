@@ -3,13 +3,11 @@ package com.omniwyse.dod.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
-import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.PromotionSummary;
@@ -22,7 +20,7 @@ public List<Promotion> getPromotions();
 	
 	public Promotion createPromotions(CreatePromotionVo createPromotionVo); 
 	
-	public Promotion getIdbasePromotion(IdBasePromotion idBasePromotion);
+	public Promotion getIdbasePromotion(Integer promotionId);
 
 	public List<PromotionSummary> promotionSummary(Date date);
 	
@@ -32,11 +30,11 @@ public List<Promotion> getPromotions();
 	
 	public Product fetchProductById(CreatePromotionVo createPromotionVo);	
 	
-	public List<PromotionDto> categoryIdPromotion(CategoryPromotion categoryPromotion );
+	public List<PromotionDto> categoryIdPromotion(Long categoryId );
 	
-	public List<PromotionDto> brandIdPromotion(CategoryPromotion categoryPromotion );
+	public List<PromotionDto> brandIdPromotion(Long brandId );
 	
-	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion );
+	public List<PromotionDto> brandCatIdPromotion(Long categoryId, Long brandId );
 	
 	public boolean updatePromotions(Long id,CreatePromotionVo createPromotionVo);
 	

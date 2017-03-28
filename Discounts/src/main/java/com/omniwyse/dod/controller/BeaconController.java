@@ -38,7 +38,7 @@ import com.omniwyse.dod.service.MetaDataService;
 @RestController
 public class BeaconController {
 
-	private static final Logger logger = Logger.getLogger(BeaconController.class);
+	private static final Logger LOGGER = Logger.getLogger(BeaconController.class);
 	private static final String CLASS_NAME = BeaconController.class.getName();
 	@Autowired
 	MetaDataService metaDataService;
@@ -78,9 +78,9 @@ public class BeaconController {
 			}
 
 		} catch (Exception exception) {
-			logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
+			LOGGER.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
 		}
-		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
+		LOGGER.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
 		return responseEntity;
 
 	}
@@ -95,7 +95,7 @@ public class BeaconController {
 		List<MerchantAisle> aisles = null;
 		DataResultlist<AliseVO> result;
 		try {
-			logger.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
+			LOGGER.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
 			if (ialiseVO.getMerchantId() != null && !ialiseVO.getMerchantId().isEmpty()) {
 
 				aisles = metaDataService.fetchAisle(ialiseVO.getMerchantId());
@@ -130,10 +130,10 @@ public class BeaconController {
 		}
 
 		catch (Exception exception) {
-			logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
+			LOGGER.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
 		}
 
-		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
+		LOGGER.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
 
 		return responseEntity;
 	}
@@ -148,7 +148,7 @@ public class BeaconController {
 		List<BeaconVO> beaconVOs = null;
 		DataResultlist<BeaconVO> result;
 		try {
-			logger.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
+			LOGGER.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
            if(merchantId.getMerchantId()!=null && !merchantId.getMerchantId().isEmpty()){
 			List<MerchantBeacon> beacons = metaDataService.fetchMerchantBeacons(merchantId.getMerchantId());
 			beaconVOs = new ArrayList<BeaconVO>();
@@ -176,9 +176,9 @@ public class BeaconController {
 			}
 
 		} catch (Exception exception) {
-			logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
+			LOGGER.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
 		}
-		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
+		LOGGER.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
 		return responseEntity;
 
 	}
@@ -209,14 +209,14 @@ public class BeaconController {
 		List<MerchantPromotionBeacon> merchantPromotionBeacons = null;
 		StringBuilder validData;
 		try {
-			logger.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
+			LOGGER.debug("Entering " + CLASS_NAME + " " + METHOD_NAME);
 			try {
 				token = new TypeToken<List<IBeaconVO>>() {
 				};
 				iBeaconVOs = gson.fromJson(jsonArray, token.getType());
 			} catch (Exception exception) {
 				parseFlag = true;
-				logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
+				LOGGER.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
 			}
 			if (iBeaconVOs != null && !iBeaconVOs.isEmpty() && !parseFlag) {
 
@@ -400,9 +400,9 @@ public class BeaconController {
 			}
 
 		} catch (Exception exception) {
-			logger.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
+			LOGGER.error("Exception in " + CLASS_NAME + " + METHOD_NAME + " + exception.getMessage());
 		}
-		logger.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
+		LOGGER.debug("Exiting " + CLASS_NAME + " " + METHOD_NAME);
 
 		return responseEntity;
 

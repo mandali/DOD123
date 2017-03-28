@@ -20,7 +20,6 @@ import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
-import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.service.MerchantService;
@@ -79,9 +78,9 @@ public class MerchantServiceImpl implements MerchantService{
 		return MerchantDao.getMerchantbyID(id);
 	}
 		
-	public List<Promotion> merchatPromotion(MerchantPromotions MerchantPromotions, Date date) {
+	public List<Promotion> merchatPromotion(Integer merchantId) {
 		
-		 return MerchantDao.merchantPromotions(MerchantPromotions, date);
+		 return MerchantDao.merchantPromotions(merchantId);
 	}
 
 	public MerchantProfile getMerchant(MerchantLogin MerchantLogin) {

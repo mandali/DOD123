@@ -1,6 +1,5 @@
 package com.omniwyse.dod.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import com.omniwyse.dod.DTO.CreatePromotionVo;
@@ -12,7 +11,6 @@ import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
-import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.Promotion;
 
 public interface MerchantDao {
@@ -35,7 +33,7 @@ public interface MerchantDao {
 	
 	public MerchantProfile getMerchantbyID(Integer id);
 	
-	public List<Promotion> merchantPromotions(MerchantPromotions MerchantPromotions , Date date); 	
+	public List<Promotion> merchantPromotions(Integer merchantId); 	
 	
 	public MerchantProfile validatePromotion(CreatePromotionVo createPromotionVo);
 	

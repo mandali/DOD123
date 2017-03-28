@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.omniwyse.dod.DTO.CategoryPromotion;
 import com.omniwyse.dod.DTO.CreatePromotionVo;
 import com.omniwyse.dod.DTO.PromotionDto;
 import com.omniwyse.dod.dao.MerchantDao;
@@ -16,7 +15,6 @@ import com.omniwyse.dod.dao.PromotionsDao;
 import com.omniwyse.dod.model.Brand;
 import com.omniwyse.dod.model.Category;
 import com.omniwyse.dod.model.CategorySelection;
-import com.omniwyse.dod.model.IdBasePromotion;
 import com.omniwyse.dod.model.Product;
 import com.omniwyse.dod.model.Promotion;
 import com.omniwyse.dod.model.PromotionSummary;
@@ -52,9 +50,9 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotionsDao.createPromotions(createPromotionVo);
 	}		
 
-	public Promotion idBasePromotions(IdBasePromotion idBasePromotion) {
+	public Promotion idBasePromotions(Integer promotionId) {
 		
-		return promotionsDao.getIdbasePromotion(idBasePromotion);
+		return promotionsDao.getIdbasePromotion(promotionId);
 	}	
 
 	public List<PromotionSummary> promotionSummary(String date) {
@@ -62,20 +60,20 @@ public class PromotionServiceImpl implements PromotionService{
 		return promotionsDao.promotionSummary(date1);
 	}	
 
-	public List<PromotionDto> categoryIdPromotions(CategoryPromotion categoryPromotion) {
+	public List<PromotionDto> categoryIdPromotions(Long categoryId) {
 		
-		return promotionsDao.categoryIdPromotion(categoryPromotion);
+		return promotionsDao.categoryIdPromotion(categoryId);
 		
 	}	
 
-	public List<PromotionDto> brandIdPromotions(CategoryPromotion categoryPromotion) {
+	public List<PromotionDto> brandIdPromotions(Long brandId) {
 		
-		return promotionsDao.brandIdPromotion(categoryPromotion);
+		return promotionsDao.brandIdPromotion(brandId);
 	}	
 
-	public List<PromotionDto> brandCatIdPromotion(CategoryPromotion categoryPromotion) {
+	public List<PromotionDto> brandCatIdPromotion(Long categoryId, Long brandId) {
 		
-		return promotionsDao.brandCatIdPromotion(categoryPromotion);
+		return promotionsDao.brandCatIdPromotion(categoryId, brandId);
 	}
 
 	public Category getcategoryId(CreatePromotionVo createPromotionVo) {

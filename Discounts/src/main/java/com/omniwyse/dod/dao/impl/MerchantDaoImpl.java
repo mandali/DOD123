@@ -1,6 +1,5 @@
 package com.omniwyse.dod.dao.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -20,7 +19,6 @@ import com.omniwyse.dod.model.MerchantLogin;
 import com.omniwyse.dod.model.MerchantLoginwithEmail;
 import com.omniwyse.dod.model.MerchantLoginwithMobile;
 import com.omniwyse.dod.model.MerchantProfile;
-import com.omniwyse.dod.model.MerchantPromotions;
 import com.omniwyse.dod.model.Promotion;
 
 @Repository
@@ -28,7 +26,7 @@ public class MerchantDaoImpl implements MerchantDao{
 	
 	@Autowired
 	SessionFactory sessionFactory;
-	private static final Logger logger = Logger.getLogger(MerchantDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(MerchantDaoImpl.class);
 	public MerchantProfile registermerchant(MerchantProfile merchantProfile) {
 		final String METHOD_NAME = "registermerchant";
 		MerchantProfile resp = null;
@@ -38,7 +36,7 @@ public class MerchantDaoImpl implements MerchantDao{
 			resp=(MerchantProfile) session.get(MerchantProfile.class, id);
 		}catch(Exception exception)
 		{
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());		
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());		
 		}
 			return resp;	
 		}
@@ -52,7 +50,7 @@ public class MerchantDaoImpl implements MerchantDao{
 				.setParameter("mobileno",getMerchantById.getMobilenumber() );	
 		 resp=(MerchantProfile) query.uniqueResult();
 		}catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
 		}
 		return resp;
 	}
@@ -66,7 +64,7 @@ public class MerchantDaoImpl implements MerchantDao{
 				.setParameter("id",getMerchantById );	
 		resp=(MerchantProfile) query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
 		}
 		return resp;
 	}
@@ -79,7 +77,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		Query query=(Query) session.createQuery("from MerchantProfile where mobilenumber=:mobile").setParameter("mobile", MerchantLogin.getMobileno());
 		MerchantProfile=(MerchantProfile)query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
 		}
 		return MerchantProfile;
 	}
@@ -94,7 +92,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		.setParameter("password", merchantLogin.getPassword().trim());		
 		resp=(MerchantProfile)query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());	
 		}
 		return resp;
 	}
@@ -109,7 +107,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		query.setParameter("emalid", merchantLoginwithEmail.getEmail());
 		resp=(MerchantProfile) query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
 	}		
@@ -123,7 +121,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		query.setParameter("mobile", merchantLoginwithMobile.getMobileno().trim());
 		resp=(MerchantProfile) query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
 	}		
@@ -136,7 +134,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		query.setParameter("mobileno", getMerchatProfile.getMobileno());		
 		resp=(MerchantProfile) query.uniqueResult();
 		}catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
 	}		
@@ -148,19 +146,19 @@ public class MerchantDaoImpl implements MerchantDao{
 			Session session = this.sessionFactory.getCurrentSession();			
 		list = session.createQuery(" from MerchantProfile ").list();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return list;
 	}		
 	@SuppressWarnings("unchecked")
-	public List<Promotion> merchantPromotions(MerchantPromotions MerchantPromotions, Date date) {
+	public List<Promotion> merchantPromotions(Integer merchantId) {
 		final String METHOD_NAME = "MerchantPromotions";
 		List<Promotion> list = null;
 		try{
 			Session session = this.sessionFactory.getCurrentSession();		
-		list= session.createQuery(" from Promotion p where p.merchatId.id=:merchantId").setParameter("merchantId",MerchantPromotions.getId()).list();
+		list= session.createQuery(" from Promotion p where p.merchatId.id=:merchantId").setParameter("merchantId",merchantId).list();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return list;
 	}		
@@ -174,7 +172,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		 resp=(MerchantProfile) query.uniqueResult();
 		}
 		catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
 	}
@@ -189,7 +187,7 @@ public class MerchantDaoImpl implements MerchantDao{
 		 resp=(Location) query.uniqueResult();
 		}
 		catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
 	}
@@ -208,22 +206,23 @@ public class MerchantDaoImpl implements MerchantDao{
 				merchantProfile.setBusinessname(merchantProfileVo.getBusinessname());
 				merchantProfile.setBusinessoffaddr(merchantProfileVo.getBusinessoffaddr());
 				merchantProfile.setLandlineno(merchantProfileVo.getLandlineno());
-				merchantProfile.setCity(merchantProfileVo.getCity());
-				merchantProfile.setState(merchantProfileVo.getState());
-				merchantProfile.setCountry(merchantProfileVo.getCountry());
-				merchantProfile.setState(merchantProfileVo.getStreet());
 				merchantProfile.setTown(merchantProfileVo.getTown());
 				merchantProfile.setZipcode(merchantProfileVo.getZipcode());
 				merchantProfile.setDescription(merchantProfileVo.getDescription());
 				merchantProfile.setTags(merchantProfileVo.getTags());
+				merchantProfile.setLogo(merchantProfileVo.getLogo());
 				merchantProfile.setNickname(merchantProfileVo.getNickname());
+				merchantProfile.setStreet(merchantProfileVo.getStreet());
+				merchantProfile.setCity(merchantProfileVo.getCity());
+				merchantProfile.setState(merchantProfileVo.getState());
+				merchantProfile.setCountry(merchantProfileVo.getCountry());				
 				session.saveOrUpdate(merchantProfile);	
 			}else{
 				flag=false;				
 			}
 			
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 			flag=false;	
 		}
 		return flag;
@@ -242,7 +241,7 @@ public class MerchantDaoImpl implements MerchantDao{
 				flag=false;
 			}			
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 			flag=false;	
 		}
 		

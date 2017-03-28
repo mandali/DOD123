@@ -43,7 +43,7 @@ import com.omniwyse.dod.model.Promotion;
 @Repository
 public class MetaDataDaoImpl implements MetaDataDao {
 
-	private static final Logger logger = Logger.getLogger(MetaDataDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(MetaDataDaoImpl.class);
 
 	@SuppressWarnings("unused")
 	private static final String MerchantProfile = null;
@@ -61,7 +61,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		Query query = (Query) session.createQuery("from Category c order by c.categoryRank desc");
 		categories = (List<Category>) query.list();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 
 		return categories;
@@ -128,14 +128,14 @@ public class MetaDataDaoImpl implements MetaDataDao {
 				}			
 			}
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		} 
 		return categoryVOs;
 	}
 	
 
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
-	public List<ProductVO> fetchMerchantProducts(ProductVO productVO) {
+	public List<ProductVO> fetchMerchantProducts(Integer merchantId) {
 		Session session;
 		Query query;
 		List<MerchantProfile> merchantProfiles = null;
@@ -149,7 +149,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		{
 		session = this.sessionFactory.getCurrentSession();
 		query =  (Query)session.createQuery(" from MerchantProfile m where m.id=:merchantId ");
-		query.setParameter("merchantId",Integer.valueOf(productVO.getMerchantId()));
+		query.setParameter("merchantId",merchantId);
 		objects = query.list();
 		Iterator iterator = objects.iterator();
 		while (iterator.hasNext()) {
@@ -172,7 +172,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 	}
 		catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		
 		return productVOs;
@@ -195,7 +195,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		Long id = (Long) session.save(location);
 		resp=(Location) session.get(Location.class, id);
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;		
 	}
@@ -223,7 +223,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		}
 		catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return mpbObjects;
 	}
@@ -271,7 +271,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			mpbObjects.add(cities);
 		}
 		catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return mpbObjects;
 	}
@@ -302,7 +302,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		resp=(MerchantPromotionBeacon) session.get(MerchantPromotionBeacon.class, id);	
 		}
 		catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
 	}
@@ -316,7 +316,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		Session session = this.sessionFactory.getCurrentSession();
 		result= session.createSQLQuery(" SELECT p.PRMS_ID as promotionId,p.Merchant_ID as merchantId,p.LO_ID as location  FROM dod_db.promotions p where p.PRMS_ID not in(select m.P_ID from merchant_pm_bc m);").list();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}		
 		return result;
 	}
@@ -331,7 +331,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			beacons=session.createQuery(" from Beacon ").list();
 		}
 		catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		
 		return beacons;
@@ -348,7 +348,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 		}
 		
 		catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return aisles;
 		
@@ -365,7 +365,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			
 		}catch(Exception exception){
 			
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}		
 		return brandVOs;
 	}
@@ -387,7 +387,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			resp = (Brand) session.get(Brand.class, id);			
 		}
 		catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}		
 		return resp;
 	}
@@ -399,7 +399,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			Query query=(Query) session.createQuery(" from Brand where brandName=:brandname").setParameter("brandname", brand.getBrandName());
 			brandname=(Brand) query.uniqueResult();			
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return brandname;
 	}
@@ -419,7 +419,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 			query.setParameterList("beaconminors", minor);
 			beacons = query.list();
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return beacons;
 	}
@@ -434,7 +434,7 @@ public class MetaDataDaoImpl implements MetaDataDao {
 					.setParameter("merchantId", Integer.valueOf(merchantId));
 			beacons = query.list();
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return beacons;
 	}

@@ -24,7 +24,7 @@ public interface MetaDataDao {
 	
 	public List<BrandVO> listBrands();
 	
-	public List<ProductVO> fetchMerchantProducts(ProductVO productVO); 
+	public List<ProductVO> fetchMerchantProducts(Integer merchantId); 
 	
 	public Location createLocation(LocationVO locationVo) ;
 		

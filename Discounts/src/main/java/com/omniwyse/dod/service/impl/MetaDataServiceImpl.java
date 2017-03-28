@@ -41,9 +41,9 @@ public class MetaDataServiceImpl implements MetaDataService {
 	public List<CategoryBrandVO> fetchBrands() {
 		return metaDataDao.fetchBrands();
 	}
-	public List<ProductVO> fetchMerchantProducts(ProductVO productVO) {
+	public List<ProductVO> fetchMerchantProducts(Integer merchantId) {
 		
-		return metaDataDao.fetchMerchantProducts(productVO);
+		return metaDataDao.fetchMerchantProducts(merchantId);
 	}
 	public Product createProduct(NewProductVO newProductVO,MerchantProfile merchantProfile) {
 		// TODO Auto-generated method stub

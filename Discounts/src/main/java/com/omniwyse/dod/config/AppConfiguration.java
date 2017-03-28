@@ -15,10 +15,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 	})
 @EnableTransactionManagement
 public class AppConfiguration {
-	private static final Logger logger = Logger.getLogger(AppConfiguration.class);
+	private static final Logger LOGGER = Logger.getLogger(AppConfiguration.class);
 
 	public AppConfiguration() {
-		logger.info("AppConfiguration loading..");
+		LOGGER.info("AppConfiguration loading..");
 
 	}
 

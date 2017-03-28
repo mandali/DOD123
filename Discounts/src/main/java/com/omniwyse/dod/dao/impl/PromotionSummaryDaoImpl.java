@@ -19,7 +19,7 @@ import com.omniwyse.dod.model.RegisterWithOtp;
 @Repository
 public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 	
-	private static final Logger logger = Logger.getLogger(PromotionSummaryDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(PromotionSummaryDaoImpl.class);
 	
 	@Autowired
 	SessionFactory sessionFactory;
@@ -33,7 +33,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 			promotions = session.createSQLQuery("select max(p.DISCOUNT),min(p.DISCOUNT),count(p.DISCOUNT),p.BRD_ID , p.CAT_ID from promotions p group by p.BRD_ID").list();			
 		}catch(Exception exception)
 		{			
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());			
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());			
 		}		
 		return promotions;
 	}	
@@ -49,7 +49,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 					.setParameter("id",brandIds);
 			brand =(Brand)query.uniqueResult();						
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());	
 		}		
 		return brand;
 	}
@@ -66,7 +66,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 			
 		}catch(Exception exception)
 		{
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 			
 		}
 		
@@ -83,7 +83,7 @@ public class PromotionSummaryDaoImpl implements PromotionSummaryDao{
 			}
 						
 		}catch(Exception exception){
-			logger.error("Exception in "+METHOD_NAME+""+exception.getMessage());
+			LOGGER.error("Exception in "+METHOD_NAME+""+exception.getMessage());
 			flag=true;			
 		}	
 		return flag;		

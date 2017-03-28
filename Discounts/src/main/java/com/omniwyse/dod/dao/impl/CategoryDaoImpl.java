@@ -12,7 +12,7 @@ import com.omniwyse.dod.model.Category;
 @Repository
 public class CategoryDaoImpl implements CategoryDao{
 	
-	private static final Logger logger = Logger.getLogger(ConsumerDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(ConsumerDaoImpl.class);
 
 	@Autowired
 	SessionFactory sessionFactory;	
@@ -25,7 +25,7 @@ public class CategoryDaoImpl implements CategoryDao{
 			Query query=(Query) session.createQuery("from Category where categoryId=:id").setParameter("id", id);
 			category=(Category)query.uniqueResult();			
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}		
 		return category;		
 	}

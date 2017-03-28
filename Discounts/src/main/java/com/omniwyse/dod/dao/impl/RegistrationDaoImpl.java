@@ -15,7 +15,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	private static final Logger logger = Logger.getLogger(RegistrationDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(RegistrationDaoImpl.class);
 
 	public RegisterWithOtp register(RegisterWithOtp registerWithOtp) {
 		final String METHOD_NAME = "register";
@@ -26,7 +26,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			Integer id = (Integer) session.save(registerWithOtp);
 			reg = (RegisterWithOtp) session.get(RegisterWithOtp.class, id);
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return reg;
 	}
@@ -39,7 +39,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			Integer id = (Integer) session.save(userProfile);
 			resp = (UserProfile) session.get(UserProfile.class, id);
 		} catch (Exception exception) {
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 
 		}
 		return resp;

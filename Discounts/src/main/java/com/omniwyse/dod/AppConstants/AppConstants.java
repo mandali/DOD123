@@ -1,41 +1,38 @@
 package com.omniwyse.dod.AppConstants;
 
-/*
- *   api.dod.omniwyse.com/deals/v1/
- * 
- */
+
 public class AppConstants {	
 	public static final String REGISTER="/register";
-	public static final String OTP_VALIDATE="/otpvalidate";
+	public static final String AUTHENTICATE="/consumer/authenticate";
 	public static final String CONSUMER_REGISTER="/consumerRegistration";
-	public static final String CONSUMER_LOGIN="/consumerlogin";
+	public static final String CONSUMER_LOGIN="/consumer/login";
 	public static final String CONSUMER_EMAIL_LOGIN="/consumeremaillogin";
 	public static final String CONSUMER_MOBILE_LOGIN="/consumermobilelogin";	
 	public static final String CONSUMER_PROFILE="/consumerProfile";
-	public static final String MERCHANT_REGISTER="/merchantRegistration";
-	public static final String LIST_PROMOTIONS_CATEGORYID="/promotion/categoryId"; 	
-	public static final String IDBASE_PROMOTIONS="/IdBasePromotions";	
+	public static final String MERCHANT_REGISTER="/merchant/register";
+	public static final String LIST_PROMOTIONS_CATEGORYID="/promotion/category/{categoryId}"; 	
+	public static final String IDBASE_PROMOTIONS="/promotion/{promotionId}";	
 	public static final String MERCHANT_EMAIL_LOGIN="/merchantemaillogin";
 	public static final String MERCHANT_MOBILE_LOGIN="/merchantmobilelogin";	
-	public static final String MERCHANT_PROFILE="/merchantProfile";	
-	public static final String MERCHANT_LOGIN="/merchantlogin";
-	public static final String PROMOTION_SUMMERY="/promotionsummary";	
+	public static final String MERCHANT_PROFILE="/merchant/profile";	
+	public static final String MERCHANT_LOGIN="/merchant/login";
+	public static final String PROMOTION_SUMMERY="/promotion/summary";	
 	public static final String LIST_COUNTRIES="/countries";
-	public static final String LIST_CITIES="/cities";
-	public static final String LIST_LOCATIONS="/locations";
-	public static final String MERCHANT_LIST="/merchantlist";	
+	public static final String LIST_CITIES="/countries/{countryId}/cities";
+	public static final String LIST_LOCATIONS="countries/{countryId}/cities/{cityId}/locations";
+	public static final String MERCHANT_LIST="/merchants";	
 	
-	public static final String LIST_MERCHANT_PRODUCTS="/merchantproducts";
-	public static final String LIST_BRANDID_CATEGORYID="/brandcatidpromotion"; 
+	public static final String LIST_MERCHANT_PRODUCTS="/merchant/{merchantId}/products";
+	public static final String LIST_BRANDID_CATEGORYID="/promotion/category/{categoryId}/brand/{brandId}"; 
 	public static final String CREATE_PROMOTION="/promotion";
-	public static final String LIST_BRANDID_PROMOTIONS="/promotion/brandId";
-	public static final String MERCHANT_PROMOTION_MERCHANTID="/promotion/merchantid";
+	public static final String LIST_BRANDID_PROMOTIONS="/promotion/brand/{brandId}";
+	public static final String MERCHANT_PROMOTION_MERCHANTID="/merchant/{merchantId}/promotions";
 	public static final String LIST_CATEGORIES="/categories";
-	public static final String CREATE_BRANDS="/createbrands";
-	public static final String CREATE_PRODUCTS="/createproduct";
+	public static final String CREATE_BRANDS="/brand";
+	public static final String CREATE_PRODUCTS="/product";
 	public static final String CREATE_LOCATION="/createlocation";	
-	public static final String LIST_BRANDS="/brands";
-	public static final String LIST_All_BRANDS="/listbrands";
+	public static final String LIST_CATEGORY_BRANDS="/category/brands";
+	public static final String LIST_All_BRANDS="/brands";
 	public static final String LIST_PROMOTIONS="/promotions";
 	public static final String PROMOTION_RESOURCE_URL="/promotion/{id}";
 	

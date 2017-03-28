@@ -16,7 +16,7 @@ import com.omniwyse.dod.model.MerchantPromotionBeacon;
 @Repository
 public class MerchantPromotionBeaconDaoImpl implements MerchantPromotionBeaconDao{
 	
-	private static final Logger logger = Logger.getLogger(MerchantPromotionBeaconDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(MerchantPromotionBeaconDaoImpl.class);
 	
 	@Autowired
 	SessionFactory sessionFactory;
@@ -30,7 +30,7 @@ public class MerchantPromotionBeaconDaoImpl implements MerchantPromotionBeaconDa
 			Session session = this.sessionFactory.getCurrentSession();
 		result= session.createSQLQuery(" select distinct m.ID as MerchantId,mpb.A_ID as asileId,mpb.BC_ID as BeaconId,mpb.P_ID as promotionId from merchant_profile m join merchant_pm_bc mpb where m.ID=mpb.M_ID").list();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}		
 		return result;
 	}
@@ -52,7 +52,7 @@ public class MerchantPromotionBeaconDaoImpl implements MerchantPromotionBeaconDa
 			 merchantPromotionBeacons=query.setParameterList("beaconnames", bIds).list();			
 		}
 		catch(Exception  exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}		
 		return merchantPromotionBeacons;
 	}

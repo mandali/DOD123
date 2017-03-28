@@ -21,7 +21,7 @@ public class LocationDaoImpl implements LocationDao{
 	@Autowired
 	SessionFactory sessionFactory;	
 	
-	private static final Logger logger = Logger.getLogger(LocationDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(LocationDaoImpl.class);
 ;
 
 	@SuppressWarnings("unchecked")
@@ -34,36 +34,37 @@ public class LocationDaoImpl implements LocationDao{
 		countries=(List<Country>)query.list();
 		}catch(Exception exception)
 		{
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 
 		}
 		return countries;
 	}
 	@SuppressWarnings("unchecked")
-	public List<Cities> fetchCitiesList() {
+	public List<Cities> fetchCitiesList(Long countryId) {
 		final String METHOD_NAME = "fetchCitiesList";
 		List<Cities> cities = null;
 		try{
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query=(Query) session.createQuery("from Cities");
+		Query query=(Query) session.createQuery("from Cities where countryId.countryId=:id").setParameter("id", countryId);
 		cities=(List<Cities>)query.list();
 		}catch(Exception exception)
 		{
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return cities;
 	}
 	@SuppressWarnings("unchecked")
-	public List<Location> fetchLocationsList() {
+	public List<Location> fetchLocationsList(Long countryId, Long cityId) {
 		final String METHOD_NAME = "fetchCitiesList";
 		List<Location> locations = null;
 		try{
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query=(Query) session.createQuery("from Location");
+		Query query=(Query) session.createQuery("from Location where countryId.countryId=:countryid and citiesId.cityId=:cityid")
+				.setParameter("countryid", countryId).setParameter("cityid", cityId);
 		locations=(List<Location>)query.list();
 		}catch(Exception  exception)
 		{
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return locations;
 	}
@@ -75,7 +76,7 @@ public class LocationDaoImpl implements LocationDao{
 			Query query=(Query) session.createQuery("from Location where locationId=:id").setParameter("id", id);
 			location=(Location)query.uniqueResult();			
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}		
 		return location;
 	}

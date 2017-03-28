@@ -23,7 +23,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 	@Autowired
 	SessionFactory sessionFactory;	
 	
-	private static final Logger logger = Logger.getLogger(ConsumerDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(ConsumerDaoImpl.class);
 	
 	public ConsumerProfile consumerautheticatewithemail(ConsumerLoginwithEmail userLogin) {	
 		ConsumerProfile login = null; 
@@ -35,7 +35,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		query.setParameter("email",userLogin.getEmail().trim());
 		login=(ConsumerProfile)query.uniqueResult();		
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());			
 		}
 		 return login;
 	}
@@ -51,7 +51,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		resp =(ConsumerProfile) query.uniqueResult();
 		}catch(Exception exception)
 		{
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 			
 		}
 		return resp;
@@ -66,7 +66,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		query.setParameter("mobile",userLogin.getMobileno());			
 		 login=(RegisterWithOtp)query.uniqueResult();
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		 return login;
 	}
@@ -80,7 +80,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		 resp=(ConsumerProfile) session.get(ConsumerProfile.class, id);
 		}catch(Exception exception)
 		{
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
 	}
@@ -94,7 +94,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		query.setParameter("mobileno", ConsumerIdBaseProfile.getMobileno().trim());		
 		 resp=(ConsumerProfile) query.uniqueResult();	
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
 	}
@@ -107,7 +107,7 @@ public class ConsumerDaoImpl implements ConsumerDao {
 		Integer id = (Integer) session.save(consumerPromotionData);
 		resp=(ConsumerPromotionData) session.get(ConsumerPromotionData.class, id);
 		}catch(Exception exception){
-			logger.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
+			LOGGER.error("Exception in " + METHOD_NAME + "" + exception.getMessage());
 		}
 		return resp;
 	}

@@ -26,7 +26,7 @@ public interface MetaDataService {
 	
 	public List<BrandVO> listBrands();
 	
-	public List<ProductVO> fetchMerchantProducts(ProductVO productVO);
+	public List<ProductVO> fetchMerchantProducts(Integer merchantId);
 	
 	public Product createProduct(NewProductVO newProductVO,MerchantProfile merchantProfile) ; 
 	
