@@ -17,27 +17,35 @@
         vm.promotion = angular.copy(row.entity);
         
 
-    	vm.submitAddPromotionToBeacon = function () {
+    	vm.updatePromotion = function () {
 
-    		console.log('fdsdfsdf');
+    		console.log('updating Promotion..');
 
             var headers = {
                 'Content-Type':'application/json',
                 'Access-Control-Allow-Origin':'*'
             };
-            vm.addPromotionToBeaconObject = {
-                "merchantId":$rootScope.globals.currentUser.id,
-                "promotionId":""+vm.promotion_id,
-                "beaconId":vm.beaconId,
-                "aisleId":vm.aisleId
-            };
-            console.log('after addpromotion to beacon');
-            console.log(vm.addPromotionToBeaconObject);
+            vm.promotionId= vm.promotion.id;
 
-            UserService.AddPromotionToBeacon(vm.addPromotionToBeaconObject).then(function (response) {
+            vm.editPromotionObject = {
+                "merchatid":$rootScope.globals.currentUser.id,
+                "pId":vm.promotion.product_id,
+                "catid":""+vm.promotion.catid,
+                "brandId":""+vm.promotion.brandId,
+                "discount":vm.promotion.discount,
+                "originalPrice":vm.promotion.originalPrice,
+                "discountText":vm.promotion.discountText,
+                "description":vm.promotion.description,         
+                "locationId":vm.promotion.locationId
+            };
+            console.log('after updated promotion object');
+            console.log(vm.editPromotionObject);
+
+            UserService.EditPromotion(vm.editPromotionObject,vm.promotionId).then(function (response) {
                 if (response.success) {
                     /*FlashService.Success('Promotion Posted successful', true);*/
-                    console.log(elem);                   
+                    row.entity = angular.extend(row.entity, vm.promotion);
+                    console.log(response);                  
                     $uibModalInstance.close('closed');
 
                 } else {
